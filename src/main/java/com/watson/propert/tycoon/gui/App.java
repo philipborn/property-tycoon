@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.watson.propert.tycoon;
+package com.watson.propert.tycoon.gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
