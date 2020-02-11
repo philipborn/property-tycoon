@@ -25,7 +25,6 @@ package com.watson.propert.tycoon.gui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.watson.propert.tycoon.gui.App;
 import org.junit.jupiter.api.Test;
 
 class AppTest {
