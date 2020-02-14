@@ -23,91 +23,113 @@
 //*
 //
 package com.watson.propert.tycoon.io;
-/*********************************************************************************
- Class for extracting objects from a JSON file & returning them as HashMaps for
- the Board Builder class to use.
- @author Tom Doran
- @version 1.0
- @since 13/02/2020
- ********************************************************************************/
-
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
+/**
+ * ******************************************************************************* Class for
+ * extracting objects from a JSON file & returning them as HashMaps for the Board Builder class to
+ * use.
+ *
+ * @author Tom Doran
+ * @version 1.0
+ * @since 13/02/2020 ******************************************************************************
+ */
 import java.io.FileReader;
 import java.util.HashMap;
 
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+
 public class BoardReaderJson {
 
-    private JSONArray objects;
-    private int iterator;
-    private String[] keys = {"Position", "Name", "Group", "Action", "canBeBought",
-            "Cost", "Rent", "1house", "2houses", "3houses", "4houses", "hotel"};
+  private JSONArray objects;
+  private int iterator;
+  private String[] keys = {
+    "Position",
+    "Name",
+    "Group",
+    "Action",
+    "canBeBought",
+    "Cost",
+    "Rent",
+    "1house",
+    "2houses",
+    "3houses",
+    "4houses",
+    "hotel"
+  };
 
-    /**************************************************************************
-     * Constructor for building a Board reader object.
-     * @param fileName path of the JSON file
-     *************************************************************************/
-    public BoardReaderJson(String fileName) {
+  /**
+   * ************************************************************************ Constructor for
+   * building a Board reader object.
+   *
+   * @param fileName path of the JSON file
+   *     ***********************************************************************
+   */
+  public BoardReaderJson(String fileName) {
 
-        JSONParser jp = new JSONParser();
-        iterator = 0;
+    JSONParser jp = new JSONParser();
+    iterator = 0;
 
-        try {
-            Object o = jp.parse(new FileReader(fileName));
-            objects = (JSONArray) o;
+    try {
+      Object o = jp.parse(new FileReader(fileName));
+      objects = (JSONArray) o;
 
-        } catch (Exception e) {
+    } catch (Exception e) {
 
-            e.printStackTrace();
-        }
+      e.printStackTrace();
     }
+  }
 
-    /**************************************************************************
-     * Method for iterating through the JSON Array, also checks that the
-     * iterator is within range.
-     * @return boolean true if iterator in range, false if not
-     *************************************************************************/
-    public boolean iterate() {
-        if(iterator < objects.size()-1) {
-            iterator++;
-            return true;
-        } else {
-            return false;
-        }
+  /**
+   * ************************************************************************ Method for iterating
+   * through the JSON Array, also checks that the iterator is within range.
+   *
+   * @return boolean true if iterator in range, false if not
+   *     ***********************************************************************
+   */
+  public boolean iterate() {
+    if (iterator < objects.size() - 1) {
+      iterator++;
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    /***************************************************************************
-     * Primary funtionality of the class, translates a JSON object to a HashMap
-     * @return HashMap representing the data of a JSON object
-     ***************************************************************************/
-    public HashMap<String, Object> getObjectData() {
+  /**
+   * ************************************************************************* Primary funtionality
+   * of the class, translates a JSON object to a HashMap
+   *
+   * @return HashMap representing the data of a JSON object
+   *     *************************************************************************
+   */
+  public HashMap<String, Object> getObjectData() {
 
-        HashMap<String,Object> data = new HashMap<>();
-        // get current JSONObject
-        JSONObject jso = (JSONObject) objects.get(iterator);
+    HashMap<String, Object> data = new HashMap<>();
+    // get current JSONObject
+    JSONObject jso = (JSONObject) objects.get(iterator);
 
-        // build map of data
-        for(String key : keys) {
-            // if square has relevant fields (ie. no rent information for 'Go')
-            if(jso.get(key) instanceof String && ((String) jso.get(key)).length() > 0) {
-                data.put(key, jso.get(key));
-            } else if(jso.get(key) instanceof Long) {   // otherwise if data is a number
+    // build map of data
+    for (String key : keys) {
+      // if square has relevant fields (ie. no rent information for 'Go')
+      if (jso.get(key) instanceof String && ((String) jso.get(key)).length() > 0) {
+        data.put(key, jso.get(key));
+      } else if (jso.get(key) instanceof Long) { // otherwise if data is a number
 
-                // numbers wrapped with Long, so output ints (can be other data type if necessary later)
-                data.put(key, ((Long) jso.get(key)).intValue());
-            }
-        }
-        return data;
+        // numbers wrapped with Long, so output ints (can be other data type if necessary later)
+        data.put(key, ((Long) jso.get(key)).intValue());
+      }
     }
+    return data;
+  }
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        // update to read from resource folder
-        BoardReaderJson r = new BoardReaderJson("src/main/resources/boardDataJSON.json");
+    // update to read from resource folder
+    BoardReaderJson r = new BoardReaderJson("src/main/resources/boardDataJSON.json");
 
-        for(int i = 0; i < 100; i++) {
-            System.out.println(r.iterate());
-        }
-        System.out.println(r.getObjectData().get("Position"));
+    for (int i = 0; i < 100; i++) {
+      System.out.println(r.iterate());
     }
+    System.out.println(r.getObjectData().get("Position"));
+  }
 }
