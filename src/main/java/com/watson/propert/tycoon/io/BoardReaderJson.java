@@ -23,15 +23,7 @@
 //*
 //
 package com.watson.propert.tycoon.io;
-/**
- * ******************************************************************************* Class for
- * extracting objects from a JSON file & returning them as HashMaps for the Board Builder class to
- * use.
- *
- * @author Tom Doran
- * @version 1.0
- * @since 13/02/2020 ******************************************************************************
- */
+
 import java.io.FileReader;
 import java.util.HashMap;
 
