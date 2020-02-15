@@ -36,14 +36,10 @@ public class DicePairTest {
   void ModifiedOfReturnListDoNotChangeThrowDicesList() {
     List<Integer> first = dicePair.throwDices();
 
-    first.set(0, 7); // OutRange of the dice
+    first.set(0, 7);
+    first.add(3);
 
     assertNotEquals(first, dicePair.lastThrow());
-
-    List<Integer> res = dicePair.lastThrow();
-
-    res.add(3);
-
-    assertNotEquals(res, dicePair.lastThrow());
+    assertNotEquals(dicePair.lastThrow().get(0), 7);
   }
 }
