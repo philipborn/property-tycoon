@@ -1,29 +1,28 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GameMaster implements PropertTycoon {
+
+  private DicePair dicePair;
 
   public static PropertTycoon activateTycoon() {
     return new GameMaster();
   }
 
-  private GameMaster() {}
-
-  @Override
-  public List<Integer> throwDices() {
-    List<Integer> result = new ArrayList<>(2);
-    result.add(1);
-    result.add(2);
-    return result;
+  private GameMaster() {
+    dicePair = new DicePair();
   }
 
   @Override
-  public List<Integer> getDices() {
-    List<Integer> result = new ArrayList<>(2);
-    result.add(1);
-    result.add(2);
-    return result;
+  public Optional<List<Integer>> throwDices() {
+    List<Integer> dices = dicePair.throwDices().orElseThrow();
+    return dicePair.throwDices();
+  }
+
+  @Override
+  public Optional<List<Integer>> getDices() {
+    return dicePair.lastThrow();
   }
 }

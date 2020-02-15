@@ -1,10 +1,11 @@
 package com.watson.propert.tycoon.game;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PropertTycoon {
 
-  List<Integer> throwDices();
+  Optional<List<Integer>> throwDices();
 
-  List<Integer> getDices();
+  Optional<List<Integer>> getDices();
 }
