@@ -1,27 +1,26 @@
-//
-//* MIT License
-//*
-//* Copyright (c) 2020 Tom Doran
-//*
-//* Permission is hereby granted, free of charge, to any person obtaining a copy
-//* of this software and associated documentation files (the "Software"), to deal
-//* in the Software without restriction, including without limitation the rights
-//* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//*copies of the Software, and to permit persons to whom the Software is
-//* furnished to do so, subject to the following conditions:
-//*
-//* The above copyright notice and this permission notice shall be included in all
-//* copies or substantial portions of the Software.
-//*
-//* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//* SOFTWARE.
-//*
-//
+/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Philip Borndalen
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package com.watson.propert.tycoon.io;
 
 import java.io.FileReader;
@@ -30,6 +29,13 @@ import java.util.HashMap;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
+ *
+ * @author Tom Doran
+ * @version 1.1
+ * @since 13/02/2020
+ */
 public class BoardReaderJson {
 
   private JSONArray objects;
@@ -50,11 +56,9 @@ public class BoardReaderJson {
   };
 
   /**
-   * ************************************************************************ Constructor for
-   * building a Board reader object.
+   * Constructor for building a Board reader object.
    *
    * @param fileName path of the JSON file
-   *     ***********************************************************************
    */
   public BoardReaderJson(String fileName) {
 
@@ -72,11 +76,9 @@ public class BoardReaderJson {
   }
 
   /**
-   * ************************************************************************ Method for iterating
-   * through the JSON Array, also checks that the iterator is within range.
+   * Method for iterating through the JSON Array, also checks that the iterator is within range.
    *
    * @return boolean true if iterator in range, false if not
-   *     ***********************************************************************
    */
   public boolean iterate() {
     if (iterator < objects.size() - 1) {
@@ -88,11 +90,9 @@ public class BoardReaderJson {
   }
 
   /**
-   * ************************************************************************* Primary funtionality
-   * of the class, translates a JSON object to a HashMap
+   * Primary functionality of the class, translates a JSON object to a HashMap
    *
    * @return HashMap representing the data of a JSON object
-   *     *************************************************************************
    */
   public HashMap<String, Object> getObjectData() {
 
@@ -112,16 +112,5 @@ public class BoardReaderJson {
       }
     }
     return data;
-  }
-
-  public static void main(String[] args) {
-
-    // update to read from resource folder
-    BoardReaderJson r = new BoardReaderJson("src/main/resources/boardDataJSON.json");
-
-    for (int i = 0; i < 100; i++) {
-      System.out.println(r.iterate());
-    }
-    System.out.println(r.getObjectData().get("Position"));
   }
 }
