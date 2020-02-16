@@ -8,4 +8,6 @@ public interface PropertTycoon {
   Optional<List<Integer>> throwDices();
 
   Optional<List<Integer>> getDices();
+
+  List<String> getSquaresNames();
 }

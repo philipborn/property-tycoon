@@ -36,7 +36,17 @@ public class PropertTycoonTest {
 
   @BeforeEach
   void setup() {
-    game = GameMaster.activateTycoon();
+    SquareImp firstNode = new SquareImp("first");
+    SquareImp secondNode = new SquareImp("second");
+    SquareImp thirdNode = new SquareImp("third");
+    firstNode.setNext(secondNode);
+    secondNode.setNext(thirdNode);
+    thirdNode.setNext(firstNode);
+    firstNode.setBack(thirdNode);
+    secondNode.setBack(firstNode);
+    thirdNode.setBack(secondNode);
+
+    game = new GameMaster(firstNode);
   }
 
   @Test
@@ -52,5 +62,14 @@ public class PropertTycoonTest {
     List<Integer> getDices = game.getDices().orElseThrow();
 
     assertEquals(thrownDices, getDices);
+  }
+
+  @Test
+  void getNamesGivesAllBordNames() {
+    List<String> names = game.getSquaresNames();
+
+    assertEquals("first", names.get(0));
+    assertEquals("second", names.get(1));
+    assertEquals("third", names.get(2));
   }
 }
