@@ -8,17 +8,18 @@ public class GameMaster implements PropertTycoon {
 
   private DicePair dicePair;
   private Square bord;
-  private Player token = new Player();
+  private Player token;
 
   public GameMaster(Square startPostion) {
     dicePair = new DicePair();
     bord = startPostion;
+    token = new Player(bord);
   }
 
   @Override
   public List<Integer> throwDices() {
     List<Integer> dices = dicePair.throwDices();
-    Integer sum = dices.stream().mapToInt((a)->a).sum();
+    Integer sum = dices.stream().mapToInt((a) -> a).sum();
     token.move(sum);
     return dices;
   }
@@ -44,8 +45,8 @@ public class GameMaster implements PropertTycoon {
 
   private int findNumOf(Square square) {
     int post = 0;
-    for (Sqaure s: bord) {
-      if(square.equals((Object)square))) {
+    for (Square s : bord) {
+      if (square.name().equals(s.name())) {
         break;
       }
       ++post;

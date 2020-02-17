@@ -23,8 +23,8 @@ public interface PropertTycoon {
   /**
    * Get all squares names in the bord
    *
-   * @return List with index is same order the square are from go. First square names is at
-   *     index 0 and second at index 1.
+   * @return List with index is same order the square are from go. First square names is at index 0
+   *     and second at index 1.
    */
   List<String> getSquaresNames();
 
