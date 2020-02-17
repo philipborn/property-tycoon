@@ -23,8 +23,6 @@ public class GameMaster implements PropertTycoon {
     return dices;
   }
 
-  private sum(List<Intger>)
-
   @Override
   public Optional<List<Integer>> getDices() {
     return dicePair.lastThrow();
