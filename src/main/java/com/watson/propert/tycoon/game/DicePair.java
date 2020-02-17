@@ -15,13 +15,13 @@ public class DicePair {
     genrator = new Random();
   }
 
-  Optional<List<Integer>> throwDices() {
+  List<Integer> throwDices() {
     firstDice = randomInt();
     secondDice = randomInt();
     List<Integer> list = new ArrayList<>();
     list.add(firstDice);
     list.add(secondDice);
-    return Optional.of(list);
+    return list;
   }
 
   private Integer randomInt() {

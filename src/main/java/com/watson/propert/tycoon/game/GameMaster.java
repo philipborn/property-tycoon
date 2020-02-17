@@ -15,7 +15,7 @@ public class GameMaster implements PropertTycoon {
   }
 
   @Override
-  public Optional<List<Integer>> throwDices() {
+  public List<Integer> throwDices() {
     return dicePair.throwDices();
   }
 
