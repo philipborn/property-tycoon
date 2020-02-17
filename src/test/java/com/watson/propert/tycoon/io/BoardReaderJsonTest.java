@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.watson.propert.tycoon.gui;
+package com.watson.propert.tycoon.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,49 +40,50 @@ import com.watson.propert.tycoon.io.BoardReaderJson;
 class BoardReaderJsonTest {
 
   // board data used for the test
-  BoardReaderJson r = new BoardReaderJson("src/main/resources/boardDataJSON.json");
+  BoardReaderJson boardReaderJson = new BoardReaderJson("src/main/resources/boardDataJSON.json");
 
   @Test
-  // test that output of the board reader class is not null
-  void test_output_not_null() {
-    assertNotNull(r.getObjectData());
+  void output_not_null() {
+    assertNotNull(boardReaderJson.getObjectData());
   }
 
   @Test
-  // test that iterate method indeed moves through the list
-  void test_iterate() {
-    assertEquals(r.getObjectData().get("Position"), 1);
-    r.iterate();
-    assertEquals(r.getObjectData().get("Position"), 2);
+  void iterates_through_the_list() {
+    assertEquals(boardReaderJson.getObjectData().get("Position"), 1);
+    boardReaderJson.iterate();
+    assertEquals(boardReaderJson.getObjectData().get("Position"), 2);
   }
 
   @Test
-  // test that iterate method does not go over the end of the list
-  void test_iterate_bound() {
+  void iterate_is_bounded_by_size() {
     // 40 squares on board
     for (int i = 0; i <= 100; i++) {
-      r.iterate();
+      boardReaderJson.iterate();
     }
-    assertEquals(r.getObjectData().get("Position"), 40);
+    assertEquals(boardReaderJson.getObjectData().get("Position"), 40);
   }
 
   @Test
-  // test that Go HashMap doesn't have fields for rent, houses etc.
-  void test_HashMapSize_1() {
-    assertFalse(r.getObjectData().containsKey("Rent"));
-    assertFalse(r.getObjectData().containsKey("Cost"));
-    assertFalse(r.getObjectData().containsKey("1house"));
-    assertFalse(r.getObjectData().containsKey("2houses"));
-    assertFalse(r.getObjectData().containsKey("3houses"));
-    assertFalse(r.getObjectData().containsKey("4houses"));
-    assertFalse(r.getObjectData().containsKey("hotel"));
+  void hash_map_only_has_necessary_fields() {
+    assertFalse(boardReaderJson.getObjectData().containsKey("Rent"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("Cost"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("1house"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("2houses"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("3houses"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("4houses"));
+    assertFalse(boardReaderJson.getObjectData().containsKey("hotel"));
+
+    boardReaderJson.iterate();
+    assertFalse(boardReaderJson.getObjectData().containsKey("Action"));
+    assertEquals(boardReaderJson.getObjectData().keySet().size(), 11);
   }
 
   @Test
-  // test that Crapper Street HashMap doesn't have key for action, but does have a key for everything else
-  void test_HashMapSize_2() {
-    r.iterate();
-    assertFalse(r.getObjectData().containsKey("Action"));
-    assertEquals(r.getObjectData().keySet().size(), 11);
+  void changing_json_file_affects_output() {
+
+    assertEquals(boardReaderJson.getObjectData().get("Name"), "Go");
+    boardReaderJson = new BoardReaderJson("src/test/testResources/jsonTest.json");
+    assertEquals(boardReaderJson.getObjectData().get("Name"), "test1");
+
   }
 }
