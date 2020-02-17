@@ -16,14 +16,14 @@ public interface PropertTycoon {
   /**
    * Return last dice throw if exist.
    *
-   * @return Values Dice pare last value
+   * @return Dice pare last value
    */
   Optional<List<Integer>> getDices();
 
   /**
    * Get all squares names in the bord
    *
-   * @return names List with index is same order the square are from go. First square names is at
+   * @return List with index is same order the square are from go. First square names is at
    *     index 0 and second at index 1.
    */
   List<String> getSquaresNames();
@@ -31,7 +31,7 @@ public interface PropertTycoon {
   /**
    * Get the player position. Example: int = 0 is first square, int = 1 is the second square.
    *
-   * @return position position as the index of the square.
+   * @return position as the index of the square.
    */
   int GetPlayerPostion();
 }
