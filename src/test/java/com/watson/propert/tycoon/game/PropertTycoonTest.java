@@ -51,14 +51,14 @@ public class PropertTycoonTest {
 
   @Test
   void getDiceShouldReturnListOfSize2() {
-    List<Integer> list = game.throwDices().orElseThrow();
+    List<Integer> list = game.throwDices();
 
     assertEquals(list.size(), 2);
   }
 
   @Test
   void resultFromThrowDiceAndGetDiceShouldBeEqual() {
-    List<Integer> thrownDices = game.throwDices().orElseThrow();
+    List<Integer> thrownDices = game.throwDices();
     List<Integer> getDices = game.getDices().orElseThrow();
 
     assertEquals(thrownDices, getDices);
