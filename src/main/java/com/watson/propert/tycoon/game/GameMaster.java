@@ -32,4 +32,9 @@ public class GameMaster implements PropertTycoon {
     }
     return names;
   }
+
+  @Override
+  public int GetPlayerPostion() {
+    return 0;
+  }
 }

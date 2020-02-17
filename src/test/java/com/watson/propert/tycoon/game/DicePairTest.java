@@ -18,7 +18,7 @@ public class DicePairTest {
 
   @Test
   void diceReturnTwoVauls() {
-    List<Integer> returned = dicePair.throwDices().orElseThrow();
+    List<Integer> returned = dicePair.throwDices();
 
     assertEquals(2, returned.size());
   }
@@ -32,7 +32,7 @@ public class DicePairTest {
 
   @Test
   void ModifiedOfReturnListDoNotChangeThrowDicesList() {
-    List<Integer> first = dicePair.throwDices().orElseThrow();
+    List<Integer> first = dicePair.throwDices();
 
     first.set(0, 7);
     first.add(3);
