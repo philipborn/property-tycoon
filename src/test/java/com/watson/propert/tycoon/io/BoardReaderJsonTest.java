@@ -28,8 +28,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.watson.propert.tycoon.io.BoardReaderJson;
-
 /**
  * Test class for BoardReaderJson functionality.
  *
@@ -49,9 +47,9 @@ class BoardReaderJsonTest {
 
   @Test
   void iterates_through_the_list() {
-    assertEquals(boardReaderJson.getObjectData().get("Position"), 1);
+    assertEquals(boardReaderJson.getObjectData().get("Position"), "1");
     boardReaderJson.iterate();
-    assertEquals(boardReaderJson.getObjectData().get("Position"), 2);
+    assertEquals(boardReaderJson.getObjectData().get("Position"), "2");
   }
 
   @Test
@@ -60,7 +58,7 @@ class BoardReaderJsonTest {
     for (int i = 0; i <= 100; i++) {
       boardReaderJson.iterate();
     }
-    assertEquals(boardReaderJson.getObjectData().get("Position"), 40);
+    assertEquals(boardReaderJson.getObjectData().get("Position"), "40");
   }
 
   @Test
@@ -84,6 +82,5 @@ class BoardReaderJsonTest {
     assertEquals(boardReaderJson.getObjectData().get("Name"), "Go");
     boardReaderJson = new BoardReaderJson("src/test/testResources/jsonTest.json");
     assertEquals(boardReaderJson.getObjectData().get("Name"), "test1");
-
   }
 }

@@ -94,9 +94,9 @@ public class BoardReaderJson {
    *
    * @return HashMap representing the data of a JSON object
    */
-  public HashMap<String, Object> getObjectData() {
+  public HashMap<String, String> getObjectData() {
 
-    HashMap<String, Object> data = new HashMap<>();
+    HashMap<String, String> data = new HashMap<>();
     // get current JSONObject
     JSONObject jso = (JSONObject) objects.get(iterator);
 
@@ -104,11 +104,11 @@ public class BoardReaderJson {
     for (String key : keys) {
       // if square has relevant fields (ie. no rent information for 'Go')
       if (jso.get(key) instanceof String && ((String) jso.get(key)).length() > 0) {
-        data.put(key, jso.get(key));
+        data.put(key, jso.get(key).toString());
       } else if (jso.get(key) instanceof Long) { // otherwise if data is a number
 
         // numbers wrapped with Long, so output ints (can be other data type if necessary later)
-        data.put(key, ((Long) jso.get(key)).intValue());
+        data.put(key, ((Long) jso.get(key)).toString());
       }
     }
     return data;
