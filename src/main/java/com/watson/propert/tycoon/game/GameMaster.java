@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.common.eventbus.EventBus;
+
 public class GameMaster implements PropertTycoon {
 
   private DicePair dicePair;
   private Square bord;
   private Player token;
+  private EventBus bus;
 
-  public GameMaster(Square startPostion) {
+  public GameMaster(Square startPostion, EventBus channle) {
     dicePair = new DicePair();
     bord = startPostion;
-    token = new Player(bord);
+    token = new Player(bord, channle);
+    bus = channle;
   }
 
   @Override

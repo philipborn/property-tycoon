@@ -30,9 +30,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
+import com.google.common.eventbus.EventBus;
+
 public class PropertTycoonTest {
 
   PropertTycoon game;
+  EventBus channle;
 
   @BeforeEach
   void setup() {
@@ -46,7 +49,8 @@ public class PropertTycoonTest {
     secondNode.setBack(firstNode);
     thirdNode.setBack(secondNode);
 
-    game = new GameMaster(firstNode);
+    channle = new EventBus();
+    game = new GameMaster(firstNode, channle);
   }
 
   @Test
