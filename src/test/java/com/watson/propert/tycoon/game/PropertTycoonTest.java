@@ -24,13 +24,12 @@
 
 package com.watson.propert.tycoon.game;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 public class PropertTycoonTest {
 
@@ -54,26 +53,28 @@ public class PropertTycoonTest {
   }
 
   @Test
-  void getDiceShouldReturnListOfSize2() {
-    List<Integer> list = game.throwDices();
+  void throwAndMoveGivesDiceAndPlayerEvent() {
+    TestListener listiner = new TestListener();
+    channle.register(listiner);
 
-    assertEquals(list.size(), 2);
+    game.throwDicesAndMove();
+
+    assertNotNull(listiner.playerEvent);
+    assertNotNull(listiner.diceEvent);
+  }
+}
+
+class TestListener {
+  public PlayerEvent playerEvent;
+  public DiceEvent diceEvent;
+
+  @Subscribe
+  void catchPlayerEvent(PlayerEvent pe) {
+    playerEvent = pe;
   }
 
-  @Test
-  void resultFromThrowDiceAndGetDiceShouldBeEqual() {
-    List<Integer> thrownDices = game.throwDices();
-    List<Integer> getDices = game.getDices().orElseThrow();
-
-    assertEquals(thrownDices, getDices);
-  }
-
-  @Test
-  void getNamesGivesAllBordNames() {
-    List<String> names = game.getSquaresNames();
-
-    assertEquals("first", names.get(0));
-    assertEquals("second", names.get(1));
-    assertEquals("third", names.get(2));
+  @Subscribe
+  void catchDiceEvent(DiceEvent de) {
+    diceEvent = de;
   }
 }

@@ -7,6 +7,7 @@ public class PlayerEvent {
 
   public PlayerEvent(Player from, Square oldPostion) {
     this.from = from;
+    this.oldPost = oldPostion;
   }
 
   public Player player() {

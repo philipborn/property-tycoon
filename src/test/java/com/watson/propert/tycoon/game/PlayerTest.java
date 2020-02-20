@@ -85,7 +85,7 @@ public class PlayerTest {
   }
 
   @Test
-  void playerPostEventWhenMove() {
+  void playerMovePostsEventWhenMove() {
     TestListiner listnier = new TestListiner();
     player.registerForEvents(listnier);
 
@@ -94,6 +94,7 @@ public class PlayerTest {
 
     assertEquals(1, listnier.msgs.size());
     assertEquals(player, event.player());
+    assertEquals(first, event.oldPostion());
   }
 }
 
