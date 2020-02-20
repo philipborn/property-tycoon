@@ -92,10 +92,10 @@ class BoardReaderJsonTest {
   void changing_json_file_affects_output() {
     boardReaderJson.nextObject();
 
-    assertEquals("Go",boardReaderJson.getProperties().get("name"));
+    assertEquals("Go", boardReaderJson.getProperties().get("name"));
     boardReaderJson.readFile("src/test/testResources/jsonTest.json");
     boardReaderJson.nextObject();
-    assertEquals("name1",boardReaderJson.getProperties().get("name"));
+    assertEquals("name1", boardReaderJson.getProperties().get("name"));
   }
 
   @Test
