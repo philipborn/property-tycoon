@@ -35,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -195,8 +196,8 @@ public class PtController {
         Label price = (Label) v.getChildren().get(2);
 
         // set group names (if square is in a group)
-        if(boardReader.getObjectData().get("Group") != null) {
-          group.setId("PROPERTY_GROUP_"+boardReader.getObjectData().get("Group").toUpperCase());
+        if (boardReader.getObjectData().get("Group") != null) {
+          group.setId("PROPERTY_GROUP_" + boardReader.getObjectData().get("Group").toUpperCase());
         }
 
         // set name/price values
