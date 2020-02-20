@@ -24,10 +24,14 @@
 package com.watson.propert.tycoon.io;
 
 import java.io.FileReader;
-import java.util.HashMap;
+import java.util.*;
 
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.watson.propert.tycoon.game.BordReader;
 
 /**
  * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
@@ -36,81 +40,65 @@ import org.json.simple.parser.JSONParser;
  * @version 1.1
  * @since 13/02/2020
  */
-public class BoardReaderJson {
+public class BoardReaderJson implements BordReader {
+
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   private JSONArray objects;
-  private int iterator;
-  private String[] keys = {
-    "Position",
-    "Name",
-    "Group",
-    "Action",
-    "canBeBought",
-    "Cost",
-    "Rent",
-    "1house",
-    "2houses",
-    "3houses",
-    "4houses",
-    "hotel"
-  };
+  private int index;
 
-  /**
-   * Constructor for building a Board reader object.
-   *
-   * @param fileName path of the JSON file
-   */
-  public BoardReaderJson(String fileName) {
-
+  public void readFile(String fileName) {
     JSONParser jp = new JSONParser();
-    iterator = 0;
+    index = -1;
 
     try {
       Object o = jp.parse(new FileReader(fileName));
       objects = (JSONArray) o;
 
     } catch (Exception e) {
-
-      e.printStackTrace();
+      logger.error("JSON Parser fail", e);
     }
   }
-
-  /**
-   * Method for iterating through the JSON Array, also checks that the iterator is within range.
-   *
-   * @return boolean true if iterator in range, false if not
-   */
-  public boolean iterate() {
-    if (iterator < objects.size() - 1) {
-      iterator++;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   /**
    * Primary functionality of the class, translates a JSON object to a HashMap
    *
    * @return HashMap representing the data of a JSON object
    */
-  public HashMap<String, String> getObjectData() {
-
-    HashMap<String, String> data = new HashMap<>();
-    // get current JSONObject
-    JSONObject jso = (JSONObject) objects.get(iterator);
-
-    // build map of data
-    for (String key : keys) {
-      // if square has relevant fields (ie. no rent information for 'Go')
-      if (jso.get(key) instanceof String && ((String) jso.get(key)).length() > 0) {
-        data.put(key, jso.get(key).toString());
-      } else if (jso.get(key) instanceof Long) { // otherwise if data is a number
-
-        // numbers wrapped with Long, so output ints (can be other data type if necessary later)
-        data.put(key, ((Long) jso.get(key)).toString());
-      }
+  @Override
+  public Map<String, String> getProperties() {
+    if (index < 0) {
+      throw new RuntimeException("Has not call nextObject");
     }
-    return data;
+    if (index >= objects.size()) {
+      index = objects.size() - 1; // Do not whan't index out of bound
+    }
+
+    JSONObject json = (JSONObject) objects.get(index);
+    Set<Object> keys = json.keySet();
+
+    Map<String, String> map = new HashMap<>();
+    for (Object key : keys) {
+      Object val = json.get(key);
+      Optional<String> Optvalue = filter(val);
+      Optvalue.ifPresent((s) -> map.put(key.toString().toLowerCase(), s));
+    }
+    return map;
+  }
+
+  private Optional<String> filter(Object val) {
+    if (val.toString().equals("")) {
+      return Optional.empty();
+    }
+    return Optional.of(val.toString());
+  }
+
+  @Override
+  public Boolean hasNextObject() {
+    return index < objects.size();
+  }
+
+  @Override
+  public void nextObject() {
+    ++index;
   }
 }

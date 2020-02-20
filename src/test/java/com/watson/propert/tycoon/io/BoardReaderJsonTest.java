@@ -26,6 +26,9 @@ package com.watson.propert.tycoon.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -38,49 +41,71 @@ import org.junit.jupiter.api.Test;
 class BoardReaderJsonTest {
 
   // board data used for the test
-  BoardReaderJson boardReaderJson = new BoardReaderJson("src/main/resources/boardDataJSON.json");
+  BoardReaderJson boardReaderJson;
+
+  @BeforeEach
+  void setup() {
+    boardReaderJson = new BoardReaderJson();
+    boardReaderJson.readFile("src/main/resources/boardDataJSON.json");
+  }
 
   @Test
   void output_not_null() {
-    assertNotNull(boardReaderJson.getObjectData());
+    boardReaderJson.nextObject();
+    assertNotNull(boardReaderJson.getProperties());
   }
 
   @Test
   void iterates_through_the_list() {
-    assertEquals(boardReaderJson.getObjectData().get("Position"), "1");
-    boardReaderJson.iterate();
-    assertEquals(boardReaderJson.getObjectData().get("Position"), "2");
+    boardReaderJson.nextObject();
+    assertEquals("1", boardReaderJson.getProperties().get("position"));
+    boardReaderJson.nextObject();
+    assertEquals("2", boardReaderJson.getProperties().get("position"));
   }
 
   @Test
   void iterate_is_bounded_by_size() {
     // 40 squares on board
     for (int i = 0; i <= 100; i++) {
-      boardReaderJson.iterate();
+      boardReaderJson.nextObject();
     }
-    assertEquals(boardReaderJson.getObjectData().get("Position"), "40");
+    assertEquals(boardReaderJson.getProperties().get("position"), "40");
   }
 
   @Test
   void hash_map_only_has_necessary_fields() {
-    assertFalse(boardReaderJson.getObjectData().containsKey("Rent"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("Cost"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("1house"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("2houses"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("3houses"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("4houses"));
-    assertFalse(boardReaderJson.getObjectData().containsKey("hotel"));
+    boardReaderJson.nextObject();
+    assertFalse(boardReaderJson.getProperties().containsKey("Rent"));
+    assertFalse(boardReaderJson.getProperties().containsKey("Cost"));
+    assertFalse(boardReaderJson.getProperties().containsKey("1house"));
+    assertFalse(boardReaderJson.getProperties().containsKey("2houses"));
+    assertFalse(boardReaderJson.getProperties().containsKey("3houses"));
+    assertFalse(boardReaderJson.getProperties().containsKey("4houses"));
+    assertFalse(boardReaderJson.getProperties().containsKey("hotel"));
 
-    boardReaderJson.iterate();
-    assertFalse(boardReaderJson.getObjectData().containsKey("Action"));
-    assertEquals(boardReaderJson.getObjectData().keySet().size(), 11);
+    boardReaderJson.nextObject();
+    assertFalse(boardReaderJson.getProperties().containsKey("Action"));
+    assertEquals(boardReaderJson.getProperties().keySet().size(), 11);
   }
 
   @Test
   void changing_json_file_affects_output() {
+    boardReaderJson.nextObject();
 
-    assertEquals(boardReaderJson.getObjectData().get("Name"), "Go");
-    boardReaderJson = new BoardReaderJson("src/test/testResources/jsonTest.json");
-    assertEquals(boardReaderJson.getObjectData().get("Name"), "test1");
+    assertEquals("Go",boardReaderJson.getProperties().get("name"));
+    boardReaderJson.readFile("src/test/testResources/jsonTest.json");
+    boardReaderJson.nextObject();
+    assertEquals("name1",boardReaderJson.getProperties().get("name"));
+  }
+
+  @Test
+  void all_keys_start_with_lower_keys() {
+    boardReaderJson.nextObject();
+
+    Set<String> keys = boardReaderJson.getProperties().keySet();
+
+    for (String key : keys) {
+      assertEquals(key.toLowerCase(), key);
+    }
   }
 }
