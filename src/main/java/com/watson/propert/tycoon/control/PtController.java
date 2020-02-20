@@ -25,6 +25,7 @@ package com.watson.propert.tycoon.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
 
@@ -152,7 +154,13 @@ public class PtController {
   @FXML private TextArea MESSAGE_AREA;
 
   @FXML
-  void endGame(ActionEvent event) {}
+  void endGame(ActionEvent event) {
+    /*
+      save game functionality
+    */
+
+    Platform.exit();
+  }
 
   @FXML
   void newGame(ActionEvent event) {}
@@ -163,6 +171,41 @@ public class PtController {
   @FXML
   void initialize() {
 
+    // read JSON file
+    BoardReaderJson boardReader = new BoardReaderJson("src/main/resources/boardDataJSON.json");
+
+    StackPane[] firstSquares = {
+      SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
+      SQUARE_9, SQUARE_10, SQUARE_11, SQUARE_12, SQUARE_13, SQUARE_14, SQUARE_15, SQUARE_16,
+      SQUARE_17, SQUARE_18, SQUARE_19, SQUARE_20, SQUARE_21, SQUARE_22, SQUARE_23, SQUARE_24,
+      SQUARE_25, SQUARE_26, SQUARE_27, SQUARE_28, SQUARE_29, SQUARE_30, SQUARE_31, SQUARE_32,
+      SQUARE_33, SQUARE_34, SQUARE_35, SQUARE_36, SQUARE_37, SQUARE_38, SQUARE_39
+    };
+
+    // for every square on the board
+    for (StackPane sq : firstSquares) {
+
+      // if square is a non-corner square
+      if (sq.getChildren().get(0) instanceof VBox) {
+
+        // access elements of square
+        VBox v = (VBox) sq.getChildren().get(0);
+        HBox group = (HBox) v.getChildren().get(0);
+        Label name = (Label) v.getChildren().get(1);
+        Label price = (Label) v.getChildren().get(2);
+
+        // set group names (if square is in a group)
+        if(boardReader.getObjectData().get("Group") != null) {
+          group.setId("PROPERTY_GROUP_"+boardReader.getObjectData().get("Group").toUpperCase());
+        }
+
+        // set name/price values
+        name.setText(boardReader.getObjectData().get("Name"));
+        price.setText(boardReader.getObjectData().get("Cost"));
+      }
+      // get next square
+      boardReader.iterate();
+    }
     assert SQUARE_9 != null
         : "fx:id=\"SQUARE_9\" was not injected: check your FXML file 'propertyTycoonGui_v_0_1.fxml'.";
     assert SQUARE_8 != null
