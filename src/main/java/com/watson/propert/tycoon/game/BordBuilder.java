@@ -22,6 +22,7 @@ public class BordBuilder {
 
     source.nextObject();
     first = createSquare();
+    last = first;
 
     while (source.hasNextObject()) {
       source.nextObject();

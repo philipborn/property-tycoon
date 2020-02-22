@@ -66,14 +66,15 @@ public class BoardReaderJson implements BordReader {
    */
   @Override
   public Map<String, String> getProperties() {
+    int usedIndex = index;
     if (index < 0) {
       throw new RuntimeException("Has not call nextObject");
     }
     if (index >= objects.size()) {
-      index = objects.size() - 1; // Do not whan't index out of bound
+      usedIndex = objects.size() - 1;
     }
 
-    JSONObject json = (JSONObject) objects.get(index);
+    JSONObject json = (JSONObject) objects.get(usedIndex);
     Set<Object> keys = json.keySet();
 
     Map<String, String> map = new HashMap<>();
@@ -94,7 +95,7 @@ public class BoardReaderJson implements BordReader {
 
   @Override
   public Boolean hasNextObject() {
-    return index < objects.size();
+    return index < (objects.size() - 1);
   }
 
   @Override
