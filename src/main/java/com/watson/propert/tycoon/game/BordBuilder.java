@@ -27,6 +27,7 @@ public class BordBuilder {
       source.nextObject();
       current = createSquare();
       link(current);
+      last = current;
     }
     linkLastAndFirst();
 
@@ -41,7 +42,6 @@ public class BordBuilder {
   SquareImp link(SquareImp current) {
     current.setBack(last);
     last.setNext(current);
-    last = current;
     return current;
   }
 
