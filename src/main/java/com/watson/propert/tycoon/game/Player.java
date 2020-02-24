@@ -1,14 +1,17 @@
 package com.watson.propert.tycoon.game;
 
+import com.google.common.eventbus.EventBus;
+
 public class Player {
 
   private String name = "g";
   private Square location;
 
-  public Player() {}
+  private EventBus news;
 
-  public Player(Square startLocation) {
+  public Player(Square startLocation, EventBus bus) {
     location = startLocation;
+    news = bus;
   }
 
   String getName() {
@@ -23,12 +26,14 @@ public class Player {
   }
 
   public Square move(int steps) {
+    Square old = this.location;
     Square node;
     if (steps > 0) {
       node = stepForward(steps);
     } else {
       node = stepBack(-steps);
     }
+    news.post(new PlayerEvent(this, old));
     return node;
   }
 
@@ -52,5 +57,9 @@ public class Player {
 
   public Square postion() {
     return location;
+  }
+
+  public void registerForEvents(Object listnier) {
+    news.register(listnier);
   }
 }

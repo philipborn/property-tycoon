@@ -3,17 +3,20 @@ package com.watson.propert.tycoon.game;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.*;
 
+import com.google.common.eventbus.EventBus;
+
 public class DicePairTest {
 
+  EventBus channle;
   DicePair dicePair;
 
   @BeforeEach
   void setup() {
-    dicePair = new DicePair();
+    channle = new EventBus();
+    dicePair = new DicePair(channle);
   }
 
   @Test
@@ -21,24 +24,5 @@ public class DicePairTest {
     List<Integer> returned = dicePair.throwDices();
 
     assertEquals(2, returned.size());
-  }
-
-  @Test
-  void lastThrowGiveEmptyOptionalIfNotThrownBefore() {
-    assertEquals(dicePair.lastThrow(), Optional.empty());
-    dicePair.throwDices();
-    assertNotEquals(dicePair.lastThrow(), Optional.empty());
-  }
-
-  @Test
-  void ModifiedOfReturnListDoNotChangeThrowDicesList() {
-    List<Integer> first = dicePair.throwDices();
-
-    first.set(0, 7);
-    first.add(3);
-
-    List<Integer> returned = dicePair.lastThrow().orElseThrow();
-    assertNotEquals(first, returned);
-    assertNotEquals(returned.get(0), 7);
   }
 }
