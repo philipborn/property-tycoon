@@ -313,7 +313,8 @@ public class PtController {
   void initialize() {
 
     // read JSON file
-    BoardReaderJson boardReader = new BoardReaderJson("src/main/resources/boardDataJSON.json");
+    BoardReaderJson boardReader = new BoardReaderJson();
+    boardReader.readFile("src/main/resources/boardDataJSON.json");
 
     squares =
         new StackPane[] {
@@ -333,6 +334,7 @@ public class PtController {
         };
     // for every square on the board
     for (StackPane sq : squares) {
+      boardReader.nextObject();
 
       // if square is a non-corner square
       if (sq.getChildren().get(0) instanceof VBox) {
@@ -344,16 +346,16 @@ public class PtController {
         Label price = (Label) v.getChildren().get(2);
 
         // set group names (if square is in a group)
-        if (boardReader.getObjectData().get("Group") != null) {
-          group.setId("PROPERTY_GROUP_" + boardReader.getObjectData().get("Group").toUpperCase());
+        if (boardReader.getProperties().get("Group") != null) {
+          group.setId("PROPERTY_GROUP_" + boardReader.getProperties().get("Group").toUpperCase());
         }
 
         // set name/price values
-        name.setText(boardReader.getObjectData().get("Name"));
-        price.setText(boardReader.getObjectData().get("Cost"));
+        name.setText(boardReader.getProperties().get("Name"));
+        price.setText(boardReader.getProperties().get("Cost"));
       }
       // get next square
-      boardReader.iterate();
+
     }
     checkNotNull();
   }
