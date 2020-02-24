@@ -346,13 +346,13 @@ public class PtController {
         Label price = (Label) v.getChildren().get(2);
 
         // set group names (if square is in a group)
-        if (boardReader.getProperties().get("Group") != null) {
-          group.setId("PROPERTY_GROUP_" + boardReader.getProperties().get("Group").toUpperCase());
+        if (boardReader.getProperties().get("group") != null) {
+          group.setId("PROPERTY_GROUP_" + boardReader.getProperties().get("group").toUpperCase());
         }
 
         // set name/price values
-        name.setText(boardReader.getProperties().get("Name"));
-        price.setText(boardReader.getProperties().get("Cost"));
+        name.setText(boardReader.getProperties().get("name"));
+        price.setText(boardReader.getProperties().get("cost"));
       }
       // get next square
 
