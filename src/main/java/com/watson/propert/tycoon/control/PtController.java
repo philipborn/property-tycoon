@@ -23,8 +23,12 @@
  */
 package com.watson.propert.tycoon.control;
 
+import static java.lang.System.*;
+
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +39,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.*;
+import javafx.util.Duration;
 
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
@@ -154,6 +160,54 @@ public class PtController {
 
   @FXML private TextArea MESSAGE_AREA;
 
+  @FXML private Circle PATH_0;
+  @FXML private Circle PATH_1;
+  @FXML private Circle PATH_2;
+  @FXML private Circle PATH_3;
+  @FXML private Circle PATH_4;
+  @FXML private Circle PATH_5;
+  @FXML private Circle PATH_6;
+  @FXML private Circle PATH_7;
+  @FXML private Circle PATH_8;
+  @FXML private Circle PATH_9;
+  @FXML private CubicCurve PATH_10;
+  @FXML private Circle PATH_11;
+  @FXML private Circle PATH_12;
+  @FXML private Circle PATH_13;
+  @FXML private Circle PATH_14;
+  @FXML private Circle PATH_15;
+  @FXML private Circle PATH_16;
+  @FXML private Circle PATH_17;
+  @FXML private Circle PATH_18;
+  @FXML private Circle PATH_19;
+  @FXML private Circle PATH_20;
+  @FXML private Circle PATH_21;
+  @FXML private Circle PATH_22;
+  @FXML private Circle PATH_23;
+  @FXML private Circle PATH_24;
+  @FXML private Circle PATH_25;
+  @FXML private Circle PATH_26;
+  @FXML private Circle PATH_27;
+  @FXML private Circle PATH_28;
+  @FXML private Circle PATH_29;
+  @FXML private Circle PATH_30;
+  @FXML private Circle PATH_31;
+  @FXML private Circle PATH_32;
+  @FXML private Circle PATH_33;
+  @FXML private Circle PATH_34;
+  @FXML private Circle PATH_35;
+  @FXML private Circle PATH_36;
+  @FXML private Circle PATH_37;
+  @FXML private Circle PATH_38;
+  @FXML private Circle PATH_39;
+
+  @FXML private Circle PATH_JAIL;
+
+  private StackPane[] squares;
+  private Shape[] path;
+
+  private int PLAYER_1_position = 0;
+
   @FXML
   void endGame(ActionEvent event) {
     /*
@@ -164,10 +218,96 @@ public class PtController {
   }
 
   @FXML
-  void newGame(ActionEvent event) {}
+  void newGame(ActionEvent event) {
+    goToJail();
+  }
 
   @FXML
-  void throwDice(MouseEvent event) {}
+  void throwDice(MouseEvent event) {
+    Random r = new Random();
+    int i = r.nextInt(11) + 1;
+    MESSAGE_AREA.setText("Move " + i + " spaces");
+    move(i);
+  }
+
+  void goToJail() {
+
+    // head directly to jail from wherever the player is on the board
+
+    PathTransition pt = new PathTransition();
+    Path p =
+        new Path(
+            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+    p.getElements().add(new LineTo(PATH_JAIL.getCenterX(), PATH_JAIL.getCenterY()));
+    pt.setNode(TOKEN_PLAYER_1);
+    pt.setDuration(Duration.seconds(1));
+    pt.setPath(p);
+    pt.play();
+
+    // set player position to just visiting square for when they leave jail
+    PLAYER_1_position = 10;
+  }
+
+  void move(int spaces) { // FIX BACKWARDS BUG
+
+    PathTransition pt = new PathTransition();
+    Path p =
+        new Path(
+            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+
+    int destNum = (PLAYER_1_position + spaces) % path.length;
+
+    // while player has not reached the destination
+    while (PLAYER_1_position != destNum) {
+      // if next path is not the jail path
+      if (path[PLAYER_1_position] instanceof Circle) {
+        Circle pathBlock = (Circle) path[PLAYER_1_position];
+        p.getElements().add(new LineTo(pathBlock.getCenterX(), pathBlock.getCenterY()));
+      } else {
+        // otherwise we are on the jail square, but just visiting
+        CubicCurve jailPath = (CubicCurve) path[PLAYER_1_position];
+        p.getElements()
+            .add(
+                new CubicCurveTo(
+                    jailPath.getControlX1(),
+                    jailPath.getControlY1(),
+                    jailPath.getControlX2(),
+                    jailPath.getControlY2(),
+                    jailPath.getEndX(),
+                    jailPath.getEndY()));
+      }
+      // iterate over the board in desired direction
+      PLAYER_1_position = (PLAYER_1_position + 1) % path.length;
+    }
+
+    // add final part of path (to destination)
+    if (path[destNum] instanceof Circle) {
+      Circle pathBlock = (Circle) path[destNum];
+      p.getElements().add(new LineTo(pathBlock.getCenterX(), pathBlock.getCenterY()));
+    } else {
+      CubicCurve jailPath = (CubicCurve) path[destNum];
+      p.getElements()
+          .add(
+              new CubicCurveTo(
+                  jailPath.getControlX1(),
+                  jailPath.getControlY1(),
+                  jailPath.getControlX2(),
+                  jailPath.getControlY2(),
+                  jailPath.getEndX(),
+                  jailPath.getEndY()));
+    }
+
+    pt.setNode(TOKEN_PLAYER_1);
+    pt.setDuration(Duration.seconds(1));
+    pt.setPath(p);
+    pt.play();
+    // show on flow pane
+    /*
+    FlowPane fp = (FlowPane) squares[PLAYER_1_position].getParent();
+    fp.getChildren().add(TOKEN_PLAYER_1);
+     */
+    // execute square functionality
+  }
 
   @FXML
   void initialize() {
@@ -175,16 +315,24 @@ public class PtController {
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson("src/main/resources/boardDataJSON.json");
 
-    StackPane[] firstSquares = {
-      SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
-      SQUARE_9, SQUARE_10, SQUARE_11, SQUARE_12, SQUARE_13, SQUARE_14, SQUARE_15, SQUARE_16,
-      SQUARE_17, SQUARE_18, SQUARE_19, SQUARE_20, SQUARE_21, SQUARE_22, SQUARE_23, SQUARE_24,
-      SQUARE_25, SQUARE_26, SQUARE_27, SQUARE_28, SQUARE_29, SQUARE_30, SQUARE_31, SQUARE_32,
-      SQUARE_33, SQUARE_34, SQUARE_35, SQUARE_36, SQUARE_37, SQUARE_38, SQUARE_39
-    };
+    squares =
+        new StackPane[] {
+          SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
+          SQUARE_9, SQUARE_10, SQUARE_11, SQUARE_12, SQUARE_13, SQUARE_14, SQUARE_15, SQUARE_16,
+          SQUARE_17, SQUARE_18, SQUARE_19, SQUARE_20, SQUARE_21, SQUARE_22, SQUARE_23, SQUARE_24,
+          SQUARE_25, SQUARE_26, SQUARE_27, SQUARE_28, SQUARE_29, SQUARE_30, SQUARE_31, SQUARE_32,
+          SQUARE_33, SQUARE_34, SQUARE_35, SQUARE_36, SQUARE_37, SQUARE_38, SQUARE_39
+        };
 
+    path =
+        new Shape[] {
+          PATH_0, PATH_1, PATH_2, PATH_3, PATH_4, PATH_5, PATH_6, PATH_7, PATH_8, PATH_9, PATH_10,
+          PATH_11, PATH_12, PATH_13, PATH_14, PATH_15, PATH_16, PATH_17, PATH_18, PATH_19, PATH_20,
+          PATH_21, PATH_22, PATH_23, PATH_24, PATH_25, PATH_26, PATH_27, PATH_28, PATH_29, PATH_30,
+          PATH_31, PATH_32, PATH_33, PATH_34, PATH_35, PATH_36, PATH_37, PATH_38, PATH_39
+        };
     // for every square on the board
-    for (StackPane sq : firstSquares) {
+    for (StackPane sq : squares) {
 
       // if square is a non-corner square
       if (sq.getChildren().get(0) instanceof VBox) {
@@ -207,6 +355,10 @@ public class PtController {
       // get next square
       boardReader.iterate();
     }
+    checkNotNull();
+  }
+
+  private void checkNotNull() {
     assert SQUARE_9 != null
         : "fx:id=\"SQUARE_9\" was not injected: check your FXML file 'propertyTycoonGui_v_0_1.fxml'.";
     assert SQUARE_8 != null
