@@ -49,7 +49,7 @@ public class PropertTycoonTest {
     thirdNode.setBack(secondNode);
 
     channle = new EventBus();
-    game = new GameMaster(firstNode, channle);
+    game = new Game(firstNode, channle);
   }
 
   @Test

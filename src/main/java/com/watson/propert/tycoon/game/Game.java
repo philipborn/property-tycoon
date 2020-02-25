@@ -4,18 +4,18 @@ import java.util.List;
 
 import com.google.common.eventbus.EventBus;
 
-public class GameMaster implements PropertTycoon {
+public class Game implements PropertTycoon {
 
   private DicePair dicePair;
   private Square bord;
   private Player token;
-  private EventBus channle;
+  private EventBus channel;
 
-  public GameMaster(Square startPostion, EventBus channle) {
-    dicePair = new DicePair(channle);
+  public Game(Square startPostion, EventBus channel) {
+    dicePair = new DicePair(channel);
     bord = startPostion;
-    token = new Player(bord, channle);
-    this.channle = channle;
+    token = new Player(bord, channel);
+    this.channel = channel;
   }
 
   @Override
@@ -27,11 +27,11 @@ public class GameMaster implements PropertTycoon {
 
   @Override
   public void registerListener(Object listener) {
-    channle.register(listener);
+    channel.register(listener);
   }
 
   @Override
   public void unregisterListener(Object listener) {
-    channle.unregister(listener);
+    channel.unregister(listener);
   }
 }
