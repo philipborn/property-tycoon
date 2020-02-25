@@ -26,14 +26,7 @@ package com.watson.propert.tycoon.control;
 import static java.lang.System.*;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
-
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
-import com.watson.propert.tycoon.game.DiceEvent;
-import com.watson.propert.tycoon.game.Game;
-import com.watson.propert.tycoon.game.PropertTycoon;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -48,6 +41,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
+import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.DiceEvent;
+import com.watson.propert.tycoon.game.Game;
+import com.watson.propert.tycoon.game.PropertTycoon;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {

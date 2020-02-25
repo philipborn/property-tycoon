@@ -2,10 +2,10 @@ package com.watson.propert.tycoon.game;
 
 import java.util.List;
 
+import javax.swing.*;
+
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.io.BoardReaderJson;
-
-import javax.swing.*;
 
 public class Game implements PropertTycoon {
 
@@ -38,7 +38,7 @@ public class Game implements PropertTycoon {
     channel.unregister(listener);
   }
 
-  static public PropertTycoon newGame() {
+  public static PropertTycoon newGame() {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
