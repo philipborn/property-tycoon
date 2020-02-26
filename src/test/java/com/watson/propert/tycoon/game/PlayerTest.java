@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PlayerTest {
@@ -66,5 +67,27 @@ public class PlayerTest {
     int changed = player.cash() - before;
     assertEquals(amount, changed);
     assertThrows(IllegalArgumentException.class, () -> player.receiveCash(-50));
+  }
+
+  @Test
+  void cash_Change_will_send_CashEvent() {
+    Listener spy = new Listener();
+    channel.register(spy);
+    int old = player.cash();
+
+    player.receiveCash(50);
+
+    CashEvent event = spy.event;
+    assertEquals(old, event.getOldCash());
+    assertEquals(player.cash(), event.getNewCash());
+  }
+
+  class Listener {
+    public CashEvent event;
+
+    @Subscribe
+    void getEvent(CashEvent event) {
+      this.event = event;
+    }
   }
 }

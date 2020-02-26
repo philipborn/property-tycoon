@@ -68,7 +68,10 @@ public class Player implements CashUser {
   public void receiveCash(int amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("Amount most be postive");
+    } else if (amount > 0) {
+      int oldCash = cash;
+      cash += amount;
+      channel.post(CashEvent.write(oldCash, cash));
     }
-    cash += amount;
   }
 }
