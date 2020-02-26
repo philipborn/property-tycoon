@@ -82,6 +82,17 @@ public class PlayerTest {
     assertEquals(player.cash(), event.getNewCash());
   }
 
+  @Test
+  void player_receive_cash_when_passing_Go() {
+    Listener spy = new Listener();
+    channel.register(spy);
+
+    player.move(bordSize + 1);
+
+    CashEvent event = spy.event;
+    assert (event.getNewCash() > event.getOldCash());
+  }
+
   class Listener {
     public CashEvent event;
 
