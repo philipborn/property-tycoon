@@ -26,7 +26,6 @@ package com.watson.propert.tycoon.control;
 import static java.lang.System.*;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -42,6 +41,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
+import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.DiceEvent;
+import com.watson.propert.tycoon.game.Game;
+import com.watson.propert.tycoon.game.PropertTycoon;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -208,6 +211,8 @@ public class PtController {
 
   private int PLAYER_1_position = 0;
 
+  private PropertTycoon game;
+
   @FXML
   void endGame(ActionEvent event) {
     /*
@@ -224,9 +229,13 @@ public class PtController {
 
   @FXML
   void throwDice(MouseEvent event) {
-    Random r = new Random();
-    int i = r.nextInt(11) + 1;
-    MESSAGE_AREA.setText("Move " + i + " spaces");
+    game.throwDicesAndMove();
+  }
+
+  @Subscribe
+  void diceHandler(DiceEvent event) {
+    int i = event.firstDice() + event.secondDice();
+    MESSAGE_AREA.setText("Move: " + i + " spaces");
     move(i);
   }
 
@@ -315,6 +324,9 @@ public class PtController {
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
     boardReader.readFile("src/main/resources/boardDataJSON.json");
+
+    game = Game.newGame();
+    game.registerListener(this);
 
     squares =
         new StackPane[] {
