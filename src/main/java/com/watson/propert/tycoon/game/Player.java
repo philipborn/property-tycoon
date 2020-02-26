@@ -2,10 +2,11 @@ package com.watson.propert.tycoon.game;
 
 import com.google.common.eventbus.EventBus;
 
-public class Player {
+public class Player implements CashUser {
 
   private String name = "g";
   private Square location;
+  private int cash;
 
   private EventBus channel;
 
@@ -56,5 +57,18 @@ public class Player {
 
   public Square postion() {
     return location;
+  }
+
+  @Override
+  public int cash() {
+    return cash;
+  }
+
+  @Override
+  public void receiveCash(int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount most be postive");
+    }
+    cash += amount;
   }
 }

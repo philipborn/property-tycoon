@@ -55,4 +55,16 @@ public class PlayerTest {
 
     assertEquals(player.postion(), first);
   }
+
+  @Test
+  void receive_cash_increase_amount_of_cash() {
+    int amount = 50;
+    int before = player.cash();
+
+    player.receiveCash(amount);
+
+    int changed = player.cash() - before;
+    assertEquals(amount, changed);
+    assertThrows(IllegalArgumentException.class, () -> player.receiveCash(-50));
+  }
 }
