@@ -53,25 +53,18 @@ public class PropertTycoonTest {
   }
 
   @Test
-  void throwAndMoveGivesDiceAndPlayerEvent() {
+  void throwAndMove_GivesDiceEvent() {
     TestListener listiner = new TestListener();
     channle.register(listiner);
 
     game.throwDicesAndMove();
 
-    assertNotNull(listiner.playerEvent);
     assertNotNull(listiner.diceEvent);
   }
 }
 
 class TestListener {
-  public PlayerEvent playerEvent;
   public DiceEvent diceEvent;
-
-  @Subscribe
-  void catchPlayerEvent(PlayerEvent pe) {
-    playerEvent = pe;
-  }
 
   @Subscribe
   void catchDiceEvent(DiceEvent de) {

@@ -7,11 +7,11 @@ public class Player {
   private String name = "g";
   private Square location;
 
-  private EventBus news;
+  private EventBus channel;
 
-  public Player(Square startLocation, EventBus bus) {
+  public Player(Square startLocation, EventBus channel) {
     location = startLocation;
-    news = bus;
+    this.channel = channel;
   }
 
   String getName() {
@@ -33,7 +33,6 @@ public class Player {
     } else {
       node = stepBack(-steps);
     }
-    news.post(new PlayerEvent(this, old));
     return node;
   }
 
@@ -57,9 +56,5 @@ public class Player {
 
   public Square postion() {
     return location;
-  }
-
-  public void registerForEvents(Object listnier) {
-    news.register(listnier);
   }
 }
