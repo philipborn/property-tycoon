@@ -44,7 +44,7 @@ public class App extends Application {
     // getting URL of fxml file
     URL fxmlUrl = ClassLoader.getSystemResource("ptGui.fxml");
     Parent root = FXMLLoader.load(fxmlUrl);
-    stage.setTitle("Watson Game Property Tycoon - Project Team 16 - Sprint 1");
+    stage.setTitle("Watson Game Property Tycoon - Project Team 16 - Sprint 3");
     stage.setScene(new Scene(root));
     stage.show();
   }
