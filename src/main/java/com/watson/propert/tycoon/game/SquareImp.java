@@ -31,6 +31,11 @@ public class SquareImp implements Square {
     return name;
   }
 
+  @Override
+  public void vist(SquareVisitor visitor) {
+    visitor.SquareImp(this);
+  }
+
   public void setNext(Square node) {
     next = node;
   }

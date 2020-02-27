@@ -3,11 +3,6 @@ package com.watson.propert.tycoon.game;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.*;
-
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
@@ -16,7 +11,7 @@ import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PlayerTest {
   Player player;
-  EventBus bus;
+  EventBus channel;
   Square first;
   static int bordSize = 3;
 
@@ -29,25 +24,13 @@ public class PlayerTest {
 
     first = bb.buildBord(br);
 
-    // SquareImp firstNode = new SquareImp("first");
-    // SquareImp secondNode = new SquareImp("second");
-    // SquareImp thirdNode = new SquareImp("third");
-    // firstNode.setNext(secondNode);
-    // secondNode.setNext(thirdNode);
-    // thirdNode.setNext(firstNode);
-    // firstNode.setBack(thirdNode);
-    // secondNode.setBack(firstNode);
-    // thirdNode.setBack(secondNode);
-
-    // first = firstNode;
-    bus = new EventBus();
-    player = new Player(first, bus);
+    this.channel = new EventBus();
+    player = new Player(first, this.channel);
   }
 
   @Test
   void newplayerNameNeverReturnNull() {
     // setup gives new player
-
     assertNotNull(player.getName());
   }
 
@@ -62,58 +45,60 @@ public class PlayerTest {
 
   @Test
   void bordeIsCirular() {
-
     assertEquals(player.move(bordSize), first);
     assertEquals(player.move(-bordSize), first);
   }
 
   @Test
   void movingForeardThenBackSamePostion() {
-
     player.move(2);
     player.move(-2);
 
     assertEquals(player.postion(), first);
   }
 
-  private Square bordOf(int numSquares) {
-    List<SquareImp> list = new ArrayList<>(numSquares);
-    for (int i = 0; i < numSquares; ++i) {
-      SquareImp node = new SquareImp();
-      list.add(node);
-      if (i != 0) {
-        SquareImp nodeBefor = list.get(i - 1);
-        node.setBack(nodeBefor);
-        nodeBefor.setNext(node);
-      }
-    }
-    SquareImp lastNode = list.get(numSquares - 1);
-    SquareImp firstNode = list.get(0);
-    firstNode.setBack(lastNode);
-    lastNode.setNext(firstNode);
-    return firstNode;
+  @Test
+  void receive_cash_increase_amount_of_cash() {
+    int amount = 50;
+    int before = player.cash();
+
+    player.receiveCash(amount);
+
+    int changed = player.cash() - before;
+    assertEquals(amount, changed);
+    assertThrows(IllegalArgumentException.class, () -> player.receiveCash(-50));
   }
 
   @Test
-  void playerMovePostsEventWhenMove() {
-    TestListiner listnier = new TestListiner();
-    player.registerForEvents(listnier);
+  void cash_Change_will_send_CashEvent() {
+    Listener spy = new Listener();
+    channel.register(spy);
+    int old = player.cash();
 
-    player.move(3);
-    PlayerEvent event = listnier.msgs.get(0);
+    player.receiveCash(50);
 
-    assertEquals(1, listnier.msgs.size());
-    assertEquals(player, event.player());
-    assertEquals(first, event.oldPostion());
+    CashEvent event = spy.event;
+    assertEquals(old, event.getOldCash());
+    assertEquals(player.cash(), event.getNewCash());
   }
-}
 
-class TestListiner {
+  @Test
+  void player_receive_cash_when_passing_Go() {
+    Listener spy = new Listener();
+    channel.register(spy);
 
-  List<PlayerEvent> msgs = new ArrayList<>();
+    player.move(bordSize + 1);
 
-  @Subscribe
-  void collekt(PlayerEvent msg) {
-    msgs.add(msg);
+    CashEvent event = spy.event;
+    assert (event.getNewCash() > event.getOldCash());
+  }
+
+  class Listener {
+    public CashEvent event;
+
+    @Subscribe
+    void getEvent(CashEvent event) {
+      this.event = event;
+    }
   }
 }

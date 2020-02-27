@@ -7,4 +7,6 @@ public interface Square extends Iterable<Square> {
   Square backSquare();
 
   String name();
+
+  void vist(SquareVisitor visitor);
 }

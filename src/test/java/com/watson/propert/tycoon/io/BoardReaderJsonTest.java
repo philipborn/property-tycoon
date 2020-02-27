@@ -26,6 +26,7 @@ package com.watson.propert.tycoon.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -91,11 +92,12 @@ class BoardReaderJsonTest {
   @Test
   void changing_json_file_affects_output() {
     boardReaderJson.nextObject();
-
-    assertEquals("Go", boardReaderJson.getProperties().get("name"));
+    Map<String, String> first = boardReaderJson.getProperties();
     boardReaderJson.readFile("src/test/testResources/jsonTest.json");
     boardReaderJson.nextObject();
-    assertEquals("name1", boardReaderJson.getProperties().get("name"));
+    Map<String, String> second = boardReaderJson.getProperties();
+
+    assertNotEquals(first, second);
   }
 
   @Test
