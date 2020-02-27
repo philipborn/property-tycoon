@@ -5,8 +5,6 @@ import java.util.function.Consumer;
 import com.google.common.eventbus.EventBus;
 
 public class Player implements CashUser {
-
-  private String name = "g";
   private Square location;
   private int cash;
 
@@ -15,17 +13,6 @@ public class Player implements CashUser {
   public Player(Square startLocation, EventBus channel) {
     location = startLocation;
     this.channel = channel;
-  }
-
-  String getName() {
-    return name;
-  }
-
-  void changeName(String newName) {
-    if (newName == null) {
-      throw new NullPointerException();
-    }
-    name = newName;
   }
 
   public Square move(int steps) {

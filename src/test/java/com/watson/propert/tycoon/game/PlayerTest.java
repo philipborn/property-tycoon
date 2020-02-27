@@ -29,21 +29,6 @@ public class PlayerTest {
   }
 
   @Test
-  void newplayerNameNeverReturnNull() {
-    // setup gives new player
-    assertNotNull(player.getName());
-  }
-
-  @Test
-  void changeNameToNullNullpointException() {
-    assertThrows(
-        NullPointerException.class,
-        () -> {
-          player.changeName(null);
-        });
-  }
-
-  @Test
   void bordeIsCirular() {
     assertEquals(player.move(bordSize), first);
     assertEquals(player.move(-bordSize), first);
