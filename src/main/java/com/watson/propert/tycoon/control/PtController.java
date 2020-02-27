@@ -25,7 +25,9 @@ package com.watson.propert.tycoon.control;
 
 import static java.lang.System.*;
 
+import java.awt.*;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -35,13 +37,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.CashEvent;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
@@ -74,6 +76,7 @@ public class PtController {
   @FXML private StackPane SQUARE_0;
 
   @FXML private HBox TOKEN_PLAYER_1;
+  @FXML private HBox TOKEN_PLAYER_2;
 
   @FXML private StackPane SQUARE_10;
 
@@ -206,10 +209,17 @@ public class PtController {
 
   @FXML private Circle PATH_JAIL;
 
+  private LinkedList<HBox> playerTokens;
+  private LinkedList<Integer> playerPositions;
+  private LinkedList<VBox> playerLabels;
+
   private StackPane[] squares;
   private Shape[] path;
 
   private int PLAYER_1_position = 0;
+  private int PLAYER_2_position = 0;
+
+  private int activePlayer = 0;
 
   private PropertTycoon game;
 
@@ -236,7 +246,21 @@ public class PtController {
   void diceHandler(DiceEvent event) {
     int i = event.firstDice() + event.secondDice();
     MESSAGE_AREA.setText("Move: " + i + " spaces");
-    move(i);
+    move(i, playerTokens.get(activePlayer), playerPositions.get(activePlayer));
+    changeTurn();
+  }
+
+  void changeTurn() {
+    // can utilise style sheets, white & transparent is just to show the functionality
+    playerLabels.get(activePlayer).setStyle("-fx-background-color:TRANSPARENT");
+    activePlayer = (activePlayer + 1) % playerTokens.size();
+    playerLabels.get(activePlayer).setStyle("-fx-background-color:WHITE");
+  }
+
+  @Subscribe
+  void updateMoney(CashEvent event) {
+    Label l = (Label) playerLabels.get(activePlayer).getChildren().get(1);
+    l.setText("" + event.getNewCash());
   }
 
   void goToJail() {
@@ -246,35 +270,36 @@ public class PtController {
     PathTransition pt = new PathTransition();
     Path p =
         new Path(
-            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+            new MoveTo(
+                playerTokens.get(activePlayer).getTranslateX() + 25,
+                playerTokens.get(activePlayer).getTranslateY() + 25));
     p.getElements().add(new LineTo(PATH_JAIL.getCenterX(), PATH_JAIL.getCenterY()));
-    pt.setNode(TOKEN_PLAYER_1);
+    pt.setNode(playerTokens.get(activePlayer));
     pt.setDuration(Duration.seconds(1));
     pt.setPath(p);
     pt.play();
 
     // set player position to just visiting square for when they leave jail
-    PLAYER_1_position = 10;
+    playerPositions.set(activePlayer, 10);
   }
 
-  void move(int spaces) { // FIX BACKWARDS BUG
+  void move(int spaces, HBox activePlayer, int activePlayer_pos) { // FIX BACKWARDS BUG
 
     PathTransition pt = new PathTransition();
     Path p =
-        new Path(
-            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+        new Path(new MoveTo(activePlayer.getTranslateX() + 25, activePlayer.getTranslateY() + 25));
 
-    int destNum = (PLAYER_1_position + spaces) % path.length;
+    int destNum = (activePlayer_pos + spaces) % path.length;
 
     // while player has not reached the destination
-    while (PLAYER_1_position != destNum) {
+    while (activePlayer_pos != destNum) {
       // if next path is not the jail path
-      if (path[PLAYER_1_position] instanceof Circle) {
-        Circle pathBlock = (Circle) path[PLAYER_1_position];
+      if (path[activePlayer_pos] instanceof Circle) {
+        Circle pathBlock = (Circle) path[activePlayer_pos];
         p.getElements().add(new LineTo(pathBlock.getCenterX(), pathBlock.getCenterY()));
       } else {
         // otherwise we are on the jail square, but just visiting
-        CubicCurve jailPath = (CubicCurve) path[PLAYER_1_position];
+        CubicCurve jailPath = (CubicCurve) path[activePlayer_pos];
         p.getElements()
             .add(
                 new CubicCurveTo(
@@ -286,8 +311,11 @@ public class PtController {
                     jailPath.getEndY()));
       }
       // iterate over the board in desired direction
-      PLAYER_1_position = (PLAYER_1_position + 1) % path.length;
+      activePlayer_pos = (activePlayer_pos + 1) % path.length;
     }
+
+    // update player position
+    playerPositions.set(this.activePlayer, activePlayer_pos);
 
     // add final part of path (to destination)
     if (path[destNum] instanceof Circle) {
@@ -306,7 +334,7 @@ public class PtController {
                   jailPath.getEndY()));
     }
 
-    pt.setNode(TOKEN_PLAYER_1);
+    pt.setNode(activePlayer);
     pt.setDuration(Duration.seconds(1));
     pt.setPath(p);
     pt.play();
@@ -344,6 +372,25 @@ public class PtController {
           PATH_21, PATH_22, PATH_23, PATH_24, PATH_25, PATH_26, PATH_27, PATH_28, PATH_29, PATH_30,
           PATH_31, PATH_32, PATH_33, PATH_34, PATH_35, PATH_36, PATH_37, PATH_38, PATH_39
         };
+
+    // store player tokens in a list
+    playerTokens = new LinkedList<>();
+    playerTokens.add(TOKEN_PLAYER_1);
+    playerTokens.add(TOKEN_PLAYER_2);
+
+    // store player positions in a list
+    playerPositions = new LinkedList<>();
+    playerPositions.add(PLAYER_1_position);
+    playerPositions.add(PLAYER_2_position);
+
+    // store player labels in a list
+    playerLabels = new LinkedList<>();
+    playerLabels.add(PLAYER_1);
+    playerLabels.add(PLAYER_2);
+
+    // highlight first player to play
+    playerLabels.get(activePlayer).setStyle("-fx-background-color:WHITE");
+
     // for every square on the board
     for (StackPane sq : squares) {
       boardReader.nextObject();

@@ -10,11 +10,11 @@ public class CashEvent {
     this.newCash = newCash;
   }
 
-  int getOldCash() {
+  public int getOldCash() {
     return oldCash;
   }
 
-  int getNewCash() {
+  public int getNewCash() {
     return newCash;
   }
 
