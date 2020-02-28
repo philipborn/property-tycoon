@@ -2,13 +2,16 @@ package com.watson.propert.tycoon.game;
 
 import com.google.common.eventbus.EventBus;
 
-public class Player implements CashUser {
+public class Player implements CashUser, Comparable<Player> {
+  public final PlayerId id;
+
   private Square location;
   private int cash;
 
   private EventBus channel;
 
-  public Player(Square startLocation, EventBus channel) {
+  public Player(PlayerId id, Square startLocation, EventBus channel) {
+    this.id = id;
     location = startLocation;
     this.channel = channel;
   }
@@ -56,5 +59,18 @@ public class Player implements CashUser {
       cash += amount;
       channel.post(CashEvent.write(oldCash, cash));
     }
+  }
+
+  @Override
+  public int compareTo(Player player) {
+    final int BEFORE = -1;
+    final int EQUAL = 0;
+    final int AFTER = 1;
+
+    int comp = id.compareTo(player.id);
+    if (comp != EQUAL) {
+      return comp;
+    }
+    return Integer.compare(cash, player.cash);
   }
 }

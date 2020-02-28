@@ -25,7 +25,7 @@ public class PlayerTest {
     first = bb.buildBord(br);
 
     this.channel = new EventBus();
-    player = new Player(first, this.channel);
+    player = new Player(PlayerId.ONE, first, this.channel);
   }
 
   @Test
