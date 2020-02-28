@@ -10,21 +10,19 @@ public class SquareImp implements Square {
   private Square back;
   private String name;
 
-  public SquareImp() {}
-
   public SquareImp(String name) {
     this.name = name;
   }
 
   @Override
   public Square move(int numStep, SquareVisitor actionOnTheWay) {
-    Square newLocaktion = this;
+    Square newLocation = this;
     if (numStep > 0) {
-      newLocaktion = stepForward(numStep, actionOnTheWay);
+      newLocation = stepForward(numStep, actionOnTheWay);
     } else if (numStep < 0) {
-      newLocaktion = stepBack(numStep, actionOnTheWay);
+      newLocation = stepBack(numStep, actionOnTheWay);
     }
-    return newLocaktion;
+    return newLocation;
   }
 
   private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
@@ -80,7 +78,8 @@ public class SquareImp implements Square {
 
   @Override
   public void forEach(Consumer action) {
-    new BordIterator(this).forEachRemaining(action);
+    Iterator<Square> iter = new BordIterator(this);
+    iter.forEachRemaining(action);
   }
 
   @Override
