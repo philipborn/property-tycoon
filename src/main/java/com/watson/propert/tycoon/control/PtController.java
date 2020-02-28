@@ -35,16 +35,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+import javafx.stage.Screen;
 import javafx.util.Duration;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
+import com.watson.propert.tycoon.gui.App;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -52,6 +55,12 @@ public class PtController {
   @FXML private ResourceBundle resources;
 
   @FXML private URL location;
+
+  @FXML private BorderPane MAIN_WINDOW;
+
+  @FXML private Pane GAME_BOARD_CONTAINER;
+
+  @FXML private GridPane GAME_GRID;
 
   @FXML private StackPane SQUARE_9;
 
@@ -137,6 +146,14 @@ public class PtController {
 
   @FXML private HBox DICE;
 
+  @FXML private HBox STREET_1;
+
+  @FXML private HBox STREET_2;
+
+  @FXML private HBox STREET_3;
+
+  @FXML private HBox STREET_4;
+
   @FXML private Label DICE_1;
 
   @FXML private Label DICE_2;
@@ -206,7 +223,8 @@ public class PtController {
 
   @FXML private Circle PATH_JAIL;
 
-  private StackPane[] squares;
+  @FXML private StackPane[] squares;
+
   private Shape[] path;
 
   private int PLAYER_1_position = 0;
@@ -318,17 +336,61 @@ public class PtController {
     // execute square functionality
   }
 
+  // Rescales the game board for different screen resolutions/DPI combinations
+  void rescaleGameBoard(Double scaleFactor) {
+    Logger logger = LoggerFactory.getLogger(App.class);
+    Double default_border = 2.0; //4.0
+    Double default_board_size = 960.0 * scaleFactor; //800.0
+    Double default_street_height = 130.0 * scaleFactor; //103.0
+    Double default_street_width = default_board_size - (2.0 * default_street_height);
+    Double default_tile_width = default_street_width / 9.0;
+    Double default_tile_height = default_street_height;
+    Double default_corner_inner_size = default_street_height - default_border;
+    Double default_tile_inner_height = default_street_height - default_border;
+    Double default_tile_inner_width = default_tile_width - 2;
+    Double default_house_block_height = 0.22 * default_street_height * scaleFactor;
+    Double default_property_name_height = 0.35 * default_street_height * scaleFactor;
+    Double default_price_height = 0.22 * default_street_height * scaleFactor;
+
+    GAME_BOARD_CONTAINER.setPrefSize(default_board_size, default_board_size);
+    GAME_GRID.getColumnConstraints().get(0).setPrefWidth(default_street_height);
+    GAME_GRID.getColumnConstraints().get(1).setPrefWidth(default_street_width);
+    GAME_GRID.getColumnConstraints().get(2).setPrefWidth(default_street_height);
+    GAME_GRID.getRowConstraints().get(0).setPrefHeight(default_street_height);
+    GAME_GRID.getRowConstraints().get(1).setPrefHeight(default_street_width);
+    GAME_GRID.getRowConstraints().get(2).setPrefHeight(default_street_height);
+    STREET_1.setPrefSize(default_street_width, default_street_height);
+    STREET_2.setPrefSize(default_street_width, default_street_height);
+    STREET_3.setPrefSize(default_street_width, default_street_height);
+    STREET_4.setPrefSize(default_street_width, default_street_height);
+
+    for (int i = 0; i < this.squares.length; i++) {
+      if (i % 10 != 0) {
+        logger.debug("Index: " + i);
+        this.squares[i].setPrefHeight(default_tile_height);
+        this.squares[i].setPrefWidth(default_tile_width);
+        VBox panel = (VBox) this.squares[i].lookup("#PANEL");
+        panel.setPrefSize(default_tile_inner_width, default_tile_inner_height);
+        HBox houseBox = (HBox) this.squares[i].lookup("#PROPERTY_GROUP");
+        houseBox.setPrefWidth(default_tile_inner_width);
+        houseBox.setPrefHeight(default_house_block_height);
+        Label propertyName = (Label) this.squares[i].lookup("#PROPERTY_NAME");
+        propertyName.setPrefHeight(default_property_name_height);
+        propertyName.setPrefWidth(default_tile_inner_width);
+        Label propertyPrice = (Label) this.squares[i].lookup("#PROPERTY_PRICE");
+        propertyPrice.setPrefSize(default_tile_inner_width, default_price_height);
+      } else {
+        this.squares[i].setPrefSize(default_street_height, default_street_height);
+        ((HBox) this.squares[i].getChildren().get(0))
+            .setPrefSize(default_corner_inner_size, default_corner_inner_size);
+      }
+    }
+  }
+
   @FXML
   void initialize() {
 
-    // read JSON file
-    BoardReaderJson boardReader = new BoardReaderJson();
-    boardReader.readFile("src/main/resources/boardDataJSON.json");
-
-    game = Game.newGame();
-    game.registerListener(this);
-
-    squares =
+    this.squares =
         new StackPane[] {
           SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
           SQUARE_9, SQUARE_10, SQUARE_11, SQUARE_12, SQUARE_13, SQUARE_14, SQUARE_15, SQUARE_16,
@@ -344,6 +406,17 @@ public class PtController {
           PATH_21, PATH_22, PATH_23, PATH_24, PATH_25, PATH_26, PATH_27, PATH_28, PATH_29, PATH_30,
           PATH_31, PATH_32, PATH_33, PATH_34, PATH_35, PATH_36, PATH_37, PATH_38, PATH_39
         };
+
+    // Scale game board based on screen DPI
+    rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
+
+    // read JSON file
+    BoardReaderJson boardReader = new BoardReaderJson();
+    boardReader.readFile("src/main/resources/boardDataJSON.json");
+
+    game = Game.newGame();
+    game.registerListener(this);
+
     // for every square on the board
     for (StackPane sq : squares) {
       boardReader.nextObject();
