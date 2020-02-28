@@ -1,10 +1,10 @@
 package com.watson.propert.tycoon.game;
 
-public class NewTurnEvent {
+public class ChangePlayerEvent {
 
   public static PlayerId activePlayer;
 
-  public NewTurnEvent(PlayerId activePlayer) {
+  public ChangePlayerEvent(PlayerId activePlayer) {
     this.activePlayer = activePlayer;
   }
 }

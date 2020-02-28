@@ -29,7 +29,7 @@ public class Game implements PropertTycoon {
     List<Integer> dices = dicePair.throwDices();
     Integer sum = dices.stream().mapToInt((a) -> a).sum();
     currentPlayer.move(sum);
-    channel.post(new NewTurnEvent(master.newTurn().id));
+    channel.post(new ChangePlayerEvent(master.newTurn().id));
   }
 
   @Override
