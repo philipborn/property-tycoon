@@ -40,14 +40,10 @@ import javafx.scene.shape.*;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
-import com.watson.propert.tycoon.gui.App;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -179,6 +175,8 @@ public class PtController {
   @FXML private VBox BUTTON_CONTAINER1;
 
   @FXML private TextArea MESSAGE_AREA;
+
+  @FXML private Rectangle JAIL;
 
   @FXML private Circle PATH_0;
   @FXML private Circle PATH_1;
@@ -338,7 +336,6 @@ public class PtController {
 
   // Rescales the game board for different screen resolutions/DPI combinations
   void rescaleGameBoard(Double scaleFactor) {
-    Logger logger = LoggerFactory.getLogger(App.class);
     Double default_border = 2.0; //4.0
     Double default_board_size = 960.0 * scaleFactor; //800.0
     Double default_street_height = 130.0 * scaleFactor; //103.0
@@ -352,6 +349,7 @@ public class PtController {
     Double default_property_name_height = 0.35 * default_street_height * scaleFactor;
     Double default_price_height = 0.22 * default_street_height * scaleFactor;
 
+    // Resize game board containers
     GAME_BOARD_CONTAINER.setPrefSize(default_board_size, default_board_size);
     GAME_GRID.getColumnConstraints().get(0).setPrefWidth(default_street_height);
     GAME_GRID.getColumnConstraints().get(1).setPrefWidth(default_street_width);
@@ -359,29 +357,31 @@ public class PtController {
     GAME_GRID.getRowConstraints().get(0).setPrefHeight(default_street_height);
     GAME_GRID.getRowConstraints().get(1).setPrefHeight(default_street_width);
     GAME_GRID.getRowConstraints().get(2).setPrefHeight(default_street_height);
+
+    // Resize Street of properties
     STREET_1.setPrefSize(default_street_width, default_street_height);
     STREET_2.setPrefSize(default_street_width, default_street_height);
     STREET_3.setPrefSize(default_street_width, default_street_height);
     STREET_4.setPrefSize(default_street_width, default_street_height);
+    JAIL.setHeight(default_corner_inner_size * 0.7);
+    JAIL.setWidth(default_corner_inner_size * 0.7);
 
-    for (int i = 0; i < this.squares.length; i++) {
-      if (i % 10 != 0) {
-        logger.debug("Index: " + i);
-        this.squares[i].setPrefHeight(default_tile_height);
-        this.squares[i].setPrefWidth(default_tile_width);
-        VBox panel = (VBox) this.squares[i].lookup("#PANEL");
-        panel.setPrefSize(default_tile_inner_width, default_tile_inner_height);
-        HBox houseBox = (HBox) this.squares[i].lookup("#PROPERTY_GROUP");
-        houseBox.setPrefWidth(default_tile_inner_width);
-        houseBox.setPrefHeight(default_house_block_height);
-        Label propertyName = (Label) this.squares[i].lookup("#PROPERTY_NAME");
-        propertyName.setPrefHeight(default_property_name_height);
-        propertyName.setPrefWidth(default_tile_inner_width);
-        Label propertyPrice = (Label) this.squares[i].lookup("#PROPERTY_PRICE");
-        propertyPrice.setPrefSize(default_tile_inner_width, default_price_height);
+    // Resize squares
+    for (StackPane sq : this.squares) {
+      if (sq.getChildren().get(0) instanceof VBox) {
+        sq.setPrefHeight(default_tile_height);
+        sq.setPrefWidth(default_tile_width);
+        ((Pane) sq.lookup("#PANEL"))
+            .setPrefSize(default_tile_inner_width, default_tile_inner_height);
+        ((Pane) sq.lookup("#PROPERTY_GROUP"))
+            .setPrefSize(default_tile_inner_width, default_house_block_height);
+        ((Label) sq.lookup("#PROPERTY_NAME"))
+            .setPrefSize(default_tile_inner_width, default_property_name_height);
+        ((Label) sq.lookup("#PROPERTY_PRICE"))
+            .setPrefSize(default_tile_inner_width, default_price_height);
       } else {
-        this.squares[i].setPrefSize(default_street_height, default_street_height);
-        ((HBox) this.squares[i].getChildren().get(0))
+        sq.setPrefSize(default_street_height, default_street_height);
+        ((HBox) sq.getChildren().get(0))
             .setPrefSize(default_corner_inner_size, default_corner_inner_size);
       }
     }
@@ -389,7 +389,7 @@ public class PtController {
 
   @FXML
   void initialize() {
-
+    checkNotNull();
     this.squares =
         new StackPane[] {
           SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
@@ -442,7 +442,6 @@ public class PtController {
       // get next square
 
     }
-    checkNotNull();
   }
 
   private void checkNotNull() {

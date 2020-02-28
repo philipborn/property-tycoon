@@ -290,7 +290,7 @@
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" style="-fx-background-color: #000;" GridPane.rowIndex="2">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" style="-fx-background-color: #CCC;" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a9a9a" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="70.0" StackPane.alignment="TOP_RIGHT" />
+                        <Rectangle fx:id="JAIL" arcHeight="5.0" arcWidth="5.0" fill="#9a9a9a" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="70.0" StackPane.alignment="TOP_RIGHT" />
                      </children>
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" style="-fx-background-color: #000;" GridPane.columnIndex="2">
@@ -1057,10 +1057,13 @@
             </VBox>
             <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" spacing="25.0">
                <children>
-                  <TextArea fx:id="MESSAGE_AREA" editable="false" prefWidth="250.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="ALWAYS">
+                  <TextArea fx:id="MESSAGE_AREA" editable="false" prefWidth="250.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="SOMETIMES">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
                   </TextArea>
                </children>
                <padding>
