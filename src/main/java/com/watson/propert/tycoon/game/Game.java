@@ -12,6 +12,7 @@ public class Game implements PropertTycoon {
   private Square bord;
   private GameMaster master;
   private EventBus channel;
+  private GameState state;
 
   public Game(Square startPostion, EventBus channel) {
     dicePair = new DicePair(channel);
@@ -21,15 +22,22 @@ public class Game implements PropertTycoon {
     players.add(new Player(PlayerId.TWO, bord, channel));
     master = new GameMaster(players);
     this.channel = channel;
+    state = new NewTurnState(master, channel);
   }
 
   @Override
   public void throwDicesAndMove() {
-    Player currentPlayer = master.currentPlayer();
-    List<Integer> dices = dicePair.throwDices();
-    Integer sum = dices.stream().mapToInt((a) -> a).sum();
-    currentPlayer.move(sum);
-    channel.post(new ChangePlayerEvent(master.newTurn().id));
+    state = state.throwDicesAndMove();
+  }
+
+  @Override
+  public void buyProperty() {
+    state = state.buyProperty();
+  }
+
+  @Override
+  public void notBuyingProperty() {
+    state = state.notBuyingProperty();
   }
 
   @Override

@@ -14,6 +14,7 @@ public class GameMasterTest {
 
   GameMaster master;
 
+  List<Player> players;
   Square square;
   EventBus channel;
 
@@ -22,7 +23,7 @@ public class GameMasterTest {
     square = new SquareImp();
     channel = new EventBus();
 
-    List<Player> players = new ArrayList<>(6);
+    players = new ArrayList<>(6);
     players.add(new Player(PlayerId.ONE, square, channel));
     players.add(new Player(PlayerId.TWO, square, channel));
     master = new GameMaster(players);
@@ -33,7 +34,7 @@ public class GameMasterTest {
     Player firstP = master.currentPlayer();
     Player secondP = master.currentPlayer();
 
-    assertNotNull(firstP);
+    assertTrue(players.contains(firstP));
     assertEquals(firstP, secondP);
   }
 
@@ -43,7 +44,7 @@ public class GameMasterTest {
     master.newTurn();
     Player thirdP = master.newTurn();
 
-    assertNotNull(firstP);
+    assertTrue(players.contains(firstP));
     assertEquals(firstP, thirdP);
   }
 }
