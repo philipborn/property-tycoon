@@ -17,6 +17,35 @@ public class SquareImp implements Square {
   }
 
   @Override
+  public Square move(int numStep, SquareVisitor actionOnTheWay) {
+    Square newLocaktion = this;
+    if (numStep > 0) {
+      newLocaktion = stepForward(numStep, actionOnTheWay);
+    } else if (numStep < 0) {
+      newLocaktion = stepBack(numStep, actionOnTheWay);
+    }
+    return newLocaktion;
+  }
+
+  private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
+    if (steps < 0) {
+      this.back.vist(actionOnTheWay);
+      return this.back.move(steps + 1, actionOnTheWay);
+    } else {
+      return this;
+    }
+  }
+
+  private Square stepForward(int steps, SquareVisitor actionOnTheWay) {
+    if (steps > 0) {
+      this.next.vist(actionOnTheWay);
+      return this.next.move(steps - 1, actionOnTheWay);
+    } else {
+      return this;
+    }
+  }
+
+  @Override
   public Square nextSquare() {
     return next;
   }

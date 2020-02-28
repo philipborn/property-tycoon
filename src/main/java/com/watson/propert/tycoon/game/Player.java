@@ -1,7 +1,5 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.function.Consumer;
-
 import com.google.common.eventbus.EventBus;
 
 public class Player implements CashUser {
@@ -29,25 +27,8 @@ public class Player implements CashUser {
   }
 
   public Square move(int steps) {
-    Consumer<Player> step;
-    if (steps < 0) {
-      step = Player::stepBack;
-    } else {
-      step = Player::stepForward;
-    }
-    for (int stepLeft = Math.abs(steps); stepLeft != 0; stepLeft--) {
-      step.accept(this);
-      location.vist(PassingRule.rulesFor(this));
-    }
-    return location;
-  }
-
-  private void stepForward() {
-    location = location.nextSquare();
-  }
-
-  private void stepBack() {
-    location = location.backSquare();
+    SquareVisitor passingRulse = PassingRule.rulesFor(this);
+    return location.move(steps, passingRulse);
   }
 
   public Square postion() {
