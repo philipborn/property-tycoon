@@ -16,6 +16,11 @@ public class NewTurnState implements GameState {
   }
 
   @Override
+  public void entry() {
+    channel.post(new ChangePlayerEvent(master.newTurn().id));
+  }
+
+  @Override
   public GameState throwDicesAndMove() {
     dicePair = new DicePair(channel);
 
@@ -23,7 +28,7 @@ public class NewTurnState implements GameState {
     List<Integer> dices = dicePair.throwDices();
     Integer sum = dices.stream().mapToInt((a) -> a).sum();
     currentPlayer.move(sum);
-    channel.post(new ChangePlayerEvent(master.newTurn().id));
-    return this;
+
+    return switchTo(new NonOwnerState(master, channel));
   }
 }
