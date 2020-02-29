@@ -244,10 +244,20 @@ public class PtController {
 
   @Subscribe
   void diceHandler(DiceEvent event) {
+    // set dice results
+    Label d1 = (Label) DICE.getChildren().get(0);
+    Label d2 = (Label) DICE.getChildren().get(1);
+    d1.setText("" + event.firstDice());
+    d2.setText("" + event.secondDice());
+
+    // move functionality
     int i = event.firstDice() + event.secondDice();
-    MESSAGE_AREA.setText("Move: " + i + " spaces");
-    move(i, playerTokens.get(activePlayer), playerPositions.get(activePlayer));
+    move(i, playerTokens.get(activePlayer), playerPositions.get(activePlayer), true);
     changeTurn();
+  }
+
+  private void displayMessage(String message) {
+    MESSAGE_AREA.setText(message);
   }
 
   void changeTurn() {
@@ -283,14 +293,18 @@ public class PtController {
     playerPositions.set(activePlayer, 10);
   }
 
-  void move(int spaces, HBox activePlayer, int activePlayer_pos) { // FIX BACKWARDS BUG
+  void move(int spaces, HBox activePlayer, int activePlayer_pos, boolean forward) {
 
     PathTransition pt = new PathTransition();
     Path p =
         new Path(new MoveTo(activePlayer.getTranslateX() + 25, activePlayer.getTranslateY() + 25));
 
-    int destNum = (activePlayer_pos + spaces) % path.length;
-
+    int destNum;
+    if (forward) {
+      destNum = (activePlayer_pos + spaces) % path.length;
+    } else {
+      destNum = ((activePlayer_pos - spaces) % path.length + path.length) % path.length;
+    }
     // while player has not reached the destination
     while (activePlayer_pos != destNum) {
       // if next path is not the jail path
@@ -311,7 +325,11 @@ public class PtController {
                     jailPath.getEndY()));
       }
       // iterate over the board in desired direction
-      activePlayer_pos = (activePlayer_pos + 1) % path.length;
+      if (forward) {
+        activePlayer_pos = (activePlayer_pos + 1) % path.length;
+      } else {
+        activePlayer_pos = ((activePlayer_pos - 1) % path.length + path.length) % path.length;
+      }
     }
 
     // update player position
@@ -344,6 +362,34 @@ public class PtController {
     fp.getChildren().add(TOKEN_PLAYER_1);
      */
     // execute square functionality
+    squareFunctionality(squares[activePlayer_pos]);
+  }
+
+  void squareFunctionality(StackPane square) {
+
+    // if square is a non-corner square
+    if (square.getChildren().get(0) instanceof VBox) {
+
+      // access elements of square
+      VBox v = (VBox) square.getChildren().get(0);
+      HBox group = (HBox) v.getChildren().get(0);
+
+      // if group != null then the square is a property square
+      if (group != null) {
+        Label name = (Label) v.getChildren().get(1);
+        Label price = (Label) v.getChildren().get(2);
+        displayMessage(
+            "Would you like to buy "
+                + name.getText()
+                + " for "
+                + price.getText()
+                + "?"
+                + "\n"
+                + "Y/N?");
+        // get answer & execute
+      }
+      // functionality for other squares
+    }
   }
 
   @FXML
