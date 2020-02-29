@@ -14,7 +14,10 @@ public class NonOwnerState implements GameState {
 
   @Override
   public void entry() {
-    channel.post(new BuyOrNotMsg("Help"));
+    Player current = master.currentPlayer();
+    String propertyName = current.postion().name();
+    String msg = current.id + " buy " + propertyName + "?";
+    channel.post(new BuyOrNotMsg(msg));
   }
 
   @Override
