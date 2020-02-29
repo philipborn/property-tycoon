@@ -26,6 +26,7 @@ package com.watson.propert.tycoon.control;
 import static java.lang.System.*;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -40,10 +41,14 @@ import javafx.scene.shape.*;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
+import com.watson.propert.tycoon.gui.App;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -223,6 +228,8 @@ public class PtController {
 
   @FXML private StackPane[] squares;
 
+  private HashMap<StackPane, Double[]> squareCentres;
+
   private Shape[] path;
 
   private int PLAYER_1_position = 0;
@@ -252,6 +259,8 @@ public class PtController {
   void diceHandler(DiceEvent event) {
     int i = event.firstDice() + event.secondDice();
     MESSAGE_AREA.setText("Move: " + i + " spaces");
+    DICE_1.setText(Integer.toString(event.firstDice()));
+    DICE_2.setText(Integer.toString(event.secondDice()));
     move(i);
   }
 
@@ -334,6 +343,48 @@ public class PtController {
     // execute square functionality
   }
 
+  // Move coordinates by distance and in direction given
+  GuiCoords moveCoords(GuiCoords xy, Double distance, Direction direction) {
+    switch (direction) {
+      case DOWN:
+        return new GuiCoords(xy.getX(), xy.getY() + distance);
+      case LEFT:
+        return new GuiCoords(xy.getX() - distance, xy.getY());
+      case UP:
+        return new GuiCoords(xy.getX(), xy.getY() - distance);
+      case RIGHT:
+        return new GuiCoords(xy.getX() + distance, xy.getY());
+    }
+    return xy;
+  }
+
+  // Calculate the centre point of each square relative to gameboard Pane
+  void calculateSquareCentres(GuiCoords xy, Double tileHeight, Double tileWidth) {
+    Logger logger = LoggerFactory.getLogger(App.class);
+    Direction dir = Direction.DOWN;
+
+    for (StackPane sq : this.squares) {
+      if (sq.getChildren().get(0) instanceof VBox) {
+        //GuiCoords newPos = new GuiCoords(xy.getX(), xy.getY());
+
+        GAME_BOARD_CONTAINER.getChildren().add(new Circle(xy.getX(), xy.getY(), 4));
+
+        logger.debug(
+            sq.getId().toString() + " : " + xy.getX().toString() + "," + xy.getY().toString());
+        xy = moveCoords(xy, tileWidth, dir);
+      } else {
+        //GuiCoords newPos = new GuiCoords(xy.getX(), xy.getY());
+        //GuiCoords newPos = moveCoords(xy, tileHeight, dir);
+        xy = moveCoords(xy, tileHeight, dir);
+        logger.debug(
+            sq.getId().toString() + " : " + xy.getX().toString() + "," + xy.getY().toString());
+        GAME_BOARD_CONTAINER.getChildren().add(new Circle(xy.getX(), xy.getY(), 4));
+        dir = dir.turnRight();
+        xy = moveCoords(xy, tileHeight, dir);
+      }
+    }
+  }
+
   // Rescales the game board for different screen resolutions/DPI combinations
   void rescaleGameBoard(Double scaleFactor) {
     Double default_border = 2.0; //4.0
@@ -385,6 +436,10 @@ public class PtController {
             .setPrefSize(default_corner_inner_size, default_corner_inner_size);
       }
     }
+    calculateSquareCentres(
+        new GuiCoords(default_board_size, default_board_size - default_tile_height),
+        default_tile_height,
+        default_tile_width);
   }
 
   @FXML
