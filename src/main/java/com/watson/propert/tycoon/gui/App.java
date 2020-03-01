@@ -55,7 +55,12 @@ public class App extends Application {
     //root.setScaleY(scaleFactorY);
     //root.setLayoutX(-100);
     Scene scene = new Scene(root);
-    //root.autosize();
+
+    // Load CSS stylesheet
+    URL cssUrl = ClassLoader.getSystemResource("pt_default.css");
+    scene.getStylesheets().clear();
+    scene.getStylesheets().add(cssUrl.toExternalForm());
+
 
     stage.setTitle("Watson Game Property Tycoon - Project Team 16 - Sprint 3");
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
