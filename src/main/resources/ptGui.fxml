@@ -18,8 +18,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.CubicCurve?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -27,47 +25,6 @@
    <center>
       <Pane fx:id="GAME_BOARD_CONTAINER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="PATH_0" centerX="750.0" centerY="750.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <CubicCurve fx:id="PATH_10" controlX1="13.0" controlX2="13.0" controlY1="780.0" controlY2="756.0" endX="13.0" endY="696.0" fill="DODGERBLUE" startX="100.0" startY="780.0" stroke="BLACK" />
-            <Circle fx:id="PATH_JAIL" centerX="70.0" centerY="730.0" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_20" centerX="52.0" centerY="50.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_30" centerX="750.0" centerY="50.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_1" centerX="660.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_2" centerX="600.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_3" centerX="535.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_4" centerX="465.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_5" centerX="390.0" centerY="750.0" fill="DODGERBLUE" layoutX="9.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_6" centerX="335.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_7" centerX="270.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_8" centerX="200.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_11" centerX="50.0" centerY="665.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_12" centerX="50.0" centerY="600.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_13" centerX="50.0" centerY="530.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_14" centerX="50.0" centerY="470.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_15" centerX="50.0" centerY="400.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_16" centerX="50.0" centerY="330.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_17" centerX="50.0" centerY="270.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_18" centerX="50.0" centerY="200.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_19" centerX="50.0" centerY="135.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_9" centerX="140.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_29" centerX="660.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_28" centerX="600.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_27" centerX="535.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_26" centerX="465.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_25" centerX="400.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_24" centerX="335.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_23" centerX="270.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_22" centerX="200.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_21" centerX="140.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_39" centerX="750.0" centerY="665.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_38" centerX="750.0" centerY="600.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_37" centerX="750.0" centerY="530.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_36" centerX="750.0" centerY="470.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_35" centerX="750.0" centerY="400.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_34" centerX="750.0" centerY="330.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_33" centerX="750.0" centerY="270.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_32" centerX="750.0" centerY="200.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_31" centerX="750.0" centerY="135.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <GridPane id="GAMEBOARD" fx:id="GAME_GRID" alignment="CENTER" snapToPixel="false" style="-fx-background-color: #999;">
               <columnConstraints>
                 <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="103.0" />
@@ -917,7 +874,52 @@
             </GridPane>
             <HBox id="TOKEN" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="T" textAlignment="CENTER" textFill="#f5f0f0">
+                  <Label text="1" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="2" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0F0;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="3" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #00F;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="4" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #FF0;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="5" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0FF;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="6" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
                         <Font size="36.0" />
                      </font>

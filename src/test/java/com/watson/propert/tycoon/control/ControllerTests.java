@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
+import com.watson.propert.tycoon.gui.Direction;
+import com.watson.propert.tycoon.gui.GuiCoords;
+
 /**
- * JUnit tests for moveCoords Method Method returns new coordinates move by given distance and
+ * JUnit tests for moveCoords Method. Method returns new coordinates move by given distance and
  * direction
  *
  * @author Lee Richards
@@ -13,11 +16,10 @@ import org.junit.jupiter.api.*;
  */
 class ControllerTests {
   GuiCoords o = new GuiCoords(100.0, 100.0);
-  PtController con = new PtController();
 
   @Test
   void moveCoordinatesTestLeft() {
-    GuiCoords m = con.moveCoords(o, 90.0, Direction.LEFT);
+    GuiCoords m = o.moveCoords(90.0, Direction.LEFT);
     GuiCoords d = new GuiCoords(10.0, 100.0);
     assertEquals(d.getX(), m.getX());
     assertEquals(d.getY(), m.getY());
@@ -25,7 +27,7 @@ class ControllerTests {
 
   @Test
   void moveCoordinatesTestRight() {
-    GuiCoords m = con.moveCoords(o, 90.0, Direction.RIGHT);
+    GuiCoords m = o.moveCoords(90.0, Direction.RIGHT);
     GuiCoords d = new GuiCoords(190.0, 100.0);
     assertEquals(d.getX(), m.getX());
     assertEquals(d.getY(), m.getY());
@@ -33,7 +35,7 @@ class ControllerTests {
 
   @Test
   void moveCoordinatesTestDown() {
-    GuiCoords m = con.moveCoords(o, 90.0, Direction.DOWN);
+    GuiCoords m = o.moveCoords(90.0, Direction.DOWN);
     GuiCoords d = new GuiCoords(100.0, 190.0);
     assertEquals(d.getX(), m.getX());
     assertEquals(d.getY(), m.getY());
@@ -41,7 +43,7 @@ class ControllerTests {
 
   @Test
   void moveCoordinatesTestUp() {
-    GuiCoords m = con.moveCoords(o, 90.0, Direction.UP);
+    GuiCoords m = o.moveCoords(90.0, Direction.UP);
     GuiCoords d = new GuiCoords(100.0, 10.0);
     assertEquals(d.getX(), m.getX());
     assertEquals(d.getY(), m.getY());

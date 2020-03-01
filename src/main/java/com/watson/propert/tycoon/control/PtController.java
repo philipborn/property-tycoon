@@ -23,10 +23,9 @@
  */
 package com.watson.propert.tycoon.control;
 
-import static java.lang.System.*;
+import static java.lang.StrictMath.abs;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -48,7 +47,7 @@ import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
-import com.watson.propert.tycoon.gui.App;
+import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PtController {
@@ -84,6 +83,16 @@ public class PtController {
   @FXML private StackPane SQUARE_0;
 
   @FXML private HBox TOKEN_PLAYER_1;
+
+  @FXML private HBox TOKEN_PLAYER_2;
+
+  @FXML private HBox TOKEN_PLAYER_3;
+
+  @FXML private HBox TOKEN_PLAYER_4;
+
+  @FXML private HBox TOKEN_PLAYER_5;
+
+  @FXML private HBox TOKEN_PLAYER_6;
 
   @FXML private StackPane SQUARE_10;
 
@@ -183,52 +192,9 @@ public class PtController {
 
   @FXML private Rectangle JAIL;
 
-  @FXML private Circle PATH_0;
-  @FXML private Circle PATH_1;
-  @FXML private Circle PATH_2;
-  @FXML private Circle PATH_3;
-  @FXML private Circle PATH_4;
-  @FXML private Circle PATH_5;
-  @FXML private Circle PATH_6;
-  @FXML private Circle PATH_7;
-  @FXML private Circle PATH_8;
-  @FXML private Circle PATH_9;
-  @FXML private CubicCurve PATH_10;
-  @FXML private Circle PATH_11;
-  @FXML private Circle PATH_12;
-  @FXML private Circle PATH_13;
-  @FXML private Circle PATH_14;
-  @FXML private Circle PATH_15;
-  @FXML private Circle PATH_16;
-  @FXML private Circle PATH_17;
-  @FXML private Circle PATH_18;
-  @FXML private Circle PATH_19;
-  @FXML private Circle PATH_20;
-  @FXML private Circle PATH_21;
-  @FXML private Circle PATH_22;
-  @FXML private Circle PATH_23;
-  @FXML private Circle PATH_24;
-  @FXML private Circle PATH_25;
-  @FXML private Circle PATH_26;
-  @FXML private Circle PATH_27;
-  @FXML private Circle PATH_28;
-  @FXML private Circle PATH_29;
-  @FXML private Circle PATH_30;
-  @FXML private Circle PATH_31;
-  @FXML private Circle PATH_32;
-  @FXML private Circle PATH_33;
-  @FXML private Circle PATH_34;
-  @FXML private Circle PATH_35;
-  @FXML private Circle PATH_36;
-  @FXML private Circle PATH_37;
-  @FXML private Circle PATH_38;
-  @FXML private Circle PATH_39;
-
   @FXML private Circle PATH_JAIL;
 
-  @FXML private StackPane[] squares;
-
-  private HashMap<StackPane, Double[]> squareCentres;
+  private GuiGameBoard gameBoard;
 
   private Shape[] path;
 
@@ -247,7 +213,8 @@ public class PtController {
 
   @FXML
   void newGame(ActionEvent event) {
-    goToJail();
+    //goToJail();
+    moveBackThreeSpaces();
   }
 
   @FXML
@@ -262,6 +229,11 @@ public class PtController {
     DICE_1.setText(Integer.toString(event.firstDice()));
     DICE_2.setText(Integer.toString(event.secondDice()));
     move(i);
+    gameBoard.getNextPlayer();
+  }
+
+  void moveBackThreeSpaces() {
+    move(-3);
   }
 
   void goToJail() {
@@ -282,7 +254,29 @@ public class PtController {
     PLAYER_1_position = 10;
   }
 
-  void move(int spaces) { // FIX BACKWARDS BUG
+  void move(int spaces) {
+    GuiToken tok = gameBoard.getCurrentPlayer().getToken();
+    PathTransition pt = new PathTransition();
+    Path p =
+        new Path(
+            new MoveTo(tok.getToken().getTranslateX() + 25, tok.getToken().getTranslateY() + 25));
+    GuiCoords newPos = gameBoard.getSquare(tok.getPosition()).getCentre();
+    p.getElements().add(new LineTo(newPos.getX(), newPos.getY()));
+
+    for (int i = 0; i < abs(spaces); i++) {
+      if (spaces < 0) {
+        tok.moveBackwards();
+      } else tok.moveForwards();
+      newPos = gameBoard.getSquare(tok.getPosition()).getCentre();
+      p.getElements().add(new LineTo(newPos.getX(), newPos.getY()));
+    }
+    pt.setNode(tok.getToken());
+    pt.setDuration(Duration.millis(abs(spaces) * 200));
+    pt.setPath(p);
+    pt.play();
+  }
+
+  void move_old(int spaces) { // FIX BACKWARDS BUG
 
     PathTransition pt = new PathTransition();
     Path p =
@@ -343,44 +337,29 @@ public class PtController {
     // execute square functionality
   }
 
-  // Move coordinates by distance and in direction given
-  GuiCoords moveCoords(GuiCoords xy, Double distance, Direction direction) {
-    switch (direction) {
-      case DOWN:
-        return new GuiCoords(xy.getX(), xy.getY() + distance);
-      case LEFT:
-        return new GuiCoords(xy.getX() - distance, xy.getY());
-      case UP:
-        return new GuiCoords(xy.getX(), xy.getY() - distance);
-      case RIGHT:
-        return new GuiCoords(xy.getX() + distance, xy.getY());
-    }
-    return xy;
-  }
-
-  // Calculate the centre point of each square relative to gameboard Pane
-  void calculateSquareCentres(GuiCoords xy, Double tileHeight, Double tileWidth) {
+  // Calculate the centre point of each square relative to game board Pane
+  void calculateSquareCentres() {
     Logger logger = LoggerFactory.getLogger(App.class);
     Direction dir = Direction.DOWN;
+    Double tileHeight = SQUARE_1.getPrefHeight();
+    Double tileWidth = SQUARE_1.getPrefWidth();
+    Double halfHeight = tileHeight / 2;
+    Double halfWidth = tileWidth / 2;
+    Double board_size = GAME_BOARD_CONTAINER.getPrefHeight();
+    GuiCoords xy = new GuiCoords(board_size - halfHeight, board_size - tileHeight + halfWidth);
 
-    for (StackPane sq : this.squares) {
-      if (sq.getChildren().get(0) instanceof VBox) {
-        //GuiCoords newPos = new GuiCoords(xy.getX(), xy.getY());
-
-        GAME_BOARD_CONTAINER.getChildren().add(new Circle(xy.getX(), xy.getY(), 4));
-
-        logger.debug(
-            sq.getId().toString() + " : " + xy.getX().toString() + "," + xy.getY().toString());
-        xy = moveCoords(xy, tileWidth, dir);
+    for (GuiSquare sq : gameBoard.getSquares()) {
+      if (sq.getPane().getChildren().get(0) instanceof VBox) {
+        sq.setCentre(xy);
+        //sq.drawCentre(GAME_BOARD_CONTAINER);
+        xy = xy.moveCoords(tileWidth, dir);
       } else {
-        //GuiCoords newPos = new GuiCoords(xy.getX(), xy.getY());
-        //GuiCoords newPos = moveCoords(xy, tileHeight, dir);
-        xy = moveCoords(xy, tileHeight, dir);
-        logger.debug(
-            sq.getId().toString() + " : " + xy.getX().toString() + "," + xy.getY().toString());
-        GAME_BOARD_CONTAINER.getChildren().add(new Circle(xy.getX(), xy.getY(), 4));
+        // Turn a corner
+        xy = xy.moveCoords(halfHeight - halfWidth, dir);
+        sq.setCentre(xy);
+        //sq.drawCentre(GAME_BOARD_CONTAINER);
         dir = dir.turnRight();
-        xy = moveCoords(xy, tileHeight, dir);
+        xy = xy.moveCoords(halfHeight + halfWidth, dir);
       }
     }
   }
@@ -388,10 +367,10 @@ public class PtController {
   // Rescales the game board for different screen resolutions/DPI combinations
   void rescaleGameBoard(Double scaleFactor) {
     Double default_border = 2.0; //4.0
-    Double default_board_size = 960.0 * scaleFactor; //800.0
-    Double default_street_height = 130.0 * scaleFactor; //103.0
+    Double default_board_size = gameBoard.getBoardWidth() * scaleFactor; //800.0
+    Double default_street_height = gameBoard.getCornerSize() * scaleFactor; //103.0
     Double default_street_width = default_board_size - (2.0 * default_street_height);
-    Double default_tile_width = default_street_width / 9.0;
+    Double default_tile_width = default_street_width / gameBoard.getPropertiesPerStreet();
     Double default_tile_height = default_street_height;
     Double default_corner_inner_size = default_street_height - default_border;
     Double default_tile_inner_height = default_street_height - default_border;
@@ -409,6 +388,20 @@ public class PtController {
     GAME_GRID.getRowConstraints().get(1).setPrefHeight(default_street_width);
     GAME_GRID.getRowConstraints().get(2).setPrefHeight(default_street_height);
 
+    TOKEN_PLAYER_1.setTranslateX(default_board_size - default_tile_height);
+    TOKEN_PLAYER_2.setTranslateX(default_board_size - default_tile_height);
+    TOKEN_PLAYER_3.setTranslateX(default_board_size - default_tile_height);
+    TOKEN_PLAYER_4.setTranslateX(default_board_size - default_tile_height);
+    TOKEN_PLAYER_5.setTranslateX(default_board_size - default_tile_height);
+    TOKEN_PLAYER_6.setTranslateX(default_board_size - default_tile_height);
+
+    TOKEN_PLAYER_1.setTranslateY(default_board_size - default_tile_height);
+    TOKEN_PLAYER_2.setTranslateY(default_board_size - default_tile_height);
+    TOKEN_PLAYER_3.setTranslateY(default_board_size - default_tile_height);
+    TOKEN_PLAYER_4.setTranslateY(default_board_size - default_tile_height);
+    TOKEN_PLAYER_5.setTranslateY(default_board_size - default_tile_height);
+    TOKEN_PLAYER_6.setTranslateY(default_board_size - default_tile_height);
+
     // Resize Street of properties
     STREET_1.setPrefSize(default_street_width, default_street_height);
     STREET_2.setPrefSize(default_street_width, default_street_height);
@@ -418,50 +411,90 @@ public class PtController {
     JAIL.setWidth(default_corner_inner_size * 0.7);
 
     // Resize squares
-    for (StackPane sq : this.squares) {
-      if (sq.getChildren().get(0) instanceof VBox) {
-        sq.setPrefHeight(default_tile_height);
-        sq.setPrefWidth(default_tile_width);
-        ((Pane) sq.lookup("#PANEL"))
+    for (GuiSquare sq : gameBoard.getSquares()) {
+      if (sq.getPane().getChildren().get(0) instanceof VBox) {
+        sq.getPane().setPrefHeight(default_tile_height);
+        sq.getPane().setPrefWidth(default_tile_width);
+        ((Pane) sq.getPane().lookup("#PANEL"))
             .setPrefSize(default_tile_inner_width, default_tile_inner_height);
-        ((Pane) sq.lookup("#PROPERTY_GROUP"))
+        ((Pane) sq.getPane().lookup("#PROPERTY_GROUP"))
             .setPrefSize(default_tile_inner_width, default_house_block_height);
-        ((Label) sq.lookup("#PROPERTY_NAME"))
+        ((Label) sq.getPane().lookup("#PROPERTY_NAME"))
             .setPrefSize(default_tile_inner_width, default_property_name_height);
-        ((Label) sq.lookup("#PROPERTY_PRICE"))
+        ((Label) sq.getPane().lookup("#PROPERTY_PRICE"))
             .setPrefSize(default_tile_inner_width, default_price_height);
       } else {
-        sq.setPrefSize(default_street_height, default_street_height);
-        ((HBox) sq.getChildren().get(0))
+        sq.getPane().setPrefSize(default_street_height, default_street_height);
+        ((HBox) sq.getPane().getChildren().get(0))
             .setPrefSize(default_corner_inner_size, default_corner_inner_size);
       }
     }
-    calculateSquareCentres(
-        new GuiCoords(default_board_size, default_board_size - default_tile_height),
-        default_tile_height,
-        default_tile_width);
+    calculateSquareCentres();
   }
 
   @FXML
   void initialize() {
     checkNotNull();
-    this.squares =
-        new StackPane[] {
-          SQUARE_0, SQUARE_1, SQUARE_2, SQUARE_3, SQUARE_4, SQUARE_5, SQUARE_6, SQUARE_7, SQUARE_8,
-          SQUARE_9, SQUARE_10, SQUARE_11, SQUARE_12, SQUARE_13, SQUARE_14, SQUARE_15, SQUARE_16,
-          SQUARE_17, SQUARE_18, SQUARE_19, SQUARE_20, SQUARE_21, SQUARE_22, SQUARE_23, SQUARE_24,
-          SQUARE_25, SQUARE_26, SQUARE_27, SQUARE_28, SQUARE_29, SQUARE_30, SQUARE_31, SQUARE_32,
-          SQUARE_33, SQUARE_34, SQUARE_35, SQUARE_36, SQUARE_37, SQUARE_38, SQUARE_39
+    // Build GuiSquare array
+    GuiSquare[] guiSquares =
+        new GuiSquare[] {
+          new GuiSquare(SQUARE_0),
+          new GuiSquare(SQUARE_1),
+          new GuiSquare(SQUARE_2),
+          new GuiSquare(SQUARE_3),
+          new GuiSquare(SQUARE_4),
+          new GuiSquare(SQUARE_5),
+          new GuiSquare(SQUARE_6),
+          new GuiSquare(SQUARE_7),
+          new GuiSquare(SQUARE_8),
+          new GuiSquare(SQUARE_9),
+          new GuiSquare(SQUARE_10),
+          new GuiSquare(SQUARE_11),
+          new GuiSquare(SQUARE_12),
+          new GuiSquare(SQUARE_13),
+          new GuiSquare(SQUARE_14),
+          new GuiSquare(SQUARE_15),
+          new GuiSquare(SQUARE_16),
+          new GuiSquare(SQUARE_17),
+          new GuiSquare(SQUARE_18),
+          new GuiSquare(SQUARE_19),
+          new GuiSquare(SQUARE_20),
+          new GuiSquare(SQUARE_21),
+          new GuiSquare(SQUARE_22),
+          new GuiSquare(SQUARE_23),
+          new GuiSquare(SQUARE_24),
+          new GuiSquare(SQUARE_25),
+          new GuiSquare(SQUARE_26),
+          new GuiSquare(SQUARE_27),
+          new GuiSquare(SQUARE_28),
+          new GuiSquare(SQUARE_29),
+          new GuiSquare(SQUARE_30),
+          new GuiSquare(SQUARE_31),
+          new GuiSquare(SQUARE_32),
+          new GuiSquare(SQUARE_33),
+          new GuiSquare(SQUARE_34),
+          new GuiSquare(SQUARE_35),
+          new GuiSquare(SQUARE_36),
+          new GuiSquare(SQUARE_37),
+          new GuiSquare(SQUARE_38),
+          new GuiSquare(SQUARE_39)
         };
 
-    path =
-        new Shape[] {
-          PATH_0, PATH_1, PATH_2, PATH_3, PATH_4, PATH_5, PATH_6, PATH_7, PATH_8, PATH_9, PATH_10,
-          PATH_11, PATH_12, PATH_13, PATH_14, PATH_15, PATH_16, PATH_17, PATH_18, PATH_19, PATH_20,
-          PATH_21, PATH_22, PATH_23, PATH_24, PATH_25, PATH_26, PATH_27, PATH_28, PATH_29, PATH_30,
-          PATH_31, PATH_32, PATH_33, PATH_34, PATH_35, PATH_36, PATH_37, PATH_38, PATH_39
+    // Initialise players - FOR TESTING
+    // To be set up by New Game Dialog box
+    GuiPlayer[] players =
+        new GuiPlayer[] {
+          new GuiPlayer("Player 1", new GuiToken(TOKEN_PLAYER_1, 0), false),
+          new GuiPlayer("Player 2", new GuiToken(TOKEN_PLAYER_2, 0), false),
+          new GuiPlayer("Player 3", new GuiToken(TOKEN_PLAYER_3, 0), true),
+          new GuiPlayer("Player 4", new GuiToken(TOKEN_PLAYER_4, 0), true),
+          new GuiPlayer("Player 5", new GuiToken(TOKEN_PLAYER_5, 0), true),
+          new GuiPlayer("Player 6", new GuiToken(TOKEN_PLAYER_6, 0), true)
         };
 
+    gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
+    gameBoard.setSquares(guiSquares);
+    gameBoard.setPlayers(players);
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
@@ -473,14 +506,14 @@ public class PtController {
     game.registerListener(this);
 
     // for every square on the board
-    for (StackPane sq : squares) {
+    for (GuiSquare sq : gameBoard.getSquares()) {
       boardReader.nextObject();
 
       // if square is a non-corner square
-      if (sq.getChildren().get(0) instanceof VBox) {
+      if (sq.getPane().getChildren().get(0) instanceof VBox) {
 
         // access elements of square
-        VBox v = (VBox) sq.getChildren().get(0);
+        VBox v = (VBox) sq.getPane().getChildren().get(0);
         HBox group = (HBox) v.getChildren().get(0);
         Label name = (Label) v.getChildren().get(1);
         Label price = (Label) v.getChildren().get(2);
