@@ -57,7 +57,7 @@ public class Player implements CashUser, Comparable<Player> {
     } else if (amount > 0) {
       int oldCash = cash;
       cash += amount;
-      channel.post(CashEvent.write(oldCash, cash));
+      channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
 
