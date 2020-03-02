@@ -23,7 +23,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane snapToPixel="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.PtController">
    <center>
       <Pane maxHeight="800.0" maxWidth="800.0" BorderPane.alignment="TOP_CENTER">
@@ -925,6 +924,15 @@
                   </Label>
                </children>
             </HBox>
+            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="T" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </Pane>
    </center>
@@ -1058,7 +1066,7 @@
             </VBox>
             <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" prefHeight="300.0" spacing="25.0">
                <children>
-                  <TextArea fx:id="MESSAGE_AREA" maxHeight="400.0" maxWidth="250.0" promptText="PLAYER 1 ROLL DICE!">
+                  <TextArea fx:id="MESSAGE_AREA" maxHeight="400.0" maxWidth="250.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true">
                      <font>
                         <Font size="24.0" />
                      </font>
