@@ -16,19 +16,17 @@ public class NonOwnerState implements GameState {
   public void entry() {
     Player current = master.currentPlayer();
     String propertyName = current.postion().name();
-    String msg = current.id + " buy " + propertyName + "?";
-    channel.post(new BuyOrNotMsg(msg));
+    int price = 20;
+    channel.post(new BuyOrNotMsg(propertyName, price));
   }
 
   @Override
   public GameState buyProperty() {
-    channel.post(new ChangePlayerEvent(master.newTurn().id));
     return switchTo(new NewTurnState(master, channel));
   }
 
   @Override
   public GameState notBuyingProperty() {
-    channel.post(new ChangePlayerEvent(master.newTurn().id));
     return switchTo(new NewTurnState(master, channel));
   }
 }
