@@ -8,7 +8,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -18,78 +19,36 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.CubicCurve?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane snapToPixel="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.PtController">
+
+<BorderPane id="root" fx:id="MAIN_WINDOW" snapToPixel="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.PtController">
    <center>
-      <Pane maxHeight="800.0" maxWidth="800.0" BorderPane.alignment="TOP_CENTER">
+      <Pane id="GAMEBOARD_PANE" fx:id="GAME_BOARD_CONTAINER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Circle fx:id="PATH_0" centerX="750.0" centerY="750.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <CubicCurve fx:id="PATH_10" controlX1="13.0" controlX2="13.0" controlY1="780.0" controlY2="756.0" endX="13.0" endY="696.0" fill="DODGERBLUE" startX="100.0" startY="780.0" stroke="BLACK" />
-            <Circle fx:id="PATH_JAIL" centerX="70.0" centerY="730.0" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_20" centerX="52.0" centerY="50.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_30" centerX="750.0" centerY="50.0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_1" centerX="660.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_2" centerX="600.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_3" centerX="535.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_4" centerX="465.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_5" centerX="390.0" centerY="750.0" fill="DODGERBLUE" layoutX="9.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_6" centerX="335.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_7" centerX="270.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_8" centerX="200.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_11" centerX="50.0" centerY="665.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_12" centerX="50.0" centerY="600.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_13" centerX="50.0" centerY="530.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_14" centerX="50.0" centerY="470.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_15" centerX="50.0" centerY="400.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_16" centerX="50.0" centerY="330.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_17" centerX="50.0" centerY="270.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_18" centerX="50.0" centerY="200.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_19" centerX="50.0" centerY="135.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_9" centerX="140.0" centerY="750.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_29" centerX="660.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_28" centerX="600.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_27" centerX="535.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_26" centerX="465.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_25" centerX="400.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_24" centerX="335.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_23" centerX="270.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_22" centerX="200.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_21" centerX="140.0" centerY="45.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_39" centerX="750.0" centerY="665.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_38" centerX="750.0" centerY="600.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_37" centerX="750.0" centerY="530.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_36" centerX="750.0" centerY="470.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_35" centerX="750.0" centerY="400.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_34" centerX="750.0" centerY="330.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_33" centerX="750.0" centerY="270.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_32" centerX="750.0" centerY="200.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="PATH_31" centerX="750.0" centerY="135.0" fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <GridPane id="GAMEBOARD" alignment="CENTER" snapToPixel="false" style="-fx-background-color: #999;">
+            <GridPane id="GAMEBOARD" fx:id="GAME_GRID" alignment="CENTER" snapToPixel="false">
               <columnConstraints>
                 <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="103.0" />
-                <ColumnConstraints minWidth="-Infinity" prefWidth="594.0" />
-                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="103.0" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="-Infinity" prefWidth="594.0" />
+                  <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="103.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="103.0" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="594.0" valignment="CENTER" vgrow="NEVER" />
-                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="103.0" vgrow="NEVER" />
+                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="103.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="594.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="103.0" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" style="-fx-background-color: #000;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <HBox fx:id="STREET_1" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -104,14 +63,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -126,14 +85,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -148,14 +107,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -170,14 +129,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -192,14 +151,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -214,14 +173,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -236,14 +195,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -258,14 +217,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -282,37 +241,37 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" style="-fx-background-color: #000;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" style="-fx-background-color: #CCC;" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" style="-fx-background-color: #000;" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.rowIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" style="-fx-background-color: #CCC;" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9a9a9a" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="70.0" StackPane.alignment="TOP_RIGHT" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
+                        <Rectangle fx:id="JAIL" arcHeight="5.0" arcWidth="5.0" fill="#9a9a9a" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="70.0" StackPane.alignment="TOP_RIGHT" />
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" style="-fx-background-color: #000;" GridPane.columnIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.columnIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" style="-fx-background-color: #CCC;" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" style="-fx-background-color: #000;">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0">
                      <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" style="-fx-background-color: #CCC;" />
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
                      </children>
                   </StackPane>
-                  <HBox alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" style="-fx-background-color: #000;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <HBox fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -327,14 +286,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_18" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_18" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -349,14 +308,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -371,14 +330,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -393,14 +352,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -415,14 +374,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -437,14 +396,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -459,14 +418,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -483,14 +442,14 @@
                         </StackPane>
                         <FlowPane>
                            <children>
-                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                                  <padding>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </padding>
                                  <children>
-                                    <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                                    <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                        <children>
-                                          <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                          <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                           <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                              <font>
                                                 <Font size="10.0" />
@@ -509,16 +468,16 @@
                         </FlowPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" style="-fx-background-color: #000;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                  <HBox fx:id="STREET_3" alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -533,14 +492,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -555,14 +514,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -577,14 +536,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -599,14 +558,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -621,14 +580,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -643,14 +602,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -665,14 +624,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -687,14 +646,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -711,16 +670,16 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" style="-fx-background-color: #000;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <HBox fx:id="STREET_4" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -735,14 +694,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -757,14 +716,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -779,14 +738,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -801,14 +760,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -823,14 +782,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -845,14 +804,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -867,14 +826,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -889,14 +848,14 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" style="-fx-background-color: #000;">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
                            <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0" style="-fx-background-color: #CCC;">
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" style="-fx-background-color: #F00;" />
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
                                     <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
@@ -915,18 +874,54 @@
                   </HBox>
                </children>
             </GridPane>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN1" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="T" textAlignment="CENTER" textFill="#f5f0f0">
+                  <Label text="1" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN2" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="T" textAlignment="CENTER" textFill="#f5f0f0">
+                  <Label text="2" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN3" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0F0;" styleClass="token" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="3" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN4" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #00F;" styleClass="token" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="4" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN5" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #FF0;" styleClass="token" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="5" textAlignment="CENTER" textFill="#f5f0f0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox id="TOKEN6" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0FF;" styleClass="token" translateX="725.0" translateY="725.0">
+               <children>
+                  <Label text="6" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
                         <Font size="36.0" />
                      </font>
@@ -937,30 +932,30 @@
       </Pane>
    </center>
    <left>
-      <VBox id="LEFT_PANEL" alignment="TOP_CENTER" style="-fx-background-color: #666;" BorderPane.alignment="CENTER">
+      <VBox id="LEFT_PANEL" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="DICE" alignment="CENTER" maxHeight="100.0" maxWidth="300.0" minHeight="-Infinity" minWidth="200.0" onMouseClicked="#throwDice" spacing="40.0" style="-fx-background-color: #AAA;">
+            <HBox fx:id="DICE" accessibleText="Clck to roll dice" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#throwDice" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label id="DICE_1" fx:id="DICE_1" text="6">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Label>
-                  <Label id="DICE_2" fx:id="DICE_2" text="6">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Dice1" fx:id="DICE_IMG_1" cache="true" cacheHint="QUALITY" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="dice">
+                     <image>
+                        <Image url="@dice/dice6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="Dice2" fx:id="DICE_IMG_2" cache="true" cacheHint="QUALITY" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="dice">
+                     <image>
+                        <Image url="@dice/dice6.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_1" text="Player 1">
+                  <Label id="PLAYER_NAME_1" styleClass="playerName" text="Player 1">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_1" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_1" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
@@ -970,63 +965,66 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_3" fx:id="PLAYER_3" alignment="CENTER" layoutX="10.0" layoutY="150.0" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_3" fx:id="PLAYER_3" alignment="CENTER" layoutX="10.0" layoutY="150.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_3" text="Player 3">
+                  <Label id="PLAYER_NAME_3" styleClass="playerName" text="Player 3">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_3" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_3" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_5" fx:id="PLAYER_5" alignment="CENTER" layoutX="10.0" layoutY="250.0" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_5" fx:id="PLAYER_5" alignment="CENTER" layoutX="10.0" layoutY="250.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_5" text="Player 5">
+                  <Label id="PLAYER_NAME_5" styleClass="playerName" text="Player 5">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_5" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_5" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="BUTTON_CONTAINER" alignment="BOTTOM_CENTER" prefHeight="300.0" spacing="25.0">
+            <VBox fx:id="BUTTON_CONTAINER" alignment="BOTTOM_CENTER" prefHeight="175.0" spacing="25.0">
                <children>
                   <Button fx:id="NEW_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newGame" text="NEW GAME" />
                   <Button fx:id="END_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#endGame" text="END GAME" />
                </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" top="25.0" />
+               </VBox.margin>
             </VBox>
          </children>
       </VBox>
    </left>
    <right>
-      <VBox style="-fx-background-color: #666;" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" maxHeight="100.0" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #AAA;">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label text="00:00:00">
+                  <Label id="Timer" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" text="00:00:00" textAlignment="CENTER">
                      <font>
                         <Font size="64.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <VBox id="PLAYER_NAME_CONTAINER_2" fx:id="PLAYER_2" alignment="CENTER" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_2" fx:id="PLAYER_2" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_2" text="Player 2">
+                  <Label id="PLAYER_NAME_2" styleClass="playerName" text="Player 2">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_2" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_2" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
@@ -1036,40 +1034,43 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_4" fx:id="PLAYER_4" alignment="CENTER" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_4" fx:id="PLAYER_4" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_4" text="Player 4">
+                  <Label id="PLAYER_NAME_4" styleClass="playerName" text="Player 4">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_4" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_4" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_6" fx:id="PLAYER_6" alignment="CENTER" prefHeight="100.0">
+            <VBox id="PLAYER_NAME_CONTAINER_6" fx:id="PLAYER_6" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>
-                  <Label id="PLAYER_NAME_6" text="Player 6">
+                  <Label id="PLAYER_NAME_6" styleClass="playerName" text="Player 6">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_6" text="£888.88">
+                  <Label id="ACCOUNT_BALANCE_PLAYER_6" styleClass="playerAccount" text="£888.88">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" prefHeight="300.0" spacing="25.0">
+            <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" spacing="25.0">
                <children>
-                  <TextArea fx:id="MESSAGE_AREA" maxHeight="400.0" maxWidth="250.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true">
+                  <TextArea id="MESSAGE_BOX" fx:id="MESSAGE_AREA" editable="false" prefWidth="270.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="SOMETIMES">
                      <font>
                         <Font size="24.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="25.0" top="25.0" />
+                     </VBox.margin>
                   </TextArea>
                </children>
                <padding>
@@ -1120,7 +1121,4 @@
       </menus>
     </MenuBar>
    </top>
-   <bottom>
-      <ToolBar maxHeight="40.0" maxWidth="200.0" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>
