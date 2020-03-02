@@ -32,7 +32,7 @@
      -fx-background-position: center center;
      -fx-background-size: 100%  100%;
      -fx-border-width: 2;
-     -fx-border-color: #184d01;
+     -fx-border-color: #000;
      -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0);
 }
 
@@ -40,7 +40,7 @@
     -fx-opacity: 0.8;
     -fx-background-color: #86ad75;
     -fx-border-width: 1;
-    -fx-border-color: #184d01;
+    -fx-border-color: #000;
 }
 
 #PANEL {
@@ -115,6 +115,12 @@
      -fx-background-color: #ffffff;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
+
+.token {
+    -fx-opacity: 0.7;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
 
 .text-area .content {
     -fx-opacity: 0.9;

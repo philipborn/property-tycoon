@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
@@ -154,8 +155,6 @@ public class PtController {
 
   @FXML private StackPane SQUARE_31;
 
-  @FXML private HBox DICE;
-
   @FXML private HBox STREET_1;
 
   @FXML private HBox STREET_2;
@@ -164,9 +163,15 @@ public class PtController {
 
   @FXML private HBox STREET_4;
 
+  @FXML private HBox DICE;
+
   @FXML private Label DICE_1;
 
   @FXML private Label DICE_2;
+
+  @FXML private ImageView DICE_IMG_1;
+
+  @FXML private ImageView DICE_IMG_2;
 
   @FXML private VBox PLAYER_1;
 
@@ -225,9 +230,11 @@ public class PtController {
   @Subscribe
   void diceHandler(DiceEvent event) {
     int i = event.firstDice() + event.secondDice();
-    MESSAGE_AREA.setText("Move: " + i + " spaces");
-    DICE_1.setText(Integer.toString(event.firstDice()));
-    DICE_2.setText(Integer.toString(event.secondDice()));
+    MESSAGE_AREA.setText(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
+    //DICE_1.setText(Integer.toString(event.firstDice()));
+    //DICE_2.setText(Integer.toString(event.secondDice()));
+    DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
+    DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
     move(i);
     gameBoard.getNextPlayer();
   }
@@ -271,7 +278,7 @@ public class PtController {
       p.getElements().add(new LineTo(newPos.getX(), newPos.getY()));
     }
     pt.setNode(tok.getToken());
-    pt.setDuration(Duration.millis(abs(spaces) * 200));
+    pt.setDuration(Duration.millis(abs(spaces) * 300));
     pt.setPath(p);
     pt.play();
   }

@@ -8,6 +8,8 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -871,7 +873,7 @@
                   </HBox>
                </children>
             </GridPane>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN1" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="1" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -880,7 +882,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN2" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="2" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -889,7 +891,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0F0;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN3" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0F0;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="3" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -898,7 +900,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #00F;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN4" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #00F;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="4" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -907,7 +909,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #FF0;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN5" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #FF0;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="5" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -916,7 +918,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox id="TOKEN" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0FF;" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN6" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0FF;" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
                   <Label text="6" textAlignment="CENTER" textFill="#f5f0f0">
                      <font>
@@ -931,18 +933,18 @@
    <left>
       <VBox id="LEFT_PANEL" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="DICE" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#throwDice" prefHeight="100.0" prefWidth="300.0" spacing="40.0">
+            <HBox fx:id="DICE" accessibleText="Clck to roll dice" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#throwDice" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label id="DICE_1" fx:id="DICE_1" styleClass="dice" text="6">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Label>
-                  <Label id="DICE_2" fx:id="DICE_2" styleClass="dice" text="6">
-                     <font>
-                        <Font size="64.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Dice1" fx:id="DICE_IMG_1" cache="true" cacheHint="QUALITY" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="dice">
+                     <image>
+                        <Image url="@dice/dice6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="Dice2" fx:id="DICE_IMG_2" cache="true" cacheHint="QUALITY" fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" styleClass="dice">
+                     <image>
+                        <Image url="@dice/dice6.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
             <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
