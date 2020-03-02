@@ -244,14 +244,14 @@ public class PtController {
 
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
-    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
     gameBoard.getNextPlayer();
-    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:BLUE");
+    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:BLUE");
   }
 
   @Subscribe
   void updateMoney(CashEvent event) {
-    Label l = (Label) gameBoard.getCurrentPlayer().getInfo().getChildren().get(1);
+    Label l = (Label) gameBoard.getCurrentPlayer().getInfo().getMoney();
     l.setText("" + event.getNewCash());
   }
 
@@ -432,18 +432,23 @@ public class PtController {
     // To be set up by New Game Dialog box
     GuiPlayer[] players =
         new GuiPlayer[] {
-          new GuiPlayer("Player 1", new GuiToken(TOKEN_PLAYER_1, 0), false, PLAYER_1),
-          new GuiPlayer("Player 2", new GuiToken(TOKEN_PLAYER_2, 0), false, PLAYER_2),
-          new GuiPlayer("Player 3", new GuiToken(TOKEN_PLAYER_3, 0), true, PLAYER_3),
-          new GuiPlayer("Player 4", new GuiToken(TOKEN_PLAYER_4, 0), true, PLAYER_4),
-          new GuiPlayer("Player 5", new GuiToken(TOKEN_PLAYER_5, 0), true, PLAYER_5),
-          new GuiPlayer("Player 6", new GuiToken(TOKEN_PLAYER_6, 0), true, PLAYER_6)
+          new GuiPlayer(
+              "Player 1", new GuiToken(TOKEN_PLAYER_1, 0), false, new PlayerInfo(PLAYER_1)),
+          new GuiPlayer(
+              "Player 2", new GuiToken(TOKEN_PLAYER_2, 0), false, new PlayerInfo(PLAYER_2)),
+          new GuiPlayer(
+              "Player 3", new GuiToken(TOKEN_PLAYER_3, 0), true, new PlayerInfo(PLAYER_3)),
+          new GuiPlayer(
+              "Player 4", new GuiToken(TOKEN_PLAYER_4, 0), true, new PlayerInfo(PLAYER_4)),
+          new GuiPlayer(
+              "Player 5", new GuiToken(TOKEN_PLAYER_5, 0), true, new PlayerInfo(PLAYER_5)),
+          new GuiPlayer("Player 6", new GuiToken(TOKEN_PLAYER_6, 0), true, new PlayerInfo(PLAYER_6))
         };
 
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
     gameBoard.setSquares(guiSquares);
     gameBoard.setPlayers(players);
-    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:BLUE");
+    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:BLUE");
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
