@@ -17,28 +17,8 @@ public class Player implements CashUser, Comparable<Player> {
   }
 
   public Square move(int steps) {
-    if (steps < 0) {
-      stepBack(steps);
-    } else if (steps > 0) {
-      stepForward(steps);
-    }
-    return location;
-  }
-
-  private void stepForward(int steps) {
-    if (steps > 0) {
-      location = location.nextSquare();
-      location.vist(PassingRule.rulesFor(this));
-      stepForward(steps - 1);
-    }
-  }
-
-  private void stepBack(int steps) {
-    if (steps < 0) {
-      location = location.backSquare();
-      location.vist(PassingRule.rulesFor(this));
-      stepBack(steps + 1);
-    }
+    SquareVisitor passingRulse = PassingRule.rulesFor(this);
+    return location.move(steps, passingRulse);
   }
 
   public Square postion() {
