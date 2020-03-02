@@ -2,9 +2,11 @@ package com.watson.propert.tycoon.game;
 
 public class BuyOrNotMsg {
 
-  public final String msg;
+  public final String propName;
+  public final int price;
 
-  BuyOrNotMsg(String message) {
-    msg = message;
+  BuyOrNotMsg(String propName, int price) {
+    this.propName = propName;
+    this.price = price;
   }
 }
