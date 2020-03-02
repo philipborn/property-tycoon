@@ -1,0 +1,222 @@
+@font-face {
+    font-family: "BankGothic Lt BT";
+    src: url('bgothl.ttf');
+}
+
+@font-face {
+    font-family: "OCR A Std";
+    src: url('OCRAStd.otf');
+}
+
+/*
+ * Photographs and graphic design by Lee Richards
+ */
+#root {
+    -fx-background-image: url("background02.jpg");
+    -fx-background-repeat: stretch stretch;   
+    -fx-background-position: center center;
+    -fx-background-size: 100%  100%;
+}
+
+#Timer {
+    -fx-font-family: "OCR A Std", Helvetica, Arial, sans-serif;
+    -fx-font-size: 48px;
+    -fx-text-fill: #F7F9E0;
+    -fx-padding: 0 0 0 0;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+#GAMEBOARD_PANE {
+     -fx-background-image: url("gameBoardBg.jpg");
+     -fx-background-repeat: stretch stretch;
+     -fx-background-position: center center;
+     -fx-background-size: 100%  100%;
+     -fx-border-width: 2;
+     -fx-border-color: #000;
+     -fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0);
+}
+
+#SQUARE_BG {
+    -fx-opacity: 0.8;
+    -fx-background-color: #86ad75;
+    -fx-border-width: 1;
+    -fx-border-color: #000;
+}
+
+#PANEL {
+
+}
+
+#PROPERTY_NAME {
+    -fx-font-family: Helvetica, Arial, sans-serif;
+    -fx-font-size: 8px;
+    -fx-text-fill: #000;
+    -fx-padding: 2 1 2 1;
+    -fx-wrap-text: true;
+    /* -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 0); */
+}
+
+#PROPERTY_PRICE {
+    -fx-font-family: Helvetica, Arial, sans-serif;
+    -fx-text-fill: #000;
+}
+
+#PROPERTY_GROUP_BROWN {
+    -fx-background-color: #9c552d;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_GREEN {
+    -fx-background-color: #00aa86;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_YELLOW {
+     -fx-background-color: #ffd600;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_STATION {
+     -fx-background-color: #000000;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_UTILITIES {
+    -fx-background-color: #aaaaaa;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_ORANGE {
+    -fx-background-color: #ff5a00;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_PURPLE {
+     -fx-background-color: #bc34ba;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_BLUE {
+     -fx-background-color: #0085cf;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_RED {
+    -fx-background-color: #f32837;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_DEEP_BLUE {
+     -fx-background-color: #001ca8;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+#PROPERTY_GROUP_TAKE_CARD {
+     -fx-background-color: #ffffff;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.token {
+    -fx-opacity: 0.7;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+
+.text-area .content {
+    -fx-opacity: 0.9;
+    -fx-background-color: #2e241a;
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #F7F9E0;
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);
+}
+
+.text-area {
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #F7F9E0;
+}
+
+.playerName, .dice {
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #F7F9E0;
+}
+
+.playerAccount {
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-text-fill: #F7F9E0;
+}
+
+.playerDisplay{
+
+}
+
+.combo-box {
+    -fx-padding: 5 2 5 2;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #060606;
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-font-size: 26px;
+    -fx-alignment: center;
+    -fx-border-insets: 2px;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #d8d8d8;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: d8d8d8;
+    -fx-alignment: center;
+}
+
+/* 
+ * Button skinning adapted from:
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 15 22 15 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #2e241a;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-font-size: 26px;
+    -fx-text-fill: #d8d8d8;
+    -fx-border-insets: 2px;
+}
+
+.button:hover {
+    -fx-background-color: #574531;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}

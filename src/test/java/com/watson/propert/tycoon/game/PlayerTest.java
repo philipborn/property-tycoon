@@ -25,22 +25,7 @@ public class PlayerTest {
     first = bb.buildBord(br);
 
     this.channel = new EventBus();
-    player = new Player(first, this.channel);
-  }
-
-  @Test
-  void newplayerNameNeverReturnNull() {
-    // setup gives new player
-    assertNotNull(player.getName());
-  }
-
-  @Test
-  void changeNameToNullNullpointException() {
-    assertThrows(
-        NullPointerException.class,
-        () -> {
-          player.changeName(null);
-        });
+    player = new Player(PlayerId.ONE, first, this.channel);
   }
 
   @Test
