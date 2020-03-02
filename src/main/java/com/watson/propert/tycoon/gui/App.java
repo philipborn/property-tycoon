@@ -49,11 +49,7 @@ public class App extends Application {
     URL fxmlUrl = ClassLoader.getSystemResource("ptGui.fxml");
     Parent root = FXMLLoader.load(fxmlUrl);
 
-    Double scaleFactorX = 1.2 / Screen.getPrimary().getOutputScaleX();
-    Double scaleFactorY = 1.2 / Screen.getPrimary().getOutputScaleY();
-    //root.setScaleX(scaleFactorX);
-    //root.setScaleY(scaleFactorY);
-    //root.setLayoutX(-100);
+    // Create Scene
     Scene scene = new Scene(root);
 
     // Load CSS stylesheet
@@ -61,7 +57,8 @@ public class App extends Application {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(cssUrl.toExternalForm());
 
-    stage.setTitle("Watson Game Property Tycoon - Project Team 16 - Sprint 3");
+    // Set up stage to fill primary screen
+    stage.setTitle("Watson Games Property Tycoon - Project Team 16 - Sprint 3");
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     stage.setX(primaryScreenBounds.getMinX());
     stage.setY(primaryScreenBounds.getMinY());
