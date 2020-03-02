@@ -376,7 +376,7 @@ public class PtController {
     Double default_tile_inner_height = default_street_height - default_border;
     Double default_tile_inner_width = default_tile_width - 2;
     Double default_house_block_height = 0.22 * default_street_height * scaleFactor;
-    Double default_property_name_height = 0.35 * default_street_height * scaleFactor;
+    Double default_property_name_height = 0.55 * default_street_height * scaleFactor;
     Double default_price_height = 0.22 * default_street_height * scaleFactor;
 
     // Resize game board containers
@@ -434,6 +434,7 @@ public class PtController {
 
   @FXML
   void initialize() {
+    Logger logger = LoggerFactory.getLogger(App.class);
     checkNotNull();
     // Build GuiSquare array
     GuiSquare[] guiSquares =
@@ -520,7 +521,10 @@ public class PtController {
 
         // set group names (if square is in a group)
         if (boardReader.getProperties().get("group") != null) {
-          group.setId("PROPERTY_GROUP_" + boardReader.getProperties().get("group").toUpperCase());
+          group.setId(
+              "PROPERTY_GROUP_"
+                  + boardReader.getProperties().get("group").toUpperCase().replace(' ', '_'));
+          logger.debug(group.getId());
         }
 
         // set name/price values
