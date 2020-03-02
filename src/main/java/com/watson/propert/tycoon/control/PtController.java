@@ -27,7 +27,6 @@ import static java.lang.StrictMath.abs;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -40,6 +39,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
@@ -88,15 +88,9 @@ public class PtController {
 
   @FXML private HBox TOKEN_PLAYER_1;
   @FXML private HBox TOKEN_PLAYER_2;
-
-  @FXML private HBox TOKEN_PLAYER_2;
-
   @FXML private HBox TOKEN_PLAYER_3;
-
   @FXML private HBox TOKEN_PLAYER_4;
-
   @FXML private HBox TOKEN_PLAYER_5;
-
   @FXML private HBox TOKEN_PLAYER_6;
 
   @FXML private StackPane SQUARE_10;
@@ -201,14 +195,7 @@ public class PtController {
 
   @FXML private Rectangle JAIL;
 
-  @FXML private Circle PATH_JAIL;
-
   private GuiGameBoard gameBoard;
-
-  private Shape[] path;
-
-  private int PLAYER_1_position = 0;
-  private int PLAYER_2_position = 0;
 
   private int activePlayer = 0;
 
@@ -244,7 +231,7 @@ public class PtController {
 
     // move functionality
     int i = event.firstDice() + event.secondDice();
-    
+
     MESSAGE_AREA.setText(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
     //DICE_1.setText(Integer.toString(event.firstDice()));
     //DICE_2.setText(Integer.toString(event.secondDice()));
@@ -256,8 +243,6 @@ public class PtController {
 
   void moveBackThreeSpaces() {
     move(-3);
-
-    move(i, playerTokens.get(activePlayer), playerPositions.get(activePlayer), true);
     changeTurn();
   }
 
@@ -267,36 +252,17 @@ public class PtController {
 
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
-    playerLabels.get(activePlayer).setStyle("-fx-background-color:TRANSPARENT");
-    activePlayer = (activePlayer + 1) % playerTokens.size();
-    playerLabels.get(activePlayer).setStyle("-fx-background-color:WHITE");
+    // inactiveplayer.setStyle("-fx-background-color:TRANSPARENT");
+    // activeplayer.setStyle("-fx-background-color:WHITE");
   }
 
   @Subscribe
   void updateMoney(CashEvent event) {
-    Label l = (Label) playerLabels.get(activePlayer).getChildren().get(1);
-    l.setText("" + event.getNewCash());
+    //Label l = (Label) playerLabels.get(activePlayer).getChildren().get(1);
+    //l.setText("" + event.getNewCash());
   }
 
-  void goToJail() {
-
-    // head directly to jail from wherever the player is on the board
-
-    PathTransition pt = new PathTransition();
-    Path p =
-        new Path(
-            new MoveTo(
-                playerTokens.get(activePlayer).getTranslateX() + 25,
-                playerTokens.get(activePlayer).getTranslateY() + 25));
-    p.getElements().add(new LineTo(PATH_JAIL.getCenterX(), PATH_JAIL.getCenterY()));
-    pt.setNode(playerTokens.get(activePlayer));
-    pt.setDuration(Duration.seconds(1));
-    pt.setPath(p);
-    pt.play();
-
-    // set player position to just visiting square for when they leave jail
-    playerPositions.set(activePlayer, 10);
-  }
+  void goToJail() {}
 
   void move(int spaces) {
     GuiToken tok = gameBoard.getCurrentPlayer().getToken();
@@ -320,7 +286,6 @@ public class PtController {
     pt.play();
   }
 
-  
   void squareFunctionality(StackPane square) {
 
     // if square is a non-corner square
