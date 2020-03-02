@@ -20,7 +20,7 @@ public class GameMasterTest {
 
   @BeforeEach
   void setup() {
-    square = new SquareImp();
+    square = new SquareImp("Test");
     channel = new EventBus();
 
     players = new ArrayList<>(6);
