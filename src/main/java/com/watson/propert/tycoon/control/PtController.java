@@ -213,7 +213,9 @@ public class PtController {
   }
 
   private void yes() {
+    // implement window
     game.buyProperty();
+    changeTurn();
   }
 
   @FXML
@@ -225,14 +227,10 @@ public class PtController {
   void diceHandler(DiceEvent event) {
     // move functionality
     int i = event.firstDice() + event.secondDice();
-
-    MESSAGE_AREA.setText(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
-    //DICE_1.setText(Integer.toString(event.firstDice()));
-    //DICE_2.setText(Integer.toString(event.secondDice()));
+    displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
     DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
     DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
     move(i);
-    gameBoard.getNextPlayer();
   }
 
   void moveBackThreeSpaces() {
@@ -246,8 +244,9 @@ public class PtController {
 
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
-    // inactiveplayer.setStyle("-fx-background-color:TRANSPARENT");
-    // activeplayer.setStyle("-fx-background-color:WHITE");
+    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+    gameBoard.getNextPlayer();
+    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:BLUE");
   }
 
   @Subscribe
@@ -444,6 +443,7 @@ public class PtController {
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
     gameBoard.setSquares(guiSquares);
     gameBoard.setPlayers(players);
+    gameBoard.getCurrentPlayer().getInfo().setStyle("-fx-background-color:BLUE");
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
