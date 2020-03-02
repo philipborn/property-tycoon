@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.gui;
 
+import javafx.scene.layout.VBox;
+
 /**
  * GUI Player Class. Describes a Player in the game
  *
@@ -10,11 +12,13 @@ public class GuiPlayer {
   String name;
   GuiToken token;
   Boolean ai;
+  VBox info;
 
-  public GuiPlayer(String name, GuiToken token, Boolean ai) {
+  public GuiPlayer(String name, GuiToken token, Boolean ai, VBox info) {
     this.name = name;
     this.token = token;
     this.ai = ai;
+    this.info = info;
   }
 
   public GuiPlayer(String name, GuiToken token) {
@@ -45,5 +49,9 @@ public class GuiPlayer {
 
   public void setAi(Boolean ai) {
     this.ai = ai;
+  }
+
+  public VBox getInfo() {
+    return info;
   }
 }

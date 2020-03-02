@@ -47,10 +47,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
-import com.watson.propert.tycoon.game.CashEvent;
-import com.watson.propert.tycoon.game.DiceEvent;
-import com.watson.propert.tycoon.game.Game;
-import com.watson.propert.tycoon.game.PropertTycoon;
+import com.watson.propert.tycoon.game.*;
 import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
@@ -197,8 +194,6 @@ public class PtController {
 
   private GuiGameBoard gameBoard;
 
-  private int activePlayer = 0;
-
   private PropertTycoon game;
 
   @FXML
@@ -213,7 +208,12 @@ public class PtController {
   @FXML
   void newGame(ActionEvent event) {
     //goToJail();
-    moveBackThreeSpaces();
+    //moveBackThreeSpaces();
+    yes();
+  }
+
+  private void yes() {
+    game.buyProperty();
   }
 
   @FXML
@@ -223,12 +223,6 @@ public class PtController {
 
   @Subscribe
   void diceHandler(DiceEvent event) {
-    // set dice results
-    Label d1 = (Label) DICE.getChildren().get(0);
-    Label d2 = (Label) DICE.getChildren().get(1);
-    d1.setText("" + event.firstDice());
-    d2.setText("" + event.secondDice());
-
     // move functionality
     int i = event.firstDice() + event.secondDice();
 
@@ -258,8 +252,8 @@ public class PtController {
 
   @Subscribe
   void updateMoney(CashEvent event) {
-    //Label l = (Label) playerLabels.get(activePlayer).getChildren().get(1);
-    //l.setText("" + event.getNewCash());
+    Label l = (Label) gameBoard.getCurrentPlayer().getInfo().getChildren().get(1);
+    l.setText("" + event.getNewCash());
   }
 
   void goToJail() {}
@@ -286,31 +280,9 @@ public class PtController {
     pt.play();
   }
 
-  void squareFunctionality(StackPane square) {
-
-    // if square is a non-corner square
-    if (square.getChildren().get(0) instanceof VBox) {
-
-      // access elements of square
-      VBox v = (VBox) square.getChildren().get(0);
-      HBox group = (HBox) v.getChildren().get(0);
-
-      // if group != null then the square is a property square
-      if (group != null) {
-        Label name = (Label) v.getChildren().get(1);
-        Label price = (Label) v.getChildren().get(2);
-        displayMessage(
-            "Would you like to buy "
-                + name.getText()
-                + " for "
-                + price.getText()
-                + "?"
-                + "\n"
-                + "Y/N?");
-        // get answer & execute
-      }
-      // functionality for other squares
-    }
+  @Subscribe
+  void propertyFunctionality(BuyOrNotMsg msg) {
+    displayMessage("Would you like to buy " + msg.propName + " for " + msg.price + "?");
   }
 
   // Calculate the centre point of each square relative to game board Pane
@@ -461,12 +433,12 @@ public class PtController {
     // To be set up by New Game Dialog box
     GuiPlayer[] players =
         new GuiPlayer[] {
-          new GuiPlayer("Player 1", new GuiToken(TOKEN_PLAYER_1, 0), false),
-          new GuiPlayer("Player 2", new GuiToken(TOKEN_PLAYER_2, 0), false),
-          new GuiPlayer("Player 3", new GuiToken(TOKEN_PLAYER_3, 0), true),
-          new GuiPlayer("Player 4", new GuiToken(TOKEN_PLAYER_4, 0), true),
-          new GuiPlayer("Player 5", new GuiToken(TOKEN_PLAYER_5, 0), true),
-          new GuiPlayer("Player 6", new GuiToken(TOKEN_PLAYER_6, 0), true)
+          new GuiPlayer("Player 1", new GuiToken(TOKEN_PLAYER_1, 0), false, PLAYER_1),
+          new GuiPlayer("Player 2", new GuiToken(TOKEN_PLAYER_2, 0), false, PLAYER_2),
+          new GuiPlayer("Player 3", new GuiToken(TOKEN_PLAYER_3, 0), true, PLAYER_3),
+          new GuiPlayer("Player 4", new GuiToken(TOKEN_PLAYER_4, 0), true, PLAYER_4),
+          new GuiPlayer("Player 5", new GuiToken(TOKEN_PLAYER_5, 0), true, PLAYER_5),
+          new GuiPlayer("Player 6", new GuiToken(TOKEN_PLAYER_6, 0), true, PLAYER_6)
         };
 
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
