@@ -1,8 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.*;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.io.BoardReaderJson;
@@ -11,21 +10,34 @@ public class Game implements PropertTycoon {
 
   private DicePair dicePair;
   private Square bord;
-  private Player token;
+  private GameMaster master;
   private EventBus channel;
+  private GameState state;
 
   public Game(Square startPostion, EventBus channel) {
     dicePair = new DicePair(channel);
     bord = startPostion;
-    token = new Player(bord, channel);
+    List<Player> players = new ArrayList<>();
+    players.add(new Player(PlayerId.ONE, bord, channel));
+    players.add(new Player(PlayerId.TWO, bord, channel));
+    master = new GameMaster(players);
     this.channel = channel;
+    state = new NewTurnState(master, channel);
   }
 
   @Override
   public void throwDicesAndMove() {
-    List<Integer> dices = dicePair.throwDices();
-    Integer sum = dices.stream().mapToInt((a) -> a).sum();
-    token.move(sum);
+    state = state.throwDicesAndMove();
+  }
+
+  @Override
+  public void buyProperty() {
+    state = state.buyProperty();
+  }
+
+  @Override
+  public void notBuyingProperty() {
+    state = state.notBuyingProperty();
   }
 
   @Override

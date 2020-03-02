@@ -8,6 +8,12 @@ public interface PropertTycoon {
    */
   void throwDicesAndMove();
 
+  /** Call when player whants to buy a Property. Only works on ownless properys. */
+  void buyProperty();
+
+  /** Call when player don't whant to buy, and to began a auction */
+  void notBuyingProperty();
+
   /** Register to the event bus used by the game to inform of change state */
   void registerListener(Object listener);
 

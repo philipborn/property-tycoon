@@ -1,53 +1,44 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.function.Consumer;
-
 import com.google.common.eventbus.EventBus;
 
-public class Player implements CashUser {
+public class Player implements CashUser, Comparable<Player> {
+  public final PlayerId id;
 
-  private String name = "g";
   private Square location;
   private int cash;
 
   private EventBus channel;
 
-  public Player(Square startLocation, EventBus channel) {
+  public Player(PlayerId id, Square startLocation, EventBus channel) {
+    this.id = id;
     location = startLocation;
     this.channel = channel;
   }
 
-  String getName() {
-    return name;
-  }
-
-  void changeName(String newName) {
-    if (newName == null) {
-      throw new NullPointerException();
-    }
-    name = newName;
-  }
-
   public Square move(int steps) {
-    Consumer<Player> step;
     if (steps < 0) {
-      step = Player::stepBack;
-    } else {
-      step = Player::stepForward;
-    }
-    for (int stepLeft = Math.abs(steps); stepLeft != 0; stepLeft--) {
-      step.accept(this);
-      location.vist(PassingRule.rulesFor(this));
+      stepBack(steps);
+    } else if (steps > 0) {
+      stepForward(steps);
     }
     return location;
   }
 
-  private void stepForward() {
-    location = location.nextSquare();
+  private void stepForward(int steps) {
+    if (steps > 0) {
+      location = location.nextSquare();
+      location.vist(PassingRule.rulesFor(this));
+      stepForward(steps - 1);
+    }
   }
 
-  private void stepBack() {
-    location = location.backSquare();
+  private void stepBack(int steps) {
+    if (steps < 0) {
+      location = location.backSquare();
+      location.vist(PassingRule.rulesFor(this));
+      stepBack(steps + 1);
+    }
   }
 
   public Square postion() {
@@ -66,7 +57,20 @@ public class Player implements CashUser {
     } else if (amount > 0) {
       int oldCash = cash;
       cash += amount;
-      channel.post(CashEvent.write(oldCash, cash));
+      channel.post(CashEvent.write(id, oldCash, cash));
     }
+  }
+
+  @Override
+  public int compareTo(Player player) {
+    final int BEFORE = -1;
+    final int EQUAL = 0;
+    final int AFTER = 1;
+
+    int comp = id.compareTo(player.id);
+    if (comp != EQUAL) {
+      return comp;
+    }
+    return Integer.compare(cash, player.cash);
   }
 }

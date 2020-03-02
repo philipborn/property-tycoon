@@ -25,7 +25,9 @@ package com.watson.propert.tycoon.control;
 
 import static java.lang.StrictMath.abs;
 
+import java.awt.*;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -45,6 +47,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.CashEvent;
 import com.watson.propert.tycoon.game.DiceEvent;
 import com.watson.propert.tycoon.game.Game;
 import com.watson.propert.tycoon.game.PropertTycoon;
@@ -84,6 +87,7 @@ public class PtController {
   @FXML private StackPane SQUARE_0;
 
   @FXML private HBox TOKEN_PLAYER_1;
+  @FXML private HBox TOKEN_PLAYER_2;
 
   @FXML private HBox TOKEN_PLAYER_2;
 
@@ -204,6 +208,9 @@ public class PtController {
   private Shape[] path;
 
   private int PLAYER_1_position = 0;
+  private int PLAYER_2_position = 0;
+
+  private int activePlayer = 0;
 
   private PropertTycoon game;
 
@@ -229,7 +236,15 @@ public class PtController {
 
   @Subscribe
   void diceHandler(DiceEvent event) {
+    // set dice results
+    Label d1 = (Label) DICE.getChildren().get(0);
+    Label d2 = (Label) DICE.getChildren().get(1);
+    d1.setText("" + event.firstDice());
+    d2.setText("" + event.secondDice());
+
+    // move functionality
     int i = event.firstDice() + event.secondDice();
+    
     MESSAGE_AREA.setText(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
     //DICE_1.setText(Integer.toString(event.firstDice()));
     //DICE_2.setText(Integer.toString(event.secondDice()));
@@ -241,6 +256,26 @@ public class PtController {
 
   void moveBackThreeSpaces() {
     move(-3);
+
+    move(i, playerTokens.get(activePlayer), playerPositions.get(activePlayer), true);
+    changeTurn();
+  }
+
+  private void displayMessage(String message) {
+    MESSAGE_AREA.setText(message);
+  }
+
+  void changeTurn() {
+    // can utilise style sheets, white & transparent is just to show the functionality
+    playerLabels.get(activePlayer).setStyle("-fx-background-color:TRANSPARENT");
+    activePlayer = (activePlayer + 1) % playerTokens.size();
+    playerLabels.get(activePlayer).setStyle("-fx-background-color:WHITE");
+  }
+
+  @Subscribe
+  void updateMoney(CashEvent event) {
+    Label l = (Label) playerLabels.get(activePlayer).getChildren().get(1);
+    l.setText("" + event.getNewCash());
   }
 
   void goToJail() {
@@ -250,15 +285,17 @@ public class PtController {
     PathTransition pt = new PathTransition();
     Path p =
         new Path(
-            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+            new MoveTo(
+                playerTokens.get(activePlayer).getTranslateX() + 25,
+                playerTokens.get(activePlayer).getTranslateY() + 25));
     p.getElements().add(new LineTo(PATH_JAIL.getCenterX(), PATH_JAIL.getCenterY()));
-    pt.setNode(TOKEN_PLAYER_1);
+    pt.setNode(playerTokens.get(activePlayer));
     pt.setDuration(Duration.seconds(1));
     pt.setPath(p);
     pt.play();
 
     // set player position to just visiting square for when they leave jail
-    PLAYER_1_position = 10;
+    playerPositions.set(activePlayer, 10);
   }
 
   void move(int spaces) {
@@ -283,65 +320,32 @@ public class PtController {
     pt.play();
   }
 
-  void move_old(int spaces) { // FIX BACKWARDS BUG
+  
+  void squareFunctionality(StackPane square) {
 
-    PathTransition pt = new PathTransition();
-    Path p =
-        new Path(
-            new MoveTo(TOKEN_PLAYER_1.getTranslateX() + 25, TOKEN_PLAYER_1.getTranslateY() + 25));
+    // if square is a non-corner square
+    if (square.getChildren().get(0) instanceof VBox) {
 
-    int destNum = (PLAYER_1_position + spaces) % path.length;
+      // access elements of square
+      VBox v = (VBox) square.getChildren().get(0);
+      HBox group = (HBox) v.getChildren().get(0);
 
-    // while player has not reached the destination
-    while (PLAYER_1_position != destNum) {
-      // if next path is not the jail path
-      if (path[PLAYER_1_position] instanceof Circle) {
-        Circle pathBlock = (Circle) path[PLAYER_1_position];
-        p.getElements().add(new LineTo(pathBlock.getCenterX(), pathBlock.getCenterY()));
-      } else {
-        // otherwise we are on the jail square, but just visiting
-        CubicCurve jailPath = (CubicCurve) path[PLAYER_1_position];
-        p.getElements()
-            .add(
-                new CubicCurveTo(
-                    jailPath.getControlX1(),
-                    jailPath.getControlY1(),
-                    jailPath.getControlX2(),
-                    jailPath.getControlY2(),
-                    jailPath.getEndX(),
-                    jailPath.getEndY()));
+      // if group != null then the square is a property square
+      if (group != null) {
+        Label name = (Label) v.getChildren().get(1);
+        Label price = (Label) v.getChildren().get(2);
+        displayMessage(
+            "Would you like to buy "
+                + name.getText()
+                + " for "
+                + price.getText()
+                + "?"
+                + "\n"
+                + "Y/N?");
+        // get answer & execute
       }
-      // iterate over the board in desired direction
-      PLAYER_1_position = (PLAYER_1_position + 1) % path.length;
+      // functionality for other squares
     }
-
-    // add final part of path (to destination)
-    if (path[destNum] instanceof Circle) {
-      Circle pathBlock = (Circle) path[destNum];
-      p.getElements().add(new LineTo(pathBlock.getCenterX(), pathBlock.getCenterY()));
-    } else {
-      CubicCurve jailPath = (CubicCurve) path[destNum];
-      p.getElements()
-          .add(
-              new CubicCurveTo(
-                  jailPath.getControlX1(),
-                  jailPath.getControlY1(),
-                  jailPath.getControlX2(),
-                  jailPath.getControlY2(),
-                  jailPath.getEndX(),
-                  jailPath.getEndY()));
-    }
-
-    pt.setNode(TOKEN_PLAYER_1);
-    pt.setDuration(Duration.seconds(1));
-    pt.setPath(p);
-    pt.play();
-    // show on flow pane
-    /*
-    FlowPane fp = (FlowPane) squares[PLAYER_1_position].getParent();
-    fp.getChildren().add(TOKEN_PLAYER_1);
-     */
-    // execute square functionality
   }
 
   // Calculate the centre point of each square relative to game board Pane
