@@ -2,64 +2,55 @@ package com.watson.propert.tycoon.game;
 
 import com.google.common.eventbus.EventBus;
 
-public class Player {
+public class Player implements CashUser, Comparable<Player> {
+  public final PlayerId id;
 
-  private String name = "g";
   private Square location;
+  private int cash;
 
-  private EventBus news;
+  private EventBus channel;
 
-  public Player(Square startLocation, EventBus bus) {
+  public Player(PlayerId id, Square startLocation, EventBus channel) {
+    this.id = id;
     location = startLocation;
-    news = bus;
-  }
-
-  String getName() {
-    return name;
-  }
-
-  void changeName(String newName) {
-    if (newName == null) {
-      throw new NullPointerException();
-    }
-    name = newName;
+    this.channel = channel;
   }
 
   public Square move(int steps) {
-    Square old = this.location;
-    Square node;
-    if (steps > 0) {
-      node = stepForward(steps);
-    } else {
-      node = stepBack(-steps);
-    }
-    news.post(new PlayerEvent(this, old));
-    return node;
-  }
-
-  private Square stepForward(int steps) {
-    Square node = location;
-    while (steps > 0) {
-      node = node.nextSquare();
-      --steps;
-    }
-    return node;
-  }
-
-  private Square stepBack(int steps) {
-    Square node = location;
-    while (steps > 0) {
-      node = node.backSquare();
-      --steps;
-    }
-    return node;
+    SquareVisitor passingRulse = PassingRule.rulesFor(this);
+    return location.move(steps, passingRulse);
   }
 
   public Square postion() {
     return location;
   }
 
-  public void registerForEvents(Object listnier) {
-    news.register(listnier);
+  @Override
+  public int cash() {
+    return cash;
+  }
+
+  @Override
+  public void receiveCash(int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount most be postive");
+    } else if (amount > 0) {
+      int oldCash = cash;
+      cash += amount;
+      channel.post(CashEvent.write(id, oldCash, cash));
+    }
+  }
+
+  @Override
+  public int compareTo(Player player) {
+    final int BEFORE = -1;
+    final int EQUAL = 0;
+    final int AFTER = 1;
+
+    int comp = id.compareTo(player.id);
+    if (comp != EQUAL) {
+      return comp;
+    }
+    return Integer.compare(cash, player.cash);
   }
 }

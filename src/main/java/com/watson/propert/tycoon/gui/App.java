@@ -26,26 +26,47 @@ package com.watson.propert.tycoon.gui;
 import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class App extends Application {
+
   public String getGreeting() {
     return "Hello world.";
   }
 
   @Override
   public void start(Stage stage) throws Exception {
+    Logger logger = LoggerFactory.getLogger(App.class);
 
     // getting URL of fxml file
     URL fxmlUrl = ClassLoader.getSystemResource("ptGui.fxml");
     Parent root = FXMLLoader.load(fxmlUrl);
-    stage.setTitle("Watson Game Property Tycoon - Project Team 16 - Sprint 1");
-    stage.setScene(new Scene(root));
+
+    // Create Scene
+    Scene scene = new Scene(root);
+
+    // Load CSS stylesheet
+    URL cssUrl = ClassLoader.getSystemResource("pt_default.css");
+    scene.getStylesheets().clear();
+    scene.getStylesheets().add(cssUrl.toExternalForm());
+
+    // Set up stage to fill primary screen
+    stage.setTitle("Watson Games Property Tycoon - Project Team 16 - Sprint 3");
+    Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    stage.setX(primaryScreenBounds.getMinX());
+    stage.setY(primaryScreenBounds.getMinY());
+    stage.setWidth(primaryScreenBounds.getWidth());
+    stage.setHeight(primaryScreenBounds.getHeight());
+    logger.debug("Screen Scale: " + Screen.getPrimary().getOutputScaleX());
+
+    stage.setScene(scene);
     stage.show();
   }
 

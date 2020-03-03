@@ -1,37 +1,24 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Deque;
 
-import com.google.common.eventbus.EventBus;
+public class GameMaster {
 
-public class GameMaster implements PropertTycoon {
+  private Deque<Player> players;
 
-  private DicePair dicePair;
-  private Square bord;
-  private Player token;
-  private EventBus channle;
-
-  public GameMaster(Square startPostion, EventBus channle) {
-    dicePair = new DicePair(channle);
-    bord = startPostion;
-    token = new Player(bord, channle);
-    this.channle = channle;
+  GameMaster(Collection<Player> players) {
+    this.players = new ArrayDeque<>(players);
   }
 
-  @Override
-  public void throwDicesAndMove() {
-    List<Integer> dices = dicePair.throwDices();
-    Integer sum = dices.stream().mapToInt((a) -> a).sum();
-    token.move(sum);
+  public Player currentPlayer() {
+    return players.peekFirst();
   }
 
-  @Override
-  public void registerListener(Object listener) {
-    channle.register(listener);
-  }
-
-  @Override
-  public void unregisterListener(Object listener) {
-    channle.unregister(listener);
+  public Player newTurn() {
+    Player p = players.pop();
+    players.addLast(p);
+    return p;
   }
 }
