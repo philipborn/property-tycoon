@@ -26,6 +26,7 @@ package com.watson.propert.tycoon.control;
 import static java.lang.StrictMath.abs;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
@@ -206,10 +207,12 @@ public class PtController {
   }
 
   @FXML
-  void newGame(ActionEvent event) {
+  void newGame(ActionEvent event) throws IOException {
     //goToJail();
     //moveBackThreeSpaces();
-    yes();
+    ptNewGameDialogCtrl newGame = new ptNewGameDialogCtrl();
+    newGame.showDialog();
+    //yes();
   }
 
   private void yes() {
@@ -380,7 +383,7 @@ public class PtController {
   }
 
   @FXML
-  void initialize() {
+  void initialize() throws IOException {
     Logger logger = LoggerFactory.getLogger(App.class);
     checkNotNull();
     // Build GuiSquare array
@@ -487,6 +490,8 @@ public class PtController {
       // get next square
 
     }
+    ptNewGameDialogCtrl newGame = new ptNewGameDialogCtrl();
+    newGame.showDialog();
   }
 
   private void checkNotNull() {
