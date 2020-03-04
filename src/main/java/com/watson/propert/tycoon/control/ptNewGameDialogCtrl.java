@@ -1,4 +1,9 @@
 package com.watson.propert.tycoon.control;
+/**
+ * New Game Dialog Box controller
+ * @author Lee Richards
+ * @version Sprint3b
+ */
 
 import java.io.IOException;
 import java.net.URL;
@@ -150,12 +155,14 @@ public class ptNewGameDialogCtrl {
     return this.newPlayers;
   }
 
+  // Make a previously hidden row visible again
   private void makeRowVisible(int i) {
     newPlayers[i].getAi().setVisible(true);
     newPlayers[i].getName().setVisible(true);
     newPlayers[i].getRow().setPrefHeight(60);
   }
 
+  // Hide a row
   private void makeRowInvisible(int i) {
     newPlayers[i].getAi().setVisible(false);
     newPlayers[i].getAi().selectedProperty().setValue(false);
@@ -164,6 +171,7 @@ public class ptNewGameDialogCtrl {
     newPlayers[i].getRow().setPrefHeight(0);
   }
 
+  // Show dialog box and wait for response
   public void showDialog() throws IOException {
     newGameStage = new Stage();
     newGameStage.initModality(Modality.APPLICATION_MODAL);
