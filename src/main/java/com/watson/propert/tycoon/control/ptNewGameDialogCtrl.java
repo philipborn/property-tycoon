@@ -102,11 +102,7 @@ public class ptNewGameDialogCtrl {
 
   @FXML
   void NEW_GAME(ActionEvent event) {
-    //newGameStage.close();
     ((Stage) NEW_GAME_BUTTON.getScene().getWindow()).close();
-    //enteredPlayers = new ArrayList<Player>();
-    //enteredPlayers.add(new Player(newPlayers[0].getName().getText(), new GuiToken()));
-    logger.debug("CLOSED");
   }
 
   @FXML
@@ -180,9 +176,7 @@ public class ptNewGameDialogCtrl {
     // getting URL of fxml file
     URL fxmlUrl = ClassLoader.getSystemResource("ptNewGameDialog.fxml");
     Parent root = FXMLLoader.load(fxmlUrl);
-    /*NEW_GAME_BUTTON.setOnAction(e -> {
-        newGameStage.close();
-    });*/
+
     // Create Scene
     Scene scene = new Scene(root, 640, 480);
 

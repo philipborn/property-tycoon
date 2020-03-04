@@ -492,6 +492,8 @@ public class PtController {
     }
     ptNewGameDialogCtrl newGame = new ptNewGameDialogCtrl();
     newGame.showDialog();
+    //GuiNewPlayer[] enteredPlayers = newGame.getNewPlayers();
+    //logger.debug(enteredPlayers[0].getName().getText());
   }
 
   private void checkNotNull() {
