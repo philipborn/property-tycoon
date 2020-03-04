@@ -25,9 +25,9 @@ package com.watson.propert.tycoon.control;
 
 import static java.lang.StrictMath.abs;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -210,7 +210,7 @@ public class PtController {
   void newGame(ActionEvent event) throws IOException {
     //goToJail();
     //moveBackThreeSpaces();
-    ptNewGameDialogCtrl newGame = new ptNewGameDialogCtrl();
+    PtNewGameDialogCtrl newGame = new PtNewGameDialogCtrl();
     newGame.showDialog();
     //yes();
   }
@@ -490,10 +490,12 @@ public class PtController {
       // get next square
 
     }
-    ptNewGameDialogCtrl newGame = new ptNewGameDialogCtrl();
+    PtNewGameDialogCtrl newGame = new PtNewGameDialogCtrl();
     newGame.showDialog();
-    //GuiNewPlayer[] enteredPlayers = newGame.getNewPlayers();
-    //logger.debug(enteredPlayers[0].getName().getText());
+    // AFTER ABOVE CALL newGame IS NOW NULL?
+    //ArrayList<GuiPlayer> enteredPlayers = newGame.getNewPlayers();
+    //logger.debug("Number of players entered: " + enteredPlayers.size());
+
   }
 
   private void checkNotNull() {
