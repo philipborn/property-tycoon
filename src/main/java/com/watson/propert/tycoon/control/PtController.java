@@ -210,8 +210,6 @@ public class PtController {
   void newGame(ActionEvent event) throws IOException {
     //goToJail();
     //moveBackThreeSpaces();
-    PtNewGameDialogCtrl newGame = new PtNewGameDialogCtrl();
-    newGame.showDialog();
     //yes();
   }
 
@@ -490,12 +488,11 @@ public class PtController {
       // get next square
 
     }
-    PtNewGameDialogCtrl newGame = new PtNewGameDialogCtrl();
-    newGame.showDialog();
-    // AFTER ABOVE CALL newGame IS NOW NULL?
-    //ArrayList<GuiPlayer> enteredPlayers = newGame.getNewPlayers();
-    //logger.debug("Number of players entered: " + enteredPlayers.size());
 
+    NewGame newGameDialog = new NewGame();
+    newGameDialog.showDialog();
+    gameBoard.setPlayers( newGameDialog.getNewPlayers().toArray(GuiPlayer[]::new));
+    logger.debug("Number of players: " + gameBoard.numberPlayers());
   }
 
   private void checkNotNull() {

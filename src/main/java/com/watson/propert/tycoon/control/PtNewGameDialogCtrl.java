@@ -1,23 +1,16 @@
 package com.watson.propert.tycoon.control;
 /**
  * New Game Dialog Box controller
+ *
  * @author Lee Richards
  * @version Sprint3b
  */
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import com.watson.propert.tycoon.gui.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -25,14 +18,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.gui.*;
 
 public class PtNewGameDialogCtrl {
 
@@ -100,23 +91,28 @@ public class PtNewGameDialogCtrl {
 
   @FXML private GuiNewPlayer[] newPlayers;
   @FXML private ArrayList<GuiPlayer> enteredPlayers;
-  @FXML private Parent root;
-  private Stage newGameStage;
-  private FXMLLoader loader;
+
   private Logger logger = LoggerFactory.getLogger(App.class);
+
+  public void setNewPlayers(ArrayList<GuiPlayer> players) {
+     enteredPlayers = players;
+  }
 
   @FXML
   void NEW_GAME(ActionEvent event) {
-    enteredPlayers.clear();
-    for(int i = 0; i < 6; i++) {
+    int numPlayers = Integer.parseInt(NO_PLAYERS.getText());
+    logger.debug("Num players entered: " + numPlayers);
+    this.enteredPlayers.clear();
+    for (int i = 0; i < numPlayers; i++) {
       // Only add a new player if name field is completed or AI is selected
-      if(newPlayers[i].getName().getText().length() > 0 || newPlayers[i].getAi().isSelected()) {
         String name = newPlayers[i].getName().getText();
         logger.debug("Name: " + name);
         Boolean ai = newPlayers[i].getAi().isSelected();
-        if(name.length() == 0) { name = "Computer " + i; }
-        enteredPlayers.add( new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new VBox())));
-      }
+        if (name.length() == 0) {
+          name = "Player " + i;
+        }
+        this.enteredPlayers.add(
+            new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new VBox())));
     }
     ((Stage) NEW_GAME_BUTTON.getScene().getWindow()).close();
   }
@@ -162,11 +158,6 @@ public class PtNewGameDialogCtrl {
     }
   }
 
-  // Returns List of new players
-  public ArrayList<GuiPlayer> getNewPlayers() {
-    return ((PtNewGameDialogCtrl)loader.getController()).enteredPlayers;
-  }
-
   // Make a previously hidden row visible again
   private void makeRowVisible(int i) {
     newPlayers[i].getAi().setVisible(true);
@@ -183,45 +174,20 @@ public class PtNewGameDialogCtrl {
     newPlayers[i].getRow().setPrefHeight(0);
   }
 
-  // Show dialog box and wait for response
-  public void showDialog() throws IOException {
-    newGameStage = new Stage();
-    newGameStage.initModality(Modality.APPLICATION_MODAL);
-    newGameStage.initStyle(StageStyle.UTILITY);
-    // getting URL of fxml file
-    URL fxmlUrl = ClassLoader.getSystemResource("ptNewGameDialog.fxml");
-    loader = new FXMLLoader();
-    root = loader.load(fxmlUrl);
-
-
-    // Create Scene
-    Scene scene = new Scene(root, 640, 480);
-
-    // Load CSS stylesheet
-    URL cssUrl = ClassLoader.getSystemResource("pt_dialog.css");
-    scene.getStylesheets().clear();
-    scene.getStylesheets().add(cssUrl.toExternalForm());
-
-    // Set up stage to fill primary screen
-    newGameStage.setTitle("Property Tycoon New Game");
-    newGameStage.setScene(scene);
-    newGameStage.showAndWait();
-  }
-
   @FXML
-  void initialize() throws IOException {
+  void initialize() {
     asserts();
-    enteredPlayers = new ArrayList<>();
+    enteredPlayers = new ArrayList<GuiPlayer>();
     NO_PLAYERS.setText("4");
     newPlayers =
-            new GuiNewPlayer[] {
-                    new GuiNewPlayer(NAME_PLAYER_1, AI_PLAYER_1, ROW_PLAYER_1),
-                    new GuiNewPlayer(NAME_PLAYER_2, AI_PLAYER_2, ROW_PLAYER_2),
-                    new GuiNewPlayer(NAME_PLAYER_3, AI_PLAYER_3, ROW_PLAYER_3),
-                    new GuiNewPlayer(NAME_PLAYER_4, AI_PLAYER_4, ROW_PLAYER_4),
-                    new GuiNewPlayer(NAME_PLAYER_5, AI_PLAYER_5, ROW_PLAYER_5),
-                    new GuiNewPlayer(NAME_PLAYER_6, AI_PLAYER_6, ROW_PLAYER_6)
-            };
+        new GuiNewPlayer[] {
+          new GuiNewPlayer(NAME_PLAYER_1, AI_PLAYER_1, ROW_PLAYER_1),
+          new GuiNewPlayer(NAME_PLAYER_2, AI_PLAYER_2, ROW_PLAYER_2),
+          new GuiNewPlayer(NAME_PLAYER_3, AI_PLAYER_3, ROW_PLAYER_3),
+          new GuiNewPlayer(NAME_PLAYER_4, AI_PLAYER_4, ROW_PLAYER_4),
+          new GuiNewPlayer(NAME_PLAYER_5, AI_PLAYER_5, ROW_PLAYER_5),
+          new GuiNewPlayer(NAME_PLAYER_6, AI_PLAYER_6, ROW_PLAYER_6)
+        };
 
     makeRowInvisible(4);
     makeRowInvisible(5);
