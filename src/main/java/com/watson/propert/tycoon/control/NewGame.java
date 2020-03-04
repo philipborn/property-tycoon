@@ -3,7 +3,6 @@ package com.watson.propert.tycoon.control;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

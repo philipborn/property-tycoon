@@ -64,8 +64,6 @@ public class App extends Application {
     stage.setY(primaryScreenBounds.getMinY());
     stage.setWidth(primaryScreenBounds.getWidth());
     stage.setHeight(primaryScreenBounds.getHeight());
-    logger.debug("Screen Scale: " + Screen.getPrimary().getOutputScaleX());
-
     stage.setScene(scene);
     stage.show();
   }

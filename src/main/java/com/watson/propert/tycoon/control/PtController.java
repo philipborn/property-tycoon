@@ -27,7 +27,6 @@ import static java.lang.StrictMath.abs;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
@@ -478,7 +477,6 @@ public class PtController {
           group.setId(
               "PROPERTY_GROUP_"
                   + boardReader.getProperties().get("group").toUpperCase().replace(' ', '_'));
-          logger.debug(group.getId());
         }
 
         // set name/price values
@@ -489,9 +487,11 @@ public class PtController {
 
     }
 
+    // Create and show a New Game Dialog
+    // Results pushed to GameBoard class
     NewGame newGameDialog = new NewGame();
     newGameDialog.showDialog();
-    gameBoard.setPlayers( newGameDialog.getNewPlayers().toArray(GuiPlayer[]::new));
+    gameBoard.setPlayers(newGameDialog.getNewPlayers().toArray(GuiPlayer[]::new));
     logger.debug("Number of players: " + gameBoard.numberPlayers());
   }
 

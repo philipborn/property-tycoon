@@ -95,7 +95,7 @@ public class PtNewGameDialogCtrl {
   private Logger logger = LoggerFactory.getLogger(App.class);
 
   public void setNewPlayers(ArrayList<GuiPlayer> players) {
-     enteredPlayers = players;
+    enteredPlayers = players;
   }
 
   @FXML
@@ -105,14 +105,13 @@ public class PtNewGameDialogCtrl {
     this.enteredPlayers.clear();
     for (int i = 0; i < numPlayers; i++) {
       // Only add a new player if name field is completed or AI is selected
-        String name = newPlayers[i].getName().getText();
-        logger.debug("Name: " + name);
-        Boolean ai = newPlayers[i].getAi().isSelected();
-        if (name.length() == 0) {
-          name = "Player " + i;
-        }
-        this.enteredPlayers.add(
-            new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new VBox())));
+      String name = newPlayers[i].getName().getText();
+      Boolean ai = newPlayers[i].getAi().isSelected();
+      if (name.length() == 0) {
+        name = "Player " + i;
+      }
+      this.enteredPlayers.add(
+          new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new VBox())));
     }
     ((Stage) NEW_GAME_BUTTON.getScene().getWindow()).close();
   }
@@ -149,10 +148,8 @@ public class PtNewGameDialogCtrl {
   private void updateVisibility() {
     for (int i = 2; i <= 6; i++) {
       if (i <= Integer.parseInt(NO_PLAYERS.getText())) {
-        logger.debug("Value: " + i);
         makeRowVisible(i - 1);
       } else {
-        logger.debug("Value2: " + i);
         makeRowInvisible(i - 1);
       }
     }
