@@ -22,7 +22,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane id="root" fx:id="MAIN_WINDOW" snapToPixel="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.PtController">
    <center>
       <Pane id="GAMEBOARD_PANE" fx:id="GAME_BOARD_CONTAINER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" BorderPane.alignment="CENTER">
@@ -39,7 +38,7 @@
                 <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="103.0" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <HBox fx:id="STREET_1" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <HBox id="street" fx:id="STREET_1" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
@@ -243,7 +242,14 @@
                   </HBox>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
+                           <children>
+                              <ImageView fx:id="IMG_GO" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/GO.png" />
+                                 </image>
+                              </ImageView>
+                           </children></HBox>
                      </children>
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.rowIndex="2">
@@ -262,7 +268,7 @@
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
                      </children>
                   </StackPane>
-                  <HBox fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                  <HBox id="street" fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
@@ -468,7 +474,7 @@
                         </FlowPane>
                      </children>
                   </HBox>
-                  <HBox fx:id="STREET_3" alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                  <HBox id="street" fx:id="STREET_3" alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <children>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
@@ -670,7 +676,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox fx:id="STREET_4" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <HBox id="street" fx:id="STREET_4" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
                            <padding>
@@ -932,7 +938,7 @@
       </Pane>
    </center>
    <left>
-      <VBox id="LEFT_PANEL" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+      <VBox id="LEFT_PANEL" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="sidePanel" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="DICE" accessibleText="Clck to roll dice" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#throwDice" prefHeight="100.0" prefWidth="300.0">
                <children>
@@ -1006,7 +1012,7 @@
       </VBox>
    </left>
    <right>
-      <VBox BorderPane.alignment="CENTER">
+      <VBox id="RIGHT_PANEL" styleClass="sidePanel" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                <children>

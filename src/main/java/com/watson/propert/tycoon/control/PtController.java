@@ -59,6 +59,8 @@ public class PtController {
 
   @FXML private BorderPane MAIN_WINDOW;
 
+  @FXML private ImageView IMG_GO;
+
   @FXML private Pane GAME_BOARD_CONTAINER;
 
   @FXML private GridPane GAME_GRID;
@@ -192,6 +194,10 @@ public class PtController {
 
   @FXML private Rectangle JAIL;
 
+  @FXML private VBox RIGHT_PANEL;
+
+  @FXML private VBox LEFT_PANEL;
+
   private GuiGameBoard gameBoard;
 
   private PropertTycoon game;
@@ -209,7 +215,7 @@ public class PtController {
   void newGame(ActionEvent event) throws IOException {
     //goToJail();
     //moveBackThreeSpaces();
-    //yes();
+    yes();
   }
 
   private void yes() {
@@ -245,8 +251,16 @@ public class PtController {
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
     gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
     gameBoard.getNextPlayer();
-    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:BLUE");
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
+    gameBoard
+        .getCurrentPlayer()
+        .getInfo()
+        .getInfo()
+        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
   }
 
   @Subscribe
@@ -356,6 +370,8 @@ public class PtController {
     STREET_4.setPrefSize(default_street_width, default_street_height);
     JAIL.setHeight(default_corner_inner_size * 0.7);
     JAIL.setWidth(default_corner_inner_size * 0.7);
+    IMG_GO.setFitHeight(default_corner_inner_size);
+    IMG_GO.setFitWidth(default_corner_inner_size);
 
     // Resize squares
     for (GuiSquare sq : gameBoard.getSquares()) {
@@ -448,7 +464,11 @@ public class PtController {
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
     gameBoard.setSquares(guiSquares);
     gameBoard.setPlayers(players);
-    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:BLUE");
+    gameBoard
+        .getCurrentPlayer()
+        .getInfo()
+        .getInfo()
+        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
@@ -489,10 +509,10 @@ public class PtController {
 
     // Create and show a New Game Dialog
     // Results pushed to GameBoard class
-    NewGame newGameDialog = new NewGame();
-    newGameDialog.showDialog();
-    gameBoard.setPlayers(newGameDialog.getNewPlayers().toArray(GuiPlayer[]::new));
-    logger.debug("Number of players: " + gameBoard.numberPlayers());
+    //NewGame newGameDialog = new NewGame();
+    //newGameDialog.showDialog();
+    //gameBoard.setPlayers(newGameDialog.getNewPlayers().toArray(GuiPlayer[]::new));
+    //logger.debug("Number of players: " + gameBoard.numberPlayers());
   }
 
   private void checkNotNull() {

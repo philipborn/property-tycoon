@@ -61,9 +61,9 @@ public class PtNewGameDialogCtrl {
 
   @FXML private TextField NAME_PLAYER_3;
 
-  @FXML private TextField NAME_PLAYER_5;
-
   @FXML private TextField NAME_PLAYER_4;
+
+  @FXML private TextField NAME_PLAYER_5;
 
   @FXML private TextField NAME_PLAYER_6;
 
