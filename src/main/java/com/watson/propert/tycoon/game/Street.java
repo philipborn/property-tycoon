@@ -1,15 +1,38 @@
 package com.watson.propert.tycoon.game;
 
-public class Street extends Property{
+import java.util.Iterator;
 
-    private int houseLevel;
-    private Enum.colour colour;
+enum colourGroup {
+  RED,
+  BLUE,
+  GREEN
+} // etc
 
-    public Street () {
-        Super(amount);
-    }
+public class Street extends Property {
 
-    public iterator SameColourIter(){
-        
-    }
+  private int houseLevel;
+  private colourGroup colour;
+
+  public Street(int value, colourGroup colour) {
+    super(value);
+  }
+
+  public Iterator SameColourIter() {
+    return new Iterator() {
+      @Override
+      public boolean hasNext() {
+        return false;
+      }
+
+      @Override
+      public Object next() {
+        return null;
+      }
+    };
+  }
+
+  @Override
+  public int getRent() {
+    return 0;
+  }
 }
