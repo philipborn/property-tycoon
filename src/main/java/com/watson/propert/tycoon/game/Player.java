@@ -18,7 +18,8 @@ public class Player implements CashUser, Comparable<Player> {
 
   public Square move(int steps) {
     SquareVisitor passingRulse = PassingRule.rulesFor(this);
-    return location.move(steps, passingRulse);
+    location = location.move(steps, passingRulse);
+    return location;
   }
 
   public Square postion() {
