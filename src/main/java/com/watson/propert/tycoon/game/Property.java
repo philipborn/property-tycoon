@@ -1,12 +1,13 @@
 package com.watson.propert.tycoon.game;
 
-public abstract class Property {
+public abstract class Property extends SquareImp {
 
   private int value;
   private Player owner;
   private boolean mortgaged;
 
-  public Property(int amount) {
+  public Property(String name, int amount) {
+    super(name);
     mortgaged = false;
     value = amount;
     owner = null;
@@ -36,7 +37,7 @@ public abstract class Property {
     return value;
   }
 
-  public void buy(Player player) {
+  public void newOwner(Player player) {
     owner = player;
   }
 }

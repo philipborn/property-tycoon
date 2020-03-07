@@ -41,6 +41,16 @@ public class Player implements CashUser, Comparable<Player> {
     }
   }
 
+  public void payCash(int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount most be postive");
+    } else if (amount > 0) {
+      int oldCash = cash;
+      cash -= amount;
+      channel.post(CashEvent.write(id, oldCash, cash));
+    }
+  }
+
   @Override
   public int compareTo(Player player) {
     final int BEFORE = -1;

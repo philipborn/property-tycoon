@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public class Station extends Property {
 
-  public Station(int amount) {
-    super(amount);
+  public Station(String name, int amount) {
+    super(name, amount);
   }
 
   public Iterator stationIter() {
@@ -25,5 +25,10 @@ public class Station extends Property {
   @Override
   public int getRent() {
     return 0;
+  }
+
+  @Override
+  public void vist(SquareVisitor visitor) {
+    visitor.station(this);
   }
 }

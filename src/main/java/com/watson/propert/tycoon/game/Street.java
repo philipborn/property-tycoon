@@ -2,19 +2,20 @@ package com.watson.propert.tycoon.game;
 
 import java.util.Iterator;
 
-enum colourGroup {
-  RED,
-  BLUE,
-  GREEN
-} // etc
-
 public class Street extends Property {
 
-  private int houseLevel;
+  enum colourGroup {
+    RED,
+    BLUE,
+    GREEN
+  } // etc
+
+  private int houseLevel = 0;
   private colourGroup colour;
 
-  public Street(int value, colourGroup colour) {
-    super(value);
+  public Street(String name, int value, colourGroup colour) {
+    super(name, value);
+    this.colour = colour;
   }
 
   public Iterator SameColourIter() {
@@ -34,5 +35,10 @@ public class Street extends Property {
   @Override
   public int getRent() {
     return 0;
+  }
+
+  @Override
+  public void vist(SquareVisitor visitor) {
+    visitor.street(this);
   }
 }
