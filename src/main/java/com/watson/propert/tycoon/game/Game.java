@@ -10,23 +10,18 @@ public class Game implements PropertTycoon {
 
   protected static final int START_CASH = 200;
 
-  private DicePair dicePair;
-  private Square bord;
-  private GameMaster master;
   private EventBus channel;
   private GameState state;
 
   public Game(Square startPostion, EventBus channel) {
-    dicePair = new DicePair(channel);
-    bord = startPostion;
     List<Player> players = new ArrayList<>();
-    players.add(new Player(PlayerId.ONE, bord, channel));
-    players.add(new Player(PlayerId.TWO, bord, channel));
-    players.add(new Player(PlayerId.THREE, bord, channel));
-    players.add(new Player(PlayerId.FOUR, bord, channel));
-    players.add(new Player(PlayerId.FIVE, bord, channel));
-    players.add(new Player(PlayerId.SIX, bord, channel));
-    master = new GameMaster(players);
+    players.add(new Player(PlayerId.ONE, startPostion, channel));
+    players.add(new Player(PlayerId.TWO, startPostion, channel));
+    players.add(new Player(PlayerId.THREE, startPostion, channel));
+    players.add(new Player(PlayerId.FOUR, startPostion, channel));
+    players.add(new Player(PlayerId.FIVE, startPostion, channel));
+    players.add(new Player(PlayerId.SIX, startPostion, channel));
+    GameMaster master = new GameMaster(players);
     this.channel = channel;
     state = new NewTurnState(master, channel);
   }
