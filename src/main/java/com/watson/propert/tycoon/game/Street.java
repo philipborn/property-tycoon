@@ -22,22 +22,16 @@ public class Street extends Property {
   }
 
   public Iterator SameColourIter() {
-    return new Iterator() {
-      @Override
-      public boolean hasNext() {
-        return false;
-      }
-
-      @Override
-      public Object next() {
-        return null;
-      }
-    };
+    return new ColorIter(this.colour,this);
   }
 
   @Override
   public int getRent() {
     return 0;
+  }
+
+  public StreetColour getColour(){
+    return colour;
   }
 
   @Override
