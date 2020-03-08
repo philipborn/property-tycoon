@@ -1,21 +1,24 @@
 package com.watson.propert.tycoon.game;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class Street extends Property {
 
-  enum colourGroup {
+  enum StreetColour {
     RED,
     BLUE,
     GREEN
   } // etc
 
   private int houseLevel = 0;
-  private colourGroup colour;
+  private StreetColour colour;
+  private List<Integer> rent;
 
-  public Street(String name, int value, colourGroup colour) {
+  public Street(String name, int value, StreetColour colour, List<Integer> rent) {
     super(name, value);
     this.colour = colour;
+    this.rent = rent;
   }
 
   public Iterator SameColourIter() {
