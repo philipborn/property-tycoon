@@ -14,6 +14,7 @@ public class Player implements CashUser, Comparable<Player> {
     this.id = id;
     location = startLocation;
     this.channel = channel;
+    cash = Game.START_CASH;
   }
 
   public Square move(int steps) {
