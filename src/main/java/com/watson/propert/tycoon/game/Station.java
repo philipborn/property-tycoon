@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import static com.watson.propert.tycoon.game.StationIterator.stationIterator;
+
 import java.util.Iterator;
 
 public class Station extends Property {
@@ -9,17 +11,7 @@ public class Station extends Property {
   }
 
   public Iterator stationIter() {
-    return new Iterator() {
-      @Override
-      public boolean hasNext() {
-        return false;
-      }
-
-      @Override
-      public Object next() {
-        return null;
-      }
-    };
+    return stationIterator(this);
   }
 
   @Override

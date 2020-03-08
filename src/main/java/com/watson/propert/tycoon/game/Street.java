@@ -22,7 +22,7 @@ public class Street extends Property {
   }
 
   public Iterator SameColourIter() {
-    return new ColorIter(this.colour,this);
+    return new ColorIterator(this.colour, this);
   }
 
   @Override
@@ -30,7 +30,7 @@ public class Street extends Property {
     return 0;
   }
 
-  public StreetColour getColour(){
+  public StreetColour getColour() {
     return colour;
   }
 
