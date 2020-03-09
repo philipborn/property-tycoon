@@ -14,6 +14,9 @@ public interface PropertTycoon {
   /** Call when player don't whant to buy, and to began a auction */
   void notBuyingProperty();
 
+  /** Call when done fixing propertys. Like buingy houses */
+  void donePropertyManagement();
+
   /**
    * Used to get start cash for player
    *

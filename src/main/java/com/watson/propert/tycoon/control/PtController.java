@@ -214,8 +214,8 @@ public class PtController {
 
   private void yes() {
     // implement window
+    game.donePropertyManagement();
     game.buyProperty();
-    changeTurn();
   }
 
   @FXML
@@ -240,6 +240,11 @@ public class PtController {
 
   private void displayMessage(String message) {
     MESSAGE_AREA.setText(message);
+  }
+
+  @Subscribe
+  void newTurn(ChangePlayerEvent event) {
+    changeTurn();
   }
 
   void changeTurn() {

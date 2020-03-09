@@ -42,6 +42,11 @@ public class Game implements PropertTycoon {
   }
 
   @Override
+  public void donePropertyManagement() {
+    state = state.donePropertyManagement();
+  }
+
+  @Override
   public int startCash() {
     return START_CASH;
   }
