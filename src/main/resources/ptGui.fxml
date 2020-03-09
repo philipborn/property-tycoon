@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane id="root" fx:id="MAIN_WINDOW" snapToPixel="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.PtController">
@@ -254,8 +253,14 @@
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.rowIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
-                        <Rectangle fx:id="JAIL" arcHeight="5.0" arcWidth="5.0" fill="#9a9a9a" height="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="70.0" StackPane.alignment="TOP_RIGHT" />
+                        <HBox fx:id="JAIL_CORNER" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
+                           <children>
+                              <ImageView fx:id="JAIL_IMG" fitHeight="70.0" fitWidth="70.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/Jail.png" />
+                                 </image>
+                              </ImageView>
+                           </children></HBox>
                      </children>
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.columnIndex="2">

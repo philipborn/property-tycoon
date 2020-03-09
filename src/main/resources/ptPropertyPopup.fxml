@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="PROPERTY_POPUP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" spacing="12.0" styleClass="popup_background" stylesheets="@pt_property_popup.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.ptPropertyPopupCtrl">
+   <children>
+      <VBox fx:id="PROPERTY_CARD" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+         <children>
+            <HBox fx:id="PROPERTY_POPUP_GROUP" alignment="CENTER" prefHeight="36.0" prefWidth="132.0" styleClass="card_group" />
+            <Label fx:id="PROPERTY_NAME" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="132.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="PROPERTY_PRICE" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <HBox.margin>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="6.0" styleClass="right_panel" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="32.0" spacing="14.0" styleClass="title_panel">
+               <children>
+                  <ImageView fx:id="OWNER_IMG" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="PROPERTY_OWNER" styleClass="owner" text="Player 1" textOverrun="CLIP">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </HBox>
+            <Label styleClass="rent_title" text="Rent" underline="true" />
+            <GridPane prefWidth="150.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="110.66663106282552" minWidth="76.00002034505208" prefWidth="110.66663106282552" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.33331298828124" minWidth="10.0" prefWidth="78.6667022705078" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="rent_details" text="1 house" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="29.0" styleClass="rent_details" text="2 houses" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="47.0" styleClass="rent_details" text="3 houses" GridPane.rowIndex="3" />
+                  <Label layoutX="10.0" layoutY="65.0" styleClass="rent_details" text="4 houses" GridPane.rowIndex="4" />
+                  <Label layoutX="10.0" layoutY="84.0" styleClass="rent_details" text="Hotel" GridPane.rowIndex="5" />
+                  <Label layoutX="10.0" layoutY="33.0" styleClass="rent_details" text="Undeveloped" />
+                  <Label fx:id="RENT_HOTEL" layoutX="10.0" layoutY="12.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="RENT_BASIC" layoutX="105.0" layoutY="121.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" />
+                  <Label fx:id="RENT_1H" layoutX="105.0" layoutY="12.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="RENT_2H" layoutX="105.0" layoutY="33.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="RENT_3H" layoutX="105.0" layoutY="55.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="RENT_4H" layoutX="105.0" layoutY="77.0" styleClass="rent_values" text="£20" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="2.0" right="2.0" top="2.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+         <HBox.margin>
+            <Insets right="5.0" />
+         </HBox.margin>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</HBox>

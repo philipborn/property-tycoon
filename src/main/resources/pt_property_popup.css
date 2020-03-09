@@ -1,0 +1,60 @@
+@font-face {
+    font-family: "BankGothic Lt BT";
+    src: url('bgothl.ttf');
+}
+
+@font-face {
+    font-family: "OCR A Std";
+    src: url('OCRAStd.otf');
+}
+
+/*
+ * Photographs and graphic design by Lee Richards
+ */
+.popup_background {
+    -fx-border-radius: 20;
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+}
+
+.card_bg {
+    -fx-background-color: white;
+    -fx-background-radius:6;
+}
+
+.card_group {
+    -fx-background-color: red;
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 0);
+    -fx-background-radius:8;
+ }
+
+.card_name {
+    -fx-font-size: 18;
+}
+.card_sales_price {
+    -fx-font-size: 14;
+}
+
+ .right_panel {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+ }
+
+ .title_panel {
+    -fx-border-color: white;
+    -fx-border-width: 0 0 2 0;
+ }
+
+ .owner {
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-font-size: 18;
+    -fx-text-fill: white;
+ }
+
+ .rent_title, .rent_details, .rent_values {
+    -fx-text-fill: white;
+ }
+
+ .rent_values {
+    -fx-font-style: italic;
+ }

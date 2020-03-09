@@ -141,7 +141,7 @@
 
 .playerName, .dice {
     -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
-    -fx-text-fill: #F7F9E0;
+    -fx-text-fill: #b1b3a1;
     -fx-effect: dropshadow( three-pass-box , rgba(247,249,224,0.9) , 0,0,0,0 );
 }
 
@@ -156,7 +156,7 @@
 
 .playerAccount {
     -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
-    -fx-text-fill: #F7F9E0;
+    -fx-text-fill: #b1b3a1;
 }
 
 .playerDisplay{

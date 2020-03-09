@@ -61,6 +61,10 @@ public class PtController {
 
   @FXML private ImageView IMG_GO;
 
+  @FXML private ImageView JAIL_IMG;
+
+  @FXML private HBox JAIL_CORNER;
+
   @FXML private Pane GAME_BOARD_CONTAINER;
 
   @FXML private GridPane GAME_GRID;
@@ -368,8 +372,8 @@ public class PtController {
     STREET_2.setPrefSize(default_street_width, default_street_height);
     STREET_3.setPrefSize(default_street_width, default_street_height);
     STREET_4.setPrefSize(default_street_width, default_street_height);
-    JAIL.setHeight(default_corner_inner_size * 0.7);
-    JAIL.setWidth(default_corner_inner_size * 0.7);
+    JAIL_IMG.setFitHeight(default_corner_inner_size * 0.7);
+    JAIL_IMG.setFitWidth(default_corner_inner_size * 0.7);
     IMG_GO.setFitHeight(default_corner_inner_size);
     IMG_GO.setFitWidth(default_corner_inner_size);
 
