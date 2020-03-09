@@ -8,8 +8,13 @@ public class Street extends Property {
   enum StreetColour {
     RED,
     BLUE,
-    GREEN
-  } // etc
+    GREEN,
+    BROWN,
+    PURPLE,
+    ORANGE,
+    YELLOW,
+    DEEP_BLUE
+  }
 
   private int houseLevel = 0;
   private StreetColour colour;

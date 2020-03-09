@@ -57,8 +57,14 @@ public class BordBuilder {
             "position",
             "name",
             "group",
-            "canBeBought",
-            "cost,rent,1house,2houses,3houses,4houses,hotel");
+            "canBeBought".toLowerCase(),
+            "cost",
+            "rent",
+            "1house",
+            "2houses",
+            "3houses",
+            "4houses",
+            "hotel");
     Set<String> keys = prop.keySet();
     return keys.containsAll(streetKeys);
   }
@@ -66,10 +72,16 @@ public class BordBuilder {
   private SquareImp buildStreet() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
-    Street.StreetColour color = Street.StreetColour.valueOf(prop.get("group").toUpperCase());
+    Street.StreetColour color = extractColor(prop.get("group"));
     List<Integer> rent = new ArrayList<>(5);
     rent.add(Integer.valueOf(prop.get("rent")));
     return new Street(name, value, color, rent);
+  }
+
+  private Street.StreetColour extractColor(String color) {
+    String regex = " ";
+    String replacement = "_";
+    return Street.StreetColour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
   }
 
   private Boolean isStation() {
