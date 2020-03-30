@@ -8,19 +8,20 @@ import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class Game implements PropertTycoon {
 
-  private DicePair dicePair;
-  private Square bord;
-  private GameMaster master;
+  protected static final int START_CASH = 200;
+
   private EventBus channel;
   private GameState state;
 
   public Game(Square startPostion, EventBus channel) {
-    dicePair = new DicePair(channel);
-    bord = startPostion;
     List<Player> players = new ArrayList<>();
-    players.add(new Player(PlayerId.ONE, bord, channel));
-    players.add(new Player(PlayerId.TWO, bord, channel));
-    master = new GameMaster(players);
+    players.add(new Player(PlayerId.ONE, startPostion, channel));
+    players.add(new Player(PlayerId.TWO, startPostion, channel));
+    players.add(new Player(PlayerId.THREE, startPostion, channel));
+    players.add(new Player(PlayerId.FOUR, startPostion, channel));
+    players.add(new Player(PlayerId.FIVE, startPostion, channel));
+    players.add(new Player(PlayerId.SIX, startPostion, channel));
+    GameMaster master = new GameMaster(players);
     this.channel = channel;
     state = new NewTurnState(master, channel);
   }
@@ -38,6 +39,16 @@ public class Game implements PropertTycoon {
   @Override
   public void notBuyingProperty() {
     state = state.notBuyingProperty();
+  }
+
+  @Override
+  public void donePropertyManagement() {
+    state = state.donePropertyManagement();
+  }
+
+  @Override
+  public int startCash() {
+    return START_CASH;
   }
 
   @Override

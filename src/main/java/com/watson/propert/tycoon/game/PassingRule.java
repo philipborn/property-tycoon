@@ -15,6 +15,15 @@ public class PassingRule implements SquareVisitor {
     }
   }
 
+  @Override
+  public void street(Street street) {}
+
+  @Override
+  public void station(Station station) {}
+
+  @Override
+  public void utilities(Utilities utilities) {}
+
   public static PassingRule rulesFor(Player current) {
     return new PassingRule(current);
   }

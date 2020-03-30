@@ -22,6 +22,10 @@ public interface GameState {
     return this;
   }
 
+  default GameState donePropertyManagement() {
+    return this;
+  }
+
   default GameState switchTo(GameState nextState) {
     this.exit();
     nextState.entry();

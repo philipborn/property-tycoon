@@ -57,22 +57,15 @@ public class PropertTycoonTest {
   }
 
   @Test
-  void whenThrowDice_DiceEventAndBuyOrNotMsg_IsReceived() {
-    game.throwDicesAndMove();
-
-    assertEquals(DiceEvent.class, spy.msgs.get(0).getClass());
-    assertEquals(BuyOrNotMsg.class, spy.msgs.get(1).getClass());
-  }
-
-  @Test
   void ThrowDice_multiTimes_do_nothing() {
     game.throwDicesAndMove();
     game.throwDicesAndMove();
     game.throwDicesAndMove();
     game.throwDicesAndMove();
 
-    final int expectedNumberOfMsg = 2;
-    assertEquals(expectedNumberOfMsg, spy.msgs.size());
+    final int expectedNumberOfCashEvents = 1;
+    int count = (int) spy.msgs.stream().filter(event -> event instanceof DiceEvent).count();
+    assertEquals(expectedNumberOfCashEvents, count);
   }
 
   class TestListener {

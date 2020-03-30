@@ -14,11 +14,13 @@ public class Player implements CashUser, Comparable<Player> {
     this.id = id;
     location = startLocation;
     this.channel = channel;
+    cash = Game.START_CASH;
   }
 
   public Square move(int steps) {
     SquareVisitor passingRulse = PassingRule.rulesFor(this);
-    return location.move(steps, passingRulse);
+    location = location.move(steps, passingRulse);
+    return location;
   }
 
   public Square postion() {
@@ -37,6 +39,16 @@ public class Player implements CashUser, Comparable<Player> {
     } else if (amount > 0) {
       int oldCash = cash;
       cash += amount;
+      channel.post(CashEvent.write(id, oldCash, cash));
+    }
+  }
+
+  public void payCash(int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount most be postive");
+    } else if (amount > 0) {
+      int oldCash = cash;
+      cash -= amount;
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
