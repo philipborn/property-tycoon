@@ -29,6 +29,10 @@ public class NewTurnState implements GameState {
     Integer sum = dices.stream().mapToInt((a) -> a).sum();
     currentPlayer.move(sum);
 
-    return switchTo(new NonOwnerState(master, channel));
+    if (currentPlayer.postion() instanceof Property) {
+      return switchTo(new NonOwnerState(master, channel));
+    } else {
+      return switchTo(new FixPropertyState(master, channel));
+    }
   }
 }

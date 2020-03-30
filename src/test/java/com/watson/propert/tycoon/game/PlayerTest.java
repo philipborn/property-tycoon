@@ -37,8 +37,10 @@ public class PlayerTest {
   @Test
   void movingForeardThenBackSamePostion() {
     player.move(2);
+    Square secondSquare = player.postion();
     player.move(-2);
 
+    assertNotEquals(player.postion(), secondSquare);
     assertEquals(player.postion(), first);
   }
 
