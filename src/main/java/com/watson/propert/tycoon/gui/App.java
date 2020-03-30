@@ -58,14 +58,12 @@ public class App extends Application {
     scene.getStylesheets().add(cssUrl.toExternalForm());
 
     // Set up stage to fill primary screen
-    stage.setTitle("Watson Games Property Tycoon - Project Team 16 - Sprint 3");
+    stage.setTitle("Watson Games Property Tycoon - Project Team 16 - Sprint 3b");
     Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     stage.setX(primaryScreenBounds.getMinX());
     stage.setY(primaryScreenBounds.getMinY());
     stage.setWidth(primaryScreenBounds.getWidth());
     stage.setHeight(primaryScreenBounds.getHeight());
-    logger.debug("Screen Scale: " + Screen.getPrimary().getOutputScaleX());
-
     stage.setScene(scene);
     stage.show();
   }
