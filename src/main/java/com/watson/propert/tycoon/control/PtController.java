@@ -32,6 +32,9 @@ import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -41,6 +44,7 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import org.slf4j.Logger;
@@ -246,6 +250,40 @@ public class PtController {
   void moveBackThreeSpaces() {
     move(-3);
     changeTurn();
+  }
+
+  private Stage currentPopup;
+
+  @FXML
+  void openHoverWindow(MouseEvent event) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPropertyPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller for popup
+    ptPropertyPopupCtrl controller = loader.getController();
+
+    // find square
+    int i = 0;
+    while (gameBoard.getSquares()[i].getPane() != event.getSource()) {
+      i++;
+    }
+
+    // load data to controller
+    controller.setData(gameBoard.getSquares()[i]);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    currentPopup.setScene(scene);
+    currentPopup.show();
+  }
+
+  @FXML
+  void closeHoverWindow(MouseEvent event) {
+    if (currentPopup.isShowing()) {
+      currentPopup.close();
+    }
   }
 
   private void displayMessage(String message) {
@@ -485,6 +523,8 @@ public class PtController {
     BoardReaderJson boardReader = new BoardReaderJson();
     boardReader.readFile("src/main/resources/boardDataJSON.json");
 
+    // set popup & game variables/listener
+    currentPopup = new Stage();
     game = Game.newGame();
     game.registerListener(this);
 
