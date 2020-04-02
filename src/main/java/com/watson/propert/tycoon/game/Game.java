@@ -2,6 +2,7 @@ package com.watson.propert.tycoon.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.io.BoardReaderJson;
@@ -12,6 +13,7 @@ public class Game implements PropertTycoon {
 
   private EventBus channel;
   private GameState state;
+  private Square startPostion;
 
   public Game(Square startPostion, EventBus channel) {
     List<Player> players = new ArrayList<>();
@@ -24,6 +26,7 @@ public class Game implements PropertTycoon {
     GameMaster master = new GameMaster(players);
     this.channel = channel;
     state = new NewTurnState(master, channel);
+    this.startPostion = startPostion;
   }
 
   @Override
@@ -44,6 +47,11 @@ public class Game implements PropertTycoon {
   @Override
   public void donePropertyManagement() {
     state = state.donePropertyManagement();
+  }
+
+  @Override
+  public Optional<PropertyInfo> propertInfo(int squareNum) {
+    return PropertyInfo.getInfo(startPostion.move(squareNum - 1));
   }
 
   @Override

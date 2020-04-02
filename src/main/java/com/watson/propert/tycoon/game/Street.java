@@ -32,7 +32,11 @@ public class Street extends Property {
 
   @Override
   public int getRent() {
-    return 0;
+    return rent.get(houseLevel);
+  }
+
+  public int getNumHouse() {
+    return houseLevel;
   }
 
   public StreetColour getColour() {
