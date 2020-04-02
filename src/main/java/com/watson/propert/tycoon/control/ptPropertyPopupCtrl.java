@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import com.watson.propert.tycoon.gui.GuiSquare;
+import com.watson.propert.tycoon.game.PropertyInfo;
 
 public class ptPropertyPopupCtrl {
 
@@ -42,10 +42,15 @@ public class ptPropertyPopupCtrl {
 
   @FXML private Label RENT_4H;
 
-  void setData(GuiSquare square) {
+  void setData(PropertyInfo square) {
     // fill in relevant data
-    PROPERTY_PRICE.setText(
-        square.getCentre().getX() + " " + square.getCentre().getY()); // just to show functionality
+    PROPERTY_NAME.setText(square.getName());
+    RENT_BASIC.setText("" + square.getRent());
+    if (square.isMorged()) {
+      PROPERTY_OWNER.setText(square.getOwner().name());
+    } else {
+      PROPERTY_OWNER.setText("");
+    }
   }
 
   @FXML

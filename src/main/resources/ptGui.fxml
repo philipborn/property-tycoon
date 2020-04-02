@@ -39,7 +39,7 @@
                <children>
                   <HBox id="street" fx:id="STREET_1" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -61,7 +61,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -83,7 +83,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -105,7 +105,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -127,7 +127,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -149,7 +149,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -171,7 +171,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -193,7 +193,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -215,7 +215,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -319,7 +319,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -341,7 +341,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -363,7 +363,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -385,7 +385,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -407,7 +407,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -429,7 +429,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -453,7 +453,7 @@
                         </StackPane>
                         <FlowPane>
                            <children>
-                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                                  <padding>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </padding>
@@ -481,7 +481,7 @@
                   </HBox>
                   <HBox id="street" fx:id="STREET_3" alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -503,7 +503,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -525,7 +525,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -547,7 +547,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -569,7 +569,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -591,7 +591,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -613,7 +613,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -635,7 +635,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -657,7 +657,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -683,7 +683,7 @@
                   </HBox>
                   <HBox id="street" fx:id="STREET_4" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -705,7 +705,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -727,7 +727,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -749,7 +749,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -771,7 +771,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -793,7 +793,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -815,7 +815,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -837,7 +837,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -859,7 +859,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
