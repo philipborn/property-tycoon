@@ -28,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.*;
 
@@ -54,6 +55,12 @@ public class PropertTycoonTest {
 
     spy = new TestListener();
     channel.register(spy);
+  }
+
+  @Test
+  void PropertyInfoReturnsInfoOnlyForProperty() {
+    assertThrows(NoSuchElementException.class, () -> game.propertInfo(1).orElseThrow());
+    assertDoesNotThrow(() -> game.propertInfo(2).orElseThrow());
   }
 
   @Test

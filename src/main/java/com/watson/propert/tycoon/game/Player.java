@@ -27,6 +27,10 @@ public class Player implements CashUser, Comparable<Player> {
     return location;
   }
 
+  public PlayerId getId() {
+    return id;
+  }
+
   @Override
   public int cash() {
     return cash;

@@ -61,7 +61,8 @@ public class PropertyInfo {
 
   private static PropertyInfo info(Property p) {
     int numHouses = getHouses(p);
-    return new PropertyInfo(p.name(), p.owner().id, numHouses, p.getRent(), p.isMortgage());
+    PlayerId id = p.owner().map((d) -> d.getId()).orElse(null);
+    return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage());
   }
 
   private static int getHouses(Property p) {
