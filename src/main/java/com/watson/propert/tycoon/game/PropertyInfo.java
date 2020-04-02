@@ -18,49 +18,38 @@ public class PropertyInfo {
     isMorged = morged;
   }
 
-  /**
-   *
-   * @return Name of the Property
-   */
+  /** @return Name of the Property */
   public String getName() {
     return name;
   }
 
-  /**
-   *
-   * @return The current owner;
-   */
+  /** @return The current owner; */
   public PlayerId getOwner() {
     return owner;
   }
 
-  /**
-   *
-   * @return The number of house there is on the property
-   */
+  /** @return The number of house there is on the property */
   public int getNumHouse() {
     return numHouse;
   }
 
   /**
-   * Current rent player need to pay if land on the Property
-   * and is not the owner
+   * Current rent player need to pay if land on the Property and is not the owner
+   *
    * @return Rent that need to be payed
    */
   public int getRent() {
     return rent;
   }
 
-  /**
-   *
-   * @return Ture if property is Morged
-   */
+  /** @return Ture if property is Morged */
   public boolean isMorged() {
     return isMorged;
   }
 
   /**
    * Used to collect data from a Property
+   *
    * @param square the property to creata Info objeckt from
    * @return A PropertyInfo if square is a property
    */
