@@ -49,7 +49,7 @@ public class PropertTycoonTest {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/test/testResources/jsonTest.json");
 
-    Square first = bb.buildBord(br);
+    Square first = bb.addFrom(br);
 
     game = new Game(first, channel);
 

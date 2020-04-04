@@ -14,29 +14,42 @@ public class BordBuilder {
 
   private SquareImp first;
   private SquareImp last;
-  private SquareImp current;
   Map<String, String> prop;
+  Boolean doneLastLink = false;
+
 
   public BordBuilder(EventBus channel) {
     this.channel = channel;
   }
 
-  public Square buildBord(BordReader source) {
-    this.source = source;
+  public Square getBord() {
+    if(doneLastLink == false) {
+      linkLastAndFirst();
+    }
+    return first;
+  }
 
+  public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
+    if (doneLastLink) {throw new RuntimeException("Can't add Sqaure if the bord is build");}
+    SquareImp newSquare = new Street(name,value,color,rents);
+    addToLink(newSquare);
+    return this;
+  }
+
+  public BordBuilder addFrom(BordReader source) {
+    if (doneLastLink) {throw new RuntimeException("Can't add Sqaure if the bord is build");}
+
+    this.source = source;
     source.nextObject();
     first = createSquare();
     last = first;
 
     while (source.hasNextObject()) {
       source.nextObject();
-      current = createSquare();
-      link(current);
-      last = current;
+      SquareImp current = createSquare();
+      addToLink(current);
     }
-    linkLastAndFirst();
-
-    return first;
+    return this;
   }
 
   private SquareImp createSquare() {
@@ -111,9 +124,10 @@ public class BordBuilder {
     return new Utilities(name, value);
   }
 
-  SquareImp link(SquareImp current) {
+  SquareImp addToLink(SquareImp current) {
     current.setBack(last);
     last.setNext(current);
+    last = current;
     return current;
   }
 

@@ -22,7 +22,7 @@ public class PlayerTest {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/test/testResources/jsonTest.json");
 
-    first = bb.buildBord(br);
+    first = bb.addFrom(br);
 
     this.channel = new EventBus();
     player = new Player(PlayerId.ONE, first, this.channel);
