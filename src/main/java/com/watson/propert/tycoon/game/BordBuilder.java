@@ -30,14 +30,19 @@ public class BordBuilder {
   }
 
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
-    if (doneLastLink) {throw new RuntimeException("Can't add Sqaure if the bord is build");}
-    SquareImp newSquare = new Street(name,value,color,rents);
-    addToLink(newSquare);
+    checkIfCanAddSquare();
+    addToLink(new Street(name,value,color,rents));
+    return this;
+  }
+
+  public BordBuilder addStation(String name, int value) {
+    checkIfCanAddSquare();
+    addToLink(new Station(name,value));
     return this;
   }
 
   public BordBuilder addFrom(BordReader source) {
-    if (doneLastLink) {throw new RuntimeException("Can't add Sqaure if the bord is build");}
+    checkIfCanAddSquare();
 
     this.source = source;
     source.nextObject();
@@ -50,6 +55,10 @@ public class BordBuilder {
       addToLink(current);
     }
     return this;
+  }
+
+  private void checkIfCanAddSquare() {
+    if (doneLastLink) {throw new RuntimeException("Can't add Square if the bord is build");}
   }
 
   private SquareImp createSquare() {
