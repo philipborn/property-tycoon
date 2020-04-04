@@ -72,16 +72,16 @@ public class BordBuilder {
   private SquareImp buildStreet() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
-    Street.StreetColour color = extractColor(prop.get("group"));
+    Street.Colour color = extractColor(prop.get("group"));
     List<Integer> rent = new ArrayList<>(5);
     rent.add(Integer.valueOf(prop.get("rent")));
     return new Street(name, value, color, rent);
   }
 
-  private Street.StreetColour extractColor(String color) {
+  private Street.Colour extractColor(String color) {
     String regex = " ";
     String replacement = "_";
-    return Street.StreetColour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
+    return Street.Colour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
   }
 
   private Boolean isStation() {
