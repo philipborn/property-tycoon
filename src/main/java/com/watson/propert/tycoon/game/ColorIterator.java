@@ -11,6 +11,7 @@ public class ColorIterator implements Iterator<Street> {
   protected ColorIterator(Street.Colour color, Square start) {
     this.color = color;
     this.iter = start.iterator();
+    this.next = findStreet();
   }
 
   @Override

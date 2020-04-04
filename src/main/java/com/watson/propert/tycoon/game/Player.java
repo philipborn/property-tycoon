@@ -59,14 +59,6 @@ public class Player implements CashUser, Comparable<Player> {
 
   @Override
   public int compareTo(Player player) {
-    final int BEFORE = -1;
-    final int EQUAL = 0;
-    final int AFTER = 1;
-
-    int comp = id.compareTo(player.id);
-    if (comp != EQUAL) {
-      return comp;
-    }
-    return Integer.compare(cash, player.cash);
+    return id.compareTo(player.id);
   }
 }

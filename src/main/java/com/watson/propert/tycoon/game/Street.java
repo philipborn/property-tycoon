@@ -39,7 +39,7 @@ public class Street extends Property {
   private boolean ifOwensSameColor() {
     for (Iterator<Street> it = SameColourIter(); it.hasNext(); ) {
       Street street = it.next();
-      if(street.owner() != this.owner()) {
+      if (!street.owner().equals(this.owner())) {
         return false;
       }
     }
@@ -48,6 +48,16 @@ public class Street extends Property {
 
   public int getNumHouse() {
     return houseLevel;
+  }
+
+  public void changeNumHouses(int numHouses) {
+    if (houseLevel + numHouses >= rent.size()) {
+      throw new RuntimeException("Fail: To many houses");
+    }
+    if (houseLevel + numHouses < 0) {
+      throw new RuntimeException("Can't have negative number of houses");
+    }
+    houseLevel += numHouses;
   }
 
   public Colour getColour() {

@@ -9,7 +9,12 @@ public class BuyProperty implements SquareVisitor {
   }
 
   public void buy(Property property) {
-    property.owner().ifPresent((owner) ->{throw new RuntimeException("Can only buy not owned property");});
+    property
+        .owner()
+        .ifPresent(
+            (owner) -> {
+              throw new RuntimeException("Can only buy not owned property");
+            });
 
     int price = property.value();
     if (buyer.cash() > price) {

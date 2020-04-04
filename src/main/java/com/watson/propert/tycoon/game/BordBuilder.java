@@ -17,13 +17,12 @@ public class BordBuilder {
   private Map<String, String> prop;
   private Boolean doneLastLink = false;
 
-
   private BordBuilder(EventBus channel) {
     this.channel = channel;
   }
 
   public Square getBord() {
-    if(doneLastLink == false) {
+    if (doneLastLink == false) {
       linkLastAndFirst();
     }
     return first;
@@ -31,13 +30,13 @@ public class BordBuilder {
 
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
     checkIfCanAddSquare();
-    addToLink(new Street(name,value,color,rents));
+    addToLink(new Street(name, value, color, rents));
     return this;
   }
 
   public BordBuilder addStation(String name, int value) {
     checkIfCanAddSquare();
-    addToLink(new Station(name,value));
+    addToLink(new Station(name, value));
     return this;
   }
 
@@ -58,7 +57,9 @@ public class BordBuilder {
   }
 
   private void checkIfCanAddSquare() {
-    if (doneLastLink) {throw new RuntimeException("Can't add Square if the bord is build");}
+    if (doneLastLink) {
+      throw new RuntimeException("Can't add Square if the bord is build");
+    }
   }
 
   private SquareImp createSquare() {
@@ -134,8 +135,12 @@ public class BordBuilder {
   }
 
   private SquareImp addToLink(SquareImp current) {
-    current.setBack(last);
-    last.setNext(current);
+    if (last != null) {
+      current.setBack(last);
+      last.setNext(current);
+    } else {
+      first = current;
+    }
     last = current;
     return current;
   }
