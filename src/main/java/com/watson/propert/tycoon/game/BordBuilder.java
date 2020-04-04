@@ -14,11 +14,11 @@ public class BordBuilder {
 
   private SquareImp first;
   private SquareImp last;
-  Map<String, String> prop;
-  Boolean doneLastLink = false;
+  private Map<String, String> prop;
+  private Boolean doneLastLink = false;
 
 
-  public BordBuilder(EventBus channel) {
+  private BordBuilder(EventBus channel) {
     this.channel = channel;
   }
 
@@ -143,5 +143,9 @@ public class BordBuilder {
   private void linkLastAndFirst() {
     last.setNext(first);
     first.setBack(last);
+  }
+
+  public static BordBuilder with(EventBus channel) {
+    return new BordBuilder(channel);
   }
 }

@@ -45,11 +45,11 @@ public class PropertTycoonTest {
   @BeforeEach
   void setup() {
     channel = new EventBus();
-    BordBuilder bb = new BordBuilder(channel);
+    BordBuilder bb = BordBuilder.with(channel);
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/test/testResources/jsonTest.json");
 
-    Square first = bb.addFrom(br);
+    Square first = BordBuilder.with(channel).addFrom(br).getBord();
 
     game = new Game(first, channel);
 
