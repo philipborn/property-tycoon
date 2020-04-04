@@ -133,7 +133,7 @@ public class BordBuilder {
     return new Utilities(name, value);
   }
 
-  SquareImp addToLink(SquareImp current) {
+  private SquareImp addToLink(SquareImp current) {
     current.setBack(last);
     last.setNext(current);
     last = current;
