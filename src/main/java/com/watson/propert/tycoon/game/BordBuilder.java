@@ -46,7 +46,9 @@ public class BordBuilder {
 
   public BordBuilder addUtility(String name, int value) {
     checkIfCanAddSquare();
-    addToLink(new Utilities(name, value));
+    Utilities utilities = new Utilities(name, value);
+    addToLink(utilities);
+    channel.register(utilities);
     return this;
   }
 
