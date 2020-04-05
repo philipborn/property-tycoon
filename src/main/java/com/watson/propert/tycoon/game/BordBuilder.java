@@ -9,6 +9,10 @@ import com.google.common.eventbus.EventBus;
 
 public class BordBuilder {
 
+  public interface Source {
+    void extractTo(BordBuilder builder);
+  }
+
   private EventBus channel;
   private BordReader source;
 
@@ -40,13 +44,31 @@ public class BordBuilder {
     return this;
   }
 
+  public BordBuilder addUtility(String name, int value) {
+    checkIfCanAddSquare();
+    addToLink(new Utilities(name, value));
+    return this;
+  }
+
+  public BordBuilder addSquare(String name) {
+    checkIfCanAddSquare();
+    addToLink(new SquareImp(name));
+    return this;
+  }
+
   public BordBuilder addSquare(SquareImp square) {
     checkIfCanAddSquare();
     addToLink(square);
     return this;
   }
 
-  public BordBuilder addFrom(BordReader source) {
+  public BordBuilder addFrom(Source source) {
+    checkIfCanAddSquare();
+    source.extractTo(this);
+    return this;
+  }
+
+  public BordBuilder X(BordReader source) {
     checkIfCanAddSquare();
 
     this.source = source;

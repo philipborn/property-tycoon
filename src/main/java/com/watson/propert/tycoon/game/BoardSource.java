@@ -21,17 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.watson.propert.tycoon.io;
+package com.watson.propert.tycoon.game;
 
-import java.io.FileReader;
 import java.util.*;
-
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.watson.propert.tycoon.game.*;
 
 /**
  * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
@@ -40,77 +32,21 @@ import com.watson.propert.tycoon.game.*;
  * @version 1.1
  * @since 13/02/2020
  */
-public class BoardReaderJson implements BordReader, BordBuilder.Source {
-
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-  private JSONArray objects;
-  private int index;
+public class BoardSource implements BordBuilder.Source {
 
   private BordBuilder builder;
+  private BordReader reader;
 
-  public void readFile(String fileName) {
-    JSONParser jp = new JSONParser();
-    index = -1;
-
-    try {
-      Object o = jp.parse(new FileReader(fileName));
-      objects = (JSONArray) o;
-
-    } catch (Exception e) {
-      logger.error("JSON Parser fail", e);
-    }
-  }
-  /**
-   * Primary functionality of the class, translates a JSON object to a HashMap
-   *
-   * @return HashMap representing the data of a JSON object
-   */
-  @Override
-  public Map<String, String> getProperties() {
-    int usedIndex = index;
-    if (index < 0) {
-      throw new RuntimeException("Has not call nextObject");
-    }
-    if (index >= objects.size()) {
-      usedIndex = objects.size() - 1;
-    }
-
-    JSONObject json = (JSONObject) objects.get(usedIndex);
-    Set<Object> keys = json.keySet();
-
-    Map<String, String> map = new HashMap<>();
-    for (Object key : keys) {
-      Object val = json.get(key);
-      Optional<String> Optvalue = filter(val);
-      Optvalue.ifPresent((s) -> map.put(key.toString().toLowerCase(), s));
-    }
-    return map;
-  }
-
-  private Optional<String> filter(Object val) {
-    if (val.toString().equals("")) {
-      return Optional.empty();
-    }
-    return Optional.of(val.toString());
-  }
-
-  @Override
-  public Boolean hasNextObject() {
-    return index < (objects.size() - 1);
-  }
-
-  @Override
-  public void nextObject() {
-    ++index;
+  private BoardSource(BordReader reader) {
+    this.reader = reader;
   }
 
   @Override
   public void extractTo(BordBuilder builder) {
     this.builder = builder;
-    while (hasNextObject()) {
-      nextObject();
-      Map<String, String> prop = getProperties();
+    while (reader.hasNextObject()) {
+      reader.nextObject();
+      Map<String, String> prop = reader.getProperties();
       addSquare(prop);
     }
     this.builder = null;
@@ -190,5 +126,9 @@ public class BoardReaderJson implements BordReader, BordBuilder.Source {
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addUtility(name, value);
+  }
+
+  public static BoardSource using(BordReader reader) {
+    return new BoardSource(reader);
   }
 }

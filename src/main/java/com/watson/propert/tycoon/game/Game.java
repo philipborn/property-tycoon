@@ -73,7 +73,7 @@ public class Game implements PropertTycoon {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
-    Square first = BordBuilder.with(channel).addFrom(br).getBord();
+    Square first = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBord();
     PropertTycoon game = new Game(first, channel);
     return game;
   }
