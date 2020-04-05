@@ -73,8 +73,7 @@ public class BordBuilder {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
     Street.StreetColour color = extractColor(prop.get("group"));
-    List<Integer> rent = new ArrayList<>(5);
-    rent.add(Integer.valueOf(prop.get("rent")));
+    List<Integer> rent = extractRents();
     return new Street(name, value, color, rent);
   }
 
@@ -82,6 +81,16 @@ public class BordBuilder {
     String regex = " ";
     String replacement = "_";
     return Street.StreetColour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
+  }
+
+  private List<Integer> extractRents() {
+    List<Integer> rents = new ArrayList<>();
+    rents.add(Integer.valueOf(prop.get("rent")));
+    rents.add(Integer.valueOf(prop.get("1house")));
+    rents.add(Integer.valueOf(prop.get("2houses")));
+    rents.add(Integer.valueOf(prop.get("3houses")));
+    rents.add(Integer.valueOf(prop.get("4houses")));
+    return rents;
   }
 
   private Boolean isStation() {
