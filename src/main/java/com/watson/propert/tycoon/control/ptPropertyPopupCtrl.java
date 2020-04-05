@@ -10,6 +10,11 @@ import javafx.scene.layout.VBox;
 
 import com.watson.propert.tycoon.game.PropertyInfo;
 
+/**
+ * Class for controlling a single property popup window.
+ *
+ * @author Tom Doran
+ */
 public class ptPropertyPopupCtrl {
 
   @FXML private ResourceBundle resources;
@@ -45,11 +50,20 @@ public class ptPropertyPopupCtrl {
   void setData(PropertyInfo square) {
     // fill in relevant data
     PROPERTY_NAME.setText(square.getName());
-    RENT_BASIC.setText("" + square.getRent());
+    RENT_BASIC.setText(String.valueOf(square.getRent()));
     if (square.isMorged()) {
       PROPERTY_OWNER.setText(square.getOwner().name());
     } else {
       PROPERTY_OWNER.setText("");
+    }
+    if (square.rentsPerHouse().get().size() > 1) {
+      // is a utility or station
+    } else {
+      RENT_1H.setText(String.valueOf(square.rentsPerHouse().get().get(1)));
+      RENT_2H.setText(String.valueOf(square.rentsPerHouse().get().get(2)));
+      RENT_3H.setText(String.valueOf(square.rentsPerHouse().get().get(3)));
+      RENT_4H.setText(String.valueOf(square.rentsPerHouse().get().get(4)));
+      RENT_HOTEL.setText(String.valueOf(square.rentsPerHouse().get().get(5)));
     }
   }
 
