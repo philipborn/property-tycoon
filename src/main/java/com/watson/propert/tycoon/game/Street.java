@@ -3,6 +3,8 @@ package com.watson.propert.tycoon.game;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 public class Street extends Property {
 
   enum StreetColour {
@@ -33,6 +35,10 @@ public class Street extends Property {
   @Override
   public int getRent() {
     return rent.get(houseLevel);
+  }
+
+  protected ImmutableList<Integer> getRentByHouses() {
+    return ImmutableList.copyOf(rent);
   }
 
   public int getNumHouse() {

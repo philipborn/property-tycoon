@@ -1,21 +1,32 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.List;
 import java.util.Optional;
+
+import com.google.common.collect.ImmutableList;
 
 public class PropertyInfo {
 
-  private String name;
-  private PlayerId owner;
-  private int numHouse;
-  private int rent;
-  private boolean isMorged;
+  private final String name;
+  private final PlayerId owner;
+  private final int numHouse;
+  private final int rent;
+  private final boolean isMorged;
+  private final ImmutableList<Integer> rents;
 
-  private PropertyInfo(String name, PlayerId owner, int numHouse, int currentRent, boolean morged) {
+  private PropertyInfo(
+      String name,
+      PlayerId owner,
+      int numHouse,
+      int currentRent,
+      boolean morged,
+      List<Integer> rents) {
     this.name = name;
     this.owner = owner;
     this.numHouse = numHouse;
     this.rent = currentRent;
-    isMorged = morged;
+    this.isMorged = morged;
+    this.rents = ImmutableList.copyOf(rents);
   }
 
   /** @return Name of the Property */
@@ -48,6 +59,15 @@ public class PropertyInfo {
   }
 
   /**
+   * Rent for number of houses in the Street.
+   * Index is the number house the value is for.
+   * @return ImmutableList or Empty if not a Street
+   */
+  public Optional<ImmutableList<Integer>> rentsPerHouse() {
+    return Optional.ofNullable(rents);
+  }
+
+  /**
    * Used to collect data from a Property
    *
    * @param square the property to creata Info objeckt from
@@ -62,7 +82,8 @@ public class PropertyInfo {
   private static PropertyInfo info(Property p) {
     int numHouses = getHouses(p);
     PlayerId id = p.owner().map((d) -> d.getId()).orElse(null);
-    return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage());
+    ImmutableList<Integer> rents = getRents(p);
+    return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage(), rents);
   }
 
   private static int getHouses(Property p) {
@@ -71,6 +92,15 @@ public class PropertyInfo {
       return s.getNumHouse();
     } else {
       return 0;
+    }
+  }
+
+  private static ImmutableList<Integer> getRents(Property p) {
+    if (p instanceof Street) {
+      Street s = (Street) p;
+      return s.getRentByHouses();
+    } else {
+      return null;
     }
   }
 
