@@ -59,8 +59,8 @@ public class PropertyInfo {
   }
 
   /**
-   * Rent for number of houses in the Street.
-   * Index is the number house the value is for.
+   * Rent for number of houses in the Street. Index is the number house the value is for.
+   *
    * @return ImmutableList or Empty if not a Street
    */
   public Optional<ImmutableList<Integer>> rentsPerHouse() {
