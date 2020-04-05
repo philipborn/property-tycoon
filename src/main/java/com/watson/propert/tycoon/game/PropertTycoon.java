@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.Optional;
+
 /** The interface for GUI to take action for the players */
 public interface PropertTycoon {
 
@@ -16,6 +18,12 @@ public interface PropertTycoon {
 
   /** Call when done fixing propertys. Like buingy houses */
   void donePropertyManagement();
+
+  /**
+   * @param squareNum) The number of the square
+   * @return Datastructer with all information of a Property
+   */
+  Optional<PropertyInfo> propertInfo(int squareNum);
 
   /**
    * Used to get start cash for player

@@ -18,11 +18,10 @@ public class PlayerTest {
   @BeforeEach
   void setup() {
     EventBus channel = new EventBus();
-    BordBuilder bb = new BordBuilder(channel);
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/test/testResources/jsonTest.json");
 
-    first = bb.buildBord(br);
+    first = BordBuilder.with(channel).addFrom(br).getBord();
 
     this.channel = new EventBus();
     player = new Player(PlayerId.ONE, first, this.channel);

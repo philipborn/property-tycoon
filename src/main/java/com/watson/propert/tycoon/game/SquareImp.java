@@ -25,9 +25,16 @@ public class SquareImp implements Square {
     return newLocation;
   }
 
+  @Override
+  public Square move(int steps) {
+    return move(steps, null);
+  }
+
   private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
     if (steps < 0) {
-      this.back.vist(actionOnTheWay);
+      if (actionOnTheWay != null) {
+        this.back.vist(actionOnTheWay);
+      }
       return this.back.move(steps + 1, actionOnTheWay);
     } else {
       return this;
@@ -36,7 +43,9 @@ public class SquareImp implements Square {
 
   private Square stepForward(int steps, SquareVisitor actionOnTheWay) {
     if (steps > 0) {
-      this.next.vist(actionOnTheWay);
+      if (actionOnTheWay != null) {
+        this.back.vist(actionOnTheWay);
+      }
       return this.next.move(steps - 1, actionOnTheWay);
     } else {
       return this;
