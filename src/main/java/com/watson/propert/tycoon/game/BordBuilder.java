@@ -40,6 +40,12 @@ public class BordBuilder {
     return this;
   }
 
+  public BordBuilder addSquare(SquareImp square) {
+    checkIfCanAddSquare();
+    addToLink(square);
+    return this;
+  }
+
   public BordBuilder addFrom(BordReader source) {
     checkIfCanAddSquare();
 
