@@ -9,8 +9,10 @@ public class RuleBankruptcy implements SquareVisitor {
   }
 
   public void forPlayer(Player player) {
+    this.player = player;
     player.postion().forEach((square) -> square.vist(this));
     player.payTo(Bank.instance(), player.cash());
+    master.removePlayer(player);
   }
 
   @Override
