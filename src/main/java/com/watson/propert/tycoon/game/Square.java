@@ -17,6 +17,10 @@ public interface Square extends Iterable<Square> {
    */
   Square move(int steps);
 
+  Square moveTo(String propertyName);
+
+  Square moveTo(String propertyName, SquareVisitor visitor);
+
   Square nextSquare();
 
   Square backSquare();

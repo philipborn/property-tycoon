@@ -26,8 +26,9 @@ public abstract class Property extends SquareImp {
     return value;
   }
 
-  public void mortgage() {
+  public int mortgage() {
     mortgaged = true;
+    return value() / 2;
   }
 
   public boolean isMortgage() {

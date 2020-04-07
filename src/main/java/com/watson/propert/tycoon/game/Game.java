@@ -169,6 +169,12 @@ public class Game implements PropertTycoon {
   class NoCash implements Game.state {
 
     @Override
-    public void handle(PlayerAction playerAction) {}
+    public void handle(PlayerAction playerAction) {
+      if (playerAction instanceof PlayerAction.Mortgaged) {
+        PlayerAction.Mortgaged msg = (PlayerAction.Mortgaged) playerAction;
+        RuleToMorgade rule = new RuleToMorgade(master.currentPlayer());
+        rule.morgade(bord.moveTo(msg.propertyName));
+      }
+    }
   }
 }

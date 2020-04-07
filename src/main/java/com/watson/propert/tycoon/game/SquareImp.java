@@ -30,6 +30,31 @@ public class SquareImp implements Square {
     return move(steps, null);
   }
 
+  @Override
+  public Square moveTo(String propertyName) {
+    Iterator<Square> iter = this.iterator();
+    while (iter.hasNext()) {
+      Square square = iter.next();
+      if (square.name().equals(propertyName)) {
+        return square;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public Square moveTo(String propertyName, SquareVisitor visitor) {
+    Iterator<Square> iter = this.iterator();
+    while (iter.hasNext()) {
+      Square square = iter.next();
+      square.vist(visitor);
+      if (square.name().equals(propertyName)) {
+        return square;
+      }
+    }
+    return null;
+  }
+
   private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
     if (steps < 0) {
       if (actionOnTheWay != null) {
