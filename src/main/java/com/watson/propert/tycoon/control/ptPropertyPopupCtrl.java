@@ -56,15 +56,16 @@ public class ptPropertyPopupCtrl {
     } else {
       PROPERTY_OWNER.setText("");
     }
-    if (square.rentsPerHouse().get().size() > 1) {
-      // is a utility or station
-    } else {
-      RENT_1H.setText(String.valueOf(square.rentsPerHouse().get().get(1)));
-      RENT_2H.setText(String.valueOf(square.rentsPerHouse().get().get(2)));
-      RENT_3H.setText(String.valueOf(square.rentsPerHouse().get().get(3)));
-      RENT_4H.setText(String.valueOf(square.rentsPerHouse().get().get(4)));
-      RENT_HOTEL.setText(String.valueOf(square.rentsPerHouse().get().get(5)));
-    }
+    square
+        .rentsPerHouse()
+        .ifPresent(
+            (rents) -> {
+              RENT_1H.setText(String.valueOf(rents.get(1)));
+              RENT_2H.setText(String.valueOf(rents.get(2)));
+              RENT_3H.setText(String.valueOf(rents.get(3)));
+              RENT_4H.setText(String.valueOf(rents.get(4)));
+              RENT_HOTEL.setText(String.valueOf(rents.get(5)));
+            });
   }
 
   @FXML

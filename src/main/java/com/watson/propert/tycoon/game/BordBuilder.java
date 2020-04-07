@@ -90,6 +90,7 @@ public class BordBuilder {
     rents.add(Integer.valueOf(prop.get("2houses")));
     rents.add(Integer.valueOf(prop.get("3houses")));
     rents.add(Integer.valueOf(prop.get("4houses")));
+    rents.add(Integer.valueOf(prop.get("hotel")));
     return rents;
   }
 
