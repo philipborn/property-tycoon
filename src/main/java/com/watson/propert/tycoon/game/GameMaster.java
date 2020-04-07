@@ -34,13 +34,13 @@ public class GameMaster {
     return rank;
   }
 
-  private class HighestTotalValue implements Comparator<Player>{
+  private class HighestTotalValue implements Comparator<Player> {
 
     @Override
     public int compare(Player player, Player other) {
       Integer playerTotal = player.totalValue();
       Integer otherTotal = other.totalValue();
-      return  playerTotal.compareTo(otherTotal);
+      return playerTotal.compareTo(otherTotal);
     }
   }
 }
