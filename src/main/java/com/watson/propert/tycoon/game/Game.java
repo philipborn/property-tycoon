@@ -11,6 +11,7 @@ public class Game implements PropertTycoon {
   protected static final int START_CASH = 200;
 
   private GameMaster master;
+  private Square bord;
   private DicePair dicePair;
   private EventBus channel;
   private Game.state state;
@@ -24,29 +25,15 @@ public class Game implements PropertTycoon {
     players.add(new Player(PlayerId.FIVE, startPostion, channel));
     players.add(new Player(PlayerId.SIX, startPostion, channel));
     master = new GameMaster(players);
+    bord = startPostion;
     dicePair = new DicePair(channel);
     this.channel = channel;
     state = new NewTurn();
   }
 
   @Override
-  public void throwDicesAndMove() {
-    state.throwDicesAndMove();
-  }
-
-  @Override
-  public void buyProperty() {
-    state.buyProperty();
-  }
-
-  @Override
-  public void notBuyingProperty() {
-    state.notBuyingProperty();
-  }
-
-  @Override
-  public void donePropertyManagement() {
-    state.donePropertyManagement();
+  public void send(PlayerAction playerAction) {
+    state.handle(playerAction);
   }
 
   @Override
@@ -62,6 +49,12 @@ public class Game implements PropertTycoon {
   @Override
   public void unregisterListener(Object listener) {
     channel.unregister(listener);
+  }
+
+  private void switchTo(Game.state nextState) {
+    this.state.exit();
+    nextState.entry();
+    this.state = nextState;
   }
 
   public static PropertTycoon newGame() {
@@ -80,19 +73,7 @@ public class Game implements PropertTycoon {
 
     default void exit() {}
 
-    default void throwDicesAndMove() {}
-
-    default void buyProperty() {}
-
-    default void notBuyingProperty() {}
-
-    default void donePropertyManagement() {}
-
-    default Game.state switchTo(Game.state nextState) {
-      this.exit();
-      nextState.entry();
-      return nextState;
-    }
+    void handle(PlayerAction playerAction);
   }
 
   private class NewTurn implements Game.state {
@@ -103,24 +84,47 @@ public class Game implements PropertTycoon {
     }
 
     @Override
-    public void throwDicesAndMove() {
-      Player currentPlayer = master.currentPlayer();
-      List<Integer> dices = dicePair.throwDices();
-      Integer sum = dices.stream().mapToInt((a) -> a).sum();
-      currentPlayer.move(sum);
+    public void handle(PlayerAction playerAction) {
+      if (playerAction instanceof PlayerAction.ThrowDices) {
+        throwDicesAndMove();
+      }
+    }
 
-      if (currentPlayer.postion() instanceof Property) {
-        state = switchTo(new NoOwner());
-      } else {
-        state = switchTo(new FixProperty());
+    private void throwDicesAndMove() {
+      Player currentPlayer = master.currentPlayer();
+      Integer sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
+      Square newLocation = currentPlayer.move(sum);
+      try {
+        newLocation.vist(new RuleAfterMove(currentPlayer));
+        if (RulePropertyCanBought.by(currentPlayer)) {
+          switchTo(new NoOwner());
+        } else {
+          switchTo(new FixProperty());
+        }
+      } catch (NoCashException e) {
+        if (currentPlayer.totalValue() > e.needToPay()) {
+          removeFromGame(currentPlayer);
+        }
       }
     }
   }
 
+  private void removeFromGame(Player player) {
+    RuleBankruptcy rule = new RuleBankruptcy(master);
+    rule.forPlayer(player);
+  }
+
   private class FixProperty implements Game.state {
 
+    @Override
+    public void handle(PlayerAction playerAction) {
+      if (playerAction instanceof PlayerAction.DonePropertyUpgrade) {
+        donePropertyManagement();
+      }
+    }
+
     public void donePropertyManagement() {
-      state = switchTo(new NewTurn());
+      switchTo(new NewTurn());
     }
   }
 
@@ -136,17 +140,30 @@ public class Game implements PropertTycoon {
     }
 
     @Override
-    public void buyProperty() {
+    public void handle(PlayerAction playerAction) {
+      if (playerAction instanceof PlayerAction.BuyProperty) {
+        buyProperty();
+      } else if (playerAction instanceof PlayerAction.Auction) {
+        notBuyingProperty();
+      }
+    }
+
+    private void buyProperty() {
       Player player = master.currentPlayer();
       Square property = player.postion();
       property.vist(new BuyProperty(player));
       channel.post(new PropertyEvent(property.name(), player.id));
-      state = switchTo(new FixProperty());
+      switchTo(new FixProperty());
     }
 
-    @Override
-    public void notBuyingProperty() {
-      state = switchTo(new FixProperty());
+    private void notBuyingProperty() {
+      switchTo(new FixProperty());
     }
+  }
+
+  class NoCash implements Game.state {
+
+    @Override
+    public void handle(PlayerAction playerAction) {}
   }
 }

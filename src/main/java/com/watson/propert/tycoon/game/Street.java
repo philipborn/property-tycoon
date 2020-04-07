@@ -43,4 +43,10 @@ public class Street extends Property {
   public void vist(SquareVisitor visitor) {
     visitor.street(this);
   }
+
+  @Override
+  public int sell() {
+    houseLevel = 0;
+    return super.sell();
+  }
 }

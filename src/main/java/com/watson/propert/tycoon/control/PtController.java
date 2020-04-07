@@ -224,13 +224,13 @@ public class PtController {
 
   private void yes() {
     // implement window
-    game.donePropertyManagement();
-    game.buyProperty();
+    game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+    game.send(PlayerAction.BuyProperty.INSTANCE);
   }
 
   @FXML
   void throwDice(MouseEvent event) {
-    game.throwDicesAndMove();
+    game.send(PlayerAction.ThrowDices.INSTANCE);
   }
 
   @Subscribe

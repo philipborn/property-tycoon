@@ -7,6 +7,7 @@ public class Player implements CashUser, Comparable<Player> {
 
   private Square location;
   private int cash;
+  private boolean buyRights = false;
 
   private EventBus channel;
 
@@ -18,13 +19,17 @@ public class Player implements CashUser, Comparable<Player> {
   }
 
   public Square move(int steps) {
-    SquareVisitor passingRulse = PassingRule.rulesFor(this);
+    SquareVisitor passingRulse = RulePassing.rulesFor(this);
     location = location.move(steps, passingRulse);
     return location;
   }
 
   public Square postion() {
     return location;
+  }
+
+  public int totalValue() {
+    return cash;
   }
 
   @Override
@@ -43,6 +48,22 @@ public class Player implements CashUser, Comparable<Player> {
     }
   }
 
+  @Override
+  public void payTo(CashUser cashUser, int amount) {
+    if (amount < 0) {
+      throw new IllegalArgumentException("Amount most be postive");
+    }
+    if (cash < amount) {
+      throw new NoCashException("Player " + id + " can't pay, need more cash!", amount);
+    } else if (amount > 0) {
+      int oldCash = cash;
+      cash -= amount;
+      channel.post(CashEvent.write(id, oldCash, cash));
+      cashUser.receiveCash(amount);
+    }
+  }
+
+  @Deprecated
   public void payCash(int amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("Amount most be postive");
@@ -64,5 +85,13 @@ public class Player implements CashUser, Comparable<Player> {
       return comp;
     }
     return Integer.compare(cash, player.cash);
+  }
+
+  public boolean hasBuyRights() {
+    return buyRights;
+  }
+
+  public void receiveBuyRights() {
+    buyRights = true;
   }
 }

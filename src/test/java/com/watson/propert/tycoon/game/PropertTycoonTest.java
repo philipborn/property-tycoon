@@ -58,10 +58,10 @@ public class PropertTycoonTest {
 
   @Test
   void ThrowDice_multiTimes_do_nothing() {
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
+    game.send(PlayerAction.ThrowDices.INSTANCE);
+    game.send(PlayerAction.ThrowDices.INSTANCE);
+    game.send(PlayerAction.ThrowDices.INSTANCE);
+    game.send(PlayerAction.ThrowDices.INSTANCE);
 
     final int expectedNumberOfCashEvents = 1;
     int count = (int) spy.msgs.stream().filter(event -> event instanceof DiceEvent).count();

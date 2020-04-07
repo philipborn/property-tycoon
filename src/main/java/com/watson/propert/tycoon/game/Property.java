@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.Optional;
+
 public abstract class Property extends SquareImp {
 
   private int value;
@@ -15,8 +17,8 @@ public abstract class Property extends SquareImp {
 
   public abstract int getRent();
 
-  public Player owner() {
-    return owner;
+  public Optional<Player> owner() {
+    return Optional.ofNullable(owner);
   }
 
   // value is the property cost not rent
@@ -34,6 +36,7 @@ public abstract class Property extends SquareImp {
 
   public int sell() {
     owner = null;
+    mortgaged = false;
     return value;
   }
 

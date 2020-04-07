@@ -1,9 +1,9 @@
 package com.watson.propert.tycoon.game;
 
-public class PassingRule implements SquareVisitor {
+public class RulePassing implements SquareVisitor {
   Player currentPlayer;
 
-  private PassingRule(Player current) {
+  private RulePassing(Player current) {
     currentPlayer = current;
   }
 
@@ -24,7 +24,7 @@ public class PassingRule implements SquareVisitor {
   @Override
   public void utilities(Utilities utilities) {}
 
-  public static PassingRule rulesFor(Player current) {
-    return new PassingRule(current);
+  public static RulePassing rulesFor(Player current) {
+    return new RulePassing(current);
   }
 }
