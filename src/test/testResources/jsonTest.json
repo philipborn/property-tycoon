@@ -3,9 +3,31 @@
     "Name": "Go"
   },
   {
-    "Name": "name2"
+    "Position": 2,
+    "Name": "name2",
+    "Group": "Purple",
+    "Action": "",
+    "canBeBought": "Yes",
+    "Cost": 140,
+    "Rent": 10,
+    "1house": 50,
+    "2houses": 150,
+    "3houses": 450,
+    "4houses": 625,
+    "hotel": 750
   },
   {
-    "Name": "name3"
+    "Position": 3,
+    "Name": "name3",
+    "Group": "Utilities",
+    "Action": "",
+    "canBeBought": "Yes",
+    "Cost": 150,
+    "Rent": "See notes",
+    "1house": "",
+    "2houses": "",
+    "3houses": "",
+    "4houses": "",
+    "hotel": ""
   }
 ]

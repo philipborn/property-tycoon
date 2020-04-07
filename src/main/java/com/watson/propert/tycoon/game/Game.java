@@ -2,6 +2,7 @@ package com.watson.propert.tycoon.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.io.BoardReaderJson;
@@ -25,15 +26,20 @@ public class Game implements PropertTycoon {
     players.add(new Player(PlayerId.FIVE, startPostion, channel));
     players.add(new Player(PlayerId.SIX, startPostion, channel));
     master = new GameMaster(players);
+    state = new NewTurn();
     bord = startPostion;
     dicePair = new DicePair(channel);
     this.channel = channel;
-    state = new NewTurn();
   }
 
   @Override
   public void send(PlayerAction playerAction) {
     state.handle(playerAction);
+  }
+
+  @Override
+  public Optional<PropertyInfo> propertInfo(int squareNum) {
+    return PropertyInfo.getInfo(bord.move(squareNum - 1));
   }
 
   @Override
@@ -61,8 +67,7 @@ public class Game implements PropertTycoon {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
-    BordBuilder f = new BordBuilder(channel);
-    Square first = f.buildBord(br);
+    Square first = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBord();
     PropertTycoon game = new Game(first, channel);
     return game;
   }
