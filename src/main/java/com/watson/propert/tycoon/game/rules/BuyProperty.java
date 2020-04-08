@@ -11,7 +11,7 @@ public class BuyProperty implements SquareVisitor {
     buyer = player;
   }
 
-  public void buy(Property property) {
+  private void buy(Property property) {
     property
         .owner()
         .ifPresent(

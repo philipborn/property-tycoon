@@ -235,11 +235,11 @@ public class Game implements PropertTycoon {
 
   private void sellProperty(PlayerAction.SellProperty msg) {
     Optional<Property> property =
-            Optional.of(bord.moveTo(msg.squareName))
-                    .filter(Property.class::isInstance)
-                    .map(Property.class::cast);
+        Optional.of(bord.moveTo(msg.squareName))
+            .filter(Property.class::isInstance)
+            .map(Property.class::cast);
     boolean playerIsOwner =
-            property.flatMap(Property::owner).filter((owner -> owner.equals(player))).isPresent();
+        property.flatMap(Property::owner).filter((owner -> owner.equals(player))).isPresent();
     if (playerIsOwner) {
       property.ifPresent(Property::sell);
     }
