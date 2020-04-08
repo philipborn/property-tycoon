@@ -12,7 +12,7 @@ public class ToSellHouses implements SquareVisitor {
   }
 
   public void sellHouses(Square square) {
-    square.vist(this);
+    square.visitBy(this);
   }
 
   @Override

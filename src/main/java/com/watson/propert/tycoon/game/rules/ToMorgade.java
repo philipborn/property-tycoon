@@ -13,7 +13,7 @@ public class ToMorgade implements SquareVisitor {
   }
 
   public int morgade(Square square) {
-    square.vist(this);
+    square.visitBy(this);
     return reviveCash;
   }
 

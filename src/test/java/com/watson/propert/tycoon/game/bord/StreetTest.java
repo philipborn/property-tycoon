@@ -59,7 +59,7 @@ public class StreetTest {
 
     assertEquals(0, street.getNumHouse());
     assertEquals(value, street.getRent());
-    Street second = (Street) street.move(1);
+    Street second = (Street) street.step(1);
     second.newOwner(owner);
     assertEquals(value * 2, street.getRent());
     street.buyHouses();

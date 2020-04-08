@@ -35,6 +35,6 @@ public class AfterMove implements SquareVisitor {
 
   @Override
   public void actionSquare(ActionSquare actionSquare) {
-    actionSquare.run();
+    actionSquare.getAction().run();
   }
 }

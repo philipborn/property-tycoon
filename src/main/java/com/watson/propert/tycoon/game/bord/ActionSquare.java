@@ -20,4 +20,9 @@ public class ActionSquare extends SquareAbstract {
   public Action getAction() {
     return action;
   }
+
+  @Override
+  public void visitBy(SquareVisitor visitor) {
+    visitor.actionSquare(this);
+  }
 }

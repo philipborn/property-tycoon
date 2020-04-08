@@ -16,7 +16,7 @@ public class Bankruptcy implements SquareVisitor {
 
   public void forPlayer(Player player) {
     this.player = player;
-    player.postion().forEach((square) -> square.vist(this));
+    player.postion().forEach((square) -> square.visitBy(this));
     player.payTo(Bank.instance(), player.cash());
     master.removePlayer(player);
   }

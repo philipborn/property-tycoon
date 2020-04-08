@@ -27,9 +27,6 @@ public class BuyProperty implements SquareVisitor {
   }
 
   @Override
-  public void SquareImp(SquareAbstract square) {}
-
-  @Override
   public void street(Street street) {
     buy(street);
   }

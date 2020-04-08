@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 
 public abstract class SquareAbstract implements Square {
 
-  private Square next;
-  private Square back;
+  private SquareAbstract next;
+  private SquareAbstract back;
   private String name;
 
   public SquareAbstract(String name) {
@@ -15,7 +15,7 @@ public abstract class SquareAbstract implements Square {
   }
 
   @Override
-  public Square move(int numStep, SquareVisitor actionOnTheWay) {
+  public Square step(int numStep, SquareVisitor actionOnTheWay) {
     Square newLocation = this;
     if (numStep > 0) {
       newLocation = stepForward(numStep, actionOnTheWay);
@@ -26,12 +26,12 @@ public abstract class SquareAbstract implements Square {
   }
 
   @Override
-  public Square move(int steps) {
-    return move(steps, null);
+  public Square step(int steps) {
+    return step(steps, null);
   }
 
   @Override
-  public Square moveTo(String propertyName) {
+  public Square find(String propertyName) {
     Iterator<Square> iter = this.iterator();
     while (iter.hasNext()) {
       Square square = iter.next();
@@ -43,11 +43,11 @@ public abstract class SquareAbstract implements Square {
   }
 
   @Override
-  public Square moveTo(String propertyName, SquareVisitor visitor) {
+  public Square find(String propertyName, SquareVisitor visitor) {
     Iterator<Square> iter = this.iterator();
     while (iter.hasNext()) {
       Square square = iter.next();
-      square.vist(visitor);
+      square.visitBy(visitor);
       if (square.name().equals(propertyName)) {
         return square;
       }
@@ -58,9 +58,9 @@ public abstract class SquareAbstract implements Square {
   private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
     if (steps < 0) {
       if (actionOnTheWay != null) {
-        this.back.vist(actionOnTheWay);
+        this.back.visitBy(actionOnTheWay);
       }
-      return this.back.move(steps + 1, actionOnTheWay);
+      return this.back.step(steps + 1, actionOnTheWay);
     } else {
       return this;
     }
@@ -69,22 +69,12 @@ public abstract class SquareAbstract implements Square {
   private Square stepForward(int steps, SquareVisitor actionOnTheWay) {
     if (steps > 0) {
       if (actionOnTheWay != null) {
-        this.back.vist(actionOnTheWay);
+        this.back.visitBy(actionOnTheWay);
       }
-      return this.next.move(steps - 1, actionOnTheWay);
+      return this.next.step(steps - 1, actionOnTheWay);
     } else {
       return this;
     }
-  }
-
-  @Override
-  public Square nextSquare() {
-    return next;
-  }
-
-  @Override
-  public Square backSquare() {
-    return back;
   }
 
   @Override
@@ -92,16 +82,11 @@ public abstract class SquareAbstract implements Square {
     return name;
   }
 
-  @Override
-  public void vist(SquareVisitor visitor) {
-    visitor.SquareImp(this);
-  }
-
-  protected void setNext(Square node) {
+  protected void setNext(SquareAbstract node) {
     next = node;
   }
 
-  protected void setBack(Square node) {
+  protected void setBack(SquareAbstract node) {
     back = node;
   }
 
@@ -119,5 +104,33 @@ public abstract class SquareAbstract implements Square {
   @Override
   public Spliterator<Square> spliterator() {
     throw new UnsupportedOperationException();
+  }
+
+  private class BordIterator implements Iterator<Square> {
+
+    private SquareAbstract iterStart;
+    private SquareAbstract iterNext;
+    private Boolean atBegin = Boolean.TRUE;
+
+    private BordIterator(SquareAbstract start) {
+      this.iterStart = start;
+      this.iterNext = start;
+    }
+
+    @Override
+    public boolean hasNext() {
+      if (atBegin) {
+        return true;
+      }
+      return iterNext != iterStart;
+    }
+
+    @Override
+    public SquareAbstract next() {
+      atBegin = false;
+      SquareAbstract current = iterNext;
+      iterNext = iterNext.next;
+      return current;
+    }
   }
 }

@@ -37,7 +37,7 @@ public class Station extends Property {
   }
 
   @Override
-  public void vist(SquareVisitor visitor) {
+  public void visitBy(SquareVisitor visitor) {
     visitor.station(this);
   }
 }

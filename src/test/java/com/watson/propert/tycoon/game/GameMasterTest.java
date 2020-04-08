@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.ActionSquare;
+import com.watson.propert.tycoon.game.bord.Square;
 
 public class GameMasterTest {
 

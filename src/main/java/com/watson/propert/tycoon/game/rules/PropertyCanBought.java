@@ -13,7 +13,7 @@ public class PropertyCanBought implements SquareVisitor {
 
   public static boolean by(Player player) {
     PropertyCanBought rule = new PropertyCanBought(player);
-    player.postion().vist(rule);
+    player.postion().visitBy(rule);
     return rule.canBuy();
   }
 

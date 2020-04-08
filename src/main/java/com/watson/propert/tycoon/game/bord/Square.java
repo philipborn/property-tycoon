@@ -7,7 +7,7 @@ public interface Square extends Iterable<Square> {
    * @param actionOnTheWay The visitor will visit all pasting Squares
    * @return The new Square if moved numSteps from current one
    */
-  Square move(int numStep, SquareVisitor actionOnTheWay);
+  Square step(int numStep, SquareVisitor actionOnTheWay);
 
   /**
    * Return the Square that are number of step ahead
@@ -15,17 +15,13 @@ public interface Square extends Iterable<Square> {
    * @param steps Number of steps, negativ moves backwards
    * @return The Sqaure iit will land on
    */
-  Square move(int steps);
+  Square step(int steps);
 
-  Square moveTo(String propertyName);
+  Square find(String propertyName);
 
-  Square moveTo(String propertyName, SquareVisitor visitor);
-
-  Square nextSquare();
-
-  Square backSquare();
+  Square find(String propertyName, SquareVisitor visitor);
 
   String name();
 
-  void vist(SquareVisitor visitor);
+  void visitBy(SquareVisitor visitor);
 }

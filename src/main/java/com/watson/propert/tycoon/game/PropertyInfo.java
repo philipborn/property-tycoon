@@ -58,7 +58,7 @@ public class PropertyInfo {
    */
   public static Optional<PropertyInfo> getInfo(Square square) {
     InfoGather gather = new InfoGather();
-    square.vist(gather);
+    square.visitBy(gather);
     return Optional.ofNullable(gather.getInfo());
   }
 
@@ -88,11 +88,6 @@ public class PropertyInfo {
 
     public PropertyInfo getInfo() {
       return info;
-    }
-
-    @Override
-    public void SquareImp(SquareAbstract square) {
-      // Do nothing
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Passing implements SquareVisitor {
   @Override
   public void actionSquare(ActionSquare square) {
     Action action = square.getAction();
-    if(action instanceof PassingAction) {
+    if (action instanceof PassingAction) {
       action.run();
     }
     if (square.name().equals("Go")) {
