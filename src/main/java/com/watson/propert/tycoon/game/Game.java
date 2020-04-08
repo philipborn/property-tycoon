@@ -14,13 +14,14 @@ import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class Game implements PropertTycoon {
 
-  protected static final int START_CASH = 200;
+  protected static final int START_CASH = 1500;
 
   private GameMaster master;
   private Square bord;
   private DicePair dicePair;
   private EventBus channel;
   private Game.state state;
+  private Player player;
 
   public Game(Square startPostion, EventBus channel) {
     List<Player> players = new ArrayList<>();
@@ -31,6 +32,7 @@ public class Game implements PropertTycoon {
     players.add(new Player(Player.Id.FIVE, startPostion, channel));
     players.add(new Player(Player.Id.SIX, startPostion, channel));
     master = new GameMaster(players);
+    player = master.currentPlayer();
     state = new NewTurn();
     bord = startPostion;
     dicePair = new DicePair(channel);
@@ -90,7 +92,8 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
-      channel.post(new ChangePlayerEvent(master.newTurn().id));
+      player = master.newTurn();
+      channel.post(new ChangePlayerEvent(player.getId()));
     }
 
     @Override
@@ -145,8 +148,7 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
-      Player current = master.currentPlayer();
-      Property prop = (Property) current.postion();
+      Property prop = (Property) player.postion();
       String propertyName = prop.name();
       int price = prop.value();
       channel.post(new BuyOrNotMsg(propertyName, price));
@@ -162,7 +164,6 @@ public class Game implements PropertTycoon {
     }
 
     private void buyProperty() {
-      Player player = master.currentPlayer();
       Square property = player.postion();
       property.vist(new BuyProperty(player));
       channel.post(new PropertyEvent(property.name(), player.id));
@@ -186,23 +187,36 @@ public class Game implements PropertTycoon {
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.Mortgaged) {
         mortgaged((PlayerAction.Mortgaged) playerAction);
-      } else if (playerAction instanceof PlayerAction.RemoveHouse) {
-        sellHouse((PlayerAction.RemoveHouse) playerAction);
+      } else if (playerAction instanceof PlayerAction.SellHouse) {
+        sellHouse((PlayerAction.SellHouse) playerAction);
+      } else if (playerAction instanceof PlayerAction.SellProperty) {
+        sellProperty((PlayerAction.SellProperty) playerAction);
       }
-    }
-
-    private void mortgaged(PlayerAction.Mortgaged msg) {
-      Player player = master.currentPlayer();
-      ToMorgade rule = new ToMorgade(player);
-      rule.morgade(bord.moveTo(msg.propertyName));
       if (player.cash() > needToFree) {
         switchTo(new FixProperty());
       }
     }
 
-    private void sellHouse(PlayerAction.RemoveHouse msg) {
+    private void mortgaged(PlayerAction.Mortgaged msg) {
+      ToMorgade rule = new ToMorgade(player);
+      rule.morgade(bord.moveTo(msg.propertyName));
+    }
+
+    private void sellHouse(PlayerAction.SellHouse msg) {
       Square street = bord.moveTo(msg.streetName);
-      new ToSellHouses(master.currentPlayer()).sellHouses(street, msg.houseRemoved);
+      new ToSellHouses(player).sellHouses(street);
+    }
+
+    private void sellProperty(PlayerAction.SellProperty msg) {
+      Optional<Property> property =
+          Optional.of(bord.moveTo(msg.squareName))
+              .filter(Property.class::isInstance)
+              .map(Property.class::cast);
+      boolean playerIsOwner =
+          property.flatMap(Property::owner).filter((owner -> owner.equals(player))).isPresent();
+      if (playerIsOwner) {
+        property.ifPresent(Property::sell);
+      }
     }
   }
 }

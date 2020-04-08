@@ -31,23 +31,19 @@ public interface PlayerAction {
     }
   }
 
-  final class BuildHouses implements PlayerAction {
+  final class BuildHouse implements PlayerAction {
     public final String propertyName;
-    public final int housesBuilt;
 
-    public BuildHouses(String propertyName, int housesBuilt) {
+    public BuildHouse(String propertyName) {
       this.propertyName = propertyName;
-      this.housesBuilt = housesBuilt;
     }
   }
 
-  final class RemoveHouse implements PlayerAction {
+  final class SellHouse implements PlayerAction {
     public final String streetName;
-    public final int houseRemoved;
 
-    public RemoveHouse(String streetName, int houseRemoved) {
+    public SellHouse(String streetName) {
       this.streetName = streetName;
-      this.houseRemoved = houseRemoved;
     }
   }
 

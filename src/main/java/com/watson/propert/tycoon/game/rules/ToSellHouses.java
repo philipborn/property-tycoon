@@ -6,19 +6,17 @@ import com.watson.propert.tycoon.game.bord.*;
 public class ToSellHouses implements SquareVisitor {
 
   private Player player;
-  private int houseToSell;
 
   public ToSellHouses(Player player) {
     this.player = player;
   }
 
-  public void sellHouses(Square square, int houseToSell) {
-    this.houseToSell = houseToSell;
+  public void sellHouses(Square square) {
     square.vist(this);
   }
 
   @Override
   public void street(Street street) {
-    street.sellHouses(houseToSell);
+    street.owner().filter((owner) -> owner.equals(player)).ifPresent((owner) -> street.sellHouse());
   }
 }

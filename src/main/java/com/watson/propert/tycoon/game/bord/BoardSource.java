@@ -41,6 +41,10 @@ public class BoardSource implements BordBuilder.Source {
     this.reader = reader;
   }
 
+  public void readFile(String filePath) {
+    reader.readFile(filePath);
+  }
+
   @Override
   public void extractTo(BordBuilder builder) {
     this.builder = builder;

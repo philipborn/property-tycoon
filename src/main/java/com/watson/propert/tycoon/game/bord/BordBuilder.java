@@ -70,22 +70,6 @@ public class BordBuilder {
     return this;
   }
 
-  public BordBuilder X(BordReader source) {
-    checkIfCanAddSquare();
-
-    this.source = source;
-    source.nextObject();
-    first = createSquare();
-    last = first;
-
-    while (source.hasNextObject()) {
-      source.nextObject();
-      SquareImp current = createSquare();
-      addToLink(current);
-    }
-    return this;
-  }
-
   private void checkIfCanAddSquare() {
     if (doneLastLink) {
       throw new RuntimeException("Can't add Square if the bord is build");

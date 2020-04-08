@@ -3,6 +3,7 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.common.collect.Streams;
 import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
@@ -35,11 +36,11 @@ public class Street extends Property {
 
   @Override
   public int getRent() {
-    int factor = ifOwensSameColor() ? 2 : 1;
+    int factor = (houseLevel == 0 && ifOwnerSameColor()) ? 2 : 1;
     return factor * rent.get(houseLevel);
   }
 
-  private boolean ifOwensSameColor() {
+  private boolean ifOwnerSameColor() {
     for (Iterator<Street> it = SameColourIter(); it.hasNext(); ) {
       Street street = it.next();
       if (!street.owner().equals(this.owner())) {
@@ -53,34 +54,40 @@ public class Street extends Property {
     return houseLevel;
   }
 
-  public void buyHouses(int housesToBuy) {
-    if (housesToBuy < 0) {
-      throw new IllegalArgumentException("HouseToBuy most not be negative");
+  public boolean canBuildHouse() {
+    if (owner().isEmpty() || (houseLevel == rent.size() - 1) || !ifOwnerSameColor()) {
+      return false;
     }
-    if (houseLevel + housesToBuy >= rent.size()) {
-      throw new IllegalArgumentException("Can't buy more houses then Street support");
-    }
-    if (housesToBuy > 0) {
-      Owner owner =
-          owner().orElseThrow(() -> new RuntimeException("Street need owner to buy houses"));
-      owner.payTo(Bank.instance(), priceForHouse() * housesToBuy);
-      houseLevel += housesToBuy;
-    }
+    int minHouse = Streams.stream(SameColourIter()).mapToInt(Street::getNumHouse).min().getAsInt();
+    return houseLevel == minHouse;
   }
 
-  public void sellHouses(int housesToSell) {
-    if (housesToSell < 0) {
-      throw new IllegalArgumentException("HousesToSell most not be negative");
+  public boolean canSellHouse() {
+    if (owner().isEmpty() || houseLevel == 0 || !ifOwnerSameColor()) {
+      return false;
     }
-    if (houseLevel - housesToSell < 0) {
-      throw new IllegalArgumentException("Can't have negative number of houses");
+    int maxHouse = Streams.stream(SameColourIter()).mapToInt(Street::getNumHouse).max().getAsInt();
+    return houseLevel == maxHouse;
+  }
+
+  public void buyHouses() {
+    if (!canBuildHouse()) {
+      throw new IllegalConstructionException("Forbidden to build houses right now");
     }
-    if (housesToSell > 0) {
-      Owner owner =
-          owner().orElseThrow(() -> new RuntimeException("Street need owner to sell houses"));
-      Bank.instance().payTo(owner, priceForHouse() * housesToSell);
-      houseLevel -= housesToSell;
+    Owner owner =
+        owner().orElseThrow(() -> new RuntimeException("Street need owner to buy houses"));
+    owner.payTo(Bank.instance(), priceForHouse());
+    ++houseLevel;
+  }
+
+  public void sellHouse() {
+    if (!canSellHouse()) {
+      throw new IllegalConstructionException("Forbidden destroy houses right now");
     }
+    Owner owner =
+        owner().orElseThrow(() -> new RuntimeException("Street need owner to sell houses"));
+    Bank.instance().payTo(owner, priceForHouse());
+    --houseLevel;
   }
 
   private int priceForHouse() {
@@ -112,7 +119,9 @@ public class Street extends Property {
 
   @Override
   public int sell() {
-    houseLevel = 0;
+    if (houseLevel != 0) {
+      throw new CantSellException("Can only sell street if there is no houses on it");
+    }
     return super.sell();
   }
 }
