@@ -285,7 +285,7 @@
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
-                              <ImageView id="FREE_PARKING" fitHeight="80.0" fitWidth="80.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                              <ImageView id="FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>
                                     <Image url="@board/freeParking.png" />
                                  </image>
@@ -981,6 +981,9 @@
                      </image>
                   </ImageView>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
             <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                <children>

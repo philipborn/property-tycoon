@@ -267,7 +267,7 @@ public class PtController {
         ev -> {
           // move functionality
           int i = event.firstDice() + event.secondDice();
-          displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
+          //displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
           DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
           DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
           move(i);
