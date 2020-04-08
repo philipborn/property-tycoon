@@ -3,16 +3,16 @@ package com.watson.propert.tycoon.game.bord;
 import com.watson.propert.tycoon.game.actions.Action;
 import com.watson.propert.tycoon.game.actions.DoNothingAction;
 
-public class TriggerSquare extends SquareAbstract {
+public class ActionSquare extends SquareAbstract {
 
   private Action action;
 
-  public TriggerSquare(String name, Action action) {
+  public ActionSquare(String name, Action action) {
     super(name);
     this.action = action;
   }
 
-  public TriggerSquare(String name) {
+  public ActionSquare(String name) {
     super(name);
     this.action = new DoNothingAction();
   }

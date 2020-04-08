@@ -10,7 +10,7 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.Square;
-import com.watson.propert.tycoon.game.bord.TriggerSquare;
+import com.watson.propert.tycoon.game.bord.ActionSquare;
 
 public class GameMasterTest {
 
@@ -22,7 +22,7 @@ public class GameMasterTest {
 
   @BeforeEach
   void setup() {
-    square = new TriggerSquare("Test");
+    square = new ActionSquare("Test");
     channel = new EventBus();
 
     players = new ArrayList<>(6);

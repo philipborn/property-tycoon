@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.actions.Action;
 
 public class BordBuilder {
 
@@ -54,7 +55,13 @@ public class BordBuilder {
 
   public BordBuilder addSquare(String name) {
     checkIfCanAddSquare();
-    addToLink(new TriggerSquare(name));
+    addToLink(new ActionSquare(name));
+    return this;
+  }
+
+  public BordBuilder addActionSquare(String name, Action action) {
+    checkIfCanAddSquare();
+    addToLink(new ActionSquare(name, action));
     return this;
   }
 
@@ -85,7 +92,7 @@ public class BordBuilder {
     } else if (isUtilits()) {
       return buildUtilitys();
     }
-    return new TriggerSquare(prop.get("name"));
+    return new ActionSquare(prop.get("name"));
   }
 
   private Boolean isStreet() {
