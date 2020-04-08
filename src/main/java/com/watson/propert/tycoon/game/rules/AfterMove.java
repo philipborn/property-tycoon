@@ -32,4 +32,9 @@ public class AfterMove implements SquareVisitor {
   public void utilities(Utilities utilities) {
     propertyHandling(utilities);
   }
+
+  @Override
+  public void actionSquare(ActionSquare actionSquare) {
+    actionSquare.run();
+  }
 }

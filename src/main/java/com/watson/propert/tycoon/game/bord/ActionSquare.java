@@ -5,7 +5,7 @@ import com.watson.propert.tycoon.game.actions.DoNothingAction;
 
 public class ActionSquare extends SquareAbstract {
 
-  private Action action;
+  private final Action action;
 
   public ActionSquare(String name, Action action) {
     super(name);
@@ -17,7 +17,7 @@ public class ActionSquare extends SquareAbstract {
     this.action = new DoNothingAction();
   }
 
-  public void run() {
-    action.run();
+  public Action getAction() {
+    return action;
   }
 }

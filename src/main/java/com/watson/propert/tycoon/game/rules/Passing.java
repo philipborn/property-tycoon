@@ -1,6 +1,8 @@
 package com.watson.propert.tycoon.game.rules;
 
 import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.actions.Action;
+import com.watson.propert.tycoon.game.actions.PassingAction;
 import com.watson.propert.tycoon.game.bord.*;
 
 public class Passing implements SquareVisitor {
@@ -11,7 +13,11 @@ public class Passing implements SquareVisitor {
   }
 
   @Override
-  public void SquareImp(SquareAbstract square) {
+  public void actionSquare(ActionSquare square) {
+    Action action = square.getAction();
+    if(action instanceof PassingAction) {
+      action.run();
+    }
     if (square.name().equals("Go")) {
       int cashToReceive = 200;
       currentPlayer.receiveCash(cashToReceive);
