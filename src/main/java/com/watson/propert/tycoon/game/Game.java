@@ -119,7 +119,7 @@ public class Game implements PropertTycoon {
           removeFromGame(currentPlayer);
           switchTo(new NewTurn());
         } else {
-          switchTo(new NoCash(e.needToPay()));
+          switchTo(new NoCash(e.payTo(), e.needToPay()));
         }
       }
     }
@@ -177,9 +177,11 @@ public class Game implements PropertTycoon {
 
   class NoCash implements Game.state {
 
+    private CashUser payTo;
     private int needToFree;
 
-    private NoCash(int needToFree) {
+    private NoCash(CashUser payTo, int needToFree) {
+      this.payTo = payTo;
       this.needToFree = needToFree;
     }
 
@@ -192,7 +194,8 @@ public class Game implements PropertTycoon {
       } else if (playerAction instanceof PlayerAction.SellProperty) {
         sellProperty((PlayerAction.SellProperty) playerAction);
       }
-      if (player.cash() > needToFree) {
+      if (player.cash() >= needToFree) {
+        player.payTo(payTo, needToFree);
         switchTo(new FixProperty());
       }
     }

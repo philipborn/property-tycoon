@@ -67,17 +67,17 @@ public class Player implements Owner, Comparable<Player> {
   }
 
   @Override
-  public void payTo(CashUser cashUser, int amount) {
+  public void payTo(CashUser receiver, int amount) {
     if (amount < 0) {
       throw new IllegalArgumentException("Amount most be postive");
     }
     if (cash < amount) {
-      throw new NoCashException("Player " + id + " can't pay, need more cash!", amount);
+      throw new NoCashException("Player " + id + " can't pay, need more cash!", receiver, amount);
     } else if (amount > 0) {
       int oldCash = cash;
       cash -= amount;
       channel.post(CashEvent.write(id, oldCash, cash));
-      cashUser.receiveCash(amount);
+      receiver.receiveCash(amount);
     }
   }
 
