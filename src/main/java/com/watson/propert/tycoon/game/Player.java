@@ -6,7 +6,7 @@ import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 
-public class Player implements CashUser, Comparable<Player> {
+public class Player implements Owner, Comparable<Player> {
 
   public enum Id {
     ONE,

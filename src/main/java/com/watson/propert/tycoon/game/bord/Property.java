@@ -2,12 +2,12 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.Optional;
 
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.Owner;
 
 public abstract class Property extends SquareImp {
 
   private int value;
-  private Player owner;
+  private Owner owner;
   private boolean mortgaged;
 
   public Property(String name, int amount) {
@@ -19,7 +19,7 @@ public abstract class Property extends SquareImp {
 
   public abstract int getRent();
 
-  public Optional<Player> owner() {
+  public Optional<Owner> owner() {
     return Optional.ofNullable(owner);
   }
 
@@ -43,7 +43,7 @@ public abstract class Property extends SquareImp {
     return value;
   }
 
-  public void newOwner(Player player) {
-    owner = player;
+  public void newOwner(Owner newOwner) {
+    this.owner = newOwner;
   }
 }

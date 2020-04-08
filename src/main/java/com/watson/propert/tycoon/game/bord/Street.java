@@ -3,6 +3,9 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.Iterator;
 import java.util.List;
 
+import com.watson.propert.tycoon.game.Bank;
+import com.watson.propert.tycoon.game.Owner;
+
 public class Street extends Property {
 
   public enum Colour {
@@ -50,14 +53,52 @@ public class Street extends Property {
     return houseLevel;
   }
 
-  public void changeNumHouses(int numHouses) {
-    if (houseLevel + numHouses >= rent.size()) {
-      throw new RuntimeException("Fail: To many houses");
+  public void buyHouses(int housesToBuy) {
+    if (housesToBuy < 0) {
+      throw new IllegalArgumentException("HouseToBuy most not be negative");
     }
-    if (houseLevel + numHouses < 0) {
-      throw new RuntimeException("Can't have negative number of houses");
+    if (houseLevel + housesToBuy >= rent.size()) {
+      throw new IllegalArgumentException("Can't buy more houses then Street support");
     }
-    houseLevel += numHouses;
+    if (housesToBuy > 0) {
+      Owner owner =
+          owner().orElseThrow(() -> new RuntimeException("Street need owner to buy houses"));
+      owner.payTo(Bank.instance(), priceForHouse() * housesToBuy);
+      houseLevel += housesToBuy;
+    }
+  }
+
+  public void sellHouses(int housesToSell) {
+    if (housesToSell < 0) {
+      throw new IllegalArgumentException("HousesToSell most not be negative");
+    }
+    if (houseLevel - housesToSell < 0) {
+      throw new IllegalArgumentException("Can't have negative number of houses");
+    }
+    if (housesToSell > 0) {
+      Owner owner =
+          owner().orElseThrow(() -> new RuntimeException("Street need owner to sell houses"));
+      Bank.instance().payTo(owner, priceForHouse() * housesToSell);
+      houseLevel -= housesToSell;
+    }
+  }
+
+  private int priceForHouse() {
+    switch (colour) {
+      case BROWN:
+      case BLUE:
+        return 50;
+      case PURPLE:
+      case ORANGE:
+        return 100;
+      case RED:
+      case YELLOW:
+        return 150;
+      case GREEN:
+      case DEEP_BLUE:
+        return 200;
+    }
+    return 0;
   }
 
   public Colour getColour() {

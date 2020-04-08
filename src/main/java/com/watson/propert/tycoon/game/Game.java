@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.bord.BoardSource;
-import com.watson.propert.tycoon.game.bord.BordBuilder;
-import com.watson.propert.tycoon.game.bord.Property;
-import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
 import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
 import com.watson.propert.tycoon.game.events.PropertyEvent;
@@ -119,7 +116,7 @@ public class Game implements PropertTycoon {
           removeFromGame(currentPlayer);
           switchTo(new NewTurn());
         } else {
-          switchTo(new NoCash());
+          switchTo(new NoCash(e.needToPay()));
         }
       }
     }
@@ -179,13 +176,33 @@ public class Game implements PropertTycoon {
 
   class NoCash implements Game.state {
 
+    private int needToFree;
+
+    private NoCash(int needToFree) {
+      this.needToFree = needToFree;
+    }
+
     @Override
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.Mortgaged) {
-        PlayerAction.Mortgaged msg = (PlayerAction.Mortgaged) playerAction;
-        ToMorgade rule = new ToMorgade(master.currentPlayer());
-        rule.morgade(bord.moveTo(msg.propertyName));
+        mortgaged((PlayerAction.Mortgaged) playerAction);
+      } else if (playerAction instanceof PlayerAction.RemoveHouse) {
+        sellHouse((PlayerAction.RemoveHouse) playerAction);
       }
+    }
+
+    private void mortgaged(PlayerAction.Mortgaged msg) {
+      Player player = master.currentPlayer();
+      ToMorgade rule = new ToMorgade(player);
+      rule.morgade(bord.moveTo(msg.propertyName));
+      if (player.cash() > needToFree) {
+        switchTo(new FixProperty());
+      }
+    }
+
+    private void sellHouse(PlayerAction.RemoveHouse msg) {
+      Square street = bord.moveTo(msg.streetName);
+      new ToSellHouses(master.currentPlayer()).sellHouses(street, msg.houseRemoved);
     }
   }
 }

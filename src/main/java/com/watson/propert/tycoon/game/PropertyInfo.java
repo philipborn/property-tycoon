@@ -64,7 +64,12 @@ public class PropertyInfo {
 
   private static PropertyInfo info(Property p) {
     int numHouses = getHouses(p);
-    Player.Id id = p.owner().map(Player::getId).orElse(null);
+    Player.Id id =
+        p.owner()
+            .filter(Player.class::isInstance)
+            .map(Player.class::cast)
+            .map(Player::getId)
+            .orElse(null);
     return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage());
   }
 

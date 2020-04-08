@@ -41,7 +41,7 @@ public interface PlayerAction {
     }
   }
 
-  final class RemoveHouse {
+  final class RemoveHouse implements PlayerAction {
     public final String streetName;
     public final int houseRemoved;
 

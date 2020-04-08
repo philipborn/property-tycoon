@@ -10,7 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.CashUser;
+import com.watson.propert.tycoon.game.Owner;
 
 public class StreetTest {
 
@@ -24,15 +25,14 @@ public class StreetTest {
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addStreet("test2", 150, Street.Colour.BLUE, rents2)
                 .getBord();
-    Player player = new Player(Player.Id.ONE, null, null);
-    street.newOwner(player);
+    street.newOwner(new TestOwner());
 
     assertEquals(0, street.getNumHouse());
     assertEquals(rents.get(0), street.getRent());
-    street.changeNumHouses(1);
+    street.buyHouses(1);
     assertEquals(1, street.getNumHouse());
     assertEquals(rents.get(1), street.getRent());
-    street.changeNumHouses(2);
+    street.buyHouses(2);
     assertEquals(3, street.getNumHouse());
     assertEquals(rents.get(3), street.getRent());
   }
@@ -48,13 +48,13 @@ public class StreetTest {
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addStreet("test2", 150, Street.Colour.BLUE, rents2)
                 .getBord();
-    Player player = new Player(Player.Id.ONE, null, null);
-    street.newOwner(player);
+    Owner owner = new TestOwner();
+    street.newOwner(owner);
 
     assertEquals(0, street.getNumHouse());
     assertEquals(value, street.getRent());
     Street second = (Street) street.move(1);
-    second.newOwner(player);
+    second.newOwner(owner);
     assertEquals(value * 2, street.getRent());
   }
 
@@ -62,19 +62,35 @@ public class StreetTest {
   void tryAddToManyHouseThrowRuntimeException() {
     List<Integer> rents = new ArrayList<>(Arrays.asList(10, 100, 200, 300));
     Street street = new Street("test", 100, Street.Colour.RED, rents);
+    street.newOwner(new TestOwner());
 
-    assertDoesNotThrow(() -> street.changeNumHouses(rents.size() - 1));
-    assertThrows(RuntimeException.class, () -> street.changeNumHouses(1));
+    assertDoesNotThrow(() -> street.buyHouses(rents.size() - 1));
+    assertThrows(RuntimeException.class, () -> street.buyHouses(1));
   }
 
   @Test
   void tryToRemoveTOManyHouseThrowsRuntimeException() {
     List<Integer> rents = new ArrayList<>(Arrays.asList(10, 100, 200, 300));
     Street street = new Street("test", 100, Street.Colour.RED, rents);
+    street.newOwner(new TestOwner());
     int change = rents.size() - 1;
 
-    assertDoesNotThrow(() -> street.changeNumHouses(change));
-    assertDoesNotThrow(() -> street.changeNumHouses(-change));
-    assertThrows(RuntimeException.class, () -> street.changeNumHouses(-1));
+    assertDoesNotThrow(() -> street.buyHouses(change));
+    assertDoesNotThrow(() -> street.sellHouses(change));
+    assertThrows(RuntimeException.class, () -> street.sellHouses(1));
+  }
+
+  private class TestOwner implements Owner {
+
+    @Override
+    public int cash() {
+      return 0;
+    }
+
+    @Override
+    public void receiveCash(int amount) {}
+
+    @Override
+    public void payTo(CashUser cashUser, int amount) {}
   }
 }
