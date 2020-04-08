@@ -4,13 +4,13 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class SquareImp implements Square {
+public abstract class SquareAbstract implements Square {
 
   private Square next;
   private Square back;
   private String name;
 
-  public SquareImp(String name) {
+  public SquareAbstract(String name) {
     this.name = name;
   }
 

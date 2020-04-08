@@ -11,7 +11,7 @@ public class Passing implements SquareVisitor {
   }
 
   @Override
-  public void SquareImp(SquareImp square) {
+  public void SquareImp(SquareAbstract square) {
     if (square.name().equals("Go")) {
       int cashToReceive = 200;
       currentPlayer.receiveCash(cashToReceive);

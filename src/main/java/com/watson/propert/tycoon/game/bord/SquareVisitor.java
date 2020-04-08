@@ -1,7 +1,7 @@
 package com.watson.propert.tycoon.game.bord;
 
 public interface SquareVisitor {
-  default void SquareImp(SquareImp square) {}
+  default void SquareImp(SquareAbstract square) {}
 
   default void street(Street street) {}
 

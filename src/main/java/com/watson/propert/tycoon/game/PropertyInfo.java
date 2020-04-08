@@ -91,7 +91,7 @@ public class PropertyInfo {
     }
 
     @Override
-    public void SquareImp(SquareImp square) {
+    public void SquareImp(SquareAbstract square) {
       // Do nothing
     }
 

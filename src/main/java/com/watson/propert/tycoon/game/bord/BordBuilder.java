@@ -16,8 +16,8 @@ public class BordBuilder {
   private EventBus channel;
   private BordReader source;
 
-  private SquareImp first;
-  private SquareImp last;
+  private SquareAbstract first;
+  private SquareAbstract last;
   private Map<String, String> prop;
   private Boolean doneLastLink = false;
 
@@ -54,11 +54,11 @@ public class BordBuilder {
 
   public BordBuilder addSquare(String name) {
     checkIfCanAddSquare();
-    addToLink(new SquareImp(name));
+    addToLink(new TriggerSquare(name));
     return this;
   }
 
-  public BordBuilder addSquare(SquareImp square) {
+  public BordBuilder addSquare(SquareAbstract square) {
     checkIfCanAddSquare();
     addToLink(square);
     return this;
@@ -76,7 +76,7 @@ public class BordBuilder {
     }
   }
 
-  private SquareImp createSquare() {
+  private SquareAbstract createSquare() {
     prop = source.getProperties();
     if (isStreet()) {
       return buildStreet();
@@ -85,7 +85,7 @@ public class BordBuilder {
     } else if (isUtilits()) {
       return buildUtilitys();
     }
-    return new SquareImp(prop.get("name"));
+    return new TriggerSquare(prop.get("name"));
   }
 
   private Boolean isStreet() {
@@ -106,7 +106,7 @@ public class BordBuilder {
     return keys.containsAll(streetKeys);
   }
 
-  private SquareImp buildStreet() {
+  private SquareAbstract buildStreet() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
     Street.Colour color = extractColor(prop.get("group"));
@@ -128,7 +128,7 @@ public class BordBuilder {
     return false;
   }
 
-  private SquareImp buildStation() {
+  private SquareAbstract buildStation() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
     Station station = new Station(name, value);
@@ -142,13 +142,13 @@ public class BordBuilder {
     return prop.get("group").toLowerCase().equals("utilities");
   }
 
-  private SquareImp buildUtilitys() {
+  private SquareAbstract buildUtilitys() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
     return new Utilities(name, value);
   }
 
-  private SquareImp addToLink(SquareImp current) {
+  private SquareAbstract addToLink(SquareAbstract current) {
     if (last != null) {
       current.setBack(last);
       last.setNext(current);
