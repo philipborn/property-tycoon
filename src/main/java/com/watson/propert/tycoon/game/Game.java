@@ -104,30 +104,25 @@ public class Game implements PropertTycoon {
     }
 
     private void throwDicesAndMove() {
-      Player currentPlayer = master.currentPlayer();
       Integer sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
-      Square newLocation = currentPlayer.move(sum);
+      Square newLocation = player.move(sum);
       try {
-        newLocation.vist(new AfterMove(currentPlayer));
-        if (PropertyCanBought.by(currentPlayer)) {
+        newLocation.vist(new AfterMove(player));
+        if (PropertyCanBought.by(player)) {
           switchTo(new NoOwner());
         } else {
           switchTo(new FixProperty());
         }
       } catch (NoCashException e) {
-        if (currentPlayer.totalValue() > e.amount()) {
-          removeFromGame(currentPlayer);
+        if (player.totalValue() > e.amount()) {
+          removeFromGame(player);
           switchTo(new NewTurn());
         } else {
+          debs.addFirst(e);
           switchTo(new NoCash());
         }
       }
     }
-  }
-
-  private void removeFromGame(Player player) {
-    Bankruptcy rule = new Bankruptcy(master);
-    rule.forPlayer(player);
   }
 
   private class FixProperty implements Game.state {
@@ -137,10 +132,6 @@ public class Game implements PropertTycoon {
       if (playerAction instanceof PlayerAction.DonePropertyUpgrade) {
         donePropertyManagement();
       }
-    }
-
-    public void donePropertyManagement() {
-      switchTo(new NewTurn());
     }
   }
 
@@ -162,17 +153,6 @@ public class Game implements PropertTycoon {
         notBuyingProperty();
       }
     }
-
-    private void buyProperty() {
-      Square property = player.postion();
-      property.vist(new BuyProperty(player));
-      channel.post(new PropertyEvent(property.name(), player.id));
-      switchTo(new FixProperty());
-    }
-
-    private void notBuyingProperty() {
-      switchTo(new FixProperty());
-    }
   }
 
   class NoCash implements Game.state {
@@ -182,12 +162,7 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
-      NoCashException e = debs.pop();
-      player = (Player) e.needToPay();
-      payTo = e.payTo();
-      needToFree = e.amount();
-      channel.post(new ChangePlayerEvent(player.getId()));
-      channel.post(new PlayerInDebtEvent(player.getId(), needToFree));
+      setUpDebtCollection(debs.pop());
     }
 
     @Override
@@ -205,36 +180,68 @@ public class Game implements PropertTycoon {
       } else if (playerAction instanceof PlayerAction.SellProperty) {
         sellProperty((PlayerAction.SellProperty) playerAction);
       }
+      selectNextState();
+    }
+
+    private void selectNextState() {
       if (player.cash() >= needToFree) {
         player.payTo(payTo, needToFree);
         if (debs.isEmpty()) {
           switchTo(new FixProperty());
         } else {
-          switchTo(new NoCash());
+          setUpDebtCollection(debs.pop());
         }
       }
     }
 
-    private void mortgaged(PlayerAction.Mortgaged msg) {
-      ToMorgade rule = new ToMorgade(player);
-      rule.morgade(bord.moveTo(msg.propertyName));
+    private void setUpDebtCollection(NoCashException e) {
+      player = (Player) e.needToPay();
+      payTo = e.payTo();
+      needToFree = e.amount();
+      channel.post(new ChangePlayerEvent(player.getId()));
+      channel.post(new PlayerInDebtEvent(player.getId(), needToFree));
     }
+  }
 
-    private void sellHouse(PlayerAction.SellHouse msg) {
-      Square street = bord.moveTo(msg.streetName);
-      new ToSellHouses(player).sellHouses(street);
-    }
+  private void removeFromGame(Player player) {
+    Bankruptcy rule = new Bankruptcy(master);
+    rule.forPlayer(player);
+  }
 
-    private void sellProperty(PlayerAction.SellProperty msg) {
-      Optional<Property> property =
-          Optional.of(bord.moveTo(msg.squareName))
-              .filter(Property.class::isInstance)
-              .map(Property.class::cast);
-      boolean playerIsOwner =
-          property.flatMap(Property::owner).filter((owner -> owner.equals(player))).isPresent();
-      if (playerIsOwner) {
-        property.ifPresent(Property::sell);
-      }
+  public void donePropertyManagement() {
+    switchTo(new NewTurn());
+  }
+
+  private void buyProperty() {
+    Square property = player.postion();
+    property.vist(new BuyProperty(player));
+    channel.post(new PropertyEvent(property.name(), player.id));
+    switchTo(new FixProperty());
+  }
+
+  private void notBuyingProperty() {
+    switchTo(new FixProperty());
+  }
+
+  private void mortgaged(PlayerAction.Mortgaged msg) {
+    ToMorgade rule = new ToMorgade(player);
+    rule.morgade(bord.moveTo(msg.propertyName));
+  }
+
+  private void sellHouse(PlayerAction.SellHouse msg) {
+    Square street = bord.moveTo(msg.streetName);
+    new ToSellHouses(player).sellHouses(street);
+  }
+
+  private void sellProperty(PlayerAction.SellProperty msg) {
+    Optional<Property> property =
+            Optional.of(bord.moveTo(msg.squareName))
+                    .filter(Property.class::isInstance)
+                    .map(Property.class::cast);
+    boolean playerIsOwner =
+            property.flatMap(Property::owner).filter((owner -> owner.equals(player))).isPresent();
+    if (playerIsOwner) {
+      property.ifPresent(Property::sell);
     }
   }
 }
