@@ -31,7 +31,9 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.bord.BordReader;
+import com.watson.propert.tycoon.game.bord.Street;
 
 /**
  * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use

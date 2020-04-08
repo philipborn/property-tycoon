@@ -1,10 +1,10 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.events;
 
 public class DiceEvent {
   private int firstDice;
   private int secondDice;
 
-  DiceEvent(int firstDice, int secondDice) {
+  public DiceEvent(int firstDice, int secondDice) {
     this.firstDice = firstDice;
     this.secondDice = secondDice;
   }

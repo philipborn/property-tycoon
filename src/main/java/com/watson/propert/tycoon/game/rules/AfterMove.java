@@ -1,10 +1,13 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
 
-public class RuleAfterMove implements SquareVisitor {
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.*;
+
+public class AfterMove implements SquareVisitor {
 
   private Player player;
 
-  public RuleAfterMove(Player player) {
+  public AfterMove(Player player) {
     this.player = player;
   }
 

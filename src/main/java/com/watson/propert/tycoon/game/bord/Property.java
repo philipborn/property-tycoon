@@ -1,6 +1,8 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 import java.util.Optional;
+
+import com.watson.propert.tycoon.game.Player;
 
 public abstract class Property extends SquareImp {
 

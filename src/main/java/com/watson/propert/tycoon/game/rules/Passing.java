@@ -1,9 +1,12 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
 
-public class RulePassing implements SquareVisitor {
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.*;
+
+public class Passing implements SquareVisitor {
   Player currentPlayer;
 
-  private RulePassing(Player current) {
+  private Passing(Player current) {
     currentPlayer = current;
   }
 
@@ -12,6 +15,7 @@ public class RulePassing implements SquareVisitor {
     if (square.name().equals("Go")) {
       int cashToReceive = 200;
       currentPlayer.receiveCash(cashToReceive);
+      currentPlayer.receiveBuyRights();
     }
   }
 
@@ -24,7 +28,7 @@ public class RulePassing implements SquareVisitor {
   @Override
   public void utilities(Utilities utilities) {}
 
-  public static RulePassing rulesFor(Player current) {
-    return new RulePassing(current);
+  public static Passing rulesFor(Player current) {
+    return new Passing(current);
   }
 }

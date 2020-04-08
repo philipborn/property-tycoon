@@ -34,6 +34,11 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
+import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
+import com.watson.propert.tycoon.game.events.DiceEvent;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PropertTycoonTest {

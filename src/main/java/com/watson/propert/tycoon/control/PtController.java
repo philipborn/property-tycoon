@@ -52,6 +52,10 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
+import com.watson.propert.tycoon.game.events.CashEvent;
+import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
+import com.watson.propert.tycoon.game.events.DiceEvent;
 import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
@@ -228,8 +232,8 @@ public class PtController {
 
   private void yes() {
     // implement window
-    game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
     game.send(PlayerAction.BuyProperty.INSTANCE);
+    game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
   }
 
   @FXML

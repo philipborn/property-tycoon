@@ -1,15 +1,18 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
 
-public class RulePropertyCanBought implements SquareVisitor {
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.*;
+
+public class PropertyCanBought implements SquareVisitor {
   private Player player;
   private boolean canBuy = false;
 
-  private RulePropertyCanBought(Player player) {
+  private PropertyCanBought(Player player) {
     this.player = player;
   }
 
   public static boolean by(Player player) {
-    RulePropertyCanBought rule = new RulePropertyCanBought(player);
+    PropertyCanBought rule = new PropertyCanBought(player);
     player.postion().vist(rule);
     return rule.canBuy();
   }

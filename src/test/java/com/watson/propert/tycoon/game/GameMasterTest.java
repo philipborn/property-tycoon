@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.bord.SquareImp;
 
 public class GameMasterTest {
 
@@ -24,8 +26,8 @@ public class GameMasterTest {
     channel = new EventBus();
 
     players = new ArrayList<>(6);
-    players.add(new Player(PlayerId.ONE, square, channel));
-    players.add(new Player(PlayerId.TWO, square, channel));
+    players.add(new Player(Player.Id.ONE, square, channel));
+    players.add(new Player(Player.Id.TWO, square, channel));
     master = new GameMaster(players);
   }
 

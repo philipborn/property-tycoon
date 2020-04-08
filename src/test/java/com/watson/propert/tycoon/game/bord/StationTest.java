@@ -1,10 +1,11 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.Player;
 
 public class StationTest {
 
@@ -14,7 +15,7 @@ public class StationTest {
     Station station2 = new Station("test2", 100);
     Station station3 = new Station("test3", 100);
     Station station4 = new Station("test4", 100);
-    Player player = new Player(PlayerId.ONE, null, null);
+    Player player = new Player(Player.Id.ONE, null, null);
 
     BordBuilder.with(new EventBus())
         .addSquare(station)
@@ -46,8 +47,8 @@ public class StationTest {
     Station station2 = new Station("test2", 100);
     Station station3 = new Station("test3", 100);
     Station station4 = new Station("test4", 100);
-    Player player = new Player(PlayerId.ONE, null, null);
-    Player playerTwo = new Player(PlayerId.TWO, null, null);
+    Player player = new Player(Player.Id.ONE, null, null);
+    Player playerTwo = new Player(Player.Id.TWO, null, null);
 
     BordBuilder.with(new EventBus())
         .addSquare(station)

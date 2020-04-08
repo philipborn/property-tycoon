@@ -1,4 +1,4 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.Player;
 
 public class StreetTest {
 
@@ -23,7 +24,7 @@ public class StreetTest {
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addStreet("test2", 150, Street.Colour.BLUE, rents2)
                 .getBord();
-    Player player = new Player(PlayerId.ONE, null, null);
+    Player player = new Player(Player.Id.ONE, null, null);
     street.newOwner(player);
 
     assertEquals(0, street.getNumHouse());
@@ -47,7 +48,7 @@ public class StreetTest {
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addStreet("test2", 150, Street.Colour.BLUE, rents2)
                 .getBord();
-    Player player = new Player(PlayerId.ONE, null, null);
+    Player player = new Player(Player.Id.ONE, null, null);
     street.newOwner(player);
 
     assertEquals(0, street.getNumHouse());

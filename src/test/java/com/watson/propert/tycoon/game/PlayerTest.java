@@ -7,6 +7,9 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PlayerTest {
@@ -24,7 +27,7 @@ public class PlayerTest {
     first = BordBuilder.with(channel).addFrom(br).getBord();
 
     this.channel = new EventBus();
-    player = new Player(PlayerId.ONE, first, this.channel);
+    player = new Player(Player.Id.ONE, first, this.channel);
   }
 
   @Test

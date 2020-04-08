@@ -1,4 +1,4 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 import java.util.Iterator;
 import java.util.Spliterator;
@@ -97,11 +97,11 @@ public class SquareImp implements Square {
     visitor.SquareImp(this);
   }
 
-  public void setNext(Square node) {
+  protected void setNext(Square node) {
     next = node;
   }
 
-  public void setBack(Square node) {
+  protected void setBack(Square node) {
     back = node;
   }
 

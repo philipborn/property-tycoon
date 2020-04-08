@@ -1,10 +1,13 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
+
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.*;
 
 public class BuyProperty implements SquareVisitor {
 
   Player buyer;
 
-  BuyProperty(Player player) {
+  public BuyProperty(Player player) {
     buyer = player;
   }
 
@@ -18,7 +21,7 @@ public class BuyProperty implements SquareVisitor {
 
     int price = property.value();
     if (buyer.cash() > price) {
-      buyer.payCash(price);
+      buyer.payTo(Bank.instance(), price);
       property.newOwner(buyer);
     }
   }

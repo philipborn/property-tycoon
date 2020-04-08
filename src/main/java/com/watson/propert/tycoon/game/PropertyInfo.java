@@ -2,15 +2,18 @@ package com.watson.propert.tycoon.game;
 
 import java.util.Optional;
 
+import com.watson.propert.tycoon.game.bord.*;
+
 public class PropertyInfo {
 
   private String name;
-  private PlayerId owner;
+  private Player.Id owner;
   private int numHouse;
   private int rent;
   private boolean isMorged;
 
-  private PropertyInfo(String name, PlayerId owner, int numHouse, int currentRent, boolean morged) {
+  private PropertyInfo(
+      String name, Player.Id owner, int numHouse, int currentRent, boolean morged) {
     this.name = name;
     this.owner = owner;
     this.numHouse = numHouse;
@@ -24,7 +27,7 @@ public class PropertyInfo {
   }
 
   /** @return The current owner; */
-  public PlayerId getOwner() {
+  public Player.Id getOwner() {
     return owner;
   }
 
@@ -61,7 +64,7 @@ public class PropertyInfo {
 
   private static PropertyInfo info(Property p) {
     int numHouses = getHouses(p);
-    PlayerId id = p.owner().map(Player::getId).orElse(null);
+    Player.Id id = p.owner().map(Player::getId).orElse(null);
     return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage());
   }
 

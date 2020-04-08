@@ -1,4 +1,4 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 public interface Square extends Iterable<Square> {
 

@@ -1,9 +1,23 @@
 package com.watson.propert.tycoon.game;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.bord.SquareVisitor;
+import com.watson.propert.tycoon.game.events.CashEvent;
+import com.watson.propert.tycoon.game.rules.Passing;
 
 public class Player implements CashUser, Comparable<Player> {
-  public final PlayerId id;
+
+  public enum Id {
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX
+  }
+
+  public final Id id;
 
   private Square location;
   private int cash;
@@ -11,7 +25,7 @@ public class Player implements CashUser, Comparable<Player> {
 
   private EventBus channel;
 
-  public Player(PlayerId id, Square startLocation, EventBus channel) {
+  public Player(Id id, Square startLocation, EventBus channel) {
     this.id = id;
     location = startLocation;
     this.channel = channel;
@@ -19,7 +33,7 @@ public class Player implements CashUser, Comparable<Player> {
   }
 
   public Square move(int steps) {
-    SquareVisitor passingRulse = RulePassing.rulesFor(this);
+    SquareVisitor passingRulse = Passing.rulesFor(this);
     location = location.move(steps, passingRulse);
     return location;
   }
@@ -32,7 +46,7 @@ public class Player implements CashUser, Comparable<Player> {
     return cash;
   }
 
-  public PlayerId getId() {
+  public Id getId() {
     return id;
   }
 

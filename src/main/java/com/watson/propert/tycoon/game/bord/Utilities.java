@@ -1,8 +1,9 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
 import java.util.Iterator;
 
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.events.DiceEvent;
 
 public class Utilities extends Property {
 

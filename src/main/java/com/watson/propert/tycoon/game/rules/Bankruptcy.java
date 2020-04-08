@@ -1,10 +1,16 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
 
-public class RuleBankruptcy implements SquareVisitor {
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.SquareVisitor;
+import com.watson.propert.tycoon.game.bord.Station;
+import com.watson.propert.tycoon.game.bord.Street;
+import com.watson.propert.tycoon.game.bord.Utilities;
+
+public class Bankruptcy implements SquareVisitor {
   private Player player;
   private GameMaster master;
 
-  public RuleBankruptcy(GameMaster master) {
+  public Bankruptcy(GameMaster master) {
     this.master = master;
   }
 

@@ -5,6 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.BoardSource;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.bord.Property;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
+import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
+import com.watson.propert.tycoon.game.events.PropertyEvent;
+import com.watson.propert.tycoon.game.rules.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class Game implements PropertTycoon {
@@ -19,12 +27,12 @@ public class Game implements PropertTycoon {
 
   public Game(Square startPostion, EventBus channel) {
     List<Player> players = new ArrayList<>();
-    players.add(new Player(PlayerId.ONE, startPostion, channel));
-    players.add(new Player(PlayerId.TWO, startPostion, channel));
-    players.add(new Player(PlayerId.THREE, startPostion, channel));
-    players.add(new Player(PlayerId.FOUR, startPostion, channel));
-    players.add(new Player(PlayerId.FIVE, startPostion, channel));
-    players.add(new Player(PlayerId.SIX, startPostion, channel));
+    players.add(new Player(Player.Id.ONE, startPostion, channel));
+    players.add(new Player(Player.Id.TWO, startPostion, channel));
+    players.add(new Player(Player.Id.THREE, startPostion, channel));
+    players.add(new Player(Player.Id.FOUR, startPostion, channel));
+    players.add(new Player(Player.Id.FIVE, startPostion, channel));
+    players.add(new Player(Player.Id.SIX, startPostion, channel));
     master = new GameMaster(players);
     state = new NewTurn();
     bord = startPostion;
@@ -100,8 +108,8 @@ public class Game implements PropertTycoon {
       Integer sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
       Square newLocation = currentPlayer.move(sum);
       try {
-        newLocation.vist(new RuleAfterMove(currentPlayer));
-        if (RulePropertyCanBought.by(currentPlayer)) {
+        newLocation.vist(new AfterMove(currentPlayer));
+        if (PropertyCanBought.by(currentPlayer)) {
           switchTo(new NoOwner());
         } else {
           switchTo(new FixProperty());
@@ -109,13 +117,16 @@ public class Game implements PropertTycoon {
       } catch (NoCashException e) {
         if (currentPlayer.totalValue() > e.needToPay()) {
           removeFromGame(currentPlayer);
+          switchTo(new NewTurn());
+        } else {
+          switchTo(new NoCash());
         }
       }
     }
   }
 
   private void removeFromGame(Player player) {
-    RuleBankruptcy rule = new RuleBankruptcy(master);
+    Bankruptcy rule = new Bankruptcy(master);
     rule.forPlayer(player);
   }
 
@@ -172,7 +183,7 @@ public class Game implements PropertTycoon {
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.Mortgaged) {
         PlayerAction.Mortgaged msg = (PlayerAction.Mortgaged) playerAction;
-        RuleToMorgade rule = new RuleToMorgade(master.currentPlayer());
+        ToMorgade rule = new ToMorgade(master.currentPlayer());
         rule.morgade(bord.moveTo(msg.propertyName));
       }
     }

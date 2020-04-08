@@ -1,11 +1,14 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.rules;
 
-public class RuleToMorgade implements SquareVisitor {
+import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.bord.*;
+
+public class ToMorgade implements SquareVisitor {
 
   private Player player;
   private int reviveCash = 0;
 
-  public RuleToMorgade(Player player) {
+  public ToMorgade(Player player) {
     this.player = player;
   }
 

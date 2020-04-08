@@ -1,6 +1,6 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.bord;
 
-import static com.watson.propert.tycoon.game.StationIterator.stationIterator;
+import static com.watson.propert.tycoon.game.bord.StationIterator.stationIterator;
 
 import java.util.Iterator;
 
