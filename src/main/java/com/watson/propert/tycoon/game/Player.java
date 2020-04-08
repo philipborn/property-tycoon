@@ -72,7 +72,7 @@ public class Player implements Owner, Comparable<Player> {
       throw new IllegalArgumentException("Amount most be postive");
     }
     if (cash < amount) {
-      throw new NoCashException("Player " + id + " can't pay, need more cash!", receiver, amount);
+      throw new NoCashException(this, receiver, amount);
     } else if (amount > 0) {
       int oldCash = cash;
       cash -= amount;

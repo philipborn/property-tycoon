@@ -1,13 +1,12 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
 import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
+import com.watson.propert.tycoon.game.events.PlayerInDebtEvent;
 import com.watson.propert.tycoon.game.events.PropertyEvent;
 import com.watson.propert.tycoon.game.rules.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
@@ -22,6 +21,7 @@ public class Game implements PropertTycoon {
   private EventBus channel;
   private Game.state state;
   private Player player;
+  private Deque<NoCashException> debs = new ArrayDeque<>();
 
   public Game(Square startPostion, EventBus channel) {
     List<Player> players = new ArrayList<>();
@@ -115,11 +115,11 @@ public class Game implements PropertTycoon {
           switchTo(new FixProperty());
         }
       } catch (NoCashException e) {
-        if (currentPlayer.totalValue() > e.needToPay()) {
+        if (currentPlayer.totalValue() > e.amount()) {
           removeFromGame(currentPlayer);
           switchTo(new NewTurn());
         } else {
-          switchTo(new NoCash(e.payTo(), e.needToPay()));
+          switchTo(new NoCash());
         }
       }
     }
@@ -180,9 +180,20 @@ public class Game implements PropertTycoon {
     private CashUser payTo;
     private int needToFree;
 
-    private NoCash(CashUser payTo, int needToFree) {
-      this.payTo = payTo;
-      this.needToFree = needToFree;
+    @Override
+    public void entry() {
+      NoCashException e = debs.pop();
+      player = (Player) e.needToPay();
+      payTo = e.payTo();
+      needToFree = e.amount();
+      channel.post(new ChangePlayerEvent(player.getId()));
+      channel.post(new PlayerInDebtEvent(player.getId(), needToFree));
+    }
+
+    @Override
+    public void exit() {
+      player = master.currentPlayer();
+      channel.post(new ChangePlayerEvent(player.getId()));
     }
 
     @Override
@@ -196,7 +207,11 @@ public class Game implements PropertTycoon {
       }
       if (player.cash() >= needToFree) {
         player.payTo(payTo, needToFree);
-        switchTo(new FixProperty());
+        if (debs.isEmpty()) {
+          switchTo(new FixProperty());
+        } else {
+          switchTo(new NoCash());
+        }
       }
     }
 

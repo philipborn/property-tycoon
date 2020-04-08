@@ -2,20 +2,26 @@ package com.watson.propert.tycoon.game;
 
 public class NoCashException extends RuntimeException {
 
+  private CashUser needToPay;
   private CashUser payTo;
-  private int needToPay;
+  private int amount;
 
-  public NoCashException(String msg, CashUser payTo, int needToPay) {
-    super(msg);
-    this.payTo = payTo;
+  public NoCashException(CashUser needToPay, CashUser payTo, int amount) {
+    super();
     this.needToPay = needToPay;
+    this.payTo = payTo;
+    this.amount = amount;
   }
 
-  public int needToPay() {
+  public CashUser needToPay() {
     return needToPay;
   }
 
   public CashUser payTo() {
     return payTo;
+  }
+
+  public int amount() {
+    return amount;
   }
 }
