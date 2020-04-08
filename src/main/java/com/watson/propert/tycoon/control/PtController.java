@@ -41,10 +41,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import org.slf4j.Logger;
@@ -206,9 +208,21 @@ public class PtController {
 
   @FXML private VBox LEFT_PANEL;
 
+  @FXML private Button BUTTON_YES;
+
+  @FXML private Button BUTTON_NO;
+
   private GuiGameBoard gameBoard;
 
   private PropertTycoon game;
+
+  @FXML
+  void clickedNo(ActionEvent event) {}
+
+  @FXML
+  void clickedYes(ActionEvent event) {
+    yes();
+  }
 
   @FXML
   void endGame(ActionEvent event) {
@@ -223,7 +237,7 @@ public class PtController {
   void newGame(ActionEvent event) throws IOException {
     //goToJail();
     //moveBackThreeSpaces();
-    yes();
+    //yes();
   }
 
   private void yes() {
@@ -275,6 +289,7 @@ public class PtController {
 
     // Create & show scene
     Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
     currentPopup.setScene(scene);
     currentPopup.show();
   }
@@ -525,6 +540,7 @@ public class PtController {
 
     // set popup & game variables/listener
     currentPopup = new Stage();
+    currentPopup.initStyle(StageStyle.TRANSPARENT);
     game = Game.newGame();
     game.registerListener(this);
 

@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BankGothic Lt BT";
-    src: url('bgothl.ttf');
+    src: url('../fonts/bgothl.ttf');
 }
 
 @font-face {
     font-family: "OCR A Std";
-    src: url('OCRAStd.otf');
+    src: url('../fonts/OCRAStd.otf');
 }
 
 /*
@@ -191,14 +191,14 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-padding: 15 22 15 22;   
+    -fx-padding: 10 18 10 18;   
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #2e241a;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
     -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
-    -fx-font-size: 26px;
+    -fx-font-size: 24px;
     -fx-text-fill: #d8d8d8;
     -fx-border-insets: 2px;
 }
