@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +42,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
@@ -216,6 +218,12 @@ public class PtController {
 
   private PropertTycoon game;
 
+  // Audio clips
+  private AudioClip throwDiceAudio;
+  private AudioClip dropTokenAudio;
+  private AudioClip takeCardAudio;
+  private AudioClip tingAudio;
+
   @FXML
   void clickedNo(ActionEvent event) {}
 
@@ -253,12 +261,18 @@ public class PtController {
 
   @Subscribe
   void diceHandler(DiceEvent event) {
-    // move functionality
-    int i = event.firstDice() + event.secondDice();
-    displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
-    DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
-    DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
-    move(i);
+    throwDiceAudio.play();
+    PauseTransition pause = new PauseTransition(Duration.seconds(3));
+    pause.setOnFinished(
+        ev -> {
+          // move functionality
+          int i = event.firstDice() + event.secondDice();
+          displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
+          DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
+          DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
+          move(i);
+        });
+    pause.play();
   }
 
   void moveBackThreeSpaces() {
@@ -505,6 +519,15 @@ public class PtController {
           new GuiSquare(SQUARE_38),
           new GuiSquare(SQUARE_39)
         };
+
+    // Load Audio Clips
+    throwDiceAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    dropTokenAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    takeCardAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
 
     // Initialise players - FOR TESTING
     // To be set up by New Game Dialog box
