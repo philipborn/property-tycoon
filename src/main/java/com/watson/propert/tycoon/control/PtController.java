@@ -193,6 +193,19 @@ public class PtController {
   @FXML private Button NEW_GAME;
 
   @FXML private Button END_GAME;
+  @FXML private HBox BG_PLAYER_1;
+  @FXML private HBox BG_PLAYER_2;
+  @FXML private HBox BG_PLAYER_3;
+  @FXML private HBox BG_PLAYER_4;
+  @FXML private HBox BG_PLAYER_5;
+  @FXML private HBox BG_PLAYER_6;
+
+  @FXML private ImageView IMG_PLAYER_1;
+  @FXML private ImageView IMG_PLAYER_2;
+  @FXML private ImageView IMG_PLAYER_3;
+  @FXML private ImageView IMG_PLAYER_4;
+  @FXML private ImageView IMG_PLAYER_5;
+  @FXML private ImageView IMG_PLAYER_6;
 
   @FXML private VBox PLAYER_2;
 
@@ -326,17 +339,19 @@ public class PtController {
 
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
-    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+    //gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
     gameBoard.getNextPlayer();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
+    /*
+
     gameBoard
-        .getCurrentPlayer()
-        .getInfo()
-        .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
+    .getCurrentPlayer()
+    .getInfo()
+    .getInfo()
+    .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
   }
 
   @Subscribe
@@ -549,11 +564,14 @@ public class PtController {
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
     gameBoard.setSquares(guiSquares);
     gameBoard.setPlayers(players);
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
+
+    /*
     gameBoard
         .getCurrentPlayer()
         .getInfo()
         .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
+        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
