@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -28,6 +29,8 @@ import com.watson.propert.tycoon.gui.*;
 public class PtNewGameDialogCtrl {
 
   @FXML private ResourceBundle resources;
+
+  @FXML private ComboBox<String> TIME_LIMIT;
 
   @FXML private URL location;
 
@@ -159,6 +162,7 @@ public class PtNewGameDialogCtrl {
   private void makeRowVisible(int i) {
     newPlayers[i].getAi().setVisible(true);
     newPlayers[i].getName().setVisible(true);
+    newPlayers[i].getToken().setVisible(true);
     newPlayers[i].getRow().setPrefHeight(60);
   }
 
@@ -168,6 +172,7 @@ public class PtNewGameDialogCtrl {
     newPlayers[i].getAi().selectedProperty().setValue(false);
     newPlayers[i].getName().setText("");
     newPlayers[i].getName().setVisible(false);
+    newPlayers[i].getToken().setVisible(false);
     newPlayers[i].getRow().setPrefHeight(0);
   }
 
@@ -178,16 +183,29 @@ public class PtNewGameDialogCtrl {
     NO_PLAYERS.setText("4");
     newPlayers =
         new GuiNewPlayer[] {
-          new GuiNewPlayer(NAME_PLAYER_1, AI_PLAYER_1, ROW_PLAYER_1),
-          new GuiNewPlayer(NAME_PLAYER_2, AI_PLAYER_2, ROW_PLAYER_2),
-          new GuiNewPlayer(NAME_PLAYER_3, AI_PLAYER_3, ROW_PLAYER_3),
-          new GuiNewPlayer(NAME_PLAYER_4, AI_PLAYER_4, ROW_PLAYER_4),
-          new GuiNewPlayer(NAME_PLAYER_5, AI_PLAYER_5, ROW_PLAYER_5),
-          new GuiNewPlayer(NAME_PLAYER_6, AI_PLAYER_6, ROW_PLAYER_6)
+          new GuiNewPlayer(NAME_PLAYER_1, AI_PLAYER_1, TOKEN_PLAYER_1, ROW_PLAYER_1),
+          new GuiNewPlayer(NAME_PLAYER_2, AI_PLAYER_2, TOKEN_PLAYER_2, ROW_PLAYER_2),
+          new GuiNewPlayer(NAME_PLAYER_3, AI_PLAYER_3, TOKEN_PLAYER_3, ROW_PLAYER_3),
+          new GuiNewPlayer(NAME_PLAYER_4, AI_PLAYER_4, TOKEN_PLAYER_4, ROW_PLAYER_4),
+          new GuiNewPlayer(NAME_PLAYER_5, AI_PLAYER_5, TOKEN_PLAYER_5, ROW_PLAYER_5),
+          new GuiNewPlayer(NAME_PLAYER_6, AI_PLAYER_6, TOKEN_PLAYER_6, ROW_PLAYER_6)
         };
 
     makeRowInvisible(4);
     makeRowInvisible(5);
+    TIME_LIMIT
+        .getItems()
+        .setAll(
+            "No Time Limit",
+            "1 hour",
+            "2 hours",
+            "3 hours",
+            "4 hours",
+            "5 hours",
+            "6 hours",
+            "7 hours",
+            "8 hours");
+    TIME_LIMIT.getSelectionModel().select(0);
   }
 
   private void asserts() {

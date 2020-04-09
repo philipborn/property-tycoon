@@ -256,6 +256,9 @@ public class PtController {
 
   @FXML
   void newGame(ActionEvent event) throws IOException {
+    NewGame newGame = new NewGame();
+    newGame.showDialog();
+
     //goToJail();
     //moveBackThreeSpaces();
     //yes();
