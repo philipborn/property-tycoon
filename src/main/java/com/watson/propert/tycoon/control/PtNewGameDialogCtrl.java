@@ -96,6 +96,7 @@ public class PtNewGameDialogCtrl {
   @FXML private ArrayList<GuiPlayer> enteredPlayers;
 
   private Logger logger = LoggerFactory.getLogger(App.class);
+  private boolean isNewGame;
 
   public void setNewPlayers(ArrayList<GuiPlayer> players) {
     enteredPlayers = players;
@@ -103,6 +104,7 @@ public class PtNewGameDialogCtrl {
 
   @FXML
   void NEW_GAME(ActionEvent event) {
+    isNewGame = true;
     int numPlayers = Integer.parseInt(NO_PLAYERS.getText());
     logger.debug("Num players entered: " + numPlayers);
     this.enteredPlayers.clear();
@@ -179,6 +181,7 @@ public class PtNewGameDialogCtrl {
   @FXML
   void initialize() {
     asserts();
+    isNewGame = false;
     enteredPlayers = new ArrayList<GuiPlayer>();
     NO_PLAYERS.setText("4");
     newPlayers =
@@ -206,6 +209,14 @@ public class PtNewGameDialogCtrl {
             "7 hours",
             "8 hours");
     TIME_LIMIT.getSelectionModel().select(0);
+  }
+
+  public boolean isNewGame() {
+    return isNewGame;
+  }
+
+  public int getTimedGame() {
+    return TIME_LIMIT.getSelectionModel().selectedIndexProperty().getValue();
   }
 
   private void asserts() {

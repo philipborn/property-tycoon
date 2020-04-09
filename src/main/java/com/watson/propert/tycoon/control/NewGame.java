@@ -21,6 +21,7 @@ public class NewGame {
   Stage newGameStage;
   FXMLLoader loader;
   Logger logger = LoggerFactory.getLogger(App.class);
+  PtNewGameDialogCtrl controller;
 
   public NewGame() throws IOException {
     players = new ArrayList<GuiPlayer>();
@@ -40,8 +41,9 @@ public class NewGame {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(cssUrl.toExternalForm());
 
-    PtNewGameDialogCtrl controller = loader.getController();
+    controller = loader.getController();
     controller.setNewPlayers(players);
+
     logger.debug("Controller: " + (controller != null));
     // Set up stage to fill primary screen
     newGameStage.setTitle("Property Tycoon New Game");
@@ -54,5 +56,17 @@ public class NewGame {
 
   public ArrayList<GuiPlayer> getNewPlayers() {
     return players;
+  }
+
+  public boolean isNewGame() {
+    return controller.isNewGame();
+  }
+
+  public boolean isTimedGame() {
+    return controller.getTimedGame() > 0;
+  }
+
+  public int getGameTime() {
+    return controller.getTimedGame();
   }
 }

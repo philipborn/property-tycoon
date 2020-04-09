@@ -254,14 +254,60 @@ public class PtController {
     Platform.exit();
   }
 
+  /**
+   * Creates a New Game dialog box and sets up a new game
+   *
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void newGame(ActionEvent event) throws IOException {
+    Logger logger = LoggerFactory.getLogger(App.class);
+    // Launch a New Game Dialog Box
     NewGame newGame = new NewGame();
     newGame.showDialog();
 
-    //goToJail();
-    //moveBackThreeSpaces();
-    //yes();
+    // Test
+    logger.debug("New Game button clicked: " + newGame.isNewGame());
+    logger.debug("Is Timed Game?: " + newGame.isTimedGame());
+    logger.debug("Game Time: " + newGame.getGameTime());
+
+    // Only if New Game button clicked create a new game
+    if (newGame.isNewGame()) {
+      game = Game.newGame();
+      game.registerListener(this);
+
+      GuiToken[] t =
+          new GuiToken[] {
+            new GuiToken(TOKEN_PLAYER_1, 0),
+            new GuiToken(TOKEN_PLAYER_2, 0),
+            new GuiToken(TOKEN_PLAYER_3, 0),
+            new GuiToken(TOKEN_PLAYER_4, 0),
+            new GuiToken(TOKEN_PLAYER_5, 0),
+            new GuiToken(TOKEN_PLAYER_6, 0)
+          };
+      PlayerInfo[] pi = {
+        new PlayerInfo(PLAYER_1),
+        new PlayerInfo(PLAYER_2),
+        new PlayerInfo(PLAYER_3),
+        new PlayerInfo(PLAYER_4),
+        new PlayerInfo(PLAYER_5),
+        new PlayerInfo(PLAYER_6)
+      };
+      GuiPlayer[] players = new GuiPlayer[newGame.getNewPlayers().size()];
+      for (int i = 0; i < newGame.getNewPlayers().size(); i++) {
+        new GuiPlayer(
+            newGame.getNewPlayers().get(i).getName(),
+            t[i],
+            newGame.getNewPlayers().get(i).isAi(),
+            pi[i]);
+        pi[i].getName().setText(newGame.getNewPlayers().get(i).getName());
+      }
+
+      // Hide players not participating in the new game
+      // NEED TO REFACTOR PlayerInfo Class
+      for (int i = newGame.getNewPlayers().size(); i < 6; i++) {}
+    }
   }
 
   private void yes() {
