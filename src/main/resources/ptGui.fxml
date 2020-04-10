@@ -158,7 +158,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TAX" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -170,6 +170,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_INCOME_TAX" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/tax.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -466,7 +471,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POWER" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -478,6 +483,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_POWER_STAT" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/teslaPowerCo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <FlowPane>
@@ -540,7 +550,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="WATER CO" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -552,6 +562,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_WATER_CO" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/edisonWaterCo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -747,7 +762,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TAX" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -759,6 +774,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_SUPER_TAX" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/tax.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">

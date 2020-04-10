@@ -82,6 +82,14 @@ public class PtController {
 
   @FXML private ImageView IMG_TRAIN_STAT_4;
 
+  @FXML private ImageView IMG_POWER_STAT;
+
+  @FXML private ImageView IMG_WATER_CO;
+
+  @FXML private ImageView IMG_SUPER_TAX;
+
+  @FXML private ImageView IMG_INCOME_TAX;
+
   @FXML private HBox JAIL_CORNER;
 
   @FXML private Pane GAME_BOARD_CONTAINER;
@@ -558,6 +566,8 @@ public class PtController {
     STREET_2.setPrefSize(default_street_width, default_street_height);
     STREET_3.setPrefSize(default_street_width, default_street_height);
     STREET_4.setPrefSize(default_street_width, default_street_height);
+
+    // Resize corner images
     JAIL_IMG.setFitHeight(default_corner_inner_size * 0.7);
     JAIL_IMG.setFitWidth(default_corner_inner_size * 0.7);
     IMG_GO.setFitHeight(default_corner_inner_size);
@@ -566,14 +576,24 @@ public class PtController {
     IMG_FREE_PARKING.setFitWidth(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
-    IMG_TRAIN_STAT_1.setFitWidth(default_tile_inner_width);
-    IMG_TRAIN_STAT_1.setFitHeight(default_tile_inner_height);
-    IMG_TRAIN_STAT_2.setFitWidth(default_tile_inner_width);
-    IMG_TRAIN_STAT_2.setFitHeight(default_tile_inner_height);
-    IMG_TRAIN_STAT_3.setFitWidth(default_tile_inner_width);
-    IMG_TRAIN_STAT_3.setFitHeight(default_tile_inner_height);
-    IMG_TRAIN_STAT_4.setFitWidth(default_tile_inner_width);
-    IMG_TRAIN_STAT_4.setFitHeight(default_tile_inner_height);
+
+    // Resize Tile images
+    ImageView[] tileImages =
+        new ImageView[] {
+          IMG_TRAIN_STAT_1,
+          IMG_TRAIN_STAT_2,
+          IMG_TRAIN_STAT_3,
+          IMG_TRAIN_STAT_4,
+          IMG_POWER_STAT,
+          IMG_WATER_CO,
+          IMG_INCOME_TAX,
+          IMG_SUPER_TAX
+        };
+    for (int i = 0; i < tileImages.length; i++) {
+      tileImages[i].setFitHeight(default_tile_inner_height);
+      tileImages[i].setFitWidth(default_tile_inner_width);
+    }
+
     // Resize squares
     for (GuiSquare sq : gameBoard.getSquares()) {
       if (sq.getPane().getChildren().get(0) instanceof VBox) {
