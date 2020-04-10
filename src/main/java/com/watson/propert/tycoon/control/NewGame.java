@@ -16,6 +16,12 @@ import org.slf4j.LoggerFactory;
 import com.watson.propert.tycoon.gui.App;
 import com.watson.propert.tycoon.gui.GuiPlayer;
 
+/**
+ * New Game Dialog Box Wrapper
+ *
+ * @author Lee Richards
+ * @version Sprint3
+ */
 public class NewGame {
   ArrayList<GuiPlayer> players;
   Stage newGameStage;

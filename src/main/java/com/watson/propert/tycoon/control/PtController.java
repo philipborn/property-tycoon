@@ -27,6 +27,7 @@ import static java.lang.StrictMath.abs;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
@@ -36,9 +37,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -245,13 +244,26 @@ public class PtController {
     yes();
   }
 
+  /**
+   * End game and exit
+   *
+   * @param event
+   */
   @FXML
   void endGame(ActionEvent event) {
     /*
       save game functionality
     */
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Quit Dialog");
+    alert.setHeaderText("Quit Game");
+    alert.setContentText("Are you sure you want to quit the game?");
 
-    Platform.exit();
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      // Exit game
+      Platform.exit();
+    }
   }
 
   /**
