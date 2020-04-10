@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BankGothic Lt BT";
-    src: url('../fonts/bgothl.ttf');
+    src: url('fonts/bgothl.ttf');
 }
 
 @font-face {
     font-family: "OCR A Std";
-    src: url('../fonts/OCRAStd.otf');
+    src: url('fonts/OCRAStd.otf');
 }
 
 /*

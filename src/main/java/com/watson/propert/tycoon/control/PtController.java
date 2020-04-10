@@ -70,6 +70,10 @@ public class PtController {
 
   @FXML private ImageView JAIL_IMG;
 
+  @FXML private ImageView IMG_GOTO_JAIL;
+
+  @FXML private ImageView IMG_FREE_PARKING;
+
   @FXML private HBox JAIL_CORNER;
 
   @FXML private Pane GAME_BOARD_CONTAINER;
@@ -226,6 +230,8 @@ public class PtController {
 
   @FXML private Button BUTTON_NO;
 
+  @FXML private Label TIMER;
+
   private GuiGameBoard gameBoard;
 
   private PropertTycoon game;
@@ -319,7 +325,26 @@ public class PtController {
       // Hide players not participating in the new game
       // NEED TO REFACTOR PlayerInfo Class
       for (int i = newGame.getNewPlayers().size(); i < 6; i++) {}
+
+      // If a timed game, show and set timer, otherwise hide
+      if(newGame.isTimedGame()) {
+        setTimer(newGame.getGameTime() * 3600);
+        TIMER.setVisible(true);
+      } else {
+        TIMER.setVisible(false);
+      }
     }
+  }
+
+  /*
+   * Sets Timer Label
+   * @param Timer value in seconds
+   */
+  private void setTimer(int seconds) {
+    int hours = seconds / 3600;
+    int minutes = (seconds % 3600) / 60;
+    int secs = seconds % 60;
+    TIMER.setText(String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", secs));
   }
 
   private void yes() {
@@ -524,6 +549,10 @@ public class PtController {
     JAIL_IMG.setFitWidth(default_corner_inner_size * 0.7);
     IMG_GO.setFitHeight(default_corner_inner_size);
     IMG_GO.setFitWidth(default_corner_inner_size);
+    IMG_FREE_PARKING.setFitHeight(default_corner_inner_size);
+    IMG_FREE_PARKING.setFitWidth(default_corner_inner_size);
+    IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
+    IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
 
     // Resize squares
     for (GuiSquare sq : gameBoard.getSquares()) {

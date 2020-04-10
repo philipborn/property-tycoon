@@ -263,7 +263,7 @@
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
-                              <ImageView id="GO_TO_JAIL" fitHeight="86.0" fitWidth="86.0" opacity="0.85" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                              <ImageView id="GO_TO_JAIL" fx:id="IMG_GOTO_JAIL" fitHeight="86.0" fitWidth="86.0" opacity="0.85" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                  <image>
                                     <Image url="@board/goToJail.png" />
                                  </image>
@@ -281,7 +281,7 @@
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
-                              <ImageView id="FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                              <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                  <image>
                                     <Image url="@board/freeParking.png" />
                                  </image>
@@ -988,9 +988,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_1" styleClass="playerName" text="Player 1">
+                        <Label id="PLAYER_NAME_1" styleClass="playerName" text="Player 1" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_1" styleClass="playerAccount" text="£888.88">
@@ -1017,9 +1017,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_3" fx:id="PLAYER_3" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_3" styleClass="playerName" text="Player 3">
+                        <Label id="PLAYER_NAME_3" styleClass="playerName" text="Player 3" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_3" styleClass="playerAccount" text="£888.88">
@@ -1046,9 +1046,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_5" fx:id="PLAYER_5" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_5" styleClass="playerName" text="Player 5">
+                        <Label id="PLAYER_NAME_5" styleClass="playerName" text="Player 5" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_5" styleClass="playerAccount" text="£888.88">
@@ -1083,7 +1083,7 @@
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label id="Timer" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" text="00:00:00" textAlignment="CENTER">
+                  <Label id="Timer" fx:id="TIMER" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" text="00:00:00" textAlignment="CENTER">
                      <font>
                         <Font size="64.0" />
                      </font>
@@ -1105,9 +1105,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_2" fx:id="PLAYER_2" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_2" styleClass="playerName" text="Player 2">
+                        <Label id="PLAYER_NAME_2" styleClass="playerName" text="Player 2" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_2" styleClass="playerAccount" text="£888.88">
@@ -1131,9 +1131,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_4" fx:id="PLAYER_4" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_4" styleClass="playerName" text="Player 4">
+                        <Label id="PLAYER_NAME_4" styleClass="playerName" text="Player 4" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_4" styleClass="playerAccount" text="£888.88">
@@ -1160,9 +1160,9 @@
                   </ImageView>
                   <VBox id="PLAYER_NAME_CONTAINER_6" fx:id="PLAYER_6" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_6" styleClass="playerName" text="Player 6">
+                        <Label id="PLAYER_NAME_6" styleClass="playerName" text="Player 6" textOverrun="CLIP">
                            <font>
-                              <Font size="36.0" />
+                              <Font size="30.0" />
                            </font>
                         </Label>
                         <Label id="ACCOUNT_BALANCE_PLAYER_6" styleClass="playerAccount" text="£888.88">
