@@ -24,7 +24,7 @@ public class Game implements PropertTycoon {
 
   public Game(Square startPostion, EventBus channel) {
     master = new GameMaster();
-    state = new NewTurn();
+    state = new waitOnStart();
     bord = startPostion;
     dicePair = new DicePair(channel);
     this.channel = channel;
@@ -40,6 +40,7 @@ public class Game implements PropertTycoon {
     settings.getPlayers().forEach((id) -> players.add(new Player(id, bord, channel)));
     master.newGame(players);
     player = master.currentPlayer();
+    state = new NewTurn();
   }
 
   @Override
@@ -119,8 +120,10 @@ public class Game implements PropertTycoon {
         newLocation.visitBy(new AfterMove(player));
         if (PropertyCanBought.by(player)) {
           switchTo(new NoOwner());
-        } else {
+        } else if (CanFixProperty.forPlayer(player)) {
           switchTo(new FixProperty());
+        } else {
+          switchTo(new NewTurn());
         }
       } catch (NoCashException e) {
         if (player.totalValue() > e.amount()) {
@@ -158,8 +161,17 @@ public class Game implements PropertTycoon {
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.BuyProperty) {
         buyProperty();
+        nextState();
       } else if (playerAction instanceof PlayerAction.Auction) {
-        notBuyingProperty();
+        nextState();
+      }
+    }
+
+    private void nextState() {
+      if (CanFixProperty.forPlayer(player)) {
+        fixPropertyOrNewTurn();
+      } else {
+        switchTo(new NewTurn());
       }
     }
   }
@@ -196,7 +208,7 @@ public class Game implements PropertTycoon {
       if (player.cash() >= needToFree) {
         player.payTo(payTo, needToFree);
         if (debs.isEmpty()) {
-          switchTo(new FixProperty());
+          fixPropertyOrNewTurn();
         } else {
           setUpDebtCollection(debs.pop());
         }
@@ -238,6 +250,14 @@ public class Game implements PropertTycoon {
     @Override
     public void handle(PlayerAction playerAction) {
       // Do nothing
+    }
+  }
+
+  private void fixPropertyOrNewTurn() {
+    if (CanFixProperty.forPlayer(player)) {
+      switchTo(new FixProperty());
+    } else {
+      switchTo(new NewTurn());
     }
   }
 

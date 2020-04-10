@@ -69,7 +69,7 @@ public abstract class SquareAbstract implements Square {
   private Square stepForward(int steps, SquareVisitor actionOnTheWay) {
     if (steps > 0) {
       if (actionOnTheWay != null) {
-        this.back.visitBy(actionOnTheWay);
+        this.next.visitBy(actionOnTheWay);
       }
       return this.next.step(steps - 1, actionOnTheWay);
     } else {
