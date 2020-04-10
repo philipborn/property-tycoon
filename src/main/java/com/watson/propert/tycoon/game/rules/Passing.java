@@ -18,7 +18,7 @@ public class Passing implements SquareVisitor {
     if (action instanceof PassingAction) {
       action.run();
     }
-    if (square.name().equals("Go")) {
+    if (square.getName().equals("Go")) {
       int cashToReceive = 200;
       currentPlayer.receiveCash(cashToReceive);
       currentPlayer.receiveBuyRights();

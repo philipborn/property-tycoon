@@ -70,7 +70,7 @@ public class PropertyInfo {
             .map(Player.class::cast)
             .map(Player::getId)
             .orElse(null);
-    return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage());
+    return new PropertyInfo(p.getName(), id, numHouses, p.getRent(), p.isMortgage());
   }
 
   private static int getHouses(Property p) {

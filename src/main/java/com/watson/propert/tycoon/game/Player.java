@@ -34,7 +34,11 @@ public class Player implements Owner, Comparable<Player> {
 
   public Square move(int steps) {
     SquareVisitor passingRulse = Passing.rulesFor(this);
-    location = location.step(steps, passingRulse);
+    if (steps > 0) {
+      location = location.forward(steps, passingRulse);
+    } else {
+      location = location.backward(Math.abs(steps), passingRulse);
+    }
     return location;
   }
 

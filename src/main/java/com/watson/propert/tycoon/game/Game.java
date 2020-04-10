@@ -45,7 +45,7 @@ public class Game implements PropertTycoon {
 
   @Override
   public Optional<PropertyInfo> propertInfo(int squareNum) {
-    return PropertyInfo.getInfo(bord.step(squareNum - 1));
+    return PropertyInfo.getInfo(bord.forward(squareNum - 1));
   }
 
   @Override
@@ -152,7 +152,7 @@ public class Game implements PropertTycoon {
     @Override
     public void entry() {
       Property prop = (Property) player.postion();
-      String propertyName = prop.name();
+      String propertyName = prop.getName();
       int price = prop.value();
       channel.post(new BuyOrNotMsg(propertyName, price));
     }
@@ -273,7 +273,7 @@ public class Game implements PropertTycoon {
   private void buyProperty() {
     Square property = player.postion();
     property.visitBy(new BuyProperty(player));
-    channel.post(new PropertyEvent(property.name(), player.id));
+    channel.post(new PropertyEvent(property.getName(), player.id));
     switchTo(new FixProperty());
   }
 
@@ -283,17 +283,17 @@ public class Game implements PropertTycoon {
 
   private void mortgaged(PlayerAction.Mortgaged msg) {
     ToMorgade rule = new ToMorgade(player);
-    rule.morgade(bord.find(msg.propertyName));
+    rule.morgade(bord.forwardTo(msg.propertyName));
   }
 
   private void sellHouse(PlayerAction.SellHouse msg) {
-    Square street = bord.find(msg.streetName);
+    Square street = bord.forwardTo(msg.streetName);
     new ToSellHouses(player).sellHouses(street);
   }
 
   private void sellProperty(PlayerAction.SellProperty msg) {
     Optional<Property> property =
-        Optional.of(bord.find(msg.squareName))
+        Optional.of(bord.forwardTo(msg.squareName))
             .filter(Property.class::isInstance)
             .map(Property.class::cast);
     boolean playerIsOwner =

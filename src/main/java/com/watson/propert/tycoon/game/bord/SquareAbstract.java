@@ -15,71 +15,91 @@ public abstract class SquareAbstract implements Square {
   }
 
   @Override
-  public Square step(int numStep, SquareVisitor actionOnTheWay) {
-    Square newLocation = this;
-    if (numStep > 0) {
-      newLocation = stepForward(numStep, actionOnTheWay);
-    } else if (numStep < 0) {
-      newLocation = stepBack(numStep, actionOnTheWay);
-    }
-    return newLocation;
-  }
-
-  @Override
-  public Square step(int steps) {
-    return step(steps, null);
-  }
-
-  @Override
-  public Square find(String propertyName) {
-    Iterator<Square> iter = this.iterator();
-    while (iter.hasNext()) {
-      Square square = iter.next();
-      if (square.name().equals(propertyName)) {
-        return square;
-      }
-    }
-    return null;
-  }
-
-  @Override
-  public Square find(String propertyName, SquareVisitor visitor) {
-    Iterator<Square> iter = this.iterator();
-    while (iter.hasNext()) {
-      Square square = iter.next();
-      square.visitBy(visitor);
-      if (square.name().equals(propertyName)) {
-        return square;
-      }
-    }
-    return null;
-  }
-
-  private Square stepBack(int steps, SquareVisitor actionOnTheWay) {
-    if (steps < 0) {
-      if (actionOnTheWay != null) {
-        this.back.visitBy(actionOnTheWay);
-      }
-      return this.back.step(steps + 1, actionOnTheWay);
-    } else {
-      return this;
-    }
-  }
-
-  private Square stepForward(int steps, SquareVisitor actionOnTheWay) {
-    if (steps > 0) {
-      if (actionOnTheWay != null) {
-        this.next.visitBy(actionOnTheWay);
-      }
-      return this.next.step(steps - 1, actionOnTheWay);
-    } else {
-      return this;
-    }
-  }
-
-  @Override
-  public String name() {
+  public String getName() {
     return name;
+  }
+
+  @Override
+  public Square forward(int steps) {
+    if (steps <= 0) {
+      return this;
+    }
+    return next.forward(steps - 1);
+  }
+
+  @Override
+  public Square forward(int steps, SquareVisitor passingVisitor) {
+    if (steps <= 0) {
+      return this;
+    }
+    next.visitBy(passingVisitor);
+    return next.forward(steps - 1, passingVisitor);
+  }
+
+  @Override
+  public Square forwardTo(String propertyName) {
+    Iterator<Square> iter = this.iterator();
+    return iterate(iter);
+  }
+
+  @Override
+  public Square forwardTo(String name, SquareVisitor passingVisitor) {
+    Iterator<Square> iter = this.iterator();
+    return iterate(iter, passingVisitor);
+  }
+
+  @Override
+  public Square backward(int steps) {
+    if (steps <= 0) {
+      return this;
+    }
+    return back.backward(steps - 1);
+  }
+
+  @Override
+  public Square backward(int steps, SquareVisitor passingVisitor) {
+    if (steps <= 0) {
+      return this;
+    }
+    back.visitBy(passingVisitor);
+    return back.backward(steps - 1, passingVisitor);
+  }
+
+  @Override
+  public Square backwardTo(String name) {
+    Iterator<Square> iter = new BackwardIterator(this);
+    return iterate(iter);
+  }
+
+  @Override
+  public Square backwardTo(String name, SquareVisitor passingVisitor) {
+    Iterator<Square> iter = new BackwardIterator(this);
+    return iterate(iter, passingVisitor);
+  }
+
+  private Square iterate(Iterator<Square> iter) {
+    while (iter.hasNext()) {
+      Square square = iter.next();
+      if (square.getName().equals(name)) {
+        return square;
+      }
+    }
+    return null;
+  }
+
+  private Square iterate(Iterator<Square> iter, SquareVisitor passingVisitor) {
+    Square square;
+    while (iter.hasNext()) {
+      square = iter.next();
+      if (square.getName().equals(name)) {
+        return square;
+      }
+      if (!square.getName().equals(this.name)) {
+        square.visitBy(passingVisitor);
+      }
+      ;
+    }
+    return null;
   }
 
   protected void setNext(SquareAbstract node) {
@@ -106,7 +126,7 @@ public abstract class SquareAbstract implements Square {
     throw new UnsupportedOperationException();
   }
 
-  private class BordIterator implements Iterator<Square> {
+  private static class BordIterator implements Iterator<Square> {
 
     private SquareAbstract iterStart;
     private SquareAbstract iterNext;
@@ -130,6 +150,34 @@ public abstract class SquareAbstract implements Square {
       atBegin = false;
       SquareAbstract current = iterNext;
       iterNext = iterNext.next;
+      return current;
+    }
+  }
+
+  private static class BackwardIterator implements Iterator<Square> {
+
+    private SquareAbstract iterStart;
+    private SquareAbstract iterNext;
+    private Boolean atBegin = Boolean.TRUE;
+
+    private BackwardIterator(SquareAbstract start) {
+      this.iterStart = start;
+      this.iterNext = start;
+    }
+
+    @Override
+    public boolean hasNext() {
+      if (atBegin) {
+        return true;
+      }
+      return iterNext != iterStart;
+    }
+
+    @Override
+    public SquareAbstract next() {
+      atBegin = false;
+      SquareAbstract current = iterNext;
+      iterNext = iterNext.back;
       return current;
     }
   }
