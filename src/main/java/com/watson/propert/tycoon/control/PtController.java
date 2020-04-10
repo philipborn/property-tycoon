@@ -74,6 +74,14 @@ public class PtController {
 
   @FXML private ImageView IMG_FREE_PARKING;
 
+  @FXML private ImageView IMG_TRAIN_STAT_1;
+
+  @FXML private ImageView IMG_TRAIN_STAT_2;
+
+  @FXML private ImageView IMG_TRAIN_STAT_3;
+
+  @FXML private ImageView IMG_TRAIN_STAT_4;
+
   @FXML private HBox JAIL_CORNER;
 
   @FXML private Pane GAME_BOARD_CONTAINER;
@@ -327,7 +335,7 @@ public class PtController {
       for (int i = newGame.getNewPlayers().size(); i < 6; i++) {}
 
       // If a timed game, show and set timer, otherwise hide
-      if(newGame.isTimedGame()) {
+      if (newGame.isTimedGame()) {
         setTimer(newGame.getGameTime() * 3600);
         TIMER.setVisible(true);
       } else {
@@ -344,7 +352,12 @@ public class PtController {
     int hours = seconds / 3600;
     int minutes = (seconds % 3600) / 60;
     int secs = seconds % 60;
-    TIMER.setText(String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", secs));
+    TIMER.setText(
+        String.format("%02d", hours)
+            + ":"
+            + String.format("%02d", minutes)
+            + ":"
+            + String.format("%02d", secs));
   }
 
   private void yes() {
@@ -553,7 +566,14 @@ public class PtController {
     IMG_FREE_PARKING.setFitWidth(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
-
+    IMG_TRAIN_STAT_1.setFitWidth(default_tile_inner_width);
+    IMG_TRAIN_STAT_1.setFitHeight(default_tile_inner_height);
+    IMG_TRAIN_STAT_2.setFitWidth(default_tile_inner_width);
+    IMG_TRAIN_STAT_2.setFitHeight(default_tile_inner_height);
+    IMG_TRAIN_STAT_3.setFitWidth(default_tile_inner_width);
+    IMG_TRAIN_STAT_3.setFitHeight(default_tile_inner_height);
+    IMG_TRAIN_STAT_4.setFitWidth(default_tile_inner_width);
+    IMG_TRAIN_STAT_4.setFitHeight(default_tile_inner_height);
     // Resize squares
     for (GuiSquare sq : gameBoard.getSquares()) {
       if (sq.getPane().getChildren().get(0) instanceof VBox) {

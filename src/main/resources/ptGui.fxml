@@ -131,7 +131,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 1" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -143,6 +143,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -390,7 +395,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 2" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -402,6 +407,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -596,7 +606,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 3" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -608,6 +618,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -798,7 +813,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 4" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -810,6 +825,11 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_4" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
