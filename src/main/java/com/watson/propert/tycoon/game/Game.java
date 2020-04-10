@@ -1,13 +1,11 @@
 package com.watson.propert.tycoon.game;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.*;
-import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
-import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
-import com.watson.propert.tycoon.game.events.PlayerInDebtEvent;
-import com.watson.propert.tycoon.game.events.PropertyEvent;
+import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.game.rules.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
@@ -16,23 +14,16 @@ public class Game implements PropertTycoon {
   protected static final int START_CASH = 1500;
 
   private GameMaster master;
+  private GameEnd gameEnd = new GameEnd() {};
   private Square bord;
   private DicePair dicePair;
   private EventBus channel;
-  private Game.state state;
+  private State state;
   private Player player;
   private Deque<NoCashException> debs = new ArrayDeque<>();
 
   public Game(Square startPostion, EventBus channel) {
-    List<Player> players = new ArrayList<>();
-    players.add(new Player(Player.Id.ONE, startPostion, channel));
-    players.add(new Player(Player.Id.TWO, startPostion, channel));
-    players.add(new Player(Player.Id.THREE, startPostion, channel));
-    players.add(new Player(Player.Id.FOUR, startPostion, channel));
-    players.add(new Player(Player.Id.FIVE, startPostion, channel));
-    players.add(new Player(Player.Id.SIX, startPostion, channel));
-    master = new GameMaster(players);
-    player = master.currentPlayer();
+    master = new GameMaster();
     state = new NewTurn();
     bord = startPostion;
     dicePair = new DicePair(channel);
@@ -42,6 +33,13 @@ public class Game implements PropertTycoon {
   @Override
   public void send(PlayerAction playerAction) {
     state.handle(playerAction);
+  }
+
+  public void startGame(GameSetting settings) {
+    List<Player> players = new ArrayList<>();
+    settings.getPlayers().forEach((id) -> players.add(new Player(id, bord, channel)));
+    master.newGame(players);
+    player = master.currentPlayer();
   }
 
   @Override
@@ -64,7 +62,10 @@ public class Game implements PropertTycoon {
     channel.unregister(listener);
   }
 
-  private void switchTo(Game.state nextState) {
+  private void switchTo(State nextState) {
+    if (master.numActivePlayers() <= 1 || gameEnd.isGameDone()) {
+      nextState = new GameOver();
+    }
     this.state.exit();
     nextState.entry();
     this.state = nextState;
@@ -76,10 +77,18 @@ public class Game implements PropertTycoon {
     EventBus channel = new EventBus();
     Square first = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBord();
     PropertTycoon game = new Game(first, channel);
+    GameSetting settings = new GameSetting();
+    settings.set(Player.Id.ONE);
+    settings.set(Player.Id.TWO);
+    settings.set(Player.Id.THREE);
+    settings.set(Player.Id.FOUR);
+    settings.set(Player.Id.FIVE);
+    settings.set(Player.Id.SIX);
+    game.startGame(settings);
     return game;
   }
 
-  public interface state {
+  public interface State {
 
     default void entry() {}
 
@@ -88,7 +97,7 @@ public class Game implements PropertTycoon {
     void handle(PlayerAction playerAction);
   }
 
-  private class NewTurn implements Game.state {
+  private class NewTurn implements State {
 
     @Override
     public void entry() {
@@ -104,7 +113,7 @@ public class Game implements PropertTycoon {
     }
 
     private void throwDicesAndMove() {
-      Integer sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
+      int sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
       Square newLocation = player.move(sum);
       try {
         newLocation.visitBy(new AfterMove(player));
@@ -125,7 +134,7 @@ public class Game implements PropertTycoon {
     }
   }
 
-  private class FixProperty implements Game.state {
+  private class FixProperty implements State {
 
     @Override
     public void handle(PlayerAction playerAction) {
@@ -135,7 +144,7 @@ public class Game implements PropertTycoon {
     }
   }
 
-  private class NoOwner implements Game.state {
+  private class NoOwner implements State {
 
     @Override
     public void entry() {
@@ -155,7 +164,7 @@ public class Game implements PropertTycoon {
     }
   }
 
-  class NoCash implements Game.state {
+  class NoCash implements State {
 
     private CashUser payTo;
     private int needToFree;
@@ -200,6 +209,35 @@ public class Game implements PropertTycoon {
       needToFree = e.amount();
       channel.post(new ChangePlayerEvent(player.getId()));
       channel.post(new PlayerInDebtEvent(player.getId(), needToFree));
+    }
+  }
+
+  /** Game have finish */
+  private class GameOver implements State {
+
+    @Override
+    public void entry() {
+      channel.post(
+          new GameOverEvent(
+              master
+                  .theRanking()
+                  .stream()
+                  .map((player) -> player.getId())
+                  .collect(Collectors.toList())));
+    }
+
+    @Override
+    public void handle(PlayerAction playerAction) {
+      // Do nothing
+    }
+  }
+
+  /** Game haven started jet */
+  private class waitOnStart implements State {
+
+    @Override
+    public void handle(PlayerAction playerAction) {
+      // Do nothing
     }
   }
 

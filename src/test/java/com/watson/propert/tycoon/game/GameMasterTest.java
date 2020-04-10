@@ -28,7 +28,8 @@ public class GameMasterTest {
     players = new ArrayList<>(6);
     players.add(new Player(Player.Id.ONE, square, channel));
     players.add(new Player(Player.Id.TWO, square, channel));
-    master = new GameMaster(players);
+    master = new GameMaster();
+    master.newGame(players);
   }
 
   @Test

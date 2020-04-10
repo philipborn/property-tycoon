@@ -5,6 +5,8 @@ import java.util.Optional;
 /** The interface for GUI to take action for the players */
 public interface PropertTycoon {
 
+  void startGame(GameSetting settings);
+
   /** Sen player Actions to the game */
   void send(PlayerAction playerAction);
 

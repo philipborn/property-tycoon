@@ -56,6 +56,7 @@ public class PropertTycoonTest {
     Square first = BordBuilder.with(channel).addFrom(source).getBord();
 
     game = new Game(first, channel);
+    game.startGame(new GameSetting());
 
     spy = new TestListener();
     channel.register(spy);
@@ -65,18 +66,6 @@ public class PropertTycoonTest {
   void PropertyInfoReturnsInfoOnlyForProperty() {
     assertThrows(NoSuchElementException.class, () -> game.propertInfo(1).orElseThrow());
     assertDoesNotThrow(() -> game.propertInfo(2).orElseThrow());
-  }
-
-  @Test
-  void ThrowDice_multiTimes_do_nothing() {
-    game.send(PlayerAction.ThrowDices.INSTANCE);
-    game.send(PlayerAction.ThrowDices.INSTANCE);
-    game.send(PlayerAction.ThrowDices.INSTANCE);
-    game.send(PlayerAction.ThrowDices.INSTANCE);
-
-    final int expectedNumberOfCashEvents = 1;
-    int count = (int) spy.msgs.stream().filter(event -> event instanceof DiceEvent).count();
-    assertEquals(expectedNumberOfCashEvents, count);
   }
 
   class TestListener {
