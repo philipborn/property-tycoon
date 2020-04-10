@@ -90,6 +90,18 @@ public class PtController {
 
   @FXML private ImageView IMG_INCOME_TAX;
 
+  @FXML private ImageView IMG_POT_LUCK_1;
+
+  @FXML private ImageView IMG_POT_LUCK_2;
+
+  @FXML private ImageView IMG_POT_LUCK_3;
+
+  @FXML private ImageView IMG_OP_KNOCK_1;
+
+  @FXML private ImageView IMG_OP_KNOCK_2;
+
+  @FXML private ImageView IMG_OP_KNOCK_3;
+
   @FXML private HBox JAIL_CORNER;
 
   @FXML private Pane GAME_BOARD_CONTAINER;
@@ -587,7 +599,13 @@ public class PtController {
           IMG_POWER_STAT,
           IMG_WATER_CO,
           IMG_INCOME_TAX,
-          IMG_SUPER_TAX
+          IMG_SUPER_TAX,
+          IMG_POT_LUCK_1,
+          IMG_POT_LUCK_2,
+          IMG_POT_LUCK_3,
+          IMG_OP_KNOCK_1,
+          IMG_OP_KNOCK_2,
+          IMG_OP_KNOCK_3
         };
     for (int i = 0; i < tileImages.length; i++) {
       tileImages[i].setFitHeight(default_tile_inner_height);

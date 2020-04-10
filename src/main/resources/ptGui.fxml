@@ -87,18 +87,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -207,18 +212,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -356,18 +366,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -692,18 +707,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -811,18 +831,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
@@ -882,18 +907,23 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
