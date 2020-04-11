@@ -1,12 +1,17 @@
 package com.watson.propert.tycoon.game;
 
+import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.Property;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 
+import java.util.Optional;
+
 public class Player implements Owner, Comparable<Player> {
+
 
   public enum Id {
     ONE,
@@ -20,16 +25,16 @@ public class Player implements Owner, Comparable<Player> {
   public final Id id;
 
   private Square location;
-  private int cash;
+  private BankAccount account;
   private boolean buyRights = false;
 
   private EventBus channel;
 
-  public Player(Id id, Square startLocation, EventBus channel) {
+  public Player(Id id, BankAccount account ,Square startLocation, EventBus channel) {
     this.id = id;
     location = startLocation;
     this.channel = channel;
-    cash = Game.START_CASH;
+    this.account = account;
   }
 
   public Square move(int steps) {
@@ -47,7 +52,12 @@ public class Player implements Owner, Comparable<Player> {
   }
 
   public int totalValue() {
-    return cash;
+    return account.cash() + Streams.stream(location.iterator())
+            .filter(Property.class::isInstance)
+            .map(Property.class::cast)
+            .filter((prop) -> prop.owner().equals(Optional.of(this)))
+            .mapToInt(Property::totalValue)
+            .sum();
   }
 
   public Id getId() {
@@ -56,42 +66,25 @@ public class Player implements Owner, Comparable<Player> {
 
   @Override
   public int cash() {
-    return cash;
+    return account.cash();
   }
 
   @Override
   public void receiveCash(int amount) {
-    if (amount < 0) {
-      throw new IllegalArgumentException("Amount most be postive");
-    } else if (amount > 0) {
-      int oldCash = cash;
-      cash += amount;
+    int oldCash = account.cash();
+    account.receiveCash(amount);
+    int cash  =account.cash();
+    if(cash != oldCash) {
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
 
   @Override
-  public void payTo(CashUser receiver, int amount) {
-    if (amount < 0) {
-      throw new IllegalArgumentException("Amount most be postive");
-    }
-    if (cash < amount) {
-      throw new NoCashException(this, receiver, amount);
-    } else if (amount > 0) {
-      int oldCash = cash;
-      cash -= amount;
-      channel.post(CashEvent.write(id, oldCash, cash));
-      receiver.receiveCash(amount);
-    }
-  }
-
-  @Deprecated
-  public void payCash(int amount) {
-    if (amount < 0) {
-      throw new IllegalArgumentException("Amount most be postive");
-    } else if (amount > 0) {
-      int oldCash = cash;
-      cash -= amount;
+  public void payTo(CashUser cashUser, int amount) {
+    int oldCash = account.cash();
+    account.payTo(cashUser,amount);
+    int cash  =account.cash();
+    if(cash != oldCash) {
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }

@@ -24,13 +24,20 @@ public abstract class Property extends SquareAbstract {
   }
 
   // value is the property cost not rent
-  public int value() {
+  public int price() {
     return value;
   }
 
+  /**
+   * This method is to override if the value of the Property
+   * need to be calculated differently
+   * @return value of the Property
+   */
+  public int totalValue() {return value;}
+
   public int mortgage() {
     mortgaged = true;
-    return value() / 2;
+    return price() / 2;
   }
 
   public boolean isMortgage() {

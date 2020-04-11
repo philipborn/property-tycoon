@@ -22,7 +22,7 @@ public class PropertyCanBought implements SquareVisitor {
   }
 
   private void canBuyProperty(Property prop) {
-    canBuy = player.hasBuyRights() && prop.owner().isEmpty() && (player.cash() >= prop.value());
+    canBuy = player.hasBuyRights() && prop.owner().isEmpty() && (player.cash() >= prop.price());
   }
 
   @Override

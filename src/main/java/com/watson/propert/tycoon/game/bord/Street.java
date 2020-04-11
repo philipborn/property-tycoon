@@ -113,6 +113,11 @@ public class Street extends Property {
   }
 
   @Override
+  public int totalValue() {
+    return super.totalValue() + houseLevel * priceForHouse();
+  }
+
+  @Override
   public void visitBy(SquareVisitor visitor) {
     visitor.street(this);
   }

@@ -153,7 +153,7 @@ public class Game implements PropertTycoon {
     public void entry() {
       Property prop = (Property) player.postion();
       String propertyName = prop.getName();
-      int price = prop.value();
+      int price = prop.price();
       channel.post(new BuyOrNotMsg(propertyName, price));
     }
 
