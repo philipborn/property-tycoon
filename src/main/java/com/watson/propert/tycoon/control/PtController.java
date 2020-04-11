@@ -35,6 +35,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -261,7 +262,7 @@ public class PtController {
   @FXML private Label TIMER;
 
   private GuiGameBoard gameBoard;
-
+  private Stage playerPopUp;
   private PropertTycoon game;
 
   // Audio clips
@@ -276,6 +277,51 @@ public class PtController {
   @FXML
   void clickedYes(ActionEvent event) {
     yes();
+  }
+
+  // Show Extended Player Details
+  @FXML
+  void playerPopUp(MouseEvent event) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    GuiPlayer player = null;
+    // get controller for popup
+    ptPlayerPopupCtrl controller = loader.getController();
+
+    // Get Player
+    Object box = event.getSource();
+    if (box instanceof HBox) {
+      Node vb = ((HBox) box).getChildren().get(1);
+      Node lName = ((VBox) vb).getChildren().get(0);
+      if (lName instanceof Label) {
+
+        // get GuiPlayer
+        for (GuiPlayer p : gameBoard.getPlayers()) {
+          if (p.getName().equals(((Label) lName).getText())) {
+            player = p;
+          }
+        }
+      }
+    }
+
+    // TEST DATA
+    //player = new GuiPlayer("Lee", new GuiToken(new Pane(), 1));
+    player.addProperty(new GuiProperty("London Road", 100, PropertyGroup.BLUE));
+    player.addProperty(new GuiProperty("Brighton Road", 100, PropertyGroup.BLUE));
+    player.addProperty(new GuiProperty("Eastbourne Road", 100, PropertyGroup.RED));
+    player.addProperty(new GuiProperty("Lewes Road", 100, PropertyGroup.BROWN));
+    player.addProperty(new GuiProperty("Pole Gate Road", 100, PropertyGroup.PURPLE));
+    player.addProperty(new GuiProperty("Hastings Road", 100, PropertyGroup.YELLOW));
+
+    // load data to controller
+    controller.setData(player);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    playerPopUp.setScene(scene);
+    playerPopUp.show();
   }
 
   /**
@@ -730,6 +776,8 @@ public class PtController {
     // set popup & game variables/listener
     currentPopup = new Stage();
     currentPopup.initStyle(StageStyle.TRANSPARENT);
+    playerPopUp = new Stage();
+    playerPopUp.initStyle(StageStyle.UTILITY);
     game = Game.newGame();
     game.registerListener(this);
 
