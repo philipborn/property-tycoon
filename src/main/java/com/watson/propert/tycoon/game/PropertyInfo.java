@@ -11,13 +11,15 @@ public class PropertyInfo {
   private int numHouse;
   private int rent;
   private boolean isMorged;
+  private int price;
 
   private PropertyInfo(
-      String name, Player.Id owner, int numHouse, int currentRent, boolean morged) {
+      String name, Player.Id owner, int numHouse, int price, int currentRent, boolean morged) {
     this.name = name;
     this.owner = owner;
     this.numHouse = numHouse;
     this.rent = currentRent;
+    this.price = price;
     isMorged = morged;
   }
 
@@ -70,7 +72,7 @@ public class PropertyInfo {
             .map(Player.class::cast)
             .map(Player::getId)
             .orElse(null);
-    return new PropertyInfo(p.getName(), id, numHouses, p.getRent(), p.isMortgage());
+    return new PropertyInfo(p.getName(), id, numHouses, p.price(), p.getRent(), p.isMortgage());
   }
 
   private static int getHouses(Property p) {
@@ -80,6 +82,10 @@ public class PropertyInfo {
     } else {
       return 0;
     }
+  }
+
+  public int price() {
+    return price;
   }
 
   static class InfoGather implements SquareVisitor {

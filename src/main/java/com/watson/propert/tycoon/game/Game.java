@@ -159,9 +159,9 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
-      Property prop = (Property) player.postion();
-      String propertyName = prop.getName();
-      int price = prop.price();
+      PropertyInfo info = PropertyInfo.getInfo(player.postion()).get();
+      String propertyName = info.getName();
+      int price = info.price();
       channel.post(new BuyOrNotMsg(propertyName, price));
     }
 
