@@ -8,8 +8,8 @@ public class Station extends Property {
 
   private StationGroup group;
 
-  public Station(String name, int amount, StationGroup group) {
-    super(name, amount);
+  public Station(int amount, StationGroup group) {
+    super(amount);
     this.group = group;
     group.add(this);
   }

@@ -5,14 +5,13 @@ import java.util.Optional;
 import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
-public abstract class Property extends SquareNode implements SquareTyp {
+public abstract class Property implements SquareTyp {
 
   private int value;
   private Owner owner;
   private boolean mortgaged;
 
-  public Property(String name, int amount) {
-    super(name);
+  public Property(int amount) {
     mortgaged = false;
     value = amount;
     owner = null;

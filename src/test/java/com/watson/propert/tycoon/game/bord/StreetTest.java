@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import com.watson.propert.tycoon.game.CashUser;
+import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
 public class StreetTest {
@@ -19,9 +19,9 @@ public class StreetTest {
     List<Integer> rents = new ArrayList<>(Arrays.asList(10, 21, 32, 45));
     List<Integer> rents2 = new ArrayList<>(Arrays.asList(15, 24, 62, 105));
     StreetGroup group = new StreetGroup(Street.Colour.BLUE);
-    Street street = new Street("test", 100, group, rents);
-    Street street2 = new Street("test2", 150, group, rents2);
-    Owner owner = new TestOwner();
+    Street street = new Street(100, group, rents);
+    Street street2 = new Street(150, group, rents2);
+    Owner owner = Bank.instance();
     street.newOwner(owner);
     street2.newOwner(owner);
 
@@ -44,9 +44,9 @@ public class StreetTest {
     List<Integer> rents = new ArrayList<>(Arrays.asList(value, 21, 32, 45));
     List<Integer> rents2 = new ArrayList<>(Arrays.asList(15, 24, 62, 105));
     StreetGroup group = new StreetGroup(Street.Colour.BLUE);
-    Street street = new Street("test", 100, group, rents);
-    Street street2 = new Street("test2", 150, group, rents2);
-    Owner owner = new TestOwner();
+    Street street = new Street(100, group, rents);
+    Street street2 = new Street(150, group, rents2);
+    Owner owner = Bank.instance();
     street.newOwner(owner);
 
     assertEquals(0, street.getNumHouse());
@@ -61,8 +61,8 @@ public class StreetTest {
   void tryAddToManyHouseThrowIllegalConstructionException() {
     List<Integer> rents = new ArrayList<>(Arrays.asList(10, 100, 200, 300));
     StreetGroup group = new StreetGroup(Street.Colour.BLUE);
-    Street street = new Street("test", 100, group, rents);
-    street.newOwner(new TestOwner());
+    Street street = new Street(100, group, rents);
+    street.newOwner(Bank.instance());
 
     assertDoesNotThrow(street::buyHouses);
     assertDoesNotThrow(street::buyHouses);
@@ -74,8 +74,8 @@ public class StreetTest {
   void tryToRemoveTOManyHouseThrowsIllegalConstructionException() {
     List<Integer> rents = new ArrayList<>(Arrays.asList(10, 100, 200, 300));
     StreetGroup group = new StreetGroup(Street.Colour.BLUE);
-    Street street = new Street("test", 100, group, rents);
-    street.newOwner(new TestOwner());
+    Street street = new Street(100, group, rents);
+    street.newOwner(Bank.instance());
 
     assertDoesNotThrow(street::buyHouses);
     assertDoesNotThrow(street::buyHouses);
@@ -84,19 +84,5 @@ public class StreetTest {
     assertDoesNotThrow(street::sellHouse);
     assertDoesNotThrow(street::sellHouse);
     assertThrows(IllegalConstructionException.class, street::sellHouse);
-  }
-
-  private class TestOwner implements Owner {
-
-    @Override
-    public int cash() {
-      return 0;
-    }
-
-    @Override
-    public void receiveCash(int amount) {}
-
-    @Override
-    public void payTo(CashUser cashUser, int amount) {}
   }
 }

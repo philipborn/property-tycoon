@@ -22,8 +22,8 @@ public class Street extends Property {
   private StreetGroup group;
   private List<Integer> rent;
 
-  public Street(String name, int value, StreetGroup group, List<Integer> rent) {
-    super(name, value);
+  public Street(int value, StreetGroup group, List<Integer> rent) {
+    super(value);
     this.group = group;
     this.rent = List.copyOf(rent);
     group.add(this);

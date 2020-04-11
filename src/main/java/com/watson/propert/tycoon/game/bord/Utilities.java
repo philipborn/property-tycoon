@@ -4,8 +4,8 @@ public class Utilities extends Property {
 
   private UtilitiesGroup group;
 
-  public Utilities(String name, int amount, UtilitiesGroup group) {
-    super(name, amount);
+  public Utilities(int amount, UtilitiesGroup group) {
+    super(amount);
     this.group = group;
     group.add(this);
   }

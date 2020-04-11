@@ -11,10 +11,10 @@ public class StationTest {
   @Test
   void stationRentIsExponentialToNumberOfOwnedStations() {
     StationGroup group = new StationGroup();
-    Station station = new Station("test", 100, group);
-    Station station2 = new Station("test2", 100, group);
-    Station station3 = new Station("test3", 100, group);
-    Station station4 = new Station("test4", 100, group);
+    Station station = new Station(100, group);
+    Station station2 = new Station(100, group);
+    Station station3 = new Station(100, group);
+    Station station4 = new Station(100, group);
     Bank bank = Bank.instance();
 
     assertEquals(Station.BASE_RENT, station.getRent());
@@ -37,10 +37,10 @@ public class StationTest {
   @Test
   void rentDontChangeIfOtherPlayerBuy() {
     StationGroup group = new StationGroup();
-    Station station = new Station("test", 100, group);
-    Station station2 = new Station("test2", 100, group);
-    Station station3 = new Station("test3", 100, group);
-    Station station4 = new Station("test4", 100, group);
+    Station station = new Station(100, group);
+    Station station2 = new Station(100, group);
+    Station station3 = new Station(100, group);
+    Station station4 = new Station(100, group);
     Bank bank = Bank.instance();
     Bank bank1 = Bank.instance();
 
