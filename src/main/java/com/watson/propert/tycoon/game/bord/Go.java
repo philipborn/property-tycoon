@@ -1,10 +1,6 @@
 package com.watson.propert.tycoon.game.bord;
 
-public class Go extends SquareNode {
-
-  public Go(String name) {
-    super(name);
-  }
+public class Go implements SquareTyp {
 
   @Override
   public void visitBy(SquareVisitor visitor) {

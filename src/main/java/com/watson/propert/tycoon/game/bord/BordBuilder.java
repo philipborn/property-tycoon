@@ -88,8 +88,10 @@ public class BordBuilder {
 
   public BordBuilder addGo(String name) {
     checkIfCanAddSquare();
-    Go go = new Go(name);
-    addToLink(go);
+    Go go = new Go();
+    SquareNode node = new SquareNode(name, go);
+    addToLink(node);
+    board.setStart(node);
     board.setGo(go);
     return this;
   }

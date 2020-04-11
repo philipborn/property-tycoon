@@ -5,6 +5,7 @@ public class Board {
   private Go go;
   private Jail jail;
   private FreePark freePark;
+  private Square start;
 
   public Go getGo() {
     return go;
@@ -16,6 +17,10 @@ public class Board {
 
   public FreePark getFreePark() {
     return freePark;
+  }
+
+  public Square getStart() {
+    return start;
   }
 
   protected void setGo(Go go) {
@@ -37,5 +42,9 @@ public class Board {
       throw new RuntimeException("First square most be group Go");
     }
     this.freePark = freePark;
+  }
+
+  protected void setStart(Square start) {
+    this.start = start;
   }
 }

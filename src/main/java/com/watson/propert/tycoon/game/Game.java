@@ -26,7 +26,7 @@ public class Game implements PropertTycoon {
   public Game(Board board, EventBus channel) {
     master = new GameMaster();
     state = new waitOnStart();
-    this.board = board.getGo();
+    this.board = board.getStart();
     this.jailer = board.getJailer();
     dicePair = new DicePair(channel);
     this.channel = channel;
