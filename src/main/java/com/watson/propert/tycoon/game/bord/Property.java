@@ -2,9 +2,10 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.Optional;
 
+import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
-public abstract class Property extends SquareNode {
+public abstract class Property extends SquareNode implements SquareTyp {
 
   private int value;
   private Owner owner;
@@ -47,6 +48,7 @@ public abstract class Property extends SquareNode {
   }
 
   public int sell() {
+    Bank.instance().payTo(owner, price());
     owner = null;
     mortgaged = false;
     return value;

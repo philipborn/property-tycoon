@@ -45,7 +45,9 @@ public class BordBuilder {
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
     checkIfCanAddSquare();
     streetGroups.computeIfAbsent(color, (key) -> new StreetGroup(color));
-    addToLink(new Street(name, value, streetGroups.get(color), rents));
+    SquareTyp typ = new Street(name, value, streetGroups.get(color), rents);
+    SquareNode node = new SquareNode(name, typ);
+    addToLink(node);
     return this;
   }
 
