@@ -19,14 +19,13 @@ public class Street extends Property {
   }
 
   private int houseLevel = 0;
-  private Colour colour;
   private StreetGroup group;
   private List<Integer> rent;
 
   public Street(String name, int value, StreetGroup group, List<Integer> rent) {
     super(name, value);
     this.group = group;
-    this.rent = rent;
+    this.rent = List.copyOf(rent);
     group.add(this);
   }
 

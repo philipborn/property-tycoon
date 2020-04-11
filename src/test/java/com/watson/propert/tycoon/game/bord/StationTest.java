@@ -4,25 +4,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
-import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.Player;
 
 public class StationTest {
 
   @Test
   void stationRentIsExponentialToNumberOfOwnedStations() {
-    Station station = new Station("test", 100);
-    Station station2 = new Station("test2", 100);
-    Station station3 = new Station("test3", 100);
-    Station station4 = new Station("test4", 100);
+    StationGroup group = new StationGroup();
+    Station station = new Station("test", 100, group);
+    Station station2 = new Station("test2", 100, group);
+    Station station3 = new Station("test3", 100, group);
+    Station station4 = new Station("test4", 100, group);
     Player player = new Player(Player.Id.ONE, null, null, null);
-
-    BordBuilder.with(new EventBus())
-        .addSquare(station)
-        .addSquare(station2)
-        .addSquare(station3)
-        .addSquare(station4)
-        .getFirstSquare();
 
     assertEquals(Station.BASE_RENT, station.getRent());
     station.newOwner(player);
@@ -43,19 +36,13 @@ public class StationTest {
 
   @Test
   void rentDontChangeIfOtherPlayerBuy() {
-    Station station = new Station("test", 100);
-    Station station2 = new Station("test2", 100);
-    Station station3 = new Station("test3", 100);
-    Station station4 = new Station("test4", 100);
+    StationGroup group = new StationGroup();
+    Station station = new Station("test", 100, group);
+    Station station2 = new Station("test2", 100, group);
+    Station station3 = new Station("test3", 100, group);
+    Station station4 = new Station("test4", 100, group);
     Player player = new Player(Player.Id.ONE, null, null, null);
     Player playerTwo = new Player(Player.Id.TWO, null, null, null);
-
-    BordBuilder.with(new EventBus())
-        .addSquare(station)
-        .addSquare(station2)
-        .addSquare(station3)
-        .addSquare(station4)
-        .getFirstSquare();
 
     station.newOwner(player);
     assertEquals(Station.BASE_RENT, station.getRent());

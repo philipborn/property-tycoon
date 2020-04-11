@@ -1,19 +1,17 @@
 package com.watson.propert.tycoon.game.bord;
 
-import static com.watson.propert.tycoon.game.bord.StationIterator.stationIterator;
-
-import java.util.Iterator;
+import com.watson.propert.tycoon.game.Owner;
 
 public class Station extends Property {
 
   protected static final int BASE_RENT = 25;
 
-  public Station(String name, int amount) {
-    super(name, amount);
-  }
+  private StationGroup group;
 
-  public Iterator stationIter() {
-    return stationIterator(this);
+  public Station(String name, int amount, StationGroup group) {
+    super(name, amount);
+    this.group = group;
+    group.add(this);
   }
 
   @Override
@@ -21,19 +19,9 @@ public class Station extends Property {
     if (owner().isEmpty()) {
       return BASE_RENT;
     }
-    int exponent = numberOfOwenStation() - 1;
+    Owner owner = owner().get();
+    int exponent = group.numOfOwned(owner) - 1;
     return (int) (BASE_RENT * Math.pow(2, exponent));
-  }
-
-  private int numberOfOwenStation() {
-    int count = 0;
-    for (Iterator<Station> it = stationIter(); it.hasNext(); ) {
-      Station station = it.next();
-      if (station.owner().equals(this.owner())) {
-        count++;
-      }
-    }
-    return count;
   }
 
   @Override

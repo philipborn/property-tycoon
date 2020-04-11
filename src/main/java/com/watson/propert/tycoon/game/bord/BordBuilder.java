@@ -16,6 +16,7 @@ public class BordBuilder {
   private Board board = new Board();
   private BordReader source;
   private Map<Street.Colour, StreetGroup> streetGroups = new HashMap<>();
+  private StationGroup stationGroup = new StationGroup();
 
   private SquareNode first;
   private SquareNode last;
@@ -49,7 +50,7 @@ public class BordBuilder {
 
   public BordBuilder addStation(String name, int value) {
     checkIfCanAddSquare();
-    addToLink(new Station(name, value));
+    addToLink(new Station(name, value, stationGroup));
     return this;
   }
 
