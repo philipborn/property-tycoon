@@ -1049,21 +1049,21 @@
                   <Insets top="10.0" />
                </padding>
             </HBox>
-            <HBox fx:id="BG_PLAYER_1" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" spacing="15.0">
+            <HBox fx:id="PLAYER_1" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" spacing="15.0">
                <children>
-                  <ImageView fx:id="IMG_PLAYER_1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenCat.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_1" styleClass="playerName" text="Player 1" textOverrun="CLIP">
+                        <Label id="PlayerName" fx:id="PLAYER_NAME" styleClass="playerName" text="Player 1" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_1" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" fx:id="PLAYER_BALANCE" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -1078,21 +1078,21 @@
                   <Insets left="5.0" right="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="BG_PLAYER_3" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <HBox fx:id="PLAYER_3" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <ImageView fx:id="IMG_PLAYER_3" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_3" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenBoot.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_3" fx:id="PLAYER_3" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_3" styleClass="playerName" text="Player 3" textOverrun="CLIP">
+                        <Label id="PlayerName" styleClass="playerName" text="Player 3" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_3" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -1107,21 +1107,21 @@
                   <Insets left="5.0" right="5.0" />
                </padding>
             </HBox>
-            <HBox fx:id="BG_PLAYER_5" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <HBox fx:id="PLAYER_5" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <ImageView fx:id="IMG_PLAYER_5" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_5" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenHatStand.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_5" fx:id="PLAYER_5" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_5" styleClass="playerName" text="Player 5" textOverrun="CLIP">
+                        <Label id="PlayerName" styleClass="playerName" text="Player 5" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_5" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -1160,7 +1160,7 @@
                   </Label>
                </children>
             </HBox>
-            <HBox fx:id="BG_PLAYER_2" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <HBox fx:id="PLAYER_2" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="25.0" />
                </VBox.margin>
@@ -1168,19 +1168,19 @@
                   <Insets left="5.0" right="5.0" />
                </padding>
                <children>
-                  <ImageView fx:id="IMG_PLAYER_2" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_2" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenGoblet.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_2" fx:id="PLAYER_2" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_2" styleClass="playerName" text="Player 2" textOverrun="CLIP">
+                        <Label id="PlayerName" styleClass="playerName" text="Player 2" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_2" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -1189,24 +1189,24 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="BG_PLAYER_4" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <HBox fx:id="PLAYER_4" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <padding>
                   <Insets left="5.0" right="5.0" />
                </padding>
                <children>
-                  <ImageView fx:id="IMG_PLAYER_4" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_4" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenSmartPhone.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_4" fx:id="PLAYER_4" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_4" styleClass="playerName" text="Player 4" textOverrun="CLIP">
+                        <Label id="PlayerName" styleClass="playerName" text="Player 4" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_4" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>
@@ -1218,24 +1218,24 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox fx:id="BG_PLAYER_6" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+            <HBox fx:id="PLAYER_6" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <padding>
                   <Insets left="5.0" right="5.0" />
                </padding>
                <children>
-                  <ImageView fx:id="IMG_PLAYER_6" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="Token" fx:id="IMG_PLAYER_6" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tokens/tokenSpoon.png" />
                      </image>
                   </ImageView>
-                  <VBox id="PLAYER_NAME_CONTAINER_6" fx:id="PLAYER_6" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
                      <children>
-                        <Label id="PLAYER_NAME_6" styleClass="playerName" text="Player 6" textOverrun="CLIP">
+                        <Label id="PlayerName" styleClass="playerName" text="Player 6" textOverrun="CLIP">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label id="ACCOUNT_BALANCE_PLAYER_6" styleClass="playerAccount" text="£888.88">
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
                            <font>
                               <Font name="System Italic" size="24.0" />
                            </font>

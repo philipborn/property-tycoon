@@ -214,23 +214,18 @@ public class PtController {
 
   @FXML private ImageView DICE_IMG_2;
 
-  @FXML private VBox PLAYER_1;
-
-  @FXML private VBox PLAYER_3;
-
-  @FXML private VBox PLAYER_5;
-
   @FXML private VBox BUTTON_CONTAINER;
 
   @FXML private Button NEW_GAME;
 
   @FXML private Button END_GAME;
-  @FXML private HBox BG_PLAYER_1;
-  @FXML private HBox BG_PLAYER_2;
-  @FXML private HBox BG_PLAYER_3;
-  @FXML private HBox BG_PLAYER_4;
-  @FXML private HBox BG_PLAYER_5;
-  @FXML private HBox BG_PLAYER_6;
+
+  @FXML private HBox PLAYER_1;
+  @FXML private HBox PLAYER_2;
+  @FXML private HBox PLAYER_3;
+  @FXML private HBox PLAYER_4;
+  @FXML private HBox PLAYER_5;
+  @FXML private HBox PLAYER_6;
 
   @FXML private ImageView IMG_PLAYER_1;
   @FXML private ImageView IMG_PLAYER_2;
@@ -238,12 +233,6 @@ public class PtController {
   @FXML private ImageView IMG_PLAYER_4;
   @FXML private ImageView IMG_PLAYER_5;
   @FXML private ImageView IMG_PLAYER_6;
-
-  @FXML private VBox PLAYER_2;
-
-  @FXML private VBox PLAYER_4;
-
-  @FXML private VBox PLAYER_6;
 
   @FXML private VBox BUTTON_CONTAINER1;
 
@@ -282,6 +271,8 @@ public class PtController {
   // Show Extended Player Details
   @FXML
   void playerPopUp(MouseEvent event) throws IOException {
+    Logger logger = LoggerFactory.getLogger(App.class);
+
     // getting URL of fxml file
     URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerPopup.fxml");
     FXMLLoader loader = new FXMLLoader(fxmlUrl);
@@ -290,34 +281,37 @@ public class PtController {
     // get controller for popup
     ptPlayerPopupCtrl controller = loader.getController();
 
+    logger.debug("Num players: " + gameBoard.getPlayers().length);
     // Get Player
     Object box = event.getSource();
     if (box instanceof HBox) {
-      Node vb = ((HBox) box).getChildren().get(1);
-      Node lName = ((VBox) vb).getChildren().get(0);
+      Node vb = ((HBox) box).lookup("#PlayerDetail");
+      Node lName = ((VBox) vb).lookup("#PlayerName");
       if (lName instanceof Label) {
 
         // get GuiPlayer
         for (GuiPlayer p : gameBoard.getPlayers()) {
           if (p.getName().equals(((Label) lName).getText())) {
             player = p;
+            break;
           }
         }
       }
     }
 
-    // TEST DATA
-    //player = new GuiPlayer("Lee", new GuiToken(new Pane(), 1));
-    player.addProperty(new GuiProperty("London Road", 100, PropertyGroup.BLUE));
-    player.addProperty(new GuiProperty("Brighton Road", 100, PropertyGroup.BLUE));
-    player.addProperty(new GuiProperty("Eastbourne Road", 100, PropertyGroup.RED));
-    player.addProperty(new GuiProperty("Lewes Road", 100, PropertyGroup.BROWN));
-    player.addProperty(new GuiProperty("Pole Gate Road", 100, PropertyGroup.PURPLE));
-    player.addProperty(new GuiProperty("Hastings Road", 100, PropertyGroup.YELLOW));
+    if (player != null) {
+      // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
+      player.getPortfolio().clear();
+      player.addProperty(new GuiProperty("London Road", 100, PropertyGroup.BLUE));
+      player.addProperty(new GuiProperty("Brighton Road", 100, PropertyGroup.BLUE));
+      player.addProperty(new GuiProperty("Eastbourne Road", 100, PropertyGroup.RED));
+      player.addProperty(new GuiProperty("Lewes Road", 100, PropertyGroup.BROWN));
+      player.addProperty(new GuiProperty("Pole Gate Road", 100, PropertyGroup.PURPLE));
+      player.addProperty(new GuiProperty("Hastings Road", 100, PropertyGroup.YELLOW));
 
-    // load data to controller
-    controller.setData(player);
-
+      // load data to controller
+      controller.setData(player);
+    }
     // Create & show scene
     Scene scene = new Scene(root);
     playerPopUp.setScene(scene);
@@ -366,9 +360,6 @@ public class PtController {
 
     // Only if New Game button clicked create a new game
     if (newGame.isNewGame()) {
-      game = Game.newGame();
-      game.registerListener(this);
-
       GuiToken[] t =
           new GuiToken[] {
             new GuiToken(TOKEN_PLAYER_1, 0),
@@ -378,6 +369,7 @@ public class PtController {
             new GuiToken(TOKEN_PLAYER_5, 0),
             new GuiToken(TOKEN_PLAYER_6, 0)
           };
+
       PlayerInfo[] pi = {
         new PlayerInfo(PLAYER_1),
         new PlayerInfo(PLAYER_2),
@@ -386,27 +378,48 @@ public class PtController {
         new PlayerInfo(PLAYER_5),
         new PlayerInfo(PLAYER_6)
       };
-      GuiPlayer[] players = new GuiPlayer[newGame.getNewPlayers().size()];
-      for (int i = 0; i < newGame.getNewPlayers().size(); i++) {
-        new GuiPlayer(
-            newGame.getNewPlayers().get(i).getName(),
-            t[i],
-            newGame.getNewPlayers().get(i).isAi(),
-            pi[i]);
-        pi[i].getName().setText(newGame.getNewPlayers().get(i).getName());
+
+      // Hide players and tokens
+      for (int i = 0; i < 6; i++) {
+        pi[i].getContainer().setVisible(false);
+        t[i].getToken().setVisible(false);
       }
 
-      // Hide players not participating in the new game
-      // NEED TO REFACTOR PlayerInfo Class
-      for (int i = newGame.getNewPlayers().size(); i < 6; i++) {}
+      // Set up new Players
+      GuiPlayer[] players = new GuiPlayer[newGame.getNewPlayers().size()];
+      for (int i = 0; i < newGame.getNewPlayers().size(); i++) {
+        players[i] =
+            new GuiPlayer(
+                newGame.getNewPlayers().get(i).getName(),
+                t[i],
+                newGame.getNewPlayers().get(i).isAi(),
+                pi[i]);
+        pi[i].getName().setText(newGame.getNewPlayers().get(i).getName());
+        pi[i].getMoney().setText("500");
+        pi[i].getContainer().setVisible(true);
+        t[i].getToken().setVisible(true);
+      }
+
+      // Set new players
+      gameBoard.setPlayers(players);
 
       // If a timed game, show and set timer, otherwise hide
       if (newGame.isTimedGame()) {
         setTimer(newGame.getGameTime() * 3600);
         TIMER.setVisible(true);
+        gameBoard.setTimedGame(true);
       } else {
         TIMER.setVisible(false);
+        gameBoard.setTimedGame(false);
       }
+
+      // Reset Gameboard
+      if (event != null) {
+        gameBoard.reset();
+      }
+
+      game = Game.newGame();
+      game.registerListener(this);
     }
   }
 
@@ -778,6 +791,7 @@ public class PtController {
     currentPopup.initStyle(StageStyle.TRANSPARENT);
     playerPopUp = new Stage();
     playerPopUp.initStyle(StageStyle.UTILITY);
+    playerPopUp.setTitle("Extended Player Data");
     game = Game.newGame();
     game.registerListener(this);
 
@@ -810,6 +824,7 @@ public class PtController {
     }
 
     // Create and show a New Game Dialog
+    newGame(null);
     // Results pushed to GameBoard class
     //NewGame newGameDialog = new NewGame();
     //newGameDialog.showDialog();

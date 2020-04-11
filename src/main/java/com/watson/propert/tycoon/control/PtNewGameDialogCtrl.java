@@ -18,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
@@ -113,10 +112,10 @@ public class PtNewGameDialogCtrl {
       String name = newPlayers[i].getName().getText();
       Boolean ai = newPlayers[i].getAi().isSelected();
       if (name.length() == 0) {
-        name = "Player " + i;
+        name = "Player " + (i + 1);
       }
       this.enteredPlayers.add(
-          new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new VBox())));
+          new GuiPlayer(name, new GuiToken(new HBox()), ai, new PlayerInfo(new HBox())));
     }
     ((Stage) NEW_GAME_BUTTON.getScene().getWindow()).close();
   }

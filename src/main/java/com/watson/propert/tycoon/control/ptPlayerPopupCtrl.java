@@ -84,8 +84,7 @@ public class ptPlayerPopupCtrl {
     for (GuiProperty p : player.getPortfolio()) {
       addProperty(p);
     }
-    //IMG_PLAYER_TOKEN.setImage(player.getToken());
-
+    IMG_PLAYER_TOKEN.setImage(player.getToken().getImage());
   }
 
   @FXML
