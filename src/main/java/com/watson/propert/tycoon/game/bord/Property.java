@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.watson.propert.tycoon.game.Owner;
 
-public abstract class Property extends SquareAbstract {
+public abstract class Property extends SquareNode {
 
   private int value;
   private Owner owner;

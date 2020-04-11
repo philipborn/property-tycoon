@@ -3,7 +3,7 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Jail extends SquareAbstract implements Jailer {
+public class Jail extends SquareNode implements Jailer {
 
   private static final int jailTime = 2;
   private Map<Prisonable, Integer> jailRecord = new HashMap<>();

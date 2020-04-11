@@ -1,9 +1,7 @@
 package com.watson.propert.tycoon.game.bord;
 
-import java.util.Iterator;
 import java.util.List;
 
-import com.google.common.collect.Streams;
 import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
@@ -22,32 +20,21 @@ public class Street extends Property {
 
   private int houseLevel = 0;
   private Colour colour;
+  private StreetGroup group;
   private List<Integer> rent;
 
-  public Street(String name, int value, Colour colour, List<Integer> rent) {
+  public Street(String name, int value, StreetGroup group, List<Integer> rent) {
     super(name, value);
-    this.colour = colour;
+    this.group = group;
     this.rent = rent;
-  }
-
-  public Iterator<Street> SameColourIter() {
-    return new ColorIterator(this.colour, this);
+    group.add(this);
   }
 
   @Override
   public int getRent() {
-    int factor = (houseLevel == 0 && ifOwnerSameColor()) ? 2 : 1;
+    Boolean owensTheGroup = owner().map(group::owensTheGroup).orElse(false);
+    int factor = (houseLevel == 0 && owensTheGroup) ? 2 : 1;
     return factor * rent.get(houseLevel);
-  }
-
-  private boolean ifOwnerSameColor() {
-    for (Iterator<Street> it = SameColourIter(); it.hasNext(); ) {
-      Street street = it.next();
-      if (!street.owner().equals(this.owner())) {
-        return false;
-      }
-    }
-    return true;
   }
 
   public int getNumHouse() {
@@ -55,19 +42,19 @@ public class Street extends Property {
   }
 
   public boolean canBuildHouse() {
-    if (owner().isEmpty() || (houseLevel == rent.size() - 1) || !ifOwnerSameColor()) {
+    Boolean owensTheGroup = owner().map(group::owensTheGroup).orElse(false);
+    if (owner().isEmpty() || (houseLevel == rent.size() - 1) || !owensTheGroup) {
       return false;
     }
-    int minHouse = Streams.stream(SameColourIter()).mapToInt(Street::getNumHouse).min().getAsInt();
-    return houseLevel == minHouse;
+    return houseLevel == group.smallestHouseSize();
   }
 
   public boolean canSellHouse() {
-    if (owner().isEmpty() || houseLevel == 0 || !ifOwnerSameColor()) {
+    Boolean owensTheGroup = owner().map(group::owensTheGroup).orElse(false);
+    if (owner().isEmpty() || houseLevel == 0 || !owensTheGroup) {
       return false;
     }
-    int maxHouse = Streams.stream(SameColourIter()).mapToInt(Street::getNumHouse).max().getAsInt();
-    return houseLevel == maxHouse;
+    return houseLevel == group.largesHouseSize();
   }
 
   public void buyHouses() {
@@ -76,7 +63,7 @@ public class Street extends Property {
     }
     Owner owner =
         owner().orElseThrow(() -> new RuntimeException("Street need owner to buy houses"));
-    owner.payTo(Bank.instance(), priceForHouse());
+    owner.payTo(Bank.instance(), group.getHousePrice());
     ++houseLevel;
   }
 
@@ -86,35 +73,17 @@ public class Street extends Property {
     }
     Owner owner =
         owner().orElseThrow(() -> new RuntimeException("Street need owner to sell houses"));
-    Bank.instance().payTo(owner, priceForHouse());
+    Bank.instance().payTo(owner, group.getHousePrice());
     --houseLevel;
   }
 
-  private int priceForHouse() {
-    switch (colour) {
-      case BROWN:
-      case BLUE:
-        return 50;
-      case PURPLE:
-      case ORANGE:
-        return 100;
-      case RED:
-      case YELLOW:
-        return 150;
-      case GREEN:
-      case DEEP_BLUE:
-        return 200;
-    }
-    return 0;
-  }
-
   public Colour getColour() {
-    return colour;
+    return group.getColor();
   }
 
   @Override
   public int totalValue() {
-    return super.totalValue() + houseLevel * priceForHouse();
+    return super.totalValue() + houseLevel * group.getHousePrice();
   }
 
   @Override

@@ -4,14 +4,21 @@ import java.util.Iterator;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public abstract class SquareAbstract implements Square {
+public class SquareNode implements Square {
 
-  private SquareAbstract next;
-  private SquareAbstract back;
+  private SquareNode next;
+  private SquareNode back;
   private String name;
+  private SquareTyp typ;
 
-  public SquareAbstract(String name) {
+  public SquareNode(String name) {
     this.name = name;
+    this.typ = new NullTyp();
+  }
+
+  public SquareNode(String name, SquareTyp typ) {
+    this.name = name;
+    this.typ = typ;
   }
 
   @Override
@@ -102,11 +109,16 @@ public abstract class SquareAbstract implements Square {
     return null;
   }
 
-  protected void setNext(SquareAbstract node) {
+  @Override
+  public void visitBy(SquareVisitor visitor) {
+    typ.visitBy(visitor);
+  }
+
+  protected void setNext(SquareNode node) {
     next = node;
   }
 
-  protected void setBack(SquareAbstract node) {
+  protected void setBack(SquareNode node) {
     back = node;
   }
 
@@ -128,11 +140,11 @@ public abstract class SquareAbstract implements Square {
 
   private static class BordIterator implements Iterator<Square> {
 
-    private SquareAbstract iterStart;
-    private SquareAbstract iterNext;
+    private SquareNode iterStart;
+    private SquareNode iterNext;
     private Boolean atBegin = Boolean.TRUE;
 
-    private BordIterator(SquareAbstract start) {
+    private BordIterator(SquareNode start) {
       this.iterStart = start;
       this.iterNext = start;
     }
@@ -146,9 +158,9 @@ public abstract class SquareAbstract implements Square {
     }
 
     @Override
-    public SquareAbstract next() {
+    public SquareNode next() {
       atBegin = false;
-      SquareAbstract current = iterNext;
+      SquareNode current = iterNext;
       iterNext = iterNext.next;
       return current;
     }
@@ -156,11 +168,11 @@ public abstract class SquareAbstract implements Square {
 
   private static class BackwardIterator implements Iterator<Square> {
 
-    private SquareAbstract iterStart;
-    private SquareAbstract iterNext;
+    private SquareNode iterStart;
+    private SquareNode iterNext;
     private Boolean atBegin = Boolean.TRUE;
 
-    private BackwardIterator(SquareAbstract start) {
+    private BackwardIterator(SquareNode start) {
       this.iterStart = start;
       this.iterNext = start;
     }
@@ -174,9 +186,9 @@ public abstract class SquareAbstract implements Square {
     }
 
     @Override
-    public SquareAbstract next() {
+    public SquareNode next() {
       atBegin = false;
-      SquareAbstract current = iterNext;
+      SquareNode current = iterNext;
       iterNext = iterNext.back;
       return current;
     }

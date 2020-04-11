@@ -1,6 +1,6 @@
 package com.watson.propert.tycoon.game.bord;
 
-public class Go extends SquareAbstract {
+public class Go extends SquareNode {
 
   public Go(String name) {
     super(name);

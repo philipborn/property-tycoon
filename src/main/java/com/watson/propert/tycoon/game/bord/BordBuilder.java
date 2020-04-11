@@ -1,9 +1,6 @@
 package com.watson.propert.tycoon.game.bord;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.BankAccount;
@@ -18,9 +15,10 @@ public class BordBuilder {
   private EventBus channel;
   private Board board = new Board();
   private BordReader source;
+  private Map<Street.Colour, StreetGroup> streetGroups = new HashMap<>();
 
-  private SquareAbstract first;
-  private SquareAbstract last;
+  private SquareNode first;
+  private SquareNode last;
   private Map<String, String> prop;
   private Boolean doneLastLink = false;
 
@@ -44,7 +42,8 @@ public class BordBuilder {
 
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
     checkIfCanAddSquare();
-    addToLink(new Street(name, value, color, rents));
+    streetGroups.computeIfAbsent(color, (key) -> new StreetGroup(color));
+    addToLink(new Street(name, value, streetGroups.get(color), rents));
     return this;
   }
 
@@ -98,7 +97,7 @@ public class BordBuilder {
     return this;
   }
 
-  public BordBuilder addSquare(SquareAbstract square) {
+  public BordBuilder addSquare(SquareNode square) {
     checkIfCanAddSquare();
     addToLink(square);
     return this;
@@ -116,79 +115,7 @@ public class BordBuilder {
     }
   }
 
-  private SquareAbstract createSquare() {
-    prop = source.getProperties();
-    if (isStreet()) {
-      return buildStreet();
-    } else if (isStation()) {
-      return buildStation();
-    } else if (isUtilits()) {
-      return buildUtilitys();
-    }
-    return new ActionSquare(prop.get("name"));
-  }
-
-  private Boolean isStreet() {
-    final Set<String> streetKeys =
-        Set.of(
-            "position",
-            "name",
-            "group",
-            "canBeBought".toLowerCase(),
-            "cost",
-            "rent",
-            "1house",
-            "2houses",
-            "3houses",
-            "4houses",
-            "hotel");
-    Set<String> keys = prop.keySet();
-    return keys.containsAll(streetKeys);
-  }
-
-  private SquareAbstract buildStreet() {
-    String name = prop.get("name");
-    int value = Integer.valueOf(prop.get("cost"));
-    Street.Colour color = extractColor(prop.get("group"));
-    List<Integer> rent = new ArrayList<>(5);
-    rent.add(Integer.valueOf(prop.get("rent")));
-    return new Street(name, value, color, rent);
-  }
-
-  private Street.Colour extractColor(String color) {
-    String regex = " ";
-    String replacement = "_";
-    return Street.Colour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
-  }
-
-  private Boolean isStation() {
-    if (prop.get("group") != null) {
-      return prop.get("group").toLowerCase().equals("station");
-    }
-    return false;
-  }
-
-  private SquareAbstract buildStation() {
-    String name = prop.get("name");
-    int value = Integer.valueOf(prop.get("cost"));
-    Station station = new Station(name, value);
-    return new Station(name, value);
-  }
-
-  private Boolean isUtilits() {
-    if (prop.get("group") == null) {
-      return false;
-    }
-    return prop.get("group").toLowerCase().equals("utilities");
-  }
-
-  private SquareAbstract buildUtilitys() {
-    String name = prop.get("name");
-    int value = Integer.valueOf(prop.get("cost"));
-    return new Utilities(name, value);
-  }
-
-  private SquareAbstract addToLink(SquareAbstract current) {
+  private SquareNode addToLink(SquareNode current) {
     if (last != null) {
       current.setBack(last);
       last.setNext(current);
