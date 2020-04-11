@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.BankAccount;
 import com.watson.propert.tycoon.game.Player;
 import com.watson.propert.tycoon.game.events.DiceEvent;
 
@@ -37,8 +38,8 @@ public class UtilitiesTest {
     Utilities utilOne = new Utilities("test1", value);
     Utilities utilTwo = new Utilities("test1", value);
     Utilities utilThree = new Utilities("test1", value);
-    Player playerOne = new Player(Player.Id.ONE, utilOne, null);
-    Player playerTwo = new Player(Player.Id.TWO, utilOne, null);
+    Player playerOne = new Player(Player.Id.ONE, new BankAccount(), utilOne, null);
+    Player playerTwo = new Player(Player.Id.TWO, new BankAccount(), utilOne, null);
     utilOne.newOwner(playerOne);
     utilThree.newOwner(playerTwo);
     BordBuilder.with(new EventBus())

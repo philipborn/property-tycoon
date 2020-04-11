@@ -16,7 +16,7 @@ public class ToSellHouses implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     street.owner().filter((owner) -> owner.equals(player)).ifPresent((owner) -> street.sellHouse());
   }
 }

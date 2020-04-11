@@ -23,6 +23,6 @@ public class ActionSquare extends SquareAbstract {
 
   @Override
   public void visitBy(SquareVisitor visitor) {
-    visitor.actionSquare(this);
+    visitor.areAt(this);
   }
 }

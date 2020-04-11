@@ -38,6 +38,6 @@ public class Station extends Property {
 
   @Override
   public void visitBy(SquareVisitor visitor) {
-    visitor.station(this);
+    visitor.areAt(this);
   }
 }

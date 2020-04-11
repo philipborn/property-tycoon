@@ -6,7 +6,7 @@ import java.util.Map;
 public class Jail extends SquareAbstract implements Jailer {
 
   private static final int jailTime = 2;
-  private Map<Prisonable,Integer> jailRecord = new HashMap<>();
+  private Map<Prisonable, Integer> jailRecord = new HashMap<>();
 
   public Jail(String name) {
     super(name);
@@ -17,7 +17,7 @@ public class Jail extends SquareAbstract implements Jailer {
 
   @Override
   public void toJail(Prisonable prison) {
-    jailRecord.put(prison,jailTime);
+    jailRecord.put(prison, jailTime);
   }
 
   @Override
@@ -28,6 +28,6 @@ public class Jail extends SquareAbstract implements Jailer {
 
   @Override
   public void decrementJailTime(Prisonable prison) {
-    jailRecord.computeIfPresent(prison,((prisonable, integer) -> --integer));
+    jailRecord.computeIfPresent(prison, ((prisonable, integer) -> --integer));
   }
 }

@@ -19,22 +19,28 @@ public class AfterMove implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     propertyHandling(street);
   }
 
   @Override
-  public void station(Station station) {
+  public void areAt(Station station) {
     propertyHandling(station);
   }
 
   @Override
-  public void utilities(Utilities utilities) {
+  public void areAt(Utilities utilities) {
     propertyHandling(utilities);
   }
 
   @Override
-  public void actionSquare(ActionSquare actionSquare) {
+  public void areAt(ActionSquare actionSquare) {
     actionSquare.getAction().run();
+  }
+
+  @Override
+  public void areAt(FreePark freePark) {
+    int amount = freePark.cash();
+    freePark.payTo(player, amount);
   }
 }

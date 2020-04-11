@@ -29,11 +29,13 @@ public abstract class Property extends SquareAbstract {
   }
 
   /**
-   * This method is to override if the value of the Property
-   * need to be calculated differently
+   * This method is to override if the value of the Property need to be calculated differently
+   *
    * @return value of the Property
    */
-  public int totalValue() {return value;}
+  public int totalValue() {
+    return value;
+  }
 
   public int mortgage() {
     mortgaged = true;

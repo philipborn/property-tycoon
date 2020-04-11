@@ -18,12 +18,12 @@ public class ToMorgade implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     street.owner().filter((owner) -> owner.equals(player)).ifPresent((owner) -> street.mortgage());
   }
 
   @Override
-  public void station(Station station) {
+  public void areAt(Station station) {
     station
         .owner()
         .filter((owner) -> owner.equals(player))
@@ -31,7 +31,7 @@ public class ToMorgade implements SquareVisitor {
   }
 
   @Override
-  public void utilities(Utilities utilities) {
+  public void areAt(Utilities utilities) {
     utilities
         .owner()
         .filter((owner) -> owner.equals(player))

@@ -2,11 +2,15 @@ package com.watson.propert.tycoon.game.bord;
 
 public interface SquareVisitor {
 
-  default void street(Street street) {}
+  default void areAt(Street street) {}
 
-  default void station(Station station) {}
+  default void areAt(Station station) {}
 
-  default void utilities(Utilities utilities) {}
+  default void areAt(Utilities utilities) {}
 
-  default void actionSquare(ActionSquare actionSquare) {}
+  default void areAt(ActionSquare actionSquare) {}
+
+  default void areAt(Jail jail) {}
+
+  default void areAt(FreePark freePark) {}
 }

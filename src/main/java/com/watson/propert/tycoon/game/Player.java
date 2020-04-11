@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.Optional;
+
 import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.Property;
@@ -8,10 +10,7 @@ import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 
-import java.util.Optional;
-
 public class Player implements Owner, Comparable<Player> {
-
 
   public enum Id {
     ONE,
@@ -30,7 +29,7 @@ public class Player implements Owner, Comparable<Player> {
 
   private EventBus channel;
 
-  public Player(Id id, BankAccount account ,Square startLocation, EventBus channel) {
+  public Player(Id id, BankAccount account, Square startLocation, EventBus channel) {
     this.id = id;
     location = startLocation;
     this.channel = channel;
@@ -52,7 +51,8 @@ public class Player implements Owner, Comparable<Player> {
   }
 
   public int totalValue() {
-    return account.cash() + Streams.stream(location.iterator())
+    return account.cash()
+        + Streams.stream(location.iterator())
             .filter(Property.class::isInstance)
             .map(Property.class::cast)
             .filter((prop) -> prop.owner().equals(Optional.of(this)))
@@ -73,8 +73,8 @@ public class Player implements Owner, Comparable<Player> {
   public void receiveCash(int amount) {
     int oldCash = account.cash();
     account.receiveCash(amount);
-    int cash  =account.cash();
-    if(cash != oldCash) {
+    int cash = account.cash();
+    if (cash != oldCash) {
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
@@ -82,9 +82,9 @@ public class Player implements Owner, Comparable<Player> {
   @Override
   public void payTo(CashUser cashUser, int amount) {
     int oldCash = account.cash();
-    account.payTo(cashUser,amount);
-    int cash  =account.cash();
-    if(cash != oldCash) {
+    account.payTo(cashUser, amount);
+    int cash = account.cash();
+    if (cash != oldCash) {
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }

@@ -37,7 +37,9 @@ public class Game implements PropertTycoon {
 
   public void startGame(GameSetting settings) {
     List<Player> players = new ArrayList<>();
-    settings.getPlayers().forEach((id) -> players.add(new Player(id, bord, channel)));
+    settings
+        .getPlayers()
+        .forEach((id) -> players.add(new Player(id, new BankAccount(START_CASH), bord, channel)));
     master.newGame(players);
     player = master.currentPlayer();
     state = new NewTurn();

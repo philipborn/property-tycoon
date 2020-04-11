@@ -26,17 +26,17 @@ public class PropertyCanBought implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     canBuyProperty(street);
   }
 
   @Override
-  public void station(Station station) {
+  public void areAt(Station station) {
     canBuyProperty(station);
   }
 
   @Override
-  public void utilities(Utilities utilities) {
+  public void areAt(Utilities utilities) {
     canBuyProperty(utilities);
   }
 }

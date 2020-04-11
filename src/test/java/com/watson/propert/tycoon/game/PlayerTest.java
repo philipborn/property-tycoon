@@ -27,7 +27,7 @@ public class PlayerTest {
     first = BordBuilder.with(channel).addFrom(source).getBord();
 
     this.channel = new EventBus();
-    player = new Player(Player.Id.ONE, first, this.channel);
+    player = new Player(Player.Id.ONE, new BankAccount(1000), first, this.channel);
   }
 
   @Test

@@ -45,6 +45,6 @@ public class Utilities extends Property {
 
   @Override
   public void visitBy(SquareVisitor visitor) {
-    visitor.utilities(this);
+    visitor.areAt(this);
   }
 }

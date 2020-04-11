@@ -91,17 +91,17 @@ public class PropertyInfo {
     }
 
     @Override
-    public void street(Street street) {
+    public void areAt(Street street) {
       info = info(street);
     }
 
     @Override
-    public void station(Station station) {
+    public void areAt(Station station) {
       info = info(station);
     }
 
     @Override
-    public void utilities(Utilities utilities) {
+    public void areAt(Utilities utilities) {
       info = info(utilities);
     }
   }

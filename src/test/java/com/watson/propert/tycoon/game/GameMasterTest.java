@@ -25,9 +25,10 @@ public class GameMasterTest {
     square = new ActionSquare("Test");
     channel = new EventBus();
 
+    int cash = 10000;
     players = new ArrayList<>(6);
-    players.add(new Player(Player.Id.ONE, square, channel));
-    players.add(new Player(Player.Id.TWO, square, channel));
+    players.add(new Player(Player.Id.ONE, new BankAccount(cash), square, channel));
+    players.add(new Player(Player.Id.TWO, new BankAccount(cash), square, channel));
     master = new GameMaster();
     master.newGame(players);
   }

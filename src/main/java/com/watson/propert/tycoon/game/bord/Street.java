@@ -119,7 +119,7 @@ public class Street extends Property {
 
   @Override
   public void visitBy(SquareVisitor visitor) {
-    visitor.street(this);
+    visitor.areAt(this);
   }
 
   @Override

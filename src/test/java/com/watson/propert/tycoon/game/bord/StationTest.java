@@ -15,7 +15,7 @@ public class StationTest {
     Station station2 = new Station("test2", 100);
     Station station3 = new Station("test3", 100);
     Station station4 = new Station("test4", 100);
-    Player player = new Player(Player.Id.ONE, null, null);
+    Player player = new Player(Player.Id.ONE, null, null, null);
 
     BordBuilder.with(new EventBus())
         .addSquare(station)
@@ -47,8 +47,8 @@ public class StationTest {
     Station station2 = new Station("test2", 100);
     Station station3 = new Station("test3", 100);
     Station station4 = new Station("test4", 100);
-    Player player = new Player(Player.Id.ONE, null, null);
-    Player playerTwo = new Player(Player.Id.TWO, null, null);
+    Player player = new Player(Player.Id.ONE, null, null, null);
+    Player playerTwo = new Player(Player.Id.TWO, null, null, null);
 
     BordBuilder.with(new EventBus())
         .addSquare(station)

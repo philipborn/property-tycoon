@@ -29,17 +29,17 @@ public class CanFixProperty implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     foundProperty = street.owner().filter((owner -> owner.equals(player))).isPresent();
   }
 
   @Override
-  public void station(Station station) {
+  public void areAt(Station station) {
     foundProperty = station.owner().filter((owner -> owner.equals(player))).isPresent();
   }
 
   @Override
-  public void utilities(Utilities utilities) {
+  public void areAt(Utilities utilities) {
     foundProperty = utilities.owner().filter((owner -> owner.equals(player))).isPresent();
   }
 }

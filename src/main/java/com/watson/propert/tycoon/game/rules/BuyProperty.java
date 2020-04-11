@@ -27,17 +27,17 @@ public class BuyProperty implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {
+  public void areAt(Street street) {
     buy(street);
   }
 
   @Override
-  public void station(Station station) {
+  public void areAt(Station station) {
     buy(station);
   }
 
   @Override
-  public void utilities(Utilities utilities) {
+  public void areAt(Utilities utilities) {
     buy(utilities);
   }
 }

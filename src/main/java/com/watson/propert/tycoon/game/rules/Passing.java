@@ -13,7 +13,7 @@ public class Passing implements SquareVisitor {
   }
 
   @Override
-  public void actionSquare(ActionSquare square) {
+  public void areAt(ActionSquare square) {
     Action action = square.getAction();
     if (action instanceof PassingAction) {
       action.run();
@@ -26,13 +26,13 @@ public class Passing implements SquareVisitor {
   }
 
   @Override
-  public void street(Street street) {}
+  public void areAt(Street street) {}
 
   @Override
-  public void station(Station station) {}
+  public void areAt(Station station) {}
 
   @Override
-  public void utilities(Utilities utilities) {}
+  public void areAt(Utilities utilities) {}
 
   public static Passing rulesFor(Player current) {
     return new Passing(current);
