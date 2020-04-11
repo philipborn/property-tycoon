@@ -81,8 +81,9 @@ public class BordBuilder {
 
   public BordBuilder addFreePark(String name) {
     checkIfCanAddSquare();
-    FreePark freePark = new FreePark(name, channel, new BankAccount());
-    addToLink(freePark);
+    FreePark freePark = new FreePark(channel, new BankAccount());
+    SquareNode node = new SquareNode(name, freePark);
+    addToLink(node);
     board.setFreePark(freePark);
     return this;
   }

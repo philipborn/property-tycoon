@@ -5,13 +5,12 @@ import com.watson.propert.tycoon.game.BankAccount;
 import com.watson.propert.tycoon.game.CashUser;
 import com.watson.propert.tycoon.game.events.FreeParkChangeEvent;
 
-public class FreePark extends SquareNode implements CashUser {
+public class FreePark implements CashUser, SquareTyp {
 
   private BankAccount account;
   private EventBus channel;
 
-  public FreePark(String name, EventBus channel, BankAccount account) {
-    super(name);
+  public FreePark(EventBus channel, BankAccount account) {
     this.channel = channel;
     this.account = account;
   }
