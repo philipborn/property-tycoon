@@ -3,17 +3,10 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Jail extends SquareNode implements Jailer {
+public class Jail implements Jailer, SquareTyp {
 
   private static final int jailTime = 2;
   private Map<Prisonable, Integer> jailRecord = new HashMap<>();
-
-  public Jail(String name) {
-    super(name);
-  }
-
-  @Override
-  public void visitBy(SquareVisitor visitor) {}
 
   @Override
   public void toJail(Prisonable prison) {
@@ -29,5 +22,10 @@ public class Jail extends SquareNode implements Jailer {
   @Override
   public void decrementJailTime(Prisonable prison) {
     jailRecord.computeIfPresent(prison, ((prisonable, integer) -> --integer));
+  }
+
+  @Override
+  public void visitBy(SquareVisitor visitor) {
+    visitor.areAt(this);
   }
 }

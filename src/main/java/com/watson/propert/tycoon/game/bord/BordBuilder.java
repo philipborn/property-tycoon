@@ -72,8 +72,9 @@ public class BordBuilder {
 
   public BordBuilder addJail(String name) {
     checkIfCanAddSquare();
-    Jail jail = new Jail(name);
-    addToLink(jail);
+    Jail jail = new Jail();
+    SquareNode node = new SquareNode(name, jail);
+    addToLink(node);
     board.setJailer(jail);
     return this;
   }
