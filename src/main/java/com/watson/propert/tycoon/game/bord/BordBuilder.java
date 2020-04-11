@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.BankAccount;
 import com.watson.propert.tycoon.game.actions.Action;
 
 public class BordBuilder {
@@ -15,6 +16,7 @@ public class BordBuilder {
   }
 
   private EventBus channel;
+  private Board board = new Board();
   private BordReader source;
 
   private SquareAbstract first;
@@ -26,7 +28,14 @@ public class BordBuilder {
     this.channel = channel;
   }
 
-  public Square getBord() {
+  public Board getBoard() {
+    if (doneLastLink == false) {
+      linkLastAndFirst();
+    }
+    return board;
+  }
+
+  public Square getFirstSquare() {
     if (doneLastLink == false) {
       linkLastAndFirst();
     }
@@ -50,6 +59,30 @@ public class BordBuilder {
     Utilities utilities = new Utilities(name, value);
     addToLink(utilities);
     channel.register(utilities);
+    return this;
+  }
+
+  public BordBuilder addJail(String name) {
+    checkIfCanAddSquare();
+    Jail jail = new Jail(name);
+    addToLink(jail);
+    board.setJailer(jail);
+    return this;
+  }
+
+  public BordBuilder addFreePark(String name) {
+    checkIfCanAddSquare();
+    FreePark freePark = new FreePark(name, channel, new BankAccount());
+    addToLink(freePark);
+    board.setFreePark(freePark);
+    return this;
+  }
+
+  public BordBuilder addGo(String name) {
+    checkIfCanAddSquare();
+    Go go = new Go(name);
+    addToLink(go);
+    board.setGo(go);
     return this;
   }
 

@@ -7,6 +7,7 @@ import com.watson.propert.tycoon.game.bord.*;
 
 public class Passing implements SquareVisitor {
   Player currentPlayer;
+  private static final int CASH_BY_PASSING = 200;
 
   private Passing(Player current) {
     currentPlayer = current;
@@ -26,13 +27,10 @@ public class Passing implements SquareVisitor {
   }
 
   @Override
-  public void areAt(Street street) {}
-
-  @Override
-  public void areAt(Station station) {}
-
-  @Override
-  public void areAt(Utilities utilities) {}
+  public void areAt(Go go) {
+    currentPlayer.receiveBuyRights();
+    Bank.instance().payTo(currentPlayer, CASH_BY_PASSING);
+  }
 
   public static Passing rulesFor(Player current) {
     return new Passing(current);

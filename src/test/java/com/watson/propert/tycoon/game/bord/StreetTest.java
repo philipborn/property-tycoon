@@ -25,7 +25,7 @@ public class StreetTest {
             BordBuilder.with(new EventBus())
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addSquare(street2)
-                .getBord();
+                .getFirstSquare();
     Owner owner = new TestOwner();
     street.newOwner(owner);
     street2.newOwner(owner);
@@ -53,7 +53,7 @@ public class StreetTest {
             BordBuilder.with(new EventBus())
                 .addStreet("test", 100, Street.Colour.BLUE, rents)
                 .addStreet("test2", 150, Street.Colour.BLUE, rents2)
-                .getBord();
+                .getFirstSquare();
     Owner owner = new TestOwner();
     street.newOwner(owner);
 
@@ -73,7 +73,7 @@ public class StreetTest {
         (Street)
             BordBuilder.with(new EventBus())
                 .addStreet("test", 100, Street.Colour.RED, rents)
-                .getBord();
+                .getFirstSquare();
     street.newOwner(new TestOwner());
 
     assertDoesNotThrow(street::buyHouses);
@@ -89,7 +89,7 @@ public class StreetTest {
         (Street)
             BordBuilder.with(new EventBus())
                 .addStreet("test", 100, Street.Colour.RED, rents)
-                .getBord();
+                .getFirstSquare();
     street.newOwner(new TestOwner());
 
     assertDoesNotThrow(street::buyHouses);

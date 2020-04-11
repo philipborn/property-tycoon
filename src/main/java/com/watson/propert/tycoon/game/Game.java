@@ -15,17 +15,19 @@ public class Game implements PropertTycoon {
 
   private GameMaster master;
   private GameEnd gameEnd = new GameEnd() {};
-  private Square bord;
+  private Square board;
+  private Jailer jailer;
   private DicePair dicePair;
   private EventBus channel;
   private State state;
   private Player player;
   private Deque<NoCashException> debs = new ArrayDeque<>();
 
-  public Game(Square startPostion, EventBus channel) {
+  public Game(Board board, EventBus channel) {
     master = new GameMaster();
     state = new waitOnStart();
-    bord = startPostion;
+    this.board = board.getGo();
+    this.jailer = board.getJailer();
     dicePair = new DicePair(channel);
     this.channel = channel;
   }
@@ -39,7 +41,7 @@ public class Game implements PropertTycoon {
     List<Player> players = new ArrayList<>();
     settings
         .getPlayers()
-        .forEach((id) -> players.add(new Player(id, new BankAccount(START_CASH), bord, channel)));
+        .forEach((id) -> players.add(new Player(id, new BankAccount(START_CASH), board, channel)));
     master.newGame(players);
     player = master.currentPlayer();
     state = new NewTurn();
@@ -47,7 +49,7 @@ public class Game implements PropertTycoon {
 
   @Override
   public Optional<PropertyInfo> propertInfo(int squareNum) {
-    return PropertyInfo.getInfo(bord.forward(squareNum - 1));
+    return PropertyInfo.getInfo(board.forward(squareNum - 1));
   }
 
   @Override
@@ -78,8 +80,8 @@ public class Game implements PropertTycoon {
     BoardReaderJson br = new BoardReaderJson();
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
-    Square first = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBord();
-    PropertTycoon game = new Game(first, channel);
+    Board board = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBoard();
+    PropertTycoon game = new Game(board, channel);
     GameSetting settings = new GameSetting();
     settings.set(Player.Id.ONE);
     settings.set(Player.Id.TWO);
@@ -105,6 +107,10 @@ public class Game implements PropertTycoon {
     @Override
     public void entry() {
       player = master.newTurn();
+      while (jailer.isInJail(player)) {
+        jailer.decrementJailTime(player);
+        player = master.newTurn();
+      }
       channel.post(new ChangePlayerEvent(player.getId()));
     }
 
@@ -285,17 +291,17 @@ public class Game implements PropertTycoon {
 
   private void mortgaged(PlayerAction.Mortgaged msg) {
     ToMorgade rule = new ToMorgade(player);
-    rule.morgade(bord.forwardTo(msg.propertyName));
+    rule.morgade(board.forwardTo(msg.propertyName));
   }
 
   private void sellHouse(PlayerAction.SellHouse msg) {
-    Square street = bord.forwardTo(msg.streetName);
+    Square street = board.forwardTo(msg.streetName);
     new ToSellHouses(player).sellHouses(street);
   }
 
   private void sellProperty(PlayerAction.SellProperty msg) {
     Optional<Property> property =
-        Optional.of(bord.forwardTo(msg.squareName))
+        Optional.of(board.forwardTo(msg.squareName))
             .filter(Property.class::isInstance)
             .map(Property.class::cast);
     boolean playerIsOwner =

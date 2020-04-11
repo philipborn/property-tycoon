@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.Prisonable;
 import com.watson.propert.tycoon.game.bord.Property;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 
-public class Player implements Owner, Comparable<Player> {
+public class Player implements Owner, Prisonable, Comparable<Player> {
 
   public enum Id {
     ONE,

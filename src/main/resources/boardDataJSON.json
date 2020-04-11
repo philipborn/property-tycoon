@@ -2,7 +2,7 @@
   {
     "Position": 1,
     "Name": "Go",
-    "Group": "",
+    "Group": "go",
     "Action": "Collect Â£200",
     "canBeBought": "No",
     "Cost": "",
@@ -142,7 +142,7 @@
   {
     "Position": 11,
     "Name": "Jail/Just visiting",
-    "Group": "",
+    "Group": "jail",
     "Action": "",
     "canBeBought": "No",
     "Cost": "",
@@ -282,7 +282,7 @@
   {
     "Position": 21,
     "Name": "Free Parking",
-    "Group": "",
+    "Group": "freeparking",
     "Action": "Collect fines",
     "canBeBought": "No",
     "Cost": "",

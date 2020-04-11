@@ -17,14 +17,14 @@ public class PlayerTest {
   Player player;
   EventBus channel;
   Square first;
-  static int bordSize = 3;
+  static int bordSize = 5;
 
   @BeforeEach
   void setup() {
     EventBus channel = new EventBus();
     BoardSource source = BoardSource.using(new BoardReaderJson());
     source.readFile("src/test/testResources/jsonTest.json");
-    first = BordBuilder.with(channel).addFrom(source).getBord();
+    first = BordBuilder.with(channel).addFrom(source).getFirstSquare();
 
     this.channel = new EventBus();
     player = new Player(Player.Id.ONE, new BankAccount(1000), first, this.channel);

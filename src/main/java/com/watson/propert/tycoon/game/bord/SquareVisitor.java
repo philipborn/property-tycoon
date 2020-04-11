@@ -13,4 +13,6 @@ public interface SquareVisitor {
   default void areAt(Jail jail) {}
 
   default void areAt(FreePark freePark) {}
+
+  default void areAt(Go go) {}
 }

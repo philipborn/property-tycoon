@@ -17,7 +17,7 @@ public class UtilitiesTest {
     Utilities utilOne = new Utilities("test1", value);
     int factor = 4;
 
-    BordBuilder.with(new EventBus()).addSquare(utilOne).getBord();
+    BordBuilder.with(new EventBus()).addSquare(utilOne).getFirstSquare();
 
     assertEquals(0, utilOne.getRent());
     utilOne.catchDices(new DiceEvent(1, 1));
@@ -46,7 +46,7 @@ public class UtilitiesTest {
         .addSquare(utilOne)
         .addSquare(utilTwo)
         .addSquare(utilThree)
-        .getBord();
+        .getFirstSquare();
 
     int dices = 3 + 2;
     utilOne.catchDices(new DiceEvent(3, 2));

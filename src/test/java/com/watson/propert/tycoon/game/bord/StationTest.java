@@ -22,7 +22,7 @@ public class StationTest {
         .addSquare(station2)
         .addSquare(station3)
         .addSquare(station4)
-        .getBord();
+        .getFirstSquare();
 
     assertEquals(Station.BASE_RENT, station.getRent());
     station.newOwner(player);
@@ -55,7 +55,7 @@ public class StationTest {
         .addSquare(station2)
         .addSquare(station3)
         .addSquare(station4)
-        .getBord();
+        .getFirstSquare();
 
     station.newOwner(player);
     assertEquals(Station.BASE_RENT, station.getRent());

@@ -63,6 +63,12 @@ public class BoardSource implements BordBuilder.Source {
       buildStation(prop);
     } else if (isUtility(prop)) {
       buildUtility(prop);
+    } else if (isGo(prop)) {
+      buildGo(prop);
+    } else if (isJail(prop)) {
+      buildJail(prop);
+    } else if (isFreepark(prop)) {
+      buildFreePark(prop);
     } else {
       buildSquare(prop);
     }
@@ -130,6 +136,36 @@ public class BoardSource implements BordBuilder.Source {
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addUtility(name, value);
+  }
+
+  private boolean isGo(Map<String, String> prop) {
+    String group = prop.getOrDefault("group", "");
+    return group.toLowerCase().equals("go");
+  }
+
+  private void buildGo(Map<String, String> prop) {
+    String name = prop.getOrDefault("name", "Go");
+    builder.addGo(name);
+  }
+
+  private boolean isJail(Map<String, String> prop) {
+    String group = prop.getOrDefault("group", "");
+    return group.toLowerCase().equals("jail");
+  }
+
+  private void buildJail(Map<String, String> prop) {
+    String name = prop.getOrDefault("name", "Jail");
+    builder.addJail(name);
+  }
+
+  private boolean isFreepark(Map<String, String> prop) {
+    String group = prop.getOrDefault("group", "");
+    return group.toLowerCase().equals("freepark");
+  }
+
+  private void buildFreePark(Map<String, String> prop) {
+    String name = prop.getOrDefault("name", "FreePark");
+    builder.addFreePark(name);
   }
 
   public static BoardSource using(BordReader reader) {

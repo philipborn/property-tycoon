@@ -34,9 +34,9 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.bord.Board;
 import com.watson.propert.tycoon.game.bord.BoardSource;
 import com.watson.propert.tycoon.game.bord.BordBuilder;
-import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
 import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
 import com.watson.propert.tycoon.game.events.DiceEvent;
@@ -53,9 +53,9 @@ public class PropertTycoonTest {
     channel = new EventBus();
     BoardSource source = BoardSource.using(new BoardReaderJson());
     source.readFile("src/test/testResources/jsonTest.json");
-    Square first = BordBuilder.with(channel).addFrom(source).getBord();
+    Board board = BordBuilder.with(channel).addFrom(source).getBoard();
 
-    game = new Game(first, channel);
+    game = new Game(board, channel);
     game.startGame(new GameSetting());
 
     spy = new TestListener();
