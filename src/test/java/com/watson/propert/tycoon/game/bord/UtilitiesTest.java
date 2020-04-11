@@ -14,42 +14,39 @@ public class UtilitiesTest {
   @Test
   void rentIsBasedOnDices() throws InterruptedException {
     int value = 100;
-    Utilities utilOne = new Utilities("test1", value);
+    UtilitiesGroup group = new UtilitiesGroup();
+    Utilities utilOne = new Utilities("test1", value, group);
     int factor = 4;
 
     BordBuilder.with(new EventBus()).addSquare(utilOne).getFirstSquare();
 
     assertEquals(0, utilOne.getRent());
-    utilOne.catchDices(new DiceEvent(1, 1));
+    group.catchDices(new DiceEvent(1, 1));
     assertEquals((1 + 1) * factor, utilOne.getRent());
-    utilOne.catchDices(new DiceEvent(2, 1));
+    group.catchDices(new DiceEvent(2, 1));
     assertEquals((2 + 1) * factor, utilOne.getRent());
-    utilOne.catchDices(new DiceEvent(3, 1));
+    group.catchDices(new DiceEvent(3, 1));
     assertEquals((3 + 1) * factor, utilOne.getRent());
-    utilOne.catchDices(new DiceEvent(1, 3));
+    group.catchDices(new DiceEvent(1, 3));
     assertEquals((1 + 3) * factor, utilOne.getRent());
-    utilOne.catchDices(new DiceEvent(6, 6));
+    group.catchDices(new DiceEvent(6, 6));
     assertEquals((6 + 6) * factor, utilOne.getRent());
   }
 
   @Test
   void rentWillIncreasedByFactorWhenOwnerOwensMultiUtilities() {
     int value = 100;
-    Utilities utilOne = new Utilities("test1", value);
-    Utilities utilTwo = new Utilities("test1", value);
-    Utilities utilThree = new Utilities("test1", value);
+    UtilitiesGroup group = new UtilitiesGroup();
+    Utilities utilOne = new Utilities("test1", value, group);
+    Utilities utilTwo = new Utilities("test1", value, group);
+    Utilities utilThree = new Utilities("test1", value, group);
     Player playerOne = new Player(Player.Id.ONE, new BankAccount(), utilOne, null);
     Player playerTwo = new Player(Player.Id.TWO, new BankAccount(), utilOne, null);
     utilOne.newOwner(playerOne);
     utilThree.newOwner(playerTwo);
-    BordBuilder.with(new EventBus())
-        .addSquare(utilOne)
-        .addSquare(utilTwo)
-        .addSquare(utilThree)
-        .getFirstSquare();
 
     int dices = 3 + 2;
-    utilOne.catchDices(new DiceEvent(3, 2));
+    group.catchDices(new DiceEvent(3, 2));
 
     assertEquals(dices * 4, utilOne.getRent());
     utilTwo.newOwner(playerTwo);

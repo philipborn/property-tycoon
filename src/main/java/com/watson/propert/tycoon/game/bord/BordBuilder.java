@@ -17,6 +17,7 @@ public class BordBuilder {
   private BordReader source;
   private Map<Street.Colour, StreetGroup> streetGroups = new HashMap<>();
   private StationGroup stationGroup = new StationGroup();
+  private UtilitiesGroup utilitiesGroup = new UtilitiesGroup();
 
   private SquareNode first;
   private SquareNode last;
@@ -56,9 +57,11 @@ public class BordBuilder {
 
   public BordBuilder addUtility(String name, int value) {
     checkIfCanAddSquare();
-    Utilities utilities = new Utilities(name, value);
+    Utilities utilities = new Utilities(name, value, utilitiesGroup);
     addToLink(utilities);
-    channel.register(utilities);
+    if (utilitiesGroup.size() == 1) {
+      channel.register(utilitiesGroup);
+    }
     return this;
   }
 
