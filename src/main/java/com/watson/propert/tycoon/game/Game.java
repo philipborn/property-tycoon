@@ -197,7 +197,7 @@ public class Game implements PropertTycoon {
       rule = new GoToJail(player, jailer);
       rule.movePlayer();
       if (rule.canPayJail()) {
-        channel.post(new YesOrNOEvent("Pay " + rule.getFine() + " or go to jail"));
+        channel.post(new PayOrJailEvent(rule.getFine()));
       } else {
         rule.toJail();
         channel.post(new PlayerToJailEvent(player.getId()));
