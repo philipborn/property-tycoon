@@ -1,6 +1,7 @@
 package com.watson.propert.tycoon.gui;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -17,11 +18,13 @@ public class GuiSquare {
   Pane pane;
   GuiCoords centre;
   int numHouses;
+  PropertyGroup group;
 
   public GuiSquare(Pane p) {
     this.pane = p;
     this.centre = new GuiCoords(0.0, 0.0);
     this.numHouses = 0;
+    this.group = PropertyGroup.UTILITIES;
   }
 
   public GuiSquare(Pane p, GuiCoords xy) {
@@ -29,6 +32,13 @@ public class GuiSquare {
     this.centre = xy;
   }
 
+  public PropertyGroup getGroup() {
+    return group;
+  }
+
+  public void setGroup(PropertyGroup group) {
+    this.group = group;
+  }
   /**
    * Get square's Pane on GUI
    *
@@ -74,6 +84,32 @@ public class GuiSquare {
     p.getChildren().add(new Circle(centre.getX(), centre.getY(), 4));
   }
 
+  /**
+   * Get Property Name
+   *
+   * @return name
+   */
+  public String getName() {
+    Node name = pane.lookup("#PROPERTY_NAME");
+    if (name instanceof Label) {
+      return ((Label) name).getText();
+    }
+    return "* Not Found *";
+  }
+
+  /**
+   * Get Property Price
+   *
+   * @return price
+   */
+  public String getPrice() {
+    Node name = pane.lookup("#PROPERTY_PRICE");
+    if (name instanceof Label) {
+      return ((Label) name).getText();
+    }
+    return "* Not Found *";
+  }
+
   /** Adds an house or hotel to the Property Group */
   public void addHouse() {
     Node group = pane.lookup("#PROPERTY_GROUP");
@@ -103,5 +139,14 @@ public class GuiSquare {
    */
   public int numberOfHouses() {
     return numHouses;
+  }
+
+  /**
+   * Set the number of houses on a Property Square
+   *
+   * @param n number of houses
+   */
+  public void setNumHouses(int n) {
+    numHouses = n;
   }
 }

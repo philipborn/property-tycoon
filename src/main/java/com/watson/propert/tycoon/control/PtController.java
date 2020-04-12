@@ -302,12 +302,12 @@ public class PtController {
     if (player != null) {
       // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
       player.getPortfolio().clear();
-      player.addProperty(new GuiProperty("London Road", 100, PropertyGroup.BLUE));
-      player.addProperty(new GuiProperty("Brighton Road", 100, PropertyGroup.BLUE));
-      player.addProperty(new GuiProperty("Eastbourne Road", 100, PropertyGroup.RED));
-      player.addProperty(new GuiProperty("Lewes Road", 100, PropertyGroup.BROWN));
-      player.addProperty(new GuiProperty("Pole Gate Road", 100, PropertyGroup.PURPLE));
-      player.addProperty(new GuiProperty("Hastings Road", 100, PropertyGroup.YELLOW));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(1)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(3)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(6)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(7)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(8)));
+      // END TEST DATA
 
       // load data to controller
       controller.setData(player);
@@ -810,15 +810,16 @@ public class PtController {
 
         // access elements of square
         VBox v = (VBox) sq.getPane().getChildren().get(0);
-        HBox group = (HBox) v.getChildren().get(0);
-        Label name = (Label) v.getChildren().get(1);
-        Label price = (Label) v.getChildren().get(2);
-
+        HBox group = (HBox) v.lookup("#PROPERTY_GROUP");
+        Label name = (Label) v.lookup("#PROPERTY_NAME");
+        Label price = (Label) v.lookup("#PROPERTY_PRICE");
         // set group names (if square is in a group)
         if (boardReader.getProperties().get("group") != null) {
-          group.setId(
-              "PROPERTY_GROUP_"
-                  + boardReader.getProperties().get("group").toUpperCase().replace(' ', '_'));
+          String propGroup =
+              boardReader.getProperties().get("group").toUpperCase().replace(' ', '_');
+          sq.setGroup(PropertyGroup.valueOf(propGroup));
+          group.getStyleClass().clear();
+          group.getStyleClass().add(sq.getGroup().getCssClass());
         }
 
         // set name/price values

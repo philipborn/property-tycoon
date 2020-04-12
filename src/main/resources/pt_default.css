@@ -61,57 +61,57 @@
     -fx-text-fill: #000;
 }
 
-#PROPERTY_GROUP_BROWN {
+.PROPERTY_GROUP_BROWN {
     -fx-background-color: #9c552d;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_GREEN {
+.PROPERTY_GROUP_GREEN {
     -fx-background-color: #00aa86;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_YELLOW {
+.PROPERTY_GROUP_YELLOW {
      -fx-background-color: #ffd600;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_STATION {
+.PROPERTY_GROUP_STATION {
      -fx-background-color: #000000;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_UTILITIES {
+.PROPERTY_GROUP_UTILITIES {
     -fx-background-color: #aaaaaa;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_ORANGE {
+.PROPERTY_GROUP_ORANGE {
     -fx-background-color: #ff5a00;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_PURPLE {
+.PROPERTY_GROUP_PURPLE {
      -fx-background-color: #bc34ba;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_BLUE {
+.PROPERTY_GROUP_BLUE {
      -fx-background-color: #0085cf;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_RED {
+.PROPERTY_GROUP_RED {
     -fx-background-color: #f32837;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_DEEP_BLUE {
+.PROPERTY_GROUP_DEEP_BLUE {
      -fx-background-color: #001ca8;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_TAKE_CARD {
+.PROPERTY_GROUP_TAKE_CARD {
      -fx-background-color: #ffffff;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }

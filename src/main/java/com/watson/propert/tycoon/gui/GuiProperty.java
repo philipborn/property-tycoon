@@ -16,50 +16,53 @@ import javafx.scene.text.TextAlignment;
  * @version Sprint4
  */
 public class GuiProperty {
+  GuiSquare square;
   PropertyGroup group;
   String name;
   int price;
   int numHouses;
   int boardPosition;
 
-  public GuiProperty(String name, int price, PropertyGroup group) {
-    this.name = name;
-    this.price = price;
-    this.group = group;
-    this.numHouses = 0;
+  public GuiProperty(GuiSquare square) {
+    this.square = square;
     this.boardPosition = 0;
   }
 
   public PropertyGroup getGroup() {
-    return group;
+    return square.getGroup();
   }
 
   public void setGroup(PropertyGroup group) {
-    this.group = group;
+    square.setGroup(group);
   }
 
   public String getName() {
-    return name;
+    return square.getName();
   }
 
+  /*
   public void setName(String name) {
     this.name = name;
   }
 
-  public int getPrice() {
-    return price;
+   */
+
+  public String getPrice() {
+    return square.getPrice();
   }
 
+  /*
   public void setPrice(int price) {
     this.price = price;
   }
+   */
 
   public int getNumHouses() {
-    return numHouses;
+    return square.numberOfHouses();
   }
 
   public void setNumHouses(int numHouses) {
-    this.numHouses = numHouses;
+    square.setNumHouses(numHouses);
   }
 
   public int getBoardPosition() {
@@ -86,13 +89,13 @@ public class GuiProperty {
 
     HBox propGroup = new HBox();
     propGroup.getStyleClass().add("card_group");
-    propGroup.getStyleClass().add(group.getCssClass());
+    propGroup.getStyleClass().add(getGroup().getCssClass());
     propGroup.setPadding(new Insets(3, 3, 3, 3));
     propGroup.setSpacing(3);
     propGroup.setPrefHeight(width / 3.8);
     propGroup.setAlignment(Pos.CENTER_LEFT);
 
-    Label lName = new Label(name);
+    Label lName = new Label(getName());
     lName.setTextAlignment(TextAlignment.CENTER);
     lName.setAlignment(Pos.TOP_CENTER);
     lName.setWrapText(true);
@@ -101,7 +104,7 @@ public class GuiProperty {
     lName.getStyleClass().add("card_name");
     lName.setFont(Font.font(width / 7.5));
 
-    Label lPrice = new Label("" + price);
+    Label lPrice = new Label(getPrice());
     lPrice.setPrefWidth(width);
     lPrice.setAlignment(Pos.TOP_CENTER);
     lPrice.getStyleClass().add("card_sales_price");
