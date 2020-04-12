@@ -17,10 +17,6 @@ import javafx.scene.text.TextAlignment;
  */
 public class GuiProperty {
   GuiSquare square;
-  PropertyGroup group;
-  String name;
-  int price;
-  int numHouses;
   int boardPosition;
 
   public GuiProperty(GuiSquare square) {

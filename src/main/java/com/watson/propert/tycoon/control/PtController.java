@@ -746,9 +746,9 @@ public class PtController {
     throwDiceAudio =
         new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
     dropTokenAudio =
-        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+        new AudioClip(ClassLoader.getSystemResource("audio/dropToken.mp3").toExternalForm());
     takeCardAudio =
-        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+        new AudioClip(ClassLoader.getSystemResource("audio/takeCard.mp3").toExternalForm());
     tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
 
     // Initialise players - FOR TESTING
