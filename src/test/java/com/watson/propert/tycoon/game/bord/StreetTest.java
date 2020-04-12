@@ -9,8 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import com.watson.propert.tycoon.game.Bank;
-import com.watson.propert.tycoon.game.Owner;
+import com.watson.propert.tycoon.game.entitys.Bank;
 
 public class StreetTest {
 

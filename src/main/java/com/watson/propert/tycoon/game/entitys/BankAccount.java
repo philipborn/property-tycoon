@@ -1,4 +1,4 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.entitys;
 
 public class BankAccount implements CashUser {
 

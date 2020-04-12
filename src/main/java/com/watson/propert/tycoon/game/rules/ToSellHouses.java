@@ -1,7 +1,7 @@
 package com.watson.propert.tycoon.game.rules;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.events.HouseChangeEvent;
 

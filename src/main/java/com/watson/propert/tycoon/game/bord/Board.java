@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game.bord;
 
+import com.watson.propert.tycoon.game.entitys.Jailer;
+
 public class Board {
 
   private Go go;

@@ -1,7 +1,7 @@
 package com.watson.propert.tycoon.game.rules;
 
-import com.watson.propert.tycoon.game.*;
 import com.watson.propert.tycoon.game.bord.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class PropertyCanBought implements SquareVisitor {
   private Player player;

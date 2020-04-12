@@ -2,7 +2,7 @@ package com.watson.propert.tycoon.game.rules;
 
 import java.util.Optional;
 
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.bord.Street;
 

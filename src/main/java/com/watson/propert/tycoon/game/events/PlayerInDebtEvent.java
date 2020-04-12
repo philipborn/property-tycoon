@@ -1,6 +1,6 @@
 package com.watson.propert.tycoon.game.events;
 
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public final class PlayerInDebtEvent {
 

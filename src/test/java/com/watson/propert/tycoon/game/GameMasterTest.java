@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.watson.propert.tycoon.game.entitys.BankAccount;
+import com.watson.propert.tycoon.game.entitys.GameMaster;
+import com.watson.propert.tycoon.game.entitys.Player;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;

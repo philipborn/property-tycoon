@@ -1,7 +1,5 @@
 package com.watson.propert.tycoon.game.bord;
 
-import com.watson.propert.tycoon.game.Owner;
-
 public class Station extends Property {
 
   protected static final int BASE_RENT = 25;

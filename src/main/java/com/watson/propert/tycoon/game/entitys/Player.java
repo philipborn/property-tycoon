@@ -1,10 +1,10 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.entitys;
 
 import java.util.Optional;
 
 import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.bord.Prisonable;
+import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.Property;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;

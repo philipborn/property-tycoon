@@ -3,7 +3,7 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.*;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.BankAccount;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
 import com.watson.propert.tycoon.game.actions.Action;
 
 public class BordBuilder {

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.*;
 
-import com.watson.propert.tycoon.game.Bank;
+import com.watson.propert.tycoon.game.entitys.Bank;
 import com.watson.propert.tycoon.game.events.DiceEvent;
 
 public class UtilitiesTest {

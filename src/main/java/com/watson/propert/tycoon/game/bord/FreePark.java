@@ -1,8 +1,8 @@
 package com.watson.propert.tycoon.game.bord;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.BankAccount;
-import com.watson.propert.tycoon.game.CashUser;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
+import com.watson.propert.tycoon.game.entitys.CashUser;
 import com.watson.propert.tycoon.game.events.FreeParkChangeEvent;
 
 public class FreePark implements CashUser, SquareTyp {

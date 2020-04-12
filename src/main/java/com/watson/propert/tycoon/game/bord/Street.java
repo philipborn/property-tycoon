@@ -3,8 +3,7 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.List;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.Bank;
-import com.watson.propert.tycoon.game.Owner;
+import com.watson.propert.tycoon.game.entitys.Bank;
 
 public class Street extends Property {
 

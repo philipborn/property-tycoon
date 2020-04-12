@@ -1,6 +1,6 @@
 package com.watson.propert.tycoon.game.rules;
 
-import com.watson.propert.tycoon.game.Owner;
+import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.bord.Station;
 import com.watson.propert.tycoon.game.bord.Street;

@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game;
 
+import com.watson.propert.tycoon.game.entitys.Player;
+
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Optional;

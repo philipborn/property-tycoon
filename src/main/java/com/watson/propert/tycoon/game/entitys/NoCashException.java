@@ -1,4 +1,6 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.entitys;
+
+import com.watson.propert.tycoon.game.entitys.CashUser;
 
 public class NoCashException extends RuntimeException {
 

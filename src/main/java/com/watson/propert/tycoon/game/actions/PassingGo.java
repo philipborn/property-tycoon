@@ -1,8 +1,8 @@
 package com.watson.propert.tycoon.game.actions;
 
-import com.watson.propert.tycoon.game.Bank;
-import com.watson.propert.tycoon.game.GameMaster;
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.entitys.Bank;
+import com.watson.propert.tycoon.game.entitys.GameMaster;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class PassingGo implements PassingAction {
 

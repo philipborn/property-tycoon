@@ -1,4 +1,6 @@
-package com.watson.propert.tycoon.game;
+package com.watson.propert.tycoon.game.entitys;
+
+import com.watson.propert.tycoon.game.bord.Owner;
 
 /** Bank is a CashUser with infinite mount of cash. It use as a cash sink or scoured. */
 public class Bank implements CashUser, Owner {

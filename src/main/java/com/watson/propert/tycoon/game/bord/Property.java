@@ -2,8 +2,7 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.Optional;
 
-import com.watson.propert.tycoon.game.Bank;
-import com.watson.propert.tycoon.game.Owner;
+import com.watson.propert.tycoon.game.entitys.Bank;
 
 public abstract class Property implements SquareTyp {
 

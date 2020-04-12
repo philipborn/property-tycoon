@@ -1,4 +1,4 @@
-package com.watson.propert.tycoon.game.bord;
+package com.watson.propert.tycoon.game.entitys;
 
 public interface Jailer {
 

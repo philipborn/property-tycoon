@@ -3,6 +3,7 @@ package com.watson.propert.tycoon.game;
 import java.util.Optional;
 
 import com.watson.propert.tycoon.game.bord.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class PropertyInfo {
 

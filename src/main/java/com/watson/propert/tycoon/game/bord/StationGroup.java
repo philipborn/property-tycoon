@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import com.watson.propert.tycoon.game.Owner;
-
 public class StationGroup implements Group {
 
   public static final int BASE_RENT = 25;

@@ -1,6 +1,6 @@
 package com.watson.propert.tycoon.game.rules;
 
-import com.watson.propert.tycoon.game.Player;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.bord.*;
 
 public class CanFixProperty implements SquareVisitor {

@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.google.common.eventbus.Subscribe;
-import com.watson.propert.tycoon.game.Owner;
 import com.watson.propert.tycoon.game.events.DiceEvent;
 
 public class UtilitiesGroup implements Group {
