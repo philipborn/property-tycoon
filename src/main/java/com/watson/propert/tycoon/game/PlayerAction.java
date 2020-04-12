@@ -32,42 +32,42 @@ public interface PlayerAction {
   }
 
   final class SellProperty implements PlayerAction {
-    public final String squareName;
+    public final int squareNum;
 
-    public SellProperty(String squareName) {
-      this.squareName = squareName;
+    public SellProperty(int squareNum) {
+      this.squareNum = squareNum;
     }
   }
 
   final class BuildHouse implements PlayerAction {
-    public final String propertyName;
+    public final int squareNum;
 
-    public BuildHouse(String propertyName) {
-      this.propertyName = propertyName;
+    public BuildHouse(int squareNum) {
+      this.squareNum = squareNum;
     }
   }
 
   final class SellHouse implements PlayerAction {
-    public final String streetName;
+    public final int squareNum;
 
-    public SellHouse(String streetName) {
-      this.streetName = streetName;
+    public SellHouse(int squareNum) {
+      this.squareNum = squareNum;
     }
   }
 
   final class Mortgaged implements PlayerAction {
-    public final String propertyName;
+    public final int squareNum;
 
-    public Mortgaged(String propertyName) {
-      this.propertyName = propertyName;
+    public Mortgaged(int squareNum) {
+      this.squareNum = squareNum;
     }
   }
 
   final class RemoveMortgage implements PlayerAction {
-    public final String propertyName;
+    public final int squareNum;
 
-    public RemoveMortgage(String propertyName) {
-      this.propertyName = propertyName;
+    public RemoveMortgage(int squareNum) {
+      this.squareNum = squareNum;
     }
   }
 }

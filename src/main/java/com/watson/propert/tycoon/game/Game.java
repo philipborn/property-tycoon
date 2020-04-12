@@ -326,12 +326,12 @@ public class Game implements PropertTycoon {
 
   private void mortgaged(PlayerAction.Mortgaged msg) {
     ToMorgade rule = new ToMorgade(player);
-    rule.morgade(board.forwardTo(msg.propertyName));
+    rule.morgade(board.forward(msg.squareNum));
   }
 
   private void buildHouse(PlayerAction.BuildHouse playerAction) {
     BuyHouseRule rule = new BuyHouseRule(player);
-    Square square = board.forwardTo(playerAction.propertyName);
+    Square square = board.forward(playerAction.squareNum);
     square.visitBy(rule);
     if (rule.canBuyHouse()) {
       rule.buildHouse();
@@ -339,12 +339,12 @@ public class Game implements PropertTycoon {
   }
 
   private void sellHouse(PlayerAction.SellHouse msg) {
-    Square street = board.forwardTo(msg.streetName);
+    Square street = board.forward(msg.squareNum);
     new ToSellHouses(player, channel).sellHouses(street);
   }
 
   private void sellProperty(PlayerAction.SellProperty msg) {
-    Square property = board.forwardTo(msg.squareName);
+    Square property = board.forward(msg.squareNum);
     RuleSellProperty rule = new RuleSellProperty(player);
     property.visitBy(rule);
   }
