@@ -2,6 +2,7 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.List;
 
+import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.Bank;
 import com.watson.propert.tycoon.game.Owner;
 
@@ -21,6 +22,7 @@ public class Street extends Property {
   private int houseLevel = 0;
   private StreetGroup group;
   private List<Integer> rent;
+  private EventBus channel;
 
   public Street(int value, StreetGroup group, List<Integer> rent) {
     super(value);

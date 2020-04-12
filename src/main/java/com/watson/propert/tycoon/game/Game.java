@@ -331,7 +331,7 @@ public class Game implements PropertTycoon {
 
   private void sellHouse(PlayerAction.SellHouse msg) {
     Square street = board.forwardTo(msg.streetName);
-    new ToSellHouses(player).sellHouses(street);
+    new ToSellHouses(player, channel).sellHouses(street);
   }
 
   private void sellProperty(PlayerAction.SellProperty msg) {

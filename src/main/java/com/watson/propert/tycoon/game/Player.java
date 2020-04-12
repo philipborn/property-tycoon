@@ -48,7 +48,7 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
     }
     int newPosition = location.getNumber();
     if (newPosition != oldPosition) {
-      channel.post(new PlayerMovedEvent(newPosition,oldPosition));
+      channel.post(new PlayerMovedEvent(newPosition, oldPosition));
     }
     return location;
   }
