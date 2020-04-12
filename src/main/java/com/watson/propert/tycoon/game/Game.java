@@ -22,12 +22,14 @@ public class Game implements PropertTycoon {
   private State state;
   private Player player;
   private Deque<NoCashException> debs = new ArrayDeque<>();
+  private FreePark freePark;
 
   public Game(Board board, EventBus channel) {
     master = new GameMaster();
     state = new waitOnStart();
     this.board = board.getStart();
     this.jailer = board.getJailer();
+    this.freePark = board.getFreePark();
     dicePair = new DicePair(channel);
     this.channel = channel;
   }
@@ -141,6 +143,8 @@ public class Game implements PropertTycoon {
           debs.addFirst(e);
           switchTo(new NoCash());
         }
+      } catch (JailException e) {
+        switchTo(new JailQuestion());
       }
     }
   }
@@ -179,6 +183,37 @@ public class Game implements PropertTycoon {
       if (CanFixProperty.forPlayer(player)) {
         fixPropertyOrNewTurn();
       } else {
+        switchTo(new NewTurn());
+      }
+    }
+  }
+
+  class JailQuestion implements State {
+
+    private GoToJail rule;
+
+    @Override
+    public void entry() {
+      rule = new GoToJail(player, jailer);
+      rule.movePlayer();
+      if (rule.canPayJail()) {
+        channel.post(new YesOrNOEvent("Pay " + rule.getFine() + " or go to jail"));
+      } else {
+        rule.toJail();
+        channel.post(new PlayerToJailEvent(player.getId()));
+        state = new NewTurn();
+        state.entry();
+      }
+    }
+
+    @Override
+    public void handle(PlayerAction playerAction) {
+      if (playerAction instanceof PlayerAction.Yes) {
+        rule.payJail(freePark);
+        switchTo(new NewTurn());
+      } else if (playerAction instanceof PlayerAction.No) {
+        rule.toJail();
+        channel.post(new PlayerToJailEvent(player.getId()));
         switchTo(new NewTurn());
       }
     }

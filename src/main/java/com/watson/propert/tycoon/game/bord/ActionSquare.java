@@ -7,13 +7,13 @@ public class ActionSquare extends SquareNode {
 
   private final Action action;
 
-  public ActionSquare(String name, Action action) {
-    super(name);
+  public ActionSquare(int seqNumber, String name, Action action) {
+    super(seqNumber, name);
     this.action = action;
   }
 
-  public ActionSquare(String name) {
-    super(name);
+  public ActionSquare(int seqNumber, String name) {
+    super(seqNumber, name);
     this.action = new DoNothingAction();
   }
 

@@ -8,6 +8,8 @@ import com.watson.propert.tycoon.game.actions.Action;
 
 public class BordBuilder {
 
+  private int seqNumber = 1;
+
   public interface Source {
     void extractTo(BordBuilder builder);
   }
@@ -46,7 +48,7 @@ public class BordBuilder {
     checkIfCanAddSquare();
     streetGroups.computeIfAbsent(color, (key) -> new StreetGroup(color));
     SquareTyp typ = new Street(value, streetGroups.get(color), rents);
-    SquareNode node = new SquareNode(name, typ);
+    SquareNode node = new SquareNode(seqNumber++, name, typ);
     addToLink(node);
     return this;
   }
@@ -54,7 +56,7 @@ public class BordBuilder {
   public BordBuilder addStation(String name, int value) {
     checkIfCanAddSquare();
     SquareTyp typ = new Station(value, stationGroup);
-    SquareNode node = new SquareNode(name, typ);
+    SquareNode node = new SquareNode(seqNumber++, name, typ);
     addToLink(node);
     return this;
   }
@@ -62,7 +64,7 @@ public class BordBuilder {
   public BordBuilder addUtility(String name, int value) {
     checkIfCanAddSquare();
     SquareTyp typ = new Utilities(value, utilitiesGroup);
-    SquareNode node = new SquareNode(name, typ);
+    SquareNode node = new SquareNode(seqNumber++, name, typ);
     addToLink(node);
     if (utilitiesGroup.size() == 1) {
       channel.register(utilitiesGroup);
@@ -73,7 +75,7 @@ public class BordBuilder {
   public BordBuilder addJail(String name) {
     checkIfCanAddSquare();
     Jail jail = new Jail();
-    SquareNode node = new SquareNode(name, jail);
+    SquareNode node = new SquareNode(seqNumber++, name, jail);
     addToLink(node);
     board.setJailer(jail);
     return this;
@@ -82,7 +84,7 @@ public class BordBuilder {
   public BordBuilder addFreePark(String name) {
     checkIfCanAddSquare();
     FreePark freePark = new FreePark(channel, new BankAccount());
-    SquareNode node = new SquareNode(name, freePark);
+    SquareNode node = new SquareNode(seqNumber++, name, freePark);
     addToLink(node);
     board.setFreePark(freePark);
     return this;
@@ -91,7 +93,7 @@ public class BordBuilder {
   public BordBuilder addGo(String name) {
     checkIfCanAddSquare();
     Go go = new Go();
-    SquareNode node = new SquareNode(name, go);
+    SquareNode node = new SquareNode(seqNumber++, name, go);
     addToLink(node);
     board.setStart(node);
     board.setGo(go);
@@ -100,13 +102,13 @@ public class BordBuilder {
 
   public BordBuilder addSquare(String name) {
     checkIfCanAddSquare();
-    addToLink(new ActionSquare(name));
+    addToLink(new ActionSquare(seqNumber++, name));
     return this;
   }
 
   public BordBuilder addActionSquare(String name, Action action) {
     checkIfCanAddSquare();
-    addToLink(new ActionSquare(name, action));
+    addToLink(new ActionSquare(seqNumber++, name, action));
     return this;
   }
 

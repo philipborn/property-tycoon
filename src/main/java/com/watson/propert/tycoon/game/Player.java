@@ -9,6 +9,7 @@ import com.watson.propert.tycoon.game.bord.Property;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
+import com.watson.propert.tycoon.game.events.PlayerMovedEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 
 public class Player implements Owner, Prisonable, Comparable<Player> {
@@ -45,6 +46,12 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
       location = location.backward(Math.abs(steps), passingRulse);
     }
     return location;
+  }
+
+  public void moveTo(Square newPosition) {
+    int oldPost = location.getNumber();
+    location = newPosition;
+    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost));
   }
 
   public Square postion() {

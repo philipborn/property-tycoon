@@ -32,4 +32,6 @@ public interface Square extends Iterable<Square> {
   Square backwardTo(String name, SquareVisitor visitor);
 
   void visitBy(SquareVisitor visitor);
+
+  int getNumber();
 }

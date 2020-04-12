@@ -22,7 +22,7 @@ public class GameMasterTest {
 
   @BeforeEach
   void setup() {
-    square = new ActionSquare("Test");
+    square = new ActionSquare(1, "Test");
     channel = new EventBus();
 
     int cash = 10000;

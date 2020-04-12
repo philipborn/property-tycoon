@@ -10,13 +10,16 @@ public class SquareNode implements Square {
   private SquareNode back;
   private String name;
   private SquareTyp typ;
+  private final int seqNumber;
 
-  public SquareNode(String name) {
+  public SquareNode(int seqNumber, String name) {
+    this.seqNumber = seqNumber;
     this.name = name;
     this.typ = new NullTyp();
   }
 
-  public SquareNode(String name, SquareTyp typ) {
+  public SquareNode(int seqNumber, String name, SquareTyp typ) {
+    this.seqNumber = seqNumber;
     this.name = name;
     this.typ = typ;
   }
@@ -112,6 +115,11 @@ public class SquareNode implements Square {
   @Override
   public void visitBy(SquareVisitor visitor) {
     typ.visitBy(visitor);
+  }
+
+  @Override
+  public int getNumber() {
+    return seqNumber;
   }
 
   protected void setNext(SquareNode node) {

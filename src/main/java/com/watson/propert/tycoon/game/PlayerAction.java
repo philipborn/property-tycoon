@@ -9,6 +9,14 @@ public interface PlayerAction {
     INSTANCE
   }
 
+  /** Yes to a question form game */
+  enum Yes implements PlayerAction {
+    INSTANCE
+  }
+
+  /** No to a question from game */
+  enum No implements PlayerAction {}
+
   /** Player buy property the player is standing on */
   enum BuyProperty implements PlayerAction {
     INSTANCE
