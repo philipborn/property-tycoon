@@ -43,6 +43,14 @@
     -fx-border-color: #000;
 }
 
+.PotLuck {
+    -fx-background-color: #d8dd4c;
+}
+
+.OpKnock {
+    -fx-background-color: #86ad75;
+}
+
 #PANEL {
 
 }

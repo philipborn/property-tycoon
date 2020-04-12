@@ -79,7 +79,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -204,7 +204,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" styleClass="potLuck">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -255,7 +255,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" styleClass="corner" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -267,7 +267,7 @@
                            </children></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner" GridPane.rowIndex="2">
                      <children>
                         <HBox fx:id="JAIL_CORNER" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -279,7 +279,7 @@
                            </children></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.columnIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner" GridPane.columnIndex="2">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -297,7 +297,7 @@
                            </padding></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -699,7 +699,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -823,7 +823,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -899,7 +899,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0" styleClass="potLuck">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
