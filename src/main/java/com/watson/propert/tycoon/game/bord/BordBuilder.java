@@ -3,8 +3,8 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.*;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.entitys.BankAccount;
 import com.watson.propert.tycoon.game.actions.Action;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
 
 public class BordBuilder {
 
@@ -20,6 +20,7 @@ public class BordBuilder {
   private Map<Street.Colour, StreetGroup> streetGroups = new HashMap<>();
   private StationGroup stationGroup = new StationGroup();
   private UtilitiesGroup utilitiesGroup = new UtilitiesGroup();
+  private Map<String, Deck> decks = new HashMap<>();
 
   private SquareNode first;
   private SquareNode last;
@@ -97,6 +98,14 @@ public class BordBuilder {
     addToLink(node);
     board.setStart(node);
     board.setGo(go);
+    return this;
+  }
+
+  public BordBuilder addDeck(String squareName, String deckName) {
+    checkIfCanAddSquare();
+    decks.computeIfAbsent(deckName, Deck::new);
+    SquareNode node = new SquareNode(seqNumber++, squareName, decks.get(deckName));
+    addToLink(node);
     return this;
   }
 

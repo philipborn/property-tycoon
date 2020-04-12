@@ -30,7 +30,8 @@
   {
     "Position": 3,
     "Name": "Pot Luck",
-    "Group": "",
+    "Group": "Card",
+    "DeckName": "Pot Luck",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",

@@ -2,8 +2,8 @@ package com.watson.propert.tycoon.game.rules;
 
 import java.util.Optional;
 
-import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.*;
+import com.watson.propert.tycoon.game.bord.Owner;
 
 public class RemoveMortgageRule implements SquareVisitor {
 

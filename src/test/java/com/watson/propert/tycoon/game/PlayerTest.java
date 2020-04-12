@@ -3,8 +3,6 @@ package com.watson.propert.tycoon.game;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.watson.propert.tycoon.game.entitys.BankAccount;
-import com.watson.propert.tycoon.game.entitys.Player;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
@@ -12,6 +10,8 @@ import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.bord.BoardSource;
 import com.watson.propert.tycoon.game.bord.BordBuilder;
 import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 

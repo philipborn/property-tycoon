@@ -2,12 +2,12 @@ package com.watson.propert.tycoon.game.rules;
 
 import java.util.Iterator;
 
-import com.watson.propert.tycoon.game.entitys.CashUser;
-import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.bord.Jail;
-import com.watson.propert.tycoon.game.entitys.Jailer;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
+import com.watson.propert.tycoon.game.entitys.CashUser;
+import com.watson.propert.tycoon.game.entitys.Jailer;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class GoToJail {
 

@@ -10,6 +10,8 @@ public interface SquareVisitor {
 
   default void areAt(ActionSquare actionSquare) {}
 
+  default void areAt(Deck deck) {}
+
   default void areAt(Jail jail) {}
 
   default void areAt(FreePark freePark) {}

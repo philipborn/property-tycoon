@@ -1,10 +1,10 @@
 package com.watson.propert.tycoon.game.bord;
 
-import com.watson.propert.tycoon.game.entitys.Jailer;
-import com.watson.propert.tycoon.game.entitys.Prisonable;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.watson.propert.tycoon.game.entitys.Jailer;
+import com.watson.propert.tycoon.game.entitys.Prisonable;
 
 public class Jail implements Jailer, SquareTyp {
 
