@@ -39,11 +39,16 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
   }
 
   public Square move(int steps) {
-    SquareVisitor passingRulse = Passing.rulesFor(this);
+    int oldPosition = location.getNumber();
+    SquareVisitor passingRule = Passing.rulesFor(this);
     if (steps > 0) {
-      location = location.forward(steps, passingRulse);
+      location = location.forward(steps, passingRule);
     } else {
-      location = location.backward(Math.abs(steps), passingRulse);
+      location = location.backward(Math.abs(steps), passingRule);
+    }
+    int newPosition = location.getNumber();
+    if (newPosition != oldPosition) {
+      channel.post(new PlayerMovedEvent(newPosition,oldPosition));
     }
     return location;
   }
