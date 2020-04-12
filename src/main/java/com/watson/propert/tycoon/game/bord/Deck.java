@@ -9,15 +9,15 @@ public class Deck implements SquareTyp {
   private static final Card NULL_CARD =
       new Card("Null", "This card do not exist", new DoNothingAction());
 
-  String name;
+  String deckName;
   Deque<Card> cards = new ArrayDeque<>();
 
-  public Deck(String name) {
-    this.name = name;
+  public Deck(String deckName) {
+    this.deckName = deckName;
   }
 
-  public String getName() {
-    return name;
+  public String getDeckName() {
+    return deckName;
   }
 
   public Card draw() {

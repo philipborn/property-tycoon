@@ -69,6 +69,8 @@ public class BoardSource implements BordBuilder.Source {
       buildJail(prop);
     } else if (isFreepark(prop)) {
       buildFreePark(prop);
+    } else if (isDeck(prop)) {
+      buildDeck(prop);
     } else {
       buildSquare(prop);
     }
@@ -166,6 +168,16 @@ public class BoardSource implements BordBuilder.Source {
   private void buildFreePark(Map<String, String> prop) {
     String name = prop.getOrDefault("name", "FreePark");
     builder.addFreePark(name);
+  }
+
+  private boolean isDeck(Map<String, String> prop) {
+    String group = prop.getOrDefault("group", "");
+    return group.toLowerCase().equals("deck");
+  }
+
+  private void buildDeck(Map<String, String> prop) {
+    String squareName = prop.getOrDefault("name", "Unknown Card");
+    builder.addDeck(squareName);
   }
 
   public static BoardSource using(BordReader reader) {

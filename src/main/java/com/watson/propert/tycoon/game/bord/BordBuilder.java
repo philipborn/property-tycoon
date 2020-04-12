@@ -101,10 +101,10 @@ public class BordBuilder {
     return this;
   }
 
-  public BordBuilder addDeck(String squareName, String deckName) {
+  public BordBuilder addDeck(String squareName) {
     checkIfCanAddSquare();
-    decks.computeIfAbsent(deckName, Deck::new);
-    SquareNode node = new SquareNode(seqNumber++, squareName, decks.get(deckName));
+    decks.computeIfAbsent(squareName, Deck::new);
+    SquareNode node = new SquareNode(seqNumber++, squareName, decks.get(squareName));
     addToLink(node);
     return this;
   }
