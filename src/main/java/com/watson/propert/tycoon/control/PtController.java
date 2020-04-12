@@ -782,6 +782,12 @@ public class PtController {
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
 
+    // TEST HOUSES
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
+
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
     boardReader.readFile("src/main/resources/boardDataJSON.json");

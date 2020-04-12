@@ -1,5 +1,9 @@
 package com.watson.propert.tycoon.gui;
 
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -7,15 +11,17 @@ import javafx.scene.shape.Circle;
  * Represents a GUI Square on the game board
  *
  * @author Lee Richards
- * @version Sprint3
+ * @version Sprint4
  */
 public class GuiSquare {
   Pane pane;
   GuiCoords centre;
+  int numHouses;
 
   public GuiSquare(Pane p) {
     this.pane = p;
     this.centre = new GuiCoords(0.0, 0.0);
+    this.numHouses = 0;
   }
 
   public GuiSquare(Pane p, GuiCoords xy) {
@@ -66,5 +72,27 @@ public class GuiSquare {
    */
   public void drawCentre(Pane p) {
     p.getChildren().add(new Circle(centre.getX(), centre.getY(), 4));
+  }
+
+  /** Adds an house or hotel to the Property Group */
+  public void addHouse() {
+    Node group = pane.lookup("#PROPERTY_GROUP");
+    if (group != null) {
+      ImageView iv = new ImageView();
+      iv.setFitWidth(((HBox) group).getPrefWidth() / 4.0);
+      iv.setFitHeight(((HBox) group).getPrefHeight());
+      numHouses++;
+      if (numHouses > 4) {
+        // add hotel
+        iv.setImage(
+            new Image(ClassLoader.getSystemResource("board/hotelLarge.png").toExternalForm()));
+        ((Pane) group).getChildren().clear();
+      } else {
+        // add house
+        iv.setImage(
+            new Image(ClassLoader.getSystemResource("board/houseLarge.png").toExternalForm()));
+      }
+      ((Pane) group).getChildren().add(iv);
+    }
   }
 }
