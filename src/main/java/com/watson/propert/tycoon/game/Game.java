@@ -155,6 +155,10 @@ public class Game implements PropertTycoon {
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.DonePropertyUpgrade) {
         donePropertyManagement();
+      } else if (playerAction instanceof PlayerAction.BuildHouse) {
+        buildHouse((PlayerAction.BuildHouse) playerAction);
+      } else if (playerAction instanceof PlayerAction.SellHouse) {
+        sellHouse((PlayerAction.SellHouse) playerAction);
       }
     }
   }
@@ -320,13 +324,18 @@ public class Game implements PropertTycoon {
     switchTo(new FixProperty());
   }
 
-  private void notBuyingProperty() {
-    switchTo(new FixProperty());
-  }
-
   private void mortgaged(PlayerAction.Mortgaged msg) {
     ToMorgade rule = new ToMorgade(player);
     rule.morgade(board.forwardTo(msg.propertyName));
+  }
+
+  private void buildHouse(PlayerAction.BuildHouse playerAction) {
+    BuyHouseRule rule = new BuyHouseRule(player);
+    Square square = board.forwardTo(playerAction.propertyName);
+    square.visitBy(rule);
+    if (rule.canBuyHouse()) {
+      rule.buildHouse();
+    }
   }
 
   private void sellHouse(PlayerAction.SellHouse msg) {
