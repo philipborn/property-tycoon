@@ -1,20 +1,21 @@
 package com.watson.propert.tycoon.gui;
-
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-
 /**
  * GUI Property Class. Describes a purchasable Property in the game
  *
  * @author Lee Richards
  * @version Sprint4
  */
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+
 public class GuiProperty {
   GuiSquare square;
   int boardPosition;
@@ -89,7 +90,11 @@ public class GuiProperty {
     propGroup.setPadding(new Insets(3, 3, 3, 3));
     propGroup.setSpacing(3);
     propGroup.setPrefHeight(width / 3.8);
+    propGroup.setPrefWidth(width);
     propGroup.setAlignment(Pos.CENTER_LEFT);
+
+    // Add houses to Property Group
+    addHouses(propGroup, getNumHouses());
 
     Label lName = new Label(getName());
     lName.setTextAlignment(TextAlignment.CENTER);
@@ -109,5 +114,30 @@ public class GuiProperty {
 
     propertyContainer.getChildren().addAll(propGroup, lName, lPrice);
     return propertyContainer;
+  }
+
+  // Add Houses or hotel to Property Group
+  private void addHouses(HBox pg, int numHouses) {
+    // Add Houses
+    if (numHouses > 0 && numHouses <= 4) {
+      for (int i = 0; i < numHouses; i++) {
+        ImageView iv = new ImageView();
+        iv.setFitHeight(pg.getPrefHeight() - 8);
+        iv.setPreserveRatio(true);
+        iv.setImage(
+            new Image(ClassLoader.getSystemResource("board/houseLarge.png").toExternalForm()));
+        pg.getChildren().add(iv);
+      }
+    }
+
+    // Add Hotel
+    if (numHouses > 4) {
+      ImageView iv = new ImageView();
+      iv.setFitHeight(pg.getPrefHeight() - 8);
+      iv.setPreserveRatio(true);
+      iv.setImage(
+          new Image(ClassLoader.getSystemResource("board/hotelLarge.png").toExternalForm()));
+      pg.getChildren().add(iv);
+    }
   }
 }
