@@ -159,8 +159,20 @@ public class Game implements PropertTycoon {
         buildHouse((PlayerAction.BuildHouse) playerAction);
       } else if (playerAction instanceof PlayerAction.SellHouse) {
         sellHouse((PlayerAction.SellHouse) playerAction);
+      } else if (playerAction instanceof PlayerAction.SellProperty) {
+        sellProperty((PlayerAction.SellProperty) playerAction);
+      } else if (playerAction instanceof PlayerAction.RemoveMortgage) {
+        removeMortgage((PlayerAction.RemoveMortgage) playerAction);
       }
     }
+  }
+
+  private void removeMortgage(PlayerAction.RemoveMortgage playerAction) {
+    Square square = board.forward(playerAction.squareNum);
+    RemoveMortgageRule rule = new RemoveMortgageRule(player);
+    square.visitBy(rule);
+    rule.lastStatus()
+        .ifPresent((status) -> channel.post(new MortgageChangedEvent(square.getNumber(), status)));
   }
 
   private class NoOwner implements State {

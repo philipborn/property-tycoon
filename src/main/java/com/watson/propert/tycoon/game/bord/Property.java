@@ -23,6 +23,10 @@ public abstract class Property implements SquareTyp {
     return Optional.ofNullable(owner);
   }
 
+  public void newOwner(Owner newOwner) {
+    this.owner = newOwner;
+  }
+
   // value is the property cost not rent
   public int price() {
     return value;
@@ -37,15 +41,6 @@ public abstract class Property implements SquareTyp {
     return value;
   }
 
-  public int mortgage() {
-    mortgaged = true;
-    return price() / 2;
-  }
-
-  public boolean isMortgage() {
-    return mortgaged;
-  }
-
   public int sell() {
     Bank.instance().payTo(owner, price());
     owner = null;
@@ -53,7 +48,17 @@ public abstract class Property implements SquareTyp {
     return value;
   }
 
-  public void newOwner(Owner newOwner) {
-    this.owner = newOwner;
+  public boolean isMortgage() {
+    return mortgaged;
+  }
+
+  public int mortgage() {
+    mortgaged = true;
+    return price() / 2;
+  }
+
+  public void RemoveMortgage() {
+    owner.payTo(Bank.instance(), price() / 2);
+    mortgaged = false;
   }
 }
