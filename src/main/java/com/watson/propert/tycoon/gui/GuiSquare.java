@@ -95,4 +95,13 @@ public class GuiSquare {
       ((Pane) group).getChildren().add(iv);
     }
   }
+
+  /**
+   * Get the number of houses on a Property Square 5 represents a hotel
+   *
+   * @return int number of houses
+   */
+  public int numberOfHouses() {
+    return numHouses;
+  }
 }
