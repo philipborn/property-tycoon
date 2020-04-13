@@ -8,7 +8,7 @@ public class BankPayPlayer implements Action {
 
   private int amount;
 
-  BankPayPlayer(int amount) {
+  public BankPayPlayer(int amount) {
     this.amount = amount;
   }
 
