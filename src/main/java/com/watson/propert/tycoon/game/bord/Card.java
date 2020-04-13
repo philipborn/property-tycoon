@@ -1,6 +1,6 @@
 package com.watson.propert.tycoon.game.bord;
 
-import com.watson.propert.tycoon.game.actions.Action;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class Card implements Action {
 
@@ -23,7 +23,7 @@ public class Card implements Action {
   }
 
   @Override
-  public void run() {
-    action.run();
+  public void run(Player player) {
+    action.run(player);
   }
 }

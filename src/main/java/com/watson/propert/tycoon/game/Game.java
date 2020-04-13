@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.entitys.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.game.rules.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
