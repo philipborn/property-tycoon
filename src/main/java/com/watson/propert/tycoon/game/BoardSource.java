@@ -91,9 +91,20 @@ public class BoardSource implements BordBuilder.Source {
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     Street.Colour color = extractColor(prop.get("group"));
-    List<Integer> rent = new ArrayList<>(5);
+    List<Integer> rent = extractRents(prop);
     rent.add(Integer.valueOf(prop.get("rent")));
     builder.addStreet(name, value, color, rent);
+  }
+
+  private List<Integer> extractRents(Map<String, String> prop) {
+    List<Integer> rents = new ArrayList<>();
+    rents.add(Integer.valueOf(prop.get("rent")));
+    rents.add(Integer.valueOf(prop.get("1house")));
+    rents.add(Integer.valueOf(prop.get("2houses")));
+    rents.add(Integer.valueOf(prop.get("3houses")));
+    rents.add(Integer.valueOf(prop.get("4houses")));
+    rents.add(Integer.valueOf(prop.get("hotel")));
+    return rents;
   }
 
   private Street.Colour extractColor(String color) {
