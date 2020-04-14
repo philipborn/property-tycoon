@@ -4,12 +4,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.actions.ActionFactory;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.entitys.*;
 import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.game.rules.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
+import com.watson.propert.tycoon.io.CardReaderJson;
 
 public class Game implements PropertTycoon {
 
@@ -85,6 +87,9 @@ public class Game implements PropertTycoon {
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
     Board board = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBoard();
+    CardMaker maker = new CardMaker(new ActionFactory(board.getFreePark()));
+    CardReader cr = new CardReaderJson("src/main/resources/cards.json");
+    CardMaker.combine(maker.make(cr), board.getDecks());
     PropertTycoon game = new Game(board, channel);
     GameSetting settings = new GameSetting();
     settings.set(Player.Id.ONE);

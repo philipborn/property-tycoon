@@ -8,23 +8,31 @@ public class ActionFactory {
 
   private CashUser freePark;
 
-  public Action BackwardTo(String destination) {
+  public ActionFactory(CashUser freePark) {
+    this.freePark = freePark;
+  }
+
+  public Action backwardTo(int destination) {
     return new BackwardTo(destination);
   }
 
-  public Action ForwardTo(String destination) {
+  public Action forwardTo(int destination) {
     return new ForwardTo(destination);
   }
 
-  public Action BankPayPlayer(int amount) {
+  public Action playerToJail() {
+    return new PlayerToJail();
+  }
+
+  public Action bankPayPlayer(int amount) {
     return new BankPayPlayer(amount);
   }
 
-  public Action PlayerPayBank(int amount) {
+  public Action playerPayBank(int amount) {
     return new PlayerPay(Bank.instance(), amount);
   }
 
-  public Action PlayerPayFreePark(int amount) {
+  public Action playerPayFreePark(int amount) {
     return new PlayerPay(freePark, amount);
   }
 

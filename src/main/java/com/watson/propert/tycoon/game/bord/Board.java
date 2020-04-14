@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.game.bord;
 
+import java.util.*;
+
 import com.watson.propert.tycoon.game.entitys.Jailer;
 
 public class Board {
@@ -8,6 +10,7 @@ public class Board {
   private Jail jail;
   private FreePark freePark;
   private Square start;
+  private Set<Deck> decks = new HashSet<>();;
 
   public Go getGo() {
     return go;
@@ -48,5 +51,13 @@ public class Board {
 
   protected void setStart(Square start) {
     this.start = start;
+  }
+
+  public List<Deck> getDecks() {
+    return new ArrayList<>(decks);
+  }
+
+  protected void addDeck(Deck deck) {
+    this.decks.add(deck);
   }
 }

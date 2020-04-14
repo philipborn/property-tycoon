@@ -15,7 +15,6 @@ public class BordBuilder {
 
   private EventBus channel;
   private Board board = new Board();
-  private BordReader source;
   private Map<Street.Colour, StreetGroup> streetGroups = new HashMap<>();
   private StationGroup stationGroup = new StationGroup();
   private UtilitiesGroup utilitiesGroup = new UtilitiesGroup();
@@ -103,6 +102,7 @@ public class BordBuilder {
   public BordBuilder addDeck(String squareName) {
     checkIfCanAddSquare();
     decks.computeIfAbsent(squareName, Deck::new);
+    board.addDeck(decks.get(squareName));
     SquareNode node = new SquareNode(seqNumber++, squareName, decks.get(squareName));
     addToLink(node);
     return this;

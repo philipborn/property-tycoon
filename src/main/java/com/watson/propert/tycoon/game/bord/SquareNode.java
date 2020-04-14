@@ -47,15 +47,15 @@ public class SquareNode implements Square {
   }
 
   @Override
-  public Square forwardTo(String propertyName) {
+  public Square forwardTo(int seqNumber) {
     Iterator<Square> iter = this.iterator();
-    return iterate(iter);
+    return iterate(seqNumber, iter);
   }
 
   @Override
-  public Square forwardTo(String name, SquareVisitor passingVisitor) {
+  public Square forwardTo(int seqNumber, SquareVisitor passingVisitor) {
     Iterator<Square> iter = this.iterator();
-    return iterate(iter, passingVisitor);
+    return iterate(seqNumber, iter, passingVisitor);
   }
 
   @Override
@@ -76,38 +76,37 @@ public class SquareNode implements Square {
   }
 
   @Override
-  public Square backwardTo(String name) {
+  public Square backwardTo(int seqNumber) {
     Iterator<Square> iter = new BackwardIterator(this);
-    return iterate(iter);
+    return iterate(seqNumber, iter);
   }
 
   @Override
-  public Square backwardTo(String name, SquareVisitor passingVisitor) {
+  public Square backwardTo(int seqNumber, SquareVisitor passingVisitor) {
     Iterator<Square> iter = new BackwardIterator(this);
-    return iterate(iter, passingVisitor);
+    return iterate(seqNumber, iter, passingVisitor);
   }
 
-  private Square iterate(Iterator<Square> iter) {
+  private Square iterate(int seqNumber, Iterator<Square> iter) {
     while (iter.hasNext()) {
       Square square = iter.next();
-      if (square.getName().equals(name)) {
+      if (square.getNumber() == (seqNumber)) {
         return square;
       }
     }
     return null;
   }
 
-  private Square iterate(Iterator<Square> iter, SquareVisitor passingVisitor) {
+  private Square iterate(int seqNumber, Iterator<Square> iter, SquareVisitor passingVisitor) {
     Square square;
     while (iter.hasNext()) {
       square = iter.next();
-      if (square.getName().equals(name)) {
+      if (square.getNumber() == seqNumber) {
         return square;
       }
       if (!square.getName().equals(this.name)) {
         square.visitBy(passingVisitor);
       }
-      ;
     }
     return null;
   }

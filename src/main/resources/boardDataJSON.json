@@ -2,22 +2,12 @@
   {
     "Position": 1,
     "Name": "Go",
-    "Group": "go",
-    "Action": "Collect Â£200",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "go"
   },
   {
     "Position": 2,
     "Name": "Crapper Street",
     "Group": "Brown",
-    "Action": "",
     "canBeBought": "Yes",
     "Cost": 60,
     "Rent": 2,
@@ -32,14 +22,7 @@
     "Name": "Pot Luck",
     "Group": "Deck",
     "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "canBeBought": "No"
   },
   {
     "Position": 4,

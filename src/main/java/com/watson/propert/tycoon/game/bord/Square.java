@@ -19,17 +19,17 @@ public interface Square extends Iterable<Square> {
    */
   Square forward(int steps);
 
-  Square forwardTo(String name);
+  Square forwardTo(int seqNumber);
 
-  Square forwardTo(String name, SquareVisitor visitor);
+  Square forwardTo(int seqNumber, SquareVisitor visitor);
 
   Square backward(int steps);
 
   Square backward(int steps, SquareVisitor visitor);
 
-  Square backwardTo(String name);
+  Square backwardTo(int seqNumber);
 
-  Square backwardTo(String name, SquareVisitor visitor);
+  Square backwardTo(int seqNumber, SquareVisitor visitor);
 
   void visitBy(SquareVisitor visitor);
 
