@@ -1,5 +1,8 @@
 package com.watson.propert.tycoon.gui;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
@@ -45,5 +48,10 @@ public class GuiToken {
 
   public void moveBackwards() {
     this.position = (this.position + GuiGameBoard.length - 1) % GuiGameBoard.length;
+  }
+
+  public Image getImage() {
+    ImageView iv = (ImageView) ((HBox) token).getChildren().get(0);
+    return iv.getImage();
   }
 }

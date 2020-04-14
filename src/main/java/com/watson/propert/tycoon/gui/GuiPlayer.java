@@ -1,5 +1,7 @@
 package com.watson.propert.tycoon.gui;
 
+import java.util.ArrayList;
+
 /**
  * GUI Player Class. Describes a Player in the game
  *
@@ -11,12 +13,14 @@ public class GuiPlayer {
   GuiToken token;
   Boolean ai;
   PlayerInfo info;
+  ArrayList<GuiProperty> portfolio;
 
   public GuiPlayer(String name, GuiToken token, Boolean ai, PlayerInfo info) {
     this.name = name;
     this.token = token;
     this.ai = ai;
     this.info = info;
+    portfolio = new ArrayList<>();
   }
 
   public GuiPlayer(String name, GuiToken token) {
@@ -51,5 +55,26 @@ public class GuiPlayer {
 
   public PlayerInfo getInfo() {
     return info;
+  }
+
+  // Add a purchased property to Player's portfolio
+  public void addProperty(GuiProperty property) {
+    portfolio.add(property);
+  }
+
+  // Remove a property from Player's portfolio
+  public GuiProperty removeProperty(int pos) {
+    for (GuiProperty prop : portfolio) {
+      if (prop.getBoardPosition() == pos) {
+        portfolio.remove(prop);
+        return prop;
+      }
+    }
+    return null;
+  }
+
+  // Return Player's Portfolio
+  public ArrayList<GuiProperty> getPortfolio() {
+    return portfolio;
   }
 }

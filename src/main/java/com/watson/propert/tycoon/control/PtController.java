@@ -27,24 +27,28 @@ import static java.lang.StrictMath.abs;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import org.slf4j.Logger;
@@ -66,6 +70,38 @@ public class PtController {
   @FXML private ImageView IMG_GO;
 
   @FXML private ImageView JAIL_IMG;
+
+  @FXML private ImageView IMG_GOTO_JAIL;
+
+  @FXML private ImageView IMG_FREE_PARKING;
+
+  @FXML private ImageView IMG_TRAIN_STAT_1;
+
+  @FXML private ImageView IMG_TRAIN_STAT_2;
+
+  @FXML private ImageView IMG_TRAIN_STAT_3;
+
+  @FXML private ImageView IMG_TRAIN_STAT_4;
+
+  @FXML private ImageView IMG_POWER_STAT;
+
+  @FXML private ImageView IMG_WATER_CO;
+
+  @FXML private ImageView IMG_SUPER_TAX;
+
+  @FXML private ImageView IMG_INCOME_TAX;
+
+  @FXML private ImageView IMG_POT_LUCK_1;
+
+  @FXML private ImageView IMG_POT_LUCK_2;
+
+  @FXML private ImageView IMG_POT_LUCK_3;
+
+  @FXML private ImageView IMG_OP_KNOCK_1;
+
+  @FXML private ImageView IMG_OP_KNOCK_2;
+
+  @FXML private ImageView IMG_OP_KNOCK_3;
 
   @FXML private HBox JAIL_CORNER;
 
@@ -178,23 +214,25 @@ public class PtController {
 
   @FXML private ImageView DICE_IMG_2;
 
-  @FXML private VBox PLAYER_1;
-
-  @FXML private VBox PLAYER_3;
-
-  @FXML private VBox PLAYER_5;
-
   @FXML private VBox BUTTON_CONTAINER;
 
   @FXML private Button NEW_GAME;
 
   @FXML private Button END_GAME;
 
-  @FXML private VBox PLAYER_2;
+  @FXML private HBox PLAYER_1;
+  @FXML private HBox PLAYER_2;
+  @FXML private HBox PLAYER_3;
+  @FXML private HBox PLAYER_4;
+  @FXML private HBox PLAYER_5;
+  @FXML private HBox PLAYER_6;
 
-  @FXML private VBox PLAYER_4;
-
-  @FXML private VBox PLAYER_6;
+  @FXML private ImageView IMG_PLAYER_1;
+  @FXML private ImageView IMG_PLAYER_2;
+  @FXML private ImageView IMG_PLAYER_3;
+  @FXML private ImageView IMG_PLAYER_4;
+  @FXML private ImageView IMG_PLAYER_5;
+  @FXML private ImageView IMG_PLAYER_6;
 
   @FXML private VBox BUTTON_CONTAINER1;
 
@@ -206,26 +244,200 @@ public class PtController {
 
   @FXML private VBox LEFT_PANEL;
 
-  private GuiGameBoard gameBoard;
+  @FXML private Button BUTTON_YES;
 
+  @FXML private Button BUTTON_NO;
+
+  @FXML private Label TIMER;
+
+  private GuiGameBoard gameBoard;
+  private Stage playerPopUp;
+  private Stage currentPopup;
   private PropertTycoon game;
 
-  private Stage currentPopup;
+  // Audio clips
+  private AudioClip throwDiceAudio;
+  private AudioClip dropTokenAudio;
+  private AudioClip takeCardAudio;
+  private AudioClip tingAudio;
 
+  @FXML
+  void clickedNo(ActionEvent event) {}
+
+  @FXML
+  void clickedYes(ActionEvent event) {
+    yes();
+  }
+
+  // Show Extended Player Details
+  @FXML
+  void playerPopUp(MouseEvent event) throws IOException {
+    Logger logger = LoggerFactory.getLogger(App.class);
+
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    GuiPlayer player = null;
+    // get controller for popup
+    ptPlayerPopupCtrl controller = loader.getController();
+
+    logger.debug("Num players: " + gameBoard.getPlayers().length);
+    // Get Player
+    Object box = event.getSource();
+    if (box instanceof HBox) {
+      Node vb = ((HBox) box).lookup("#PlayerDetail");
+      Node lName = ((VBox) vb).lookup("#PlayerName");
+      if (lName instanceof Label) {
+
+        // get GuiPlayer
+        for (GuiPlayer p : gameBoard.getPlayers()) {
+          if (p.getName().equals(((Label) lName).getText())) {
+            player = p;
+            break;
+          }
+        }
+      }
+    }
+
+    if (player != null) {
+      // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
+      player.getPortfolio().clear();
+      player.addProperty(new GuiProperty(gameBoard.getSquare(1)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(3)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(6)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(7)));
+      player.addProperty(new GuiProperty(gameBoard.getSquare(8)));
+      // END TEST DATA
+
+      // load data to controller
+      controller.setData(player);
+    }
+    // Create & show scene
+    Scene scene = new Scene(root);
+    playerPopUp.setScene(scene);
+    playerPopUp.show();
+  }
+
+  /**
+   * End game and exit
+   *
+   * @param event
+   */
   @FXML
   void endGame(ActionEvent event) {
     /*
       save game functionality
     */
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Quit Dialog");
+    alert.setHeaderText("Quit Game");
+    alert.setContentText("Are you sure you want to quit the game?");
 
-    Platform.exit();
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == ButtonType.OK) {
+      // Exit game
+      Platform.exit();
+    }
   }
 
+  /**
+   * Creates a New Game dialog box and sets up a new game
+   *
+   * @param event
+   * @throws IOException
+   */
   @FXML
   void newGame(ActionEvent event) throws IOException {
-    //goToJail();
-    //moveBackThreeSpaces();
-    yes();
+    Logger logger = LoggerFactory.getLogger(App.class);
+    // Launch a New Game Dialog Box
+    NewGame newGame = new NewGame();
+    newGame.showDialog();
+
+    // Test
+    logger.debug("New Game button clicked: " + newGame.isNewGame());
+    logger.debug("Is Timed Game?: " + newGame.isTimedGame());
+    logger.debug("Game Time: " + newGame.getGameTime());
+
+    // Only if New Game button clicked create a new game
+    if (newGame.isNewGame()) {
+      GuiToken[] t =
+          new GuiToken[] {
+            new GuiToken(TOKEN_PLAYER_1, 0),
+            new GuiToken(TOKEN_PLAYER_2, 0),
+            new GuiToken(TOKEN_PLAYER_3, 0),
+            new GuiToken(TOKEN_PLAYER_4, 0),
+            new GuiToken(TOKEN_PLAYER_5, 0),
+            new GuiToken(TOKEN_PLAYER_6, 0)
+          };
+
+      PlayerInfo[] pi = {
+        new PlayerInfo(PLAYER_1),
+        new PlayerInfo(PLAYER_2),
+        new PlayerInfo(PLAYER_3),
+        new PlayerInfo(PLAYER_4),
+        new PlayerInfo(PLAYER_5),
+        new PlayerInfo(PLAYER_6)
+      };
+
+      // Hide players and tokens
+      for (int i = 0; i < 6; i++) {
+        pi[i].getContainer().setVisible(false);
+        t[i].getToken().setVisible(false);
+      }
+
+      // Set up new Players
+      GuiPlayer[] players = new GuiPlayer[newGame.getNewPlayers().size()];
+      for (int i = 0; i < newGame.getNewPlayers().size(); i++) {
+        players[i] =
+            new GuiPlayer(
+                newGame.getNewPlayers().get(i).getName(),
+                t[i],
+                newGame.getNewPlayers().get(i).isAi(),
+                pi[i]);
+        pi[i].getName().setText(newGame.getNewPlayers().get(i).getName());
+        pi[i].getMoney().setText("500");
+        pi[i].getContainer().setVisible(true);
+        t[i].getToken().setVisible(true);
+      }
+
+      // Set new players
+      gameBoard.setPlayers(players);
+
+      // If a timed game, show and set timer, otherwise hide
+      if (newGame.isTimedGame()) {
+        setTimer(newGame.getGameTime() * 3600);
+        TIMER.setVisible(true);
+        gameBoard.setTimedGame(true);
+      } else {
+        TIMER.setVisible(false);
+        gameBoard.setTimedGame(false);
+      }
+
+      // Reset Gameboard
+      if (event != null) {
+        gameBoard.reset();
+      }
+
+      game = Game.newGame();
+      game.registerListener(this);
+    }
+  }
+
+  /*
+   * Sets Timer Label
+   * @param Timer value in seconds
+   */
+  private void setTimer(int seconds) {
+    int hours = seconds / 3600;
+    int minutes = (seconds % 3600) / 60;
+    int secs = seconds % 60;
+    TIMER.setText(
+        String.format("%02d", hours)
+            + ":"
+            + String.format("%02d", minutes)
+            + ":"
+            + String.format("%02d", secs));
   }
 
   private void yes() {
@@ -241,12 +453,18 @@ public class PtController {
 
   @Subscribe
   void diceHandler(DiceEvent event) {
-    // move functionality
-    int i = event.firstDice() + event.secondDice();
-    displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
-    DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
-    DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
-    move(i);
+    throwDiceAudio.play();
+    PauseTransition pause = new PauseTransition(Duration.seconds(3));
+    pause.setOnFinished(
+        ev -> {
+          // move functionality
+          int i = event.firstDice() + event.secondDice();
+          //displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
+          DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
+          DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
+          move(i);
+        });
+    pause.play();
   }
 
   void moveBackThreeSpaces() {
@@ -278,6 +496,7 @@ public class PtController {
 
       // Create & show scene
       Scene scene = new Scene(root);
+      scene.setFill(Color.TRANSPARENT);
       currentPopup.setScene(scene);
       currentPopup.show();
     }
@@ -301,17 +520,19 @@ public class PtController {
 
   void changeTurn() {
     // can utilise style sheets, white & transparent is just to show the functionality
-    gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+    //gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
     gameBoard.getNextPlayer();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
+    /*
+
     gameBoard
-        .getCurrentPlayer()
-        .getInfo()
-        .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
+    .getCurrentPlayer()
+    .getInfo()
+    .getInfo()
+    .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
   }
 
   @Subscribe
@@ -419,10 +640,39 @@ public class PtController {
     STREET_2.setPrefSize(default_street_width, default_street_height);
     STREET_3.setPrefSize(default_street_width, default_street_height);
     STREET_4.setPrefSize(default_street_width, default_street_height);
+
+    // Resize corner images
     JAIL_IMG.setFitHeight(default_corner_inner_size * 0.7);
     JAIL_IMG.setFitWidth(default_corner_inner_size * 0.7);
     IMG_GO.setFitHeight(default_corner_inner_size);
     IMG_GO.setFitWidth(default_corner_inner_size);
+    IMG_FREE_PARKING.setFitHeight(default_corner_inner_size);
+    IMG_FREE_PARKING.setFitWidth(default_corner_inner_size);
+    IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
+    IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
+
+    // Resize Tile images
+    ImageView[] tileImages =
+        new ImageView[] {
+          IMG_TRAIN_STAT_1,
+          IMG_TRAIN_STAT_2,
+          IMG_TRAIN_STAT_3,
+          IMG_TRAIN_STAT_4,
+          IMG_POWER_STAT,
+          IMG_WATER_CO,
+          IMG_INCOME_TAX,
+          IMG_SUPER_TAX,
+          IMG_POT_LUCK_1,
+          IMG_POT_LUCK_2,
+          IMG_POT_LUCK_3,
+          IMG_OP_KNOCK_1,
+          IMG_OP_KNOCK_2,
+          IMG_OP_KNOCK_3
+        };
+    for (int i = 0; i < tileImages.length; i++) {
+      tileImages[i].setFitHeight(default_tile_inner_height);
+      tileImages[i].setFitWidth(default_tile_inner_width);
+    }
 
     // Resize squares
     for (GuiSquare sq : gameBoard.getSquares()) {
@@ -495,6 +745,15 @@ public class PtController {
           new GuiSquare(SQUARE_39)
         };
 
+    // Load Audio Clips
+    throwDiceAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    dropTokenAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/dropToken.mp3").toExternalForm());
+    takeCardAudio =
+        new AudioClip(ClassLoader.getSystemResource("audio/takeCard.mp3").toExternalForm());
+    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+
     // Initialise players - FOR TESTING
     // To be set up by New Game Dialog box
     GuiPlayer[] players =
@@ -515,13 +774,22 @@ public class PtController {
     gameBoard = new GuiGameBoard(GAME_BOARD_CONTAINER);
     gameBoard.setSquares(guiSquares);
     gameBoard.setPlayers(players);
+    gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
+
+    /*
     gameBoard
         .getCurrentPlayer()
         .getInfo()
         .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;");
+        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
+
+    // TEST HOUSES
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
+    gameBoard.getSquare(3).addHouse();
 
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
@@ -529,6 +797,10 @@ public class PtController {
 
     // set popup & game variables/listener
     currentPopup = new Stage();
+    currentPopup.initStyle(StageStyle.TRANSPARENT);
+    playerPopUp = new Stage();
+    playerPopUp.initStyle(StageStyle.UTILITY);
+    playerPopUp.setTitle("Extended Player Data");
     game = Game.newGame();
     game.registerListener(this);
 
@@ -541,15 +813,16 @@ public class PtController {
 
         // access elements of square
         VBox v = (VBox) sq.getPane().getChildren().get(0);
-        HBox group = (HBox) v.getChildren().get(0);
-        Label name = (Label) v.getChildren().get(1);
-        Label price = (Label) v.getChildren().get(2);
-
+        HBox group = (HBox) v.lookup("#PROPERTY_GROUP");
+        Label name = (Label) v.lookup("#PROPERTY_NAME");
+        Label price = (Label) v.lookup("#PROPERTY_PRICE");
         // set group names (if square is in a group)
         if (boardReader.getProperties().get("group") != null) {
-          group.setId(
-              "PROPERTY_GROUP_"
-                  + boardReader.getProperties().get("group").toUpperCase().replace(' ', '_'));
+          String propGroup =
+              boardReader.getProperties().get("group").toUpperCase().replace(' ', '_');
+          sq.setGroup(PropertyGroup.valueOf(propGroup));
+          group.getStyleClass().clear();
+          group.getStyleClass().add(sq.getGroup().getCssClass());
         }
 
         // set name/price values
@@ -561,6 +834,7 @@ public class PtController {
     }
 
     // Create and show a New Game Dialog
+    newGame(null);
     // Results pushed to GameBoard class
     //NewGame newGameDialog = new NewGame();
     //newGameDialog.showDialog();

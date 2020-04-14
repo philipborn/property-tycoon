@@ -11,8 +11,17 @@
 /*
  * Photographs and graphic design by Lee Richards
  */
+
+ #root {
+     -fx-background-image: url("background02.jpg");
+     -fx-background-repeat: stretch stretch;
+     -fx-background-position: center center;
+     -fx-background-size: 100%  100%;
+     -fx-background-color: rgba(0, 0, 0, 0.3);
+     -fx-border-radius: 20;
+ }
+
 .popup_background {
-    -fx-border-radius: 20;
     -fx-background-color: rgba(0, 0, 0, 0.3);
     -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
 }
@@ -23,12 +32,11 @@
 }
 
 .card_group {
-    -fx-background-color: red;
     -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 0);
     -fx-background-radius:8;
  }
- 
- 
+
+
 .PROPERTY_GROUP_BROWN {
     -fx-background-color: #9c552d;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
@@ -91,26 +99,20 @@
     -fx-font-size: 14;
 }
 
- .right_panel {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
- }
+.player_details {
+    -fx-text-fill: #F7F9E0;
+    -fx-border-color: #F7F9E0;
+    -fx-border-width: 0 0 3 0;
+}
 
- .title_panel {
-    -fx-border-color: white;
-    -fx-border-width: 0 0 2 0;
- }
+.player {
+    -fx-text-fill: #F7F9E0;
+}
 
- .owner {
-    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
-    -fx-font-size: 18;
-    -fx-text-fill: white;
- }
+.option {
+    -fx-text-fill: #F7F9E0;
+}
 
- .rent_title, .rent_details, .rent_values {
-    -fx-text-fill: white;
- }
-
- .rent_values {
-    -fx-font-style: italic;
- }
+.option_value {
+    -fx-text-fill: #F7F9E0;
+}

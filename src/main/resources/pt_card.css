@@ -1,0 +1,31 @@
+@font-face {
+    font-family: "BankGothic Lt BT";
+    src: url('fonts/bgothl.ttf');
+}
+
+@font-face {
+    font-family: "OCR A Std";
+    src: url('fonts/OCRAStd.otf');
+}
+
+.backgroundPotLuck {
+    -fx-opacity: 0.8;
+    -fx-background-color: #d8dd4c;
+    -fx-background-radius: 20;
+}
+
+.backgroundOpKnock {
+    -fx-opacity: 0.8;
+    -fx-background-color: #ea5bcd;
+    -fx-background-radius: 20;
+}
+
+.border {
+    -fx-background-color: transparent;
+    -fx-border-width: 10;
+    -fx-border-color: #000;
+    -fx-border-radius: 20;
+}
+.cardTitle {-fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;}
+
+.cardText{-fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;}
