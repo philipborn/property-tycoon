@@ -9,6 +9,7 @@ public class StationIterator implements Iterator<Station> {
 
   private StationIterator(Square start) {
     iter = start.iterator();
+    next = findStation();
   }
 
   @Override

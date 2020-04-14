@@ -7,6 +7,11 @@ public class UtilitiesIterator implements Iterator<Utilities> {
   Iterator<Square> iter;
   Utilities next;
 
+  public UtilitiesIterator(Square start) {
+    iter = start.iterator();
+    next = findUtilities();
+  }
+
   @Override
   public boolean hasNext() {
     return next != null;

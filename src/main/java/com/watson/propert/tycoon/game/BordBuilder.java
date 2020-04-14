@@ -9,34 +9,87 @@ import com.google.common.eventbus.EventBus;
 
 public class BordBuilder {
 
+  public interface Source {
+    void extractTo(BordBuilder builder);
+  }
+
   private EventBus channel;
   private BordReader source;
 
   private SquareImp first;
   private SquareImp last;
-  private SquareImp current;
-  Map<String, String> prop;
+  private Map<String, String> prop;
+  private Boolean doneLastLink = false;
 
-  public BordBuilder(EventBus channel) {
+  private BordBuilder(EventBus channel) {
     this.channel = channel;
   }
 
-  public Square buildBord(BordReader source) {
-    this.source = source;
+  public Square getBord() {
+    if (doneLastLink == false) {
+      linkLastAndFirst();
+    }
+    return first;
+  }
 
+  public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
+    checkIfCanAddSquare();
+    addToLink(new Street(name, value, color, rents));
+    return this;
+  }
+
+  public BordBuilder addStation(String name, int value) {
+    checkIfCanAddSquare();
+    addToLink(new Station(name, value));
+    return this;
+  }
+
+  public BordBuilder addUtility(String name, int value) {
+    checkIfCanAddSquare();
+    Utilities utilities = new Utilities(name, value);
+    addToLink(utilities);
+    channel.register(utilities);
+    return this;
+  }
+
+  public BordBuilder addSquare(String name) {
+    checkIfCanAddSquare();
+    addToLink(new SquareImp(name));
+    return this;
+  }
+
+  public BordBuilder addSquare(SquareImp square) {
+    checkIfCanAddSquare();
+    addToLink(square);
+    return this;
+  }
+
+  public BordBuilder addFrom(Source source) {
+    checkIfCanAddSquare();
+    source.extractTo(this);
+    return this;
+  }
+
+  public BordBuilder X(BordReader source) {
+    checkIfCanAddSquare();
+
+    this.source = source;
     source.nextObject();
     first = createSquare();
     last = first;
 
     while (source.hasNextObject()) {
       source.nextObject();
-      current = createSquare();
-      link(current);
-      last = current;
+      SquareImp current = createSquare();
+      addToLink(current);
     }
-    linkLastAndFirst();
+    return this;
+  }
 
-    return first;
+  private void checkIfCanAddSquare() {
+    if (doneLastLink) {
+      throw new RuntimeException("Can't add Square if the bord is build");
+    }
   }
 
   private SquareImp createSquare() {
@@ -72,15 +125,15 @@ public class BordBuilder {
   private SquareImp buildStreet() {
     String name = prop.get("name");
     int value = Integer.valueOf(prop.get("cost"));
-    Street.StreetColour color = extractColor(prop.get("group"));
+    Street.Colour color = extractColor(prop.get("group"));
     List<Integer> rent = extractRents();
     return new Street(name, value, color, rent);
   }
 
-  private Street.StreetColour extractColor(String color) {
+  private Street.Colour extractColor(String color) {
     String regex = " ";
     String replacement = "_";
-    return Street.StreetColour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
+    return Street.Colour.valueOf(color.toUpperCase().replaceAll(regex, replacement));
   }
 
   private List<Integer> extractRents() {
@@ -121,14 +174,23 @@ public class BordBuilder {
     return new Utilities(name, value);
   }
 
-  SquareImp link(SquareImp current) {
-    current.setBack(last);
-    last.setNext(current);
+  private SquareImp addToLink(SquareImp current) {
+    if (last != null) {
+      current.setBack(last);
+      last.setNext(current);
+    } else {
+      first = current;
+    }
+    last = current;
     return current;
   }
 
   private void linkLastAndFirst() {
     last.setNext(first);
     first.setBack(last);
+  }
+
+  public static BordBuilder with(EventBus channel) {
+    return new BordBuilder(channel);
   }
 }
