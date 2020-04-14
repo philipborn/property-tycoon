@@ -252,6 +252,7 @@ public class PtController {
 
   private GuiGameBoard gameBoard;
   private Stage playerPopUp;
+  private Stage currentPopup;
   private PropertTycoon game;
 
   // Audio clips
@@ -471,8 +472,6 @@ public class PtController {
     changeTurn();
   }
 
-  private Stage currentPopup;
-
   @FXML
   void openHoverWindow(MouseEvent event) throws IOException {
     // getting URL of fxml file
@@ -483,20 +482,24 @@ public class PtController {
     // get controller for popup
     ptPropertyPopupCtrl controller = loader.getController();
 
-    // find square
-    int i = 0;
-    while (gameBoard.getSquares()[i].getPane() != event.getSource()) {
-      i++;
+    // find square number
+    int squareNumber = 0;
+    while (gameBoard.getSquares()[squareNumber].getPane() != event.getSource()) {
+      squareNumber++;
     }
 
-    // load data to controller
-    controller.setData(gameBoard.getSquares()[i]);
+    // if there is property info for square (ie. if square is a property square)
+    if (game.propertInfo(squareNumber + 1).isPresent()) {
 
-    // Create & show scene
-    Scene scene = new Scene(root);
-    scene.setFill(Color.TRANSPARENT);
-    currentPopup.setScene(scene);
-    currentPopup.show();
+      // load data to controller
+      controller.setData(game.propertInfo(squareNumber + 1).get());
+
+      // Create & show scene
+      Scene scene = new Scene(root);
+      scene.setFill(Color.TRANSPARENT);
+      currentPopup.setScene(scene);
+      currentPopup.show();
+    }
   }
 
   @FXML
