@@ -9,6 +9,11 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.bord.ActionSquare;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
+import com.watson.propert.tycoon.game.entitys.GameMaster;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class GameMasterTest {
 
@@ -20,13 +25,15 @@ public class GameMasterTest {
 
   @BeforeEach
   void setup() {
-    square = new SquareImp("Test");
+    square = new ActionSquare(1, "Test");
     channel = new EventBus();
 
+    int cash = 10000;
     players = new ArrayList<>(6);
-    players.add(new Player(PlayerId.ONE, square, channel));
-    players.add(new Player(PlayerId.TWO, square, channel));
-    master = new GameMaster(players);
+    players.add(new Player(Player.Id.ONE, new BankAccount(cash), square, channel));
+    players.add(new Player(Player.Id.TWO, new BankAccount(cash), square, channel));
+    master = new GameMaster();
+    master.newGame(players);
   }
 
   @Test

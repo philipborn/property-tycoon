@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.events.DiceEvent;
 
 public class DicePair {
 

@@ -1,32 +1,36 @@
 package com.watson.propert.tycoon.game;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.google.common.collect.ImmutableList;
+import com.watson.propert.tycoon.game.bord.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 
 public class PropertyInfo {
 
   private final String name;
-  private final PlayerId owner;
+  private final Player.Id owner;
   private final int numHouse;
   private final int rent;
   private final boolean isMorged;
   private final ImmutableList<Integer> rents;
+  private int price;
 
   private PropertyInfo(
       String name,
-      PlayerId owner,
+      Player.Id owner,
       int numHouse,
       int currentRent,
       boolean morged,
-      List<Integer> rents) {
+      ImmutableList<Integer> rents,
+      int price) {
     this.name = name;
     this.owner = owner;
     this.numHouse = numHouse;
     this.rent = currentRent;
     this.isMorged = morged;
-    this.rents = ImmutableList.copyOf(rents);
+    this.rents = rents;
+    this.price = price;
   }
 
   /** @return Name of the Property */
@@ -35,7 +39,7 @@ public class PropertyInfo {
   }
 
   /** @return The current owner; */
-  public PlayerId getOwner() {
+  public Player.Id getOwner() {
     return owner;
   }
 
@@ -58,6 +62,10 @@ public class PropertyInfo {
     return isMorged;
   }
 
+  public int price() {
+    return price;
+  }
+
   /**
    * Rent for number of houses in the Street. Index is the number house the value is for.
    *
@@ -74,26 +82,9 @@ public class PropertyInfo {
    * @return A PropertyInfo if square is a property
    */
   public static Optional<PropertyInfo> getInfo(Square square) {
-    InfoGather gather = new InfoGather();
-    square.vist(gather);
+    InfoGather gather = new InfoGather(square);
+    square.visitBy(gather);
     return Optional.ofNullable(gather.getInfo());
-  }
-
-  private static PropertyInfo info(Property p) {
-    int numHouses = getHouses(p);
-
-    PlayerId id = p.owner().map((d) -> d.getId()).orElse(null);
-    ImmutableList<Integer> rents = getRents(p);
-    return new PropertyInfo(p.name(), id, numHouses, p.getRent(), p.isMortgage(), rents);
-  }
-
-  private static int getHouses(Property p) {
-    if (p instanceof Street) {
-      Street s = (Street) p;
-      return s.getNumHouse();
-    } else {
-      return 0;
-    }
   }
 
   private static ImmutableList<Integer> getRents(Property p) {
@@ -108,28 +99,49 @@ public class PropertyInfo {
   static class InfoGather implements SquareVisitor {
 
     private PropertyInfo info;
+    private Square square;
+
+    public InfoGather(Square square) {
+      this.square = square;
+    }
 
     public PropertyInfo getInfo() {
       return info;
     }
 
-    @Override
-    public void SquareImp(SquareImp square) {
-      // Do nothing
+    private PropertyInfo info(Property p) {
+      int numHouses = getHouses(p);
+      Player.Id id =
+          p.owner()
+              .filter(Player.class::isInstance)
+              .map(Player.class::cast)
+              .map(Player::getId)
+              .orElse(null);
+      return new PropertyInfo(
+          square.getName(), id, numHouses, p.getRent(), p.isMortgage(), getRents(p), p.price());
+    }
+
+    private static int getHouses(Property p) {
+      if (p instanceof Street) {
+        Street s = (Street) p;
+        return s.getNumHouse();
+      } else {
+        return 0;
+      }
     }
 
     @Override
-    public void street(Street street) {
+    public void areAt(Street street) {
       info = info(street);
     }
 
     @Override
-    public void station(Station station) {
+    public void areAt(Station station) {
       info = info(station);
     }
 
     @Override
-    public void utilities(Utilities utilities) {
+    public void areAt(Utilities utilities) {
       info = info(utilities);
     }
   }

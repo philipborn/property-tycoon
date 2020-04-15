@@ -34,6 +34,12 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.bord.Board;
+import com.watson.propert.tycoon.game.bord.BoardSource;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
+import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
+import com.watson.propert.tycoon.game.events.DiceEvent;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PropertTycoonTest {
@@ -45,13 +51,12 @@ public class PropertTycoonTest {
   @BeforeEach
   void setup() {
     channel = new EventBus();
-    BordBuilder bb = BordBuilder.with(channel);
-    BoardReaderJson br = new BoardReaderJson();
-    br.readFile("src/test/testResources/jsonTest.json");
+    BoardSource source = BoardSource.using(new BoardReaderJson());
+    source.readFile("src/test/testResources/jsonTest.json");
+    Board board = BordBuilder.with(channel).addFrom(source).getBoard();
 
-    Square first = BordBuilder.with(channel).addFrom(br).getBord();
-
-    game = new Game(first, channel);
+    game = new Game(board, channel);
+    game.startGame(new GameSetting());
 
     spy = new TestListener();
     channel.register(spy);
@@ -61,18 +66,6 @@ public class PropertTycoonTest {
   void PropertyInfoReturnsInfoOnlyForProperty() {
     assertThrows(NoSuchElementException.class, () -> game.propertInfo(1).orElseThrow());
     assertDoesNotThrow(() -> game.propertInfo(2).orElseThrow());
-  }
-
-  @Test
-  void ThrowDice_multiTimes_do_nothing() {
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
-    game.throwDicesAndMove();
-
-    final int expectedNumberOfCashEvents = 1;
-    int count = (int) spy.msgs.stream().filter(event -> event instanceof DiceEvent).count();
-    assertEquals(expectedNumberOfCashEvents, count);
   }
 
   class TestListener {

@@ -7,24 +7,29 @@ import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.watson.propert.tycoon.game.bord.BoardSource;
+import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.entitys.BankAccount;
+import com.watson.propert.tycoon.game.entitys.Player;
+import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PlayerTest {
   Player player;
   EventBus channel;
   Square first;
-  static int bordSize = 3;
+  static int bordSize = 5;
 
   @BeforeEach
   void setup() {
     EventBus channel = new EventBus();
-    BoardReaderJson br = new BoardReaderJson();
-    br.readFile("src/test/testResources/jsonTest.json");
-
-    first = BordBuilder.with(channel).addFrom(br).getBord();
+    BoardSource source = BoardSource.using(new BoardReaderJson());
+    source.readFile("src/test/testResources/jsonTest.json");
+    first = BordBuilder.with(channel).addFrom(source).getFirstSquare();
 
     this.channel = new EventBus();
-    player = new Player(PlayerId.ONE, first, this.channel);
+    player = new Player(Player.Id.ONE, new BankAccount(1000), first, this.channel);
   }
 
   @Test

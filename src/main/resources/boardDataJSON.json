@@ -2,22 +2,12 @@
   {
     "Position": 1,
     "Name": "Go",
-    "Group": "",
-    "Action": "Collect Â£200",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "go"
   },
   {
     "Position": 2,
     "Name": "Crapper Street",
     "Group": "Brown",
-    "Action": "",
     "canBeBought": "Yes",
     "Cost": 60,
     "Rent": 2,
@@ -30,16 +20,9 @@
   {
     "Position": 3,
     "Name": "Pot Luck",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "canBeBought": "No"
   },
   {
     "Position": 4,
@@ -100,7 +83,7 @@
   {
     "Position": 8,
     "Name": "Opportunity Knocks",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -142,7 +125,7 @@
   {
     "Position": 11,
     "Name": "Jail/Just visiting",
-    "Group": "",
+    "Group": "jail",
     "Action": "",
     "canBeBought": "No",
     "Cost": "",
@@ -282,7 +265,7 @@
   {
     "Position": 21,
     "Name": "Free Parking",
-    "Group": "",
+    "Group": "freeparking",
     "Action": "Collect fines",
     "canBeBought": "No",
     "Cost": "",
@@ -310,7 +293,7 @@
   {
     "Position": 23,
     "Name": "Opportunity Knocks",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -464,7 +447,7 @@
   {
     "Position": 34,
     "Name": "Pot Luck",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
