@@ -20,7 +20,7 @@
   {
     "Position": 3,
     "Name": "Pot Luck",
-    "Group": "Deck",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No"
   },
@@ -83,7 +83,7 @@
   {
     "Position": 8,
     "Name": "Opportunity Knocks",
-    "Group": "Deck",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -293,7 +293,7 @@
   {
     "Position": 23,
     "Name": "Opportunity Knocks",
-    "Group": "Deck",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -447,7 +447,7 @@
   {
     "Position": 34,
     "Name": "Pot Luck",
-    "Group": "Deck",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -489,7 +489,7 @@
   {
     "Position": 37,
     "Name": "Opportunity Knocks",
-    "Group": "Deck",
+    "Group": "Take card",
     "Action": "",
     "canBeBought": "No",
     "Cost": "",

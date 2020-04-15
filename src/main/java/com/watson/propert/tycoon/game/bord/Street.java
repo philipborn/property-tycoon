@@ -2,6 +2,7 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.entitys.Bank;
 
@@ -20,13 +21,13 @@ public class Street extends Property {
 
   private int houseLevel = 0;
   private StreetGroup group;
-  private List<Integer> rent;
+  private ImmutableList<Integer> rent;
   private EventBus channel;
 
   public Street(int value, StreetGroup group, List<Integer> rent) {
     super(value);
     this.group = group;
-    this.rent = List.copyOf(rent);
+    this.rent = ImmutableList.copyOf(rent);
     group.add(this);
   }
 
@@ -75,6 +76,10 @@ public class Street extends Property {
         owner().orElseThrow(() -> new RuntimeException("Street need owner to sell houses"));
     Bank.instance().payTo(owner, group.getHousePrice());
     --houseLevel;
+  }
+
+  public ImmutableList<Integer> getRentByHouses() {
+    return rent;
   }
 
   public Colour getColour() {
