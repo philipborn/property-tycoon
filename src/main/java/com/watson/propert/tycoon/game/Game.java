@@ -50,7 +50,7 @@ public class Game implements PropertTycoon {
         .forEach((id) -> players.add(new Player(id, new BankAccount(START_CASH), board, channel)));
     master.newGame(players);
     player = master.currentPlayer();
-    state = new NewTurn();
+    switchTo(new NewTurn());
   }
 
   @Override
@@ -91,14 +91,6 @@ public class Game implements PropertTycoon {
     CardReader cr = new CardReaderJson("src/main/resources/cards.json");
     CardMaker.combine(maker.make(cr), board.getDecks());
     PropertTycoon game = new Game(board, channel);
-    GameSetting settings = new GameSetting();
-    settings.set(Player.Id.ONE);
-    settings.set(Player.Id.TWO);
-    settings.set(Player.Id.THREE);
-    settings.set(Player.Id.FOUR);
-    settings.set(Player.Id.FIVE);
-    settings.set(Player.Id.SIX);
-    game.startGame(settings);
     return game;
   }
 

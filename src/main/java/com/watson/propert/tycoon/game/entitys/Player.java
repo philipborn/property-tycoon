@@ -2,6 +2,9 @@ package com.watson.propert.tycoon.game.entitys;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.Property;
@@ -10,9 +13,12 @@ import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.events.PlayerMovedEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
+import com.watson.propert.tycoon.gui.App;
 
 public class Player
     implements com.watson.propert.tycoon.game.bord.Owner, Prisonable, Comparable<Player> {
+
+  private static final Logger logger = LoggerFactory.getLogger(App.class);
 
   public enum Id {
     ONE,
@@ -20,7 +26,26 @@ public class Player
     THREE,
     FOUR,
     FIVE,
-    SIX
+    SIX;
+
+    public static Id fromInt(int x) {
+      switch (x) {
+        case 1:
+          return Id.ONE;
+        case 2:
+          return Id.TWO;
+        case 3:
+          return Id.THREE;
+        case 4:
+          return Id.FOUR;
+        case 5:
+          return Id.FIVE;
+        case 6:
+          return Id.SIX;
+        default:
+          return null;
+      }
+    }
   }
 
   public final Id id;
@@ -49,6 +74,7 @@ public class Player
     int newPosition = location.getNumber();
     if (newPosition != oldPosition) {
       channel.post(new PlayerMovedEvent(newPosition, oldPosition));
+      logMove(newPosition, oldPosition);
     }
     return location;
   }
@@ -57,6 +83,18 @@ public class Player
     int oldPost = location.getNumber();
     location = newPosition;
     channel.post(new PlayerMovedEvent(location.getNumber(), oldPost));
+    logMove(location.getNumber(), oldPost);
+  }
+
+  private void logMove(int newPosition, int oldPosition) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Player ");
+    builder.append(id);
+    builder.append(" move from ");
+    builder.append(oldPosition);
+    builder.append(" to ");
+    builder.append(newPosition);
+    logger.info(builder.toString());
   }
 
   public Square postion() {

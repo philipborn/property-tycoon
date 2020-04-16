@@ -56,6 +56,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
@@ -423,8 +424,12 @@ public class PtController {
       if (event != null) {
         gameBoard.reset();
       }
-
+      GameSetting setting = new GameSetting();
+      for (int i = 1; i <= players.length; i++) {
+        setting.set(Player.Id.fromInt(i));
+      }
       game = Game.newGame();
+      game.startGame(setting);
       game.registerListener(this);
     }
   }
@@ -812,7 +817,9 @@ public class PtController {
     playerPopUp = new Stage();
     playerPopUp.initStyle(StageStyle.UTILITY);
     playerPopUp.setTitle("Extended Player Data");
+
     game = Game.newGame();
+
     game.registerListener(this);
 
     // for every square on the board
