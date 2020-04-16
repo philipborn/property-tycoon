@@ -4,16 +4,16 @@ import com.watson.propert.tycoon.game.entitys.Player;
 
 public class PropertyEvent {
 
-  private String name;
+  private int seqNum;
   private Player.Id owner;
 
-  public PropertyEvent(String name, Player.Id id) {
-    this.name = name;
+  public PropertyEvent(int seqNum, Player.Id id) {
+    this.seqNum = seqNum;
     this.owner = id;
   }
 
-  public String getPropertyName() {
-    return name;
+  public int getSeqNumber() {
+    return seqNum;
   }
 
   public Player.Id getOwner() {
