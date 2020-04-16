@@ -497,10 +497,10 @@ public class PtController {
     }
 
     // if there is property info for square (ie. if square is a property square)
-    if (game.propertInfo(squareNumber + 1).isPresent()) {
+    if (game.propertInfo(squareNumber - 1).isPresent()) {
 
       // load data to controller
-      controller.setData(game.propertInfo(squareNumber + 1).get());
+      controller.setData(game.propertInfo(squareNumber - 1).get());
 
       // Create & show scene
       Scene scene = new Scene(root);

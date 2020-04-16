@@ -331,7 +331,7 @@ public class Game implements PropertTycoon {
   private void buyProperty() {
     Square property = player.postion();
     property.visitBy(new BuyProperty(player));
-    channel.post(new PropertyEvent(property.getName(), player.id));
+    channel.post(new PropertyEvent(property.getNumber(), player.getId()));
     switchTo(new FixProperty());
   }
 
