@@ -299,17 +299,24 @@
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
+                        <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" StackPane.alignment="BOTTOM_RIGHT">
                            <children>
-                              <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
-                                 <image>
-                                    <Image url="@board/freeParking.png" />
-                                 </image>
-                                 <HBox.margin>
-                                    <Insets left="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </ImageView>
-                           </children></HBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="99.0" prefWidth="80.0">
+                                 <children>
+                                    <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                       <image>
+                                          <Image url="@board/freeParking.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="FREE_PARKING" text="£0.00">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </StackPane>
                   <HBox id="street" fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">

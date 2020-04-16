@@ -56,10 +56,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.*;
-import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
-import com.watson.propert.tycoon.game.events.CashEvent;
-import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
-import com.watson.propert.tycoon.game.events.DiceEvent;
+import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
@@ -224,6 +221,8 @@ public class PtController {
 
   @FXML private Button END_GAME;
 
+  @FXML private Label FREE_PARKING;
+
   @FXML private HBox PLAYER_1;
   @FXML private HBox PLAYER_2;
   @FXML private HBox PLAYER_3;
@@ -258,6 +257,8 @@ public class PtController {
   private Stage playerPopUp;
   private Stage currentPopup;
   private PropertTycoon game;
+
+  private String message;
 
   // Audio clips
   private AudioClip throwDiceAudio;
@@ -445,7 +446,6 @@ public class PtController {
   }
 
   private void yes() {
-    // implement window
     game.send(PlayerAction.BuyProperty.INSTANCE);
     game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
   }
@@ -458,7 +458,7 @@ public class PtController {
   @Subscribe
   void diceHandler(DiceEvent event) {
     throwDiceAudio.play();
-    PauseTransition pause = new PauseTransition(Duration.seconds(3));
+    PauseTransition pause = new PauseTransition(Duration.seconds(0));
     pause.setOnFinished(
         ev -> {
           // move functionality
@@ -466,14 +466,13 @@ public class PtController {
           //displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
           DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
           DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
-          move(i);
         });
     pause.play();
   }
 
-  void moveBackThreeSpaces() {
-    move(-3);
-    changeTurn();
+  @Subscribe
+  void movePlayer(PlayerMovedEvent event) {
+    move(event.newPost - event.oldPost, gameBoard.getCurrentPlayer());
   }
 
   @FXML
@@ -513,42 +512,47 @@ public class PtController {
     }
   }
 
-  private void displayMessage(String message) {
+  private void displayMessage() {
     MESSAGE_AREA.setText(message);
   }
 
   @Subscribe
-  void newTurn(ChangePlayerEvent event) {
-    changeTurn();
+  void freeParking(FreeParkChangeEvent event) {
+    FREE_PARKING.setText("" + event.newCash);
   }
 
-  void changeTurn() {
-    // can utilise style sheets, white & transparent is just to show the functionality
-    //gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+  @Subscribe
+  void changeTurn(ChangePlayerEvent event) {
+
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
     gameBoard.getNextPlayer();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
-    /*
 
-    gameBoard
-    .getCurrentPlayer()
-    .getInfo()
-    .getInfo()
-    .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
+    message = gameBoard.getCurrentPlayer().getName() + ", roll dice!";
+    displayMessage();
   }
 
   @Subscribe
   void updateMoney(CashEvent event) {
-    Label l = (Label) gameBoard.getCurrentPlayer().getInfo().getMoney();
+    Label l = (Label) gameBoard.getPlayers()[event.id.ordinal()].getInfo().getMoney();
     l.setText("" + event.getNewCash());
+    tingAudio.play();
   }
 
-  void goToJail() {}
+  @Subscribe
+  void goToJail(PlayerToJailEvent event) {
+    // get player position
+    GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
+    int position = player.getToken().getPosition();
 
-  void move(int spaces) {
-    GuiToken tok = gameBoard.getCurrentPlayer().getToken();
+    // move to jail square (square 10)
+    move(10 - position, player);
+  }
+
+  void move(int spaces, GuiPlayer player) {
+    GuiToken tok = player.getToken();
     PathTransition pt = new PathTransition();
     Path p =
         new Path(
@@ -567,11 +571,12 @@ public class PtController {
     pt.setDuration(Duration.millis(abs(spaces) * 300));
     pt.setPath(p);
     pt.play();
+    displayMessage();
   }
 
   @Subscribe
   void propertyFunctionality(BuyOrNotMsg msg) {
-    displayMessage("Would you like to buy " + msg.propName + " for " + msg.price + "?");
+    message = "Would you like to buy " + msg.propName + " for " + msg.price + "?";
   }
 
   // Calculate the centre point of each square relative to game board Pane
@@ -756,7 +761,7 @@ public class PtController {
         new AudioClip(ClassLoader.getSystemResource("audio/dropToken.mp3").toExternalForm());
     takeCardAudio =
         new AudioClip(ClassLoader.getSystemResource("audio/takeCard.mp3").toExternalForm());
-    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/ting.mp3").toExternalForm());
 
     // Initialise players - FOR TESTING
     // To be set up by New Game Dialog box
@@ -780,6 +785,8 @@ public class PtController {
     gameBoard.setPlayers(players);
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 
+    message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
+    displayMessage();
     /*
     gameBoard
         .getCurrentPlayer()
