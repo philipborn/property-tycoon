@@ -582,6 +582,7 @@ public class PtController {
   @Subscribe
   void propertyFunctionality(BuyOrNotMsg msg) {
     message = "Would you like to buy " + msg.propName + " for " + msg.price + "?";
+    displayMessage();
   }
 
   // Calculate the centre point of each square relative to game board Pane
