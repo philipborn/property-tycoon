@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.Movement;
 import com.watson.propert.tycoon.game.bord.Property;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
@@ -73,7 +74,8 @@ public class Player
     }
     int newPosition = location.getNumber();
     if (newPosition != oldPosition) {
-      channel.post(new PlayerMovedEvent(newPosition, oldPosition));
+      Movement typ = steps > 0 ? Movement.FORWARD : Movement.BACKWARD;
+      channel.post(new PlayerMovedEvent(newPosition, oldPosition, typ));
       logMove(newPosition, oldPosition);
     }
     return location;
@@ -82,7 +84,7 @@ public class Player
   public void moveTo(Square newPosition) {
     int oldPost = location.getNumber();
     location = newPosition;
-    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost));
+    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost, Movement.FORWARD));
     logMove(location.getNumber(), oldPost);
   }
 
