@@ -2,6 +2,9 @@ package com.watson.propert.tycoon.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.watson.propert.tycoon.gui.GuiSquare;
+import com.watson.propert.tycoon.gui.PropertyGroup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -47,10 +50,12 @@ public class ptPropertyPopupCtrl {
 
   @FXML private Label RENT_4H;
 
-  void setData(PropertyInfo square) {
+  void setData(PropertyInfo square, PropertyGroup propertyGroup) {
     // fill in relevant data
+    PROPERTY_POPUP_GROUP.getStyleClass().add(propertyGroup.getCssClass());
     PROPERTY_NAME.setText(square.getName());
     RENT_BASIC.setText(String.valueOf(square.getRent()));
+    PROPERTY_PRICE.setText(String.valueOf(square.price()));
     if (square.isMorged()) {
       PROPERTY_OWNER.setText(square.getOwner().name());
     } else {
@@ -58,13 +63,20 @@ public class ptPropertyPopupCtrl {
     }
     square
         .rentsPerHouse()
-        .ifPresent(
+        .ifPresentOrElse(
             (rents) -> {
               RENT_1H.setText(String.valueOf(rents.get(1)));
               RENT_2H.setText(String.valueOf(rents.get(2)));
               RENT_3H.setText(String.valueOf(rents.get(3)));
               RENT_4H.setText(String.valueOf(rents.get(4)));
               RENT_HOTEL.setText(String.valueOf(rents.get(5)));
+            },
+                () -> {                     // for utility/station
+              RENT_1H.setText("N/A");
+              RENT_2H.setText("N/A");
+              RENT_3H.setText("N/A");
+              RENT_4H.setText("N/A");
+              RENT_HOTEL.setText("N/A");
             });
   }
 

@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.watson.propert.tycoon.game.bord.Action;
 import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -271,9 +273,7 @@ public class PtController {
   void clickedNo(ActionEvent event) {}
 
   @FXML
-  void clickedYes(ActionEvent event) {
-    yes();
-  }
+  void clickedYes(ActionEvent event) {}
 
   // Show Extended Player Details
   @FXML
@@ -345,6 +345,39 @@ public class PtController {
       // Exit game
       Platform.exit();
     }
+  }
+
+  @Subscribe
+  void payOrJail(PayOrJailEvent event) {
+    message = gameBoard.getCurrentPlayer().getName() + ", pay " + event.price + " to the bank or you will go to jail!";
+    displayMessage();
+  }
+
+  @Subscribe
+  void mortgageChange(MortgageChangedEvent event) {
+    String name = gameBoard.getSquares()[event.squareNumber].getName();
+    if(event.mortgageStatus) {
+      message = name + ", is now mortgaged";
+    } else {
+      message = name + ", is unmortgaged & now available to buy";
+    }
+  }
+
+  @Subscribe
+  void houseChange(HouseChangeEvent event) {
+    // find property in current players portfolio
+    int i = 0;
+    while(gameBoard.getCurrentPlayer().getPortfolio().get(i).getBoardPosition() != event.seqNumber) {
+      i++;
+    }
+    GuiProperty property = gameBoard.getCurrentPlayer().getPortfolio().get(i);
+    property.setNumHouses(event.numHouses);
+  }
+
+  void gameOver(GameOverEvent event) {
+    /*
+    GAME OVER WINDOW
+     */
   }
 
   /**
@@ -450,9 +483,10 @@ public class PtController {
             + String.format("%02d", secs));
   }
 
-  private void yes() {
+  private void buyProperty(GuiSquare square) {
     game.send(PlayerAction.BuyProperty.INSTANCE);
     game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+    gameBoard.getCurrentPlayer().addProperty(new GuiProperty(square));
   }
 
   @FXML
@@ -500,7 +534,8 @@ public class PtController {
     if (game.propertInfo(squareNumber - 1).isPresent()) {
 
       // load data to controller
-      controller.setData(game.propertInfo(squareNumber - 1).get());
+      controller.setData(game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber).getGroup());
+
 
       // Create & show scene
       Scene scene = new Scene(root);
@@ -519,6 +554,7 @@ public class PtController {
 
   private void displayMessage() {
     MESSAGE_AREA.setText(message);
+    System.out.println(message);
   }
 
   @Subscribe
@@ -576,7 +612,7 @@ public class PtController {
     pt.setDuration(Duration.millis(abs(spaces) * 300));
     pt.setPath(p);
     pt.play();
-    displayMessage();
+    //displayMessage();
   }
 
   @Subscribe
@@ -791,8 +827,6 @@ public class PtController {
     gameBoard.setPlayers(players);
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 
-    message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
-    displayMessage();
     /*
     gameBoard
         .getCurrentPlayer()
@@ -852,6 +886,8 @@ public class PtController {
 
     }
 
+    message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
+    displayMessage();
     // Create and show a New Game Dialog
     newGame(null);
     // Results pushed to GameBoard class
