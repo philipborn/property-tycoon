@@ -18,6 +18,13 @@
     -fx-background-size: 100%  100%;
 }
 
+#Winner_background {
+    -fx-background-image: url("congratulations.jpg");
+    -fx-background-repeat: stretch stretch;   
+    -fx-background-position: center center;
+    -fx-background-size: 100%  100%;
+}
+
 #Timer {
     -fx-font-family: "OCR A Std", Helvetica, Arial, sans-serif;
     -fx-font-size: 36px;
