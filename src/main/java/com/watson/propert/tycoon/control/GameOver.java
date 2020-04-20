@@ -50,15 +50,14 @@ public class GameOver {
     gameOverStage.setScene(scene);
   }
 
-  /**
-   * Display Game Over Dialog
-   */
+  /** Display Game Over Dialog */
   public void showDialog() {
     gameOverStage.showAndWait();
   }
 
   /**
    * Is a New Game requested
+   *
    * @return new game
    */
   public boolean doNewGame() {
@@ -67,6 +66,7 @@ public class GameOver {
 
   /**
    * Initialise Winning Player
+   *
    * @param winner
    */
   public void setWinner(GuiPlayer winner) {

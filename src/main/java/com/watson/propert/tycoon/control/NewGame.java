@@ -56,15 +56,14 @@ public class NewGame {
     newGameStage.setScene(scene);
   }
 
-  /**
-   * Show New Game set up dialog
-   */
+  /** Show New Game set up dialog */
   public void showDialog() {
     newGameStage.showAndWait();
   }
 
   /**
    * Get New Players details
+   *
    * @return new players
    */
   public ArrayList<GuiPlayer> getNewPlayers() {
@@ -73,6 +72,7 @@ public class NewGame {
 
   /**
    * is a new game requested, otherwise quit
+   *
    * @return
    */
   public boolean isNewGame() {
@@ -81,6 +81,7 @@ public class NewGame {
 
   /**
    * Is the new game to have a timer?
+   *
    * @return
    */
   public boolean isTimedGame() {
@@ -89,6 +90,7 @@ public class NewGame {
 
   /**
    * Duration of new game in hours
+   *
    * @return number of hours
    */
   public int getGameTime() {

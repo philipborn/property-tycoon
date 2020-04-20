@@ -27,6 +27,7 @@ import static java.lang.StrictMath.abs;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
@@ -49,6 +50,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import org.slf4j.Logger;
@@ -383,14 +385,38 @@ public class PtController {
   }
 
   @Subscribe
-  void playerInDebt(PlayerInDebtEvent event) {
+  void playerInDebt(PlayerInDebtEvent event) throws IOException {
+
     GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
-    message = player.getName() + " is" + String.valueOf(event.amount) + " in debt";
 
     if (event.amount > player.calculateNetWorth()) {
       // player is out of game
     } else {
-      // implement selling properties to stay afloat
+      // find fxml file
+      URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerInDebtPopup.fxml");
+      FXMLLoader loader = new FXMLLoader(fxmlUrl);
+      Parent root = loader.load();
+
+      // get controller
+      ptPlayerInDebtPopupCtrl controller = loader.getController();
+
+      Stage playerInDebtWindow = new Stage();
+      controller.setData(player, event.amount, playerInDebtWindow);
+
+      // Create & show scene
+      Scene scene = new Scene(root);
+      scene.setFill(Color.TRANSPARENT);
+      playerInDebtWindow.setScene(scene);
+      playerInDebtWindow.show();
+
+      // remove properties from portfolio
+      playerInDebtWindow.setOnCloseRequest(
+          (WindowEvent windowEvent) -> {
+            List<GuiProperty> properties = controller.getPropertiesToSell();
+            for (GuiProperty gp : properties) {
+              player.getPortfolio().remove(gp);
+            }
+          });
     }
   }
 
