@@ -29,8 +29,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import com.watson.propert.tycoon.game.bord.Action;
 import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -386,45 +384,41 @@ public class PtController {
 
   @Subscribe
   void playerInDebt(PlayerInDebtEvent event) {
-      GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
-      message = player.getName() + " is" + String.valueOf(event.amount) + " in debt";
+    GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
+    message = player.getName() + " is" + String.valueOf(event.amount) + " in debt";
 
-
-
-      if(event.amount > player.calculateNetWorth()) {
-          // player is out of game
-      } else {
-          // implement selling properties to stay afloat
-      }
+    if (event.amount > player.calculateNetWorth()) {
+      // player is out of game
+    } else {
+      // implement selling properties to stay afloat
+    }
   }
 
   /*
-    FOR TESTING GAME OVER FUNCTIONALITY (REMOVE FROM NEW GAME BUTTON)
-   */
+   FOR TESTING GAME OVER FUNCTIONALITY (REMOVE FROM NEW GAME BUTTON)
+  */
   @FXML
   void gameOverTest(ActionEvent event) throws IOException {
-      // find fxml file
-      URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
-      FXMLLoader loader = new FXMLLoader(fxmlUrl);
-      Parent root = loader.load();
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
 
-      // get controller
-      PtWinnerCtrl controller = loader.getController();
+    // get controller
+    PtWinnerCtrl controller = loader.getController();
 
-      // get winner
-      GuiPlayer winningPlayer = gameBoard.getPlayers()[0];
+    // get winner
+    GuiPlayer winningPlayer = gameBoard.getPlayers()[0];
 
-      controller.setWinner(winningPlayer);
+    controller.setWinner(winningPlayer);
 
-      // Create & show scene
-      Stage gameOverWindow = new Stage();
-      Scene scene = new Scene(root);
-      scene.setFill(Color.TRANSPARENT);
-      gameOverWindow.setScene(scene);
-      gameOverWindow.show();
+    // Create & show scene
+    Stage gameOverWindow = new Stage();
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    gameOverWindow.setScene(scene);
+    gameOverWindow.show();
   }
-
-
 
   @Subscribe
   void gameOver(GameOverEvent event) throws IOException {
@@ -958,8 +952,17 @@ public class PtController {
 
     message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
     displayMessage();
+
+    // GAME OVER TEST
     // Create and show a New Game Dialog
-    newGame(null);
+    GameOver gameOver = new GameOver();
+    gameOver.setWinner(new GuiPlayer("Duane Dibbley", null));
+    gameOver.showDialog();
+    if (gameOver.doNewGame()) {
+      newGame(null);
+    } else {
+      endGame(null);
+    }
     // Results pushed to GameBoard class
     //NewGame newGameDialog = new NewGame();
     //newGameDialog.showDialog();

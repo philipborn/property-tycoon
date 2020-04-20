@@ -1,21 +1,13 @@
 package com.watson.propert.tycoon.control;
 
-import com.watson.propert.tycoon.game.Game;
-import com.watson.propert.tycoon.game.GameSetting;
-import com.watson.propert.tycoon.game.entitys.Player;
-import com.watson.propert.tycoon.gui.*;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.URL;
+import com.watson.propert.tycoon.gui.*;
 
 public class PtWinnerCtrl {
 
@@ -29,20 +21,28 @@ public class PtWinnerCtrl {
     WINNING_PLAYER.setText(winner.getName());
   }
 
+  private boolean newGame = false;
+
   @FXML
   void newGame(ActionEvent event) throws IOException {
-    // get controller for main window
-    URL fxmlUrl = ClassLoader.getSystemResource("ptGui.fxml");
-    FXMLLoader loader = new FXMLLoader(fxmlUrl);
-    loader.load();
-    PtController controller = loader.getController();
-
-    // call new game method in controller
-    controller.newGame(event);
+    // New Game
+    newGame = true;
+    ((Stage) BTN_NEW.getScene().getWindow()).close();
   }
 
   @FXML
   void quitGame(ActionEvent event) {
-    System.exit(1);
+    // Exit Game
+    newGame = false;
+    ((Stage) BTN_NEW.getScene().getWindow()).close();
+  }
+
+  public boolean doNewGame() {
+    return newGame;
+  }
+
+  @FXML
+  void initialize() {
+    newGame = false;
   }
 }
