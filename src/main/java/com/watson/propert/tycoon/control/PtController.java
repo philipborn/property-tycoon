@@ -63,6 +63,11 @@ import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.gui.*;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
+/**
+ * Controller class for the main GUI.
+ *
+ * @author Tom Doran
+ */
 public class PtController {
 
   @FXML private ResourceBundle resources;
@@ -349,14 +354,18 @@ public class PtController {
 
   @Subscribe
   void payOrJail(PayOrJailEvent event) {
-    message = gameBoard.getCurrentPlayer().getName() + ", pay " + event.price + " to the bank or you will go to jail!";
+    message =
+        gameBoard.getCurrentPlayer().getName()
+            + ", pay "
+            + event.price
+            + " to the bank or you will go to jail!";
     displayMessage();
   }
 
   @Subscribe
   void mortgageChange(MortgageChangedEvent event) {
     String name = gameBoard.getSquares()[event.squareNumber].getName();
-    if(event.mortgageStatus) {
+    if (event.mortgageStatus) {
       message = name + ", is now mortgaged";
     } else {
       message = name + ", is unmortgaged & now available to buy";
@@ -367,17 +376,78 @@ public class PtController {
   void houseChange(HouseChangeEvent event) {
     // find property in current players portfolio
     int i = 0;
-    while(gameBoard.getCurrentPlayer().getPortfolio().get(i).getBoardPosition() != event.seqNumber) {
+    while (gameBoard.getCurrentPlayer().getPortfolio().get(i).getBoardPosition()
+        != event.seqNumber) {
       i++;
     }
     GuiProperty property = gameBoard.getCurrentPlayer().getPortfolio().get(i);
     property.setNumHouses(event.numHouses);
   }
 
-  void gameOver(GameOverEvent event) {
-    /*
-    GAME OVER WINDOW
-     */
+  @Subscribe
+  void playerInDebt(PlayerInDebtEvent event) {
+      GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
+      message = player.getName() + " is" + String.valueOf(event.amount) + " in debt";
+
+
+
+      if(event.amount > player.calculateNetWorth()) {
+          // player is out of game
+      } else {
+          // implement selling properties to stay afloat
+      }
+  }
+
+  /*
+    FOR TESTING GAME OVER FUNCTIONALITY (REMOVE FROM NEW GAME BUTTON)
+   */
+  @FXML
+  void gameOverTest(ActionEvent event) throws IOException {
+      // find fxml file
+      URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
+      FXMLLoader loader = new FXMLLoader(fxmlUrl);
+      Parent root = loader.load();
+
+      // get controller
+      PtWinnerCtrl controller = loader.getController();
+
+      // get winner
+      GuiPlayer winningPlayer = gameBoard.getPlayers()[0];
+
+      controller.setWinner(winningPlayer);
+
+      // Create & show scene
+      Stage gameOverWindow = new Stage();
+      Scene scene = new Scene(root);
+      scene.setFill(Color.TRANSPARENT);
+      gameOverWindow.setScene(scene);
+      gameOverWindow.show();
+  }
+
+
+
+  @Subscribe
+  void gameOver(GameOverEvent event) throws IOException {
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    PtWinnerCtrl controller = loader.getController();
+
+    // get winner
+    Player.Id winnerId = event.ranking.get(0);
+    GuiPlayer winningPlayer = gameBoard.getPlayers()[winnerId.ordinal()];
+
+    controller.setWinner(winningPlayer);
+
+    // Create & show scene
+    Stage gameOverWindow = new Stage();
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    gameOverWindow.setScene(scene);
+    gameOverWindow.show();
   }
 
   /**
@@ -534,8 +604,8 @@ public class PtController {
     if (game.propertInfo(squareNumber - 1).isPresent()) {
 
       // load data to controller
-      controller.setData(game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber).getGroup());
-
+      controller.setData(
+          game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber).getGroup());
 
       // Create & show scene
       Scene scene = new Scene(root);

@@ -1145,7 +1145,7 @@
             </HBox>
             <VBox fx:id="BUTTON_CONTAINER" alignment="BOTTOM_CENTER" prefHeight="175.0" spacing="25.0">
                <children>
-                  <Button fx:id="NEW_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newGame" text="NEW GAME" />
+                  <Button fx:id="NEW_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gameOverTest" text="NEW GAME" />
                   <Button fx:id="END_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#endGame" text="QUIT GAME" />
                </children>
                <VBox.margin>

@@ -2,9 +2,6 @@ package com.watson.propert.tycoon.control;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.watson.propert.tycoon.gui.GuiSquare;
-import com.watson.propert.tycoon.gui.PropertyGroup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -12,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import com.watson.propert.tycoon.game.PropertyInfo;
+import com.watson.propert.tycoon.gui.PropertyGroup;
 
 /**
  * Class for controlling a single property popup window.
@@ -59,7 +57,7 @@ public class ptPropertyPopupCtrl {
     if (square.isMorged()) {
       PROPERTY_OWNER.setText(square.getOwner().name());
     } else {
-      PROPERTY_OWNER.setText("");
+      PROPERTY_OWNER.setText("For sale");
     }
     square
         .rentsPerHouse()
@@ -71,7 +69,7 @@ public class ptPropertyPopupCtrl {
               RENT_4H.setText(String.valueOf(rents.get(4)));
               RENT_HOTEL.setText(String.valueOf(rents.get(5)));
             },
-                () -> {                     // for utility/station
+            () -> { // for utility/station
               RENT_1H.setText("N/A");
               RENT_2H.setText("N/A");
               RENT_3H.setText("N/A");
