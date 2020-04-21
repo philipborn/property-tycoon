@@ -314,16 +314,22 @@ public class PtController {
     if (player != null) {
       // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
       player.getPortfolio().clear();
-      player.addProperty(new GuiProperty(gameBoard.getSquare(1)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(3)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(6)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(7)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(8)));
+      player.addProperty(
+          new GuiProperty(gameBoard.getSquare(1), game.propertInfo(1).get().rentsPerHouse()));
+      player.addProperty(
+          new GuiProperty(gameBoard.getSquare(3), game.propertInfo(3).get().rentsPerHouse()));
+      player.addProperty(
+          new GuiProperty(gameBoard.getSquare(6), game.propertInfo(6).get().rentsPerHouse()));
+      player.addProperty(
+          new GuiProperty(gameBoard.getSquare(7), game.propertInfo(7).get().rentsPerHouse()));
+      player.addProperty(
+          new GuiProperty(gameBoard.getSquare(8), game.propertInfo(8).get().rentsPerHouse()));
       // END TEST DATA
 
       // load data to controller
       controller.setData(player);
     }
+
     // Create & show scene
     Scene scene = new Scene(root);
     playerPopUp.setScene(scene);
@@ -576,7 +582,17 @@ public class PtController {
   private void buyProperty(GuiSquare square) {
     game.send(PlayerAction.BuyProperty.INSTANCE);
     game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
-    gameBoard.getCurrentPlayer().addProperty(new GuiProperty(square));
+
+    // get list of house prices
+    int i = 0;
+    while (gameBoard.getSquares()[i] != square) {
+      i++;
+    }
+
+    // build a property object & add to player's portfolio
+    gameBoard
+        .getCurrentPlayer()
+        .addProperty(new GuiProperty(square, game.propertInfo(i).get().rentsPerHouse()));
   }
 
   @FXML

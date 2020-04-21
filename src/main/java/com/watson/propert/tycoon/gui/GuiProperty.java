@@ -5,6 +5,8 @@ package com.watson.propert.tycoon.gui;
  * @author Lee Richards
  * @version Sprint4
  */
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -16,13 +18,36 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import com.google.common.collect.ImmutableList;
+
 public class GuiProperty {
   GuiSquare square;
   int boardPosition;
+  Optional<ImmutableList<Integer>> housePrices;
 
-  public GuiProperty(GuiSquare square) {
+  public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> housePrices) {
     this.square = square;
     this.boardPosition = 0;
+    this.housePrices = housePrices;
+  }
+
+  public int getCurrentValue() {
+    AtomicInteger i = new AtomicInteger();
+    housePrices.ifPresentOrElse(
+        (prices) -> {
+          // use number of houses to index prices
+          i.set(prices.get(square.numHouses).intValue());
+        },
+        () -> {
+          // otherwise use price
+          i.set(Integer.parseInt(square.getPrice()));
+        });
+    final int i1 = i.get();
+    return i1;
+  }
+
+  public Optional<ImmutableList<Integer>> getHousePrices() {
+    return housePrices;
   }
 
   public PropertyGroup getGroup() {
