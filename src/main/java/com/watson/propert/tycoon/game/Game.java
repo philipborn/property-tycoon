@@ -151,6 +151,11 @@ public class Game implements PropertTycoon {
   private class FixProperty implements State {
 
     @Override
+    public void entry() {
+      channel.post(new CanFixPropertyEvent(player.getId()));
+    }
+
+    @Override
     public void handle(PlayerAction playerAction) {
       if (playerAction instanceof PlayerAction.DonePropertyUpgrade) {
         donePropertyManagement();
