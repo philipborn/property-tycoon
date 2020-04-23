@@ -267,6 +267,7 @@ public class PtController {
   private PropertTycoon game;
 
   private String message;
+  private boolean upgrade_state;
 
   // Audio clips
   private AudioClip throwDiceAudio;
@@ -310,25 +311,27 @@ public class PtController {
         }
       }
     }
+    controller.setData(player);
+    /*
+     if (player != null) {
+       // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
+       player.getPortfolio().clear();
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(1), game.propertInfo(1).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(3), game.propertInfo(3).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(6), game.propertInfo(6).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(7), game.propertInfo(7).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(8), game.propertInfo(8).get().rentsPerHouse()));
+       // END TEST DATA
 
-    if (player != null) {
-      // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
-      player.getPortfolio().clear();
-      player.addProperty(
-          new GuiProperty(gameBoard.getSquare(1), game.propertInfo(1).get().rentsPerHouse()));
-      player.addProperty(
-          new GuiProperty(gameBoard.getSquare(3), game.propertInfo(3).get().rentsPerHouse()));
-      player.addProperty(
-          new GuiProperty(gameBoard.getSquare(6), game.propertInfo(6).get().rentsPerHouse()));
-      player.addProperty(
-          new GuiProperty(gameBoard.getSquare(7), game.propertInfo(7).get().rentsPerHouse()));
-      player.addProperty(
-          new GuiProperty(gameBoard.getSquare(8), game.propertInfo(8).get().rentsPerHouse()));
-      // END TEST DATA
-
-      // load data to controller
-      controller.setData(player);
-    }
+       // load data to controller
+       controller.setData(player);
+     }
+    */
 
     // Create & show scene
     Scene scene = new Scene(root);
@@ -374,7 +377,7 @@ public class PtController {
     if (event.mortgageStatus) {
       message = name + ", is now mortgaged";
     } else {
-      message = name + ", is unmortgaged & now available to buy";
+      message = name + ", is now unmortgaged";
     }
   }
 
@@ -388,6 +391,54 @@ public class PtController {
     }
     GuiProperty property = gameBoard.getCurrentPlayer().getPortfolio().get(i);
     property.setNumHouses(event.numHouses);
+  }
+
+  @FXML
+  void playerInDebtTest(ActionEvent event) throws IOException {
+    GuiPlayer player = gameBoard.getPlayers()[0];
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerInDebtPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    ptPlayerInDebtPopupCtrl controller = loader.getController();
+
+    Stage playerInDebtWindow = new Stage();
+    GuiProperty gprop =
+        new GuiProperty(gameBoard.getSquares()[18], game.propertInfo(18).get().rentsPerHouse());
+    player.addProperty(gprop);
+    upgrade_property_test(gprop);
+    controller.setData(player, 60, playerInDebtWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    playerInDebtWindow.setScene(scene);
+    playerInDebtWindow.show();
+
+    // remove properties from portfolio
+    playerInDebtWindow.setOnCloseRequest(
+        (WindowEvent windowEvent) -> {
+          List<SellProperty> properties = controller.getPropertiesToSell();
+          for (SellProperty sellProperty : properties) {
+            // remove houses & post player action
+            for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+              sellProperty.getProperty().getSquare().removeHouse();
+              game.send(
+                  new PlayerAction.SellHouse(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+            }
+            // if selling the whole square
+            if (sellProperty.sellingSquare()) {
+              // remove property from portfolio & post player action
+              player.getPortfolio().remove(sellProperty.getProperty());
+              game.send(
+                  new PlayerAction.SellProperty(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+            }
+          }
+        });
   }
 
   @Subscribe
@@ -418,9 +469,23 @@ public class PtController {
       // remove properties from portfolio
       playerInDebtWindow.setOnCloseRequest(
           (WindowEvent windowEvent) -> {
-            List<GuiProperty> properties = controller.getPropertiesToSell();
-            for (GuiProperty gp : properties) {
-              player.getPortfolio().remove(gp);
+            List<SellProperty> properties = controller.getPropertiesToSell();
+            for (SellProperty sellProperty : properties) {
+              // remove houses & post player action
+              for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+                sellProperty.getProperty().getSquare().removeHouse();
+                game.send(
+                    new PlayerAction.SellHouse(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+              // if selling the whole square
+              if (sellProperty.sellingSquare()) {
+                // remove property from portfolio & post player action
+                player.getPortfolio().remove(sellProperty.getProperty());
+                game.send(
+                    new PlayerAction.SellProperty(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
             }
           });
     }
@@ -579,20 +644,37 @@ public class PtController {
             + String.format("%02d", secs));
   }
 
+  @FXML
+  public void yes(ActionEvent event) {
+    buyProperty(gameBoard.getSquare(gameBoard.getCurrentPlayer().getToken().getPosition()));
+  }
+
   private void buyProperty(GuiSquare square) {
     game.send(PlayerAction.BuyProperty.INSTANCE);
     game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
 
-    // get list of house prices
-    int i = 0;
-    while (gameBoard.getSquares()[i] != square) {
-      i++;
-    }
+    int squareNumber = gameBoard.getIndexOf(square);
 
-    // build a property object & add to player's portfolio
-    gameBoard
-        .getCurrentPlayer()
-        .addProperty(new GuiProperty(square, game.propertInfo(i).get().rentsPerHouse()));
+    game.propertInfo(squareNumber)
+        .ifPresentOrElse(
+            (rents) -> {
+              System.out.println(
+                  gameBoard.getCurrentPlayer().getName()
+                      + " bought "
+                      + gameBoard.getSquare(squareNumber).getName());
+
+              gameBoard
+                  .getCurrentPlayer()
+                  .addProperty(new GuiProperty(square, rents.rentsPerHouse()));
+            },
+            () -> {
+              System.out.println(
+                  gameBoard.getCurrentPlayer().getName()
+                      + " bought "
+                      + gameBoard.getSquare(squareNumber).getName());
+
+              gameBoard.getCurrentPlayer().addProperty(new GuiProperty(square));
+            });
   }
 
   @FXML
@@ -613,6 +695,37 @@ public class PtController {
           DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
         });
     pause.play();
+  }
+
+  @Subscribe
+  void upgradePropertyState(CanFixPropertyEvent event) {
+    // change buttons to 'done' (yes) & 'raise funds' (no)
+    upgrade_state = true;
+    message =
+        gameBoard.getPlayers()[event.player.ordinal()]
+            + ", you can now upgrade properties you own by clicking on them.";
+  }
+
+  @FXML
+  void upgrade_property(MouseEvent event) {
+    if (upgrade_state) {
+      // find square
+      int squareNumber = 0;
+      GuiSquare square = gameBoard.getSquares()[squareNumber];
+      while (square.getPane() != event.getSource()) {
+        squareNumber++;
+        square = gameBoard.getSquares()[squareNumber];
+      }
+      // if player owns square & it is improvable
+      if (gameBoard.getCurrentPlayer().owns(square) && square.getGroup().getHousePrice() > 0) {
+        square.addHouse();
+        game.send(new PlayerAction.BuildHouse(squareNumber));
+      }
+    }
+  }
+
+  private void upgrade_property_test(GuiProperty guiProperty) {
+    guiProperty.getSquare().addHouse();
   }
 
   @Subscribe
@@ -641,7 +754,7 @@ public class PtController {
 
       // load data to controller
       controller.setData(
-          game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber).getGroup());
+          game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber));
 
       // Create & show scene
       Scene scene = new Scene(root);
@@ -670,6 +783,8 @@ public class PtController {
 
   @Subscribe
   void changeTurn(ChangePlayerEvent event) {
+
+    upgrade_state = false;
 
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
@@ -994,6 +1109,7 @@ public class PtController {
 
     message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
     displayMessage();
+    upgrade_state = false;
 
     // GAME OVER TEST
     // Create and show a New Game Dialog

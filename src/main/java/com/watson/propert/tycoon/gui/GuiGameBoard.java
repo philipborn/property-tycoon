@@ -33,6 +33,14 @@ public class GuiGameBoard {
     this.dice = new GuiDice();
   }
 
+  public int getIndexOf(GuiSquare guiSquare) {
+    int i = 0;
+    while (squares[i] != guiSquare) {
+      i++;
+    }
+    return i;
+  }
+
   public GuiSquare[] getSquares() {
     return squares;
   }

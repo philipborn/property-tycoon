@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -23,17 +24,23 @@ import com.google.common.collect.ImmutableList;
 public class GuiProperty {
   GuiSquare square;
   int boardPosition;
-  Optional<ImmutableList<Integer>> housePrices;
+  Optional<ImmutableList<Integer>> rentPrices;
 
-  public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> housePrices) {
+  public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> rentPrices) {
     this.square = square;
     this.boardPosition = 0;
-    this.housePrices = housePrices;
+    this.rentPrices = rentPrices;
   }
 
-  public int getCurrentValue() {
+  public GuiProperty(GuiSquare square) {
+    this.square = square;
+    this.boardPosition = 0;
+    this.rentPrices = Optional.empty();
+  }
+
+  public int getCurrentRent() {
     AtomicInteger i = new AtomicInteger();
-    housePrices.ifPresentOrElse(
+    rentPrices.ifPresentOrElse(
         (prices) -> {
           // use number of houses to index prices
           i.set(prices.get(square.numHouses).intValue());
@@ -46,8 +53,8 @@ public class GuiProperty {
     return i1;
   }
 
-  public Optional<ImmutableList<Integer>> getHousePrices() {
-    return housePrices;
+  public Optional<ImmutableList<Integer>> getRentPrices() {
+    return rentPrices;
   }
 
   public PropertyGroup getGroup() {
@@ -60,6 +67,10 @@ public class GuiProperty {
 
   public String getName() {
     return square.getName();
+  }
+
+  public GuiSquare getSquare() {
+    return square;
   }
 
   /*
@@ -146,12 +157,14 @@ public class GuiProperty {
     // Add Houses
     if (numHouses > 0 && numHouses <= 4) {
       for (int i = 0; i < numHouses; i++) {
+        StackPane house = new StackPane();
         ImageView iv = new ImageView();
         iv.setFitHeight(pg.getPrefHeight() - 8);
         iv.setPreserveRatio(true);
         iv.setImage(
             new Image(ClassLoader.getSystemResource("board/houseLarge.png").toExternalForm()));
-        pg.getChildren().add(iv);
+        house.getChildren().add(iv);
+        pg.getChildren().add(house);
       }
     }
 

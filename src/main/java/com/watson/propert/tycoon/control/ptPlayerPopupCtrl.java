@@ -78,6 +78,8 @@ public class ptPlayerPopupCtrl {
   public void setData(GuiPlayer player) {
     PLAYER_NAME.setText(player.getName());
     OPTION_1.setText("" + player.getInfo().getMoney().getText());
+    OPTION_2.setText(String.valueOf(player.calculateNetWorth()));
+    OPTION_3.setText(String.valueOf(player.getPortfolio().size()));
 
     // Add properties from Player's portfolio
     clearProperties();

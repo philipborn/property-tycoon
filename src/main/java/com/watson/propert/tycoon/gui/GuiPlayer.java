@@ -76,7 +76,7 @@ public class GuiPlayer {
   public int calculateNetWorth() {
     int total = 0;
     for (GuiProperty gp : portfolio) {
-      total += gp.getCurrentValue();
+      total += gp.getCurrentRent();
     }
     return total;
   }
@@ -84,5 +84,15 @@ public class GuiPlayer {
   // Return Player's Portfolio
   public ArrayList<GuiProperty> getPortfolio() {
     return portfolio;
+  }
+
+  public boolean owns(GuiSquare square) {
+    boolean found = false;
+    for (GuiProperty gp : portfolio) {
+      if (gp.getSquare() == square) {
+        found = true;
+      }
+    }
+    return found;
   }
 }

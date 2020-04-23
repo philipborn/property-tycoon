@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import com.watson.propert.tycoon.game.PropertyInfo;
-import com.watson.propert.tycoon.gui.PropertyGroup;
+import com.watson.propert.tycoon.gui.GuiSquare;
 
 /**
  * Class for controlling a single property popup window.
@@ -48,19 +48,18 @@ public class ptPropertyPopupCtrl {
 
   @FXML private Label RENT_4H;
 
-  void setData(PropertyInfo square, PropertyGroup propertyGroup) {
+  void setData(PropertyInfo info, GuiSquare guiSquare) {
     // fill in relevant data
-    PROPERTY_POPUP_GROUP.getStyleClass().add(propertyGroup.getCssClass());
-    PROPERTY_NAME.setText(square.getName());
-    RENT_BASIC.setText(String.valueOf(square.getRent()));
-    PROPERTY_PRICE.setText(String.valueOf(square.price()));
-    if (square.isMorged()) {
-      PROPERTY_OWNER.setText(square.getOwner().name());
+    PROPERTY_POPUP_GROUP.getStyleClass().add(guiSquare.getGroup().getCssClass());
+    PROPERTY_NAME.setText(info.getName());
+    RENT_BASIC.setText(String.valueOf(info.getRent()));
+    PROPERTY_PRICE.setText(String.valueOf(info.price()));
+    if (info.isMorged()) {
+      PROPERTY_OWNER.setText(info.getOwner().name());
     } else {
       PROPERTY_OWNER.setText("For sale");
     }
-    square
-        .rentsPerHouse()
+    info.rentsPerHouse()
         .ifPresentOrElse(
             (rents) -> {
               RENT_1H.setText(String.valueOf(rents.get(1)));

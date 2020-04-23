@@ -299,11 +299,11 @@
                   </StackPane>
                   <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" StackPane.alignment="CENTER">
+                        <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" StackPane.alignment="CENTER">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="99.0" prefWidth="80.0">
+                              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="99.0" prefWidth="80.0">
                                  <children>
-                                    <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="90.0" fitWidth="90.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                    <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="80.0" fitWidth="90.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                                        <image>
                                           <Image url="@board/freeParking.png" />
                                        </image>
@@ -321,7 +321,7 @@
                   </StackPane>
                   <HBox id="street" fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
