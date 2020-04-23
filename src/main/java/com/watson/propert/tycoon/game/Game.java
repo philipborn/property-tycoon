@@ -59,6 +59,15 @@ public class Game implements PropertTycoon {
   }
 
   @Override
+  public Optional<PlayerInfo> playerInfo(Player.Id id) {
+    return master.getPlayers()
+            .stream()
+            .filter((player1 -> player1.getId() == id))
+            .findAny()
+            .map(PlayerInfo::new);
+  }
+
+  @Override
   public int startCash() {
     return START_CASH;
   }
