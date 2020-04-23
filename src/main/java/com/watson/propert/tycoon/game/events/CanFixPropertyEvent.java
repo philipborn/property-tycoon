@@ -9,5 +9,4 @@ public final class CanFixPropertyEvent {
   public CanFixPropertyEvent(Player.Id player) {
     this.player = player;
   }
-
 }

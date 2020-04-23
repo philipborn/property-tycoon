@@ -1,23 +1,20 @@
 package com.watson.propert.tycoon.game.entitys;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.Movement;
-import com.watson.propert.tycoon.game.bord.Property;
+import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.events.PlayerMovedEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
+import com.watson.propert.tycoon.game.rules.TotalValue;
 import com.watson.propert.tycoon.gui.App;
 
-public class Player
-    implements com.watson.propert.tycoon.game.bord.Owner, Prisonable, Comparable<Player> {
+public class Player implements Owner, Prisonable, Comparable<Player> {
 
   private static final Logger logger = LoggerFactory.getLogger(App.class);
 
@@ -104,13 +101,7 @@ public class Player
   }
 
   public int totalValue() {
-    return account.cash()
-        + Streams.stream(location.iterator())
-            .filter(Property.class::isInstance)
-            .map(Property.class::cast)
-            .filter((prop) -> prop.owner().equals(Optional.of(this)))
-            .mapToInt(Property::totalValue)
-            .sum();
+    return TotalValue.calculateFor(this);
   }
 
   public Id getId() {

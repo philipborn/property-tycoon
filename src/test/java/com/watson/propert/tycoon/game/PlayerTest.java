@@ -13,6 +13,7 @@ import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.entitys.BankAccount;
 import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.CashEvent;
+import com.watson.propert.tycoon.game.rules.BuyProperty;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 public class PlayerTest {
@@ -82,6 +83,19 @@ public class PlayerTest {
 
     CashEvent event = spy.event;
     assert (event.getNewCash() > event.getOldCash());
+  }
+
+  @Test
+  void total_value_depend_on_cash_and_property() {
+    BuyProperty buy = new BuyProperty(player);
+
+    int totalValue = player.totalValue();
+
+    assertEquals(player.cash(), totalValue);
+    first.forward(1).visitBy(buy);
+    assertNotEquals(player.cash(), player.totalValue());
+    assertEquals(totalValue, player.totalValue());
+    assert (player.totalValue() > player.cash());
   }
 
   class Listener {

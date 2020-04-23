@@ -135,7 +135,7 @@ public class Game implements PropertTycoon {
           switchTo(new NewTurn());
         }
       } catch (NoCashException e) {
-        if (player.totalValue() > e.amount()) {
+        if (player.totalValue() < e.amount()) {
           removeFromGame(player);
           switchTo(new NewTurn());
         } else {
