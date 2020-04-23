@@ -2,6 +2,8 @@ package com.watson.propert.tycoon.game.entitys;
 
 import java.util.*;
 
+import com.google.common.collect.ImmutableList;
+
 public class GameMaster {
 
   private List<Player> players;
@@ -13,10 +15,11 @@ public class GameMaster {
   }
 
   public Player newTurn() {
+    Player currentPlayer = round.pop();
     if (round.isEmpty()) {
       round.addAll(players);
     }
-    return round.pop();
+    return currentPlayer;
   }
 
   public void removePlayer(Player player) {
@@ -31,6 +34,10 @@ public class GameMaster {
 
   public int numActivePlayers() {
     return players.size();
+  }
+
+  public ImmutableList<Player> getPlayers() {
+    return ImmutableList.copyOf(players);
   }
 
   public List<Player> theRanking() {
