@@ -1,11 +1,11 @@
 package com.watson.propert.tycoon.game;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.entitys.Player;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class PlayerInfo {
 
@@ -54,7 +54,7 @@ public class PlayerInfo {
     Set<Integer> getProperties() {
       props = new HashSet<>();
       player.postion().forEach(this::checkSquare);
-      return  props;
+      return props;
     }
 
     private void checkSquare(Square square) {
@@ -62,26 +62,28 @@ public class PlayerInfo {
       square.visitBy(this);
     }
 
-
     @Override
     public void areAt(Street street) {
-      street.owner()
-              .filter((owner -> owner.equals(player)))
-              .ifPresent((owner -> props.add(square.getNumber())));
+      street
+          .owner()
+          .filter((owner -> owner.equals(player)))
+          .ifPresent((owner -> props.add(square.getNumber())));
     }
 
     @Override
     public void areAt(Station station) {
-      station.owner()
-              .filter((owner -> owner.equals(player)))
-              .ifPresent((owner -> props.add(square.getNumber())));
+      station
+          .owner()
+          .filter((owner -> owner.equals(player)))
+          .ifPresent((owner -> props.add(square.getNumber())));
     }
 
     @Override
     public void areAt(Utilities utilities) {
-      utilities.owner()
-              .filter((owner -> owner.equals(player)))
-              .ifPresent((owner -> props.add(square.getNumber())));
+      utilities
+          .owner()
+          .filter((owner -> owner.equals(player)))
+          .ifPresent((owner -> props.add(square.getNumber())));
     }
   }
 }

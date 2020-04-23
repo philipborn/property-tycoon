@@ -61,6 +61,7 @@ import com.watson.propert.tycoon.game.*;
 import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.gui.*;
+import com.watson.propert.tycoon.gui.PlayerInfo;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
 /**

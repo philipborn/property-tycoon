@@ -1,8 +1,8 @@
 package com.watson.propert.tycoon.game;
 
-import com.watson.propert.tycoon.game.entitys.Player;
-
 import java.util.Optional;
+
+import com.watson.propert.tycoon.game.entitys.Player;
 
 /** The interface for GUI to take action for the players */
 public interface PropertTycoon {
@@ -20,6 +20,7 @@ public interface PropertTycoon {
 
   /**
    * PlayerInfo as cash, totalValue, properties owned by the player.
+   *
    * @param id Id of the player want info from
    * @return Immutable container player stats if player is still playing, else empty
    */

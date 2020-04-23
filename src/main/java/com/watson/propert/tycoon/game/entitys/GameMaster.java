@@ -1,25 +1,24 @@
 package com.watson.propert.tycoon.game.entitys;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.*;
+
+import com.google.common.collect.ImmutableList;
 
 public class GameMaster {
 
   private List<Player> players;
-  private Player currentPlayer;
   private ArrayDeque<Player> round;
   private ArrayDeque<Player> deads;
 
   public Player currentPlayer() {
-    return currentPlayer;
+    return round.peekFirst();
   }
 
   public Player newTurn() {
+    Player currentPlayer = round.pop();
     if (round.isEmpty()) {
       round.addAll(players);
     }
-    currentPlayer = round.pop();
     return currentPlayer;
   }
 
