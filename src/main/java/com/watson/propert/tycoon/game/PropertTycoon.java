@@ -9,6 +9,9 @@ public interface PropertTycoon {
 
   void startGame(GameSetting settings);
 
+  /** Call to stop and clean up the game; */
+  void endGame();
+
   /** Sen player Actions to the game */
   void send(PlayerAction playerAction);
 

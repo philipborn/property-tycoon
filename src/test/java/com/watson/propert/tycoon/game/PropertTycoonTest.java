@@ -72,7 +72,6 @@ public class PropertTycoonTest {
     assertDoesNotThrow(() -> game.propertyInfo(2).orElseThrow());
   }
 
-
   class TestListener {
     public List<Object> msgs = new ArrayList<>();
 

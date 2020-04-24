@@ -23,11 +23,11 @@
  */
 package com.watson.propert.tycoon.game.bord;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 import java.util.function.BiConsumer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
@@ -101,13 +101,13 @@ public class BoardSource implements BordBuilder.Source {
   }
 
   private static void buildSquare(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make square: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make square: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     builder.addSquare(name);
   }
 
   private static void buildStreet(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make street: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make street: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     Street.Colour color = extractColor(prop.get("group"));
@@ -134,39 +134,39 @@ public class BoardSource implements BordBuilder.Source {
   }
 
   private static void buildStation(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make station: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make station: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addStation(name, value);
   }
 
   private static void buildUtility(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make utility: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make utility: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addUtility(name, value);
   }
 
   private static void buildGo(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make Go: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make Go: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "Go");
     builder.addGo(name);
   }
 
   private static void buildJail(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make jail: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make jail: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "Jail");
     builder.addJail(name);
   }
 
   private static void buildFreePark(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make freePark: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make freePark: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "FreePark");
     builder.addFreePark(name);
   }
 
   private static void buildDeck(BordBuilder builder, Map<String, String> prop) {
-    logger.debug("Make card: " + prop.get("position") + " : " + prop.get("name") );
+    logger.debug("Make card: " + prop.get("position") + " : " + prop.get("name"));
     String squareName = prop.getOrDefault("name", "Unknown Card");
     builder.addDeck(squareName);
   }

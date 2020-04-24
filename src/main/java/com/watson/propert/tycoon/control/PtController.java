@@ -358,6 +358,7 @@ public class PtController {
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
       // Exit game
+      game.endGame();
       Platform.exit();
     }
   }
@@ -602,14 +603,22 @@ public class PtController {
         t[i].getToken().setVisible(true);
       }
 
+      GameSetting setting = new GameSetting();
+
       // Set new players
       gameBoard.setPlayers(players);
+      for (int i = 1; i <= players.length; i++) {
+        setting.set(Player.Id.fromInt(i));
+      }
 
       // If a timed game, show and set timer, otherwise hide
       if (newGame.isTimedGame()) {
-        setTimer(newGame.getGameTime() * 3600);
+        int timeLimitInSeconds = newGame.getGameTime() * 3600;
+        setTimer(timeLimitInSeconds);
+        setting.setSecondsToEnd(timeLimitInSeconds);
         TIMER.setVisible(true);
         gameBoard.setTimedGame(true);
+
       } else {
         TIMER.setVisible(false);
         gameBoard.setTimedGame(false);
@@ -619,11 +628,9 @@ public class PtController {
       if (event != null) {
         gameBoard.reset();
       }
-      GameSetting setting = new GameSetting();
-      for (int i = 1; i <= players.length; i++) {
-        setting.set(Player.Id.fromInt(i));
-      }
-      game = Game.newGame();
+
+      // Start the game
+      game.endGame();
       game.startGame(setting);
       game.registerListener(this);
     }
@@ -775,6 +782,11 @@ public class PtController {
   private void displayMessage() {
     MESSAGE_AREA.setText(message);
     System.out.println(message);
+  }
+
+  @Subscribe
+  void timeUpdate(TimeTicEvent event) {
+    Platform.runLater(() -> setTimer(event.secondsLeft));
   }
 
   @Subscribe

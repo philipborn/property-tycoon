@@ -8,16 +8,16 @@ import com.watson.propert.tycoon.game.entitys.Player;
 
 public class GameSetting {
 
-  private GameVersion version = GameVersion.FULL;
+  private int secondsToEnd = 0;
   private EnumSet<Player.Id> players = EnumSet.noneOf(Player.Id.class);
   private EnumMap<Player.Id, String> ai = new EnumMap<>(Player.Id.class);
 
-  public void setGameVersion(GameVersion version) {
-    this.version = version;
+  public void setSecondsToEnd(int secondsToEnd) {
+    this.secondsToEnd = secondsToEnd;
   }
 
-  public GameVersion getGameVersion() {
-    return version;
+  public int getSecondsToEnd() {
+    return secondsToEnd;
   }
 
   public void set(Player.Id id) {
