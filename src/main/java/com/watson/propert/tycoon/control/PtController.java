@@ -407,7 +407,7 @@ public class PtController {
 
     Stage playerInDebtWindow = new Stage();
     GuiProperty gprop =
-        new GuiProperty(gameBoard.getSquares()[18], game.propertInfo(18).get().rentsPerHouse());
+        new GuiProperty(gameBoard.getSquares()[18], game.propertyInfo(18).get().rentsPerHouse());
     player.addProperty(gprop);
     upgrade_property_test(gprop);
     controller.setData(player, 60, playerInDebtWindow);
@@ -656,7 +656,7 @@ public class PtController {
 
     int squareNumber = gameBoard.getIndexOf(square);
 
-    game.propertInfo(squareNumber)
+    game.propertyInfo(squareNumber)
         .ifPresentOrElse(
             (rents) -> {
               System.out.println(
@@ -751,11 +751,11 @@ public class PtController {
     }
 
     // if there is property info for square (ie. if square is a property square)
-    if (game.propertInfo(squareNumber - 1).isPresent()) {
+    if (game.propertyInfo(squareNumber + 1).isPresent()) {
 
       // load data to controller
       controller.setData(
-          game.propertInfo(squareNumber - 1).get(), gameBoard.getSquare(squareNumber));
+          game.propertyInfo(squareNumber + 1).get(), gameBoard.getSquare(squareNumber));
 
       // Create & show scene
       Scene scene = new Scene(root);

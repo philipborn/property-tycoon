@@ -13,10 +13,10 @@ public interface PropertTycoon {
   void send(PlayerAction playerAction);
 
   /**
-   * @param squareNum) The number of the square
-   * @return Datastructer with all information of a Property
+   * @param squareNum) The number of the square, first square as number 1
+   * @return Datastructer with all information of a Property, empty if not a property
    */
-  Optional<PropertyInfo> propertInfo(int squareNum);
+  Optional<PropertyInfo> propertyInfo(int squareNum);
 
   /**
    * PlayerInfo as cash, totalValue, properties owned by the player.

@@ -54,7 +54,7 @@ public class Game implements PropertTycoon {
   }
 
   @Override
-  public Optional<PropertyInfo> propertInfo(int squareNum) {
+  public Optional<PropertyInfo> propertyInfo(int squareNum) {
     return PropertyInfo.getInfo(board.forward(squareNum - 1));
   }
 
