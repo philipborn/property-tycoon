@@ -37,6 +37,7 @@ import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.bord.Board;
 import com.watson.propert.tycoon.game.bord.BoardSource;
 import com.watson.propert.tycoon.game.bord.BordBuilder;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
 import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
 import com.watson.propert.tycoon.game.events.DiceEvent;
@@ -56,7 +57,10 @@ public class PropertTycoonTest {
     Board board = BordBuilder.with(channel).addFrom(source).getBoard();
 
     game = new Game(board, channel);
-    game.startGame(new GameSetting());
+    GameSetting setting = new GameSetting();
+    setting.set(Player.Id.ONE);
+    setting.set(Player.Id.TWO);
+    game.startGame(setting);
 
     spy = new TestListener();
     channel.register(spy);
@@ -64,8 +68,8 @@ public class PropertTycoonTest {
 
   @Test
   void PropertyInfoReturnsInfoOnlyForProperty() {
-    assertThrows(NoSuchElementException.class, () -> game.propertInfo(1).orElseThrow());
-    assertDoesNotThrow(() -> game.propertInfo(2).orElseThrow());
+    assertThrows(NoSuchElementException.class, () -> game.propertyInfo(1).orElseThrow());
+    assertDoesNotThrow(() -> game.propertyInfo(2).orElseThrow());
   }
 
   class TestListener {

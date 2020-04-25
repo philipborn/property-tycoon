@@ -41,7 +41,7 @@
   {
     "Position": 5,
     "Name": "Income Tax",
-    "Group": "",
+    "Group": "Action",
     "Action": "Pay Â£200",
     "canBeBought": "No",
     "Cost": "",
@@ -223,7 +223,7 @@
   {
     "Position": 18,
     "Name": "Pot Luck",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
     "canBeBought": "No",
     "Cost": "",
@@ -517,7 +517,7 @@
   {
     "Position": 39,
     "Name": "Super Tax",
-    "Group": "",
+    "Group": "Action",
     "Action": "Pay Â£100",
     "canBeBought": "No",
     "Cost": "",

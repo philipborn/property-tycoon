@@ -27,6 +27,7 @@ public class Game implements PropertTycoon {
   private Player player;
   private Deque<NoCashException> debs = new ArrayDeque<>();
   private FreePark freePark;
+  private Timer endTimer;
 
   public Game(Board board, EventBus channel) {
     master = new GameMaster();
@@ -43,6 +44,7 @@ public class Game implements PropertTycoon {
     state.handle(playerAction);
   }
 
+  @Override
   public void startGame(GameSetting settings) {
     List<Player> players = new ArrayList<>();
     settings
@@ -50,11 +52,24 @@ public class Game implements PropertTycoon {
         .forEach((id) -> players.add(new Player(id, new BankAccount(START_CASH), board, channel)));
     master.newGame(players);
     player = master.currentPlayer();
+    if (settings.getSecondsToEnd() > 0) {
+      endTimer = new Timer("EndTimer");
+      int SECOND_IN_MILISEC = 1000;
+      endTimer.scheduleAtFixedRate(
+          new TimeLeftTask(channel, settings.getSecondsToEnd()), 2000, SECOND_IN_MILISEC);
+    }
     switchTo(new NewTurn());
   }
 
   @Override
-  public Optional<PropertyInfo> propertInfo(int squareNum) {
+  public void endGame() {
+    if (endTimer != null) {
+      endTimer.cancel();
+    }
+  }
+
+  @Override
+  public Optional<PropertyInfo> propertyInfo(int squareNum) {
     return PropertyInfo.getInfo(board.forward(squareNum - 1));
   }
 
@@ -302,6 +317,9 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
+      if (endTimer != null) {
+        endTimer.cancel();
+      }
       channel.post(
           new GameOverEvent(
               master

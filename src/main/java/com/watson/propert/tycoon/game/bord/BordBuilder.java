@@ -2,16 +2,19 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.entitys.BankAccount;
 
 public class BordBuilder {
 
-  private int seqNumber = 1;
-
   public interface Source {
     void extractTo(BordBuilder builder);
   }
+
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   private EventBus channel;
   private Board board = new Board();
@@ -24,6 +27,8 @@ public class BordBuilder {
   private SquareNode last;
   private Map<String, String> prop;
   private Boolean doneLastLink = false;
+
+  private int seqNumber = 1;
 
   private BordBuilder(EventBus channel) {
     this.channel = channel;
@@ -45,6 +50,7 @@ public class BordBuilder {
 
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
     checkIfCanAddSquare();
+    logger.debug("Make street: " + seqNumber + ": " + name);
     streetGroups.computeIfAbsent(color, (key) -> new StreetGroup(color));
     SquareTyp typ = new Street(value, streetGroups.get(color), rents);
     SquareNode node = new SquareNode(seqNumber++, name, typ);
@@ -54,6 +60,7 @@ public class BordBuilder {
 
   public BordBuilder addStation(String name, int value) {
     checkIfCanAddSquare();
+    logger.debug("Make station: " + seqNumber + ": " + name);
     SquareTyp typ = new Station(value, stationGroup);
     SquareNode node = new SquareNode(seqNumber++, name, typ);
     addToLink(node);
@@ -62,6 +69,7 @@ public class BordBuilder {
 
   public BordBuilder addUtility(String name, int value) {
     checkIfCanAddSquare();
+    logger.debug("Make Utility: " + seqNumber + ": " + name);
     SquareTyp typ = new Utilities(value, utilitiesGroup);
     SquareNode node = new SquareNode(seqNumber++, name, typ);
     addToLink(node);
@@ -73,6 +81,7 @@ public class BordBuilder {
 
   public BordBuilder addJail(String name) {
     checkIfCanAddSquare();
+    logger.debug("Make Jail: " + seqNumber + ": " + name);
     Jail jail = new Jail();
     SquareNode node = new SquareNode(seqNumber++, name, jail);
     addToLink(node);
@@ -82,6 +91,7 @@ public class BordBuilder {
 
   public BordBuilder addFreePark(String name) {
     checkIfCanAddSquare();
+    logger.debug("Make FreePark: " + seqNumber + ": " + name);
     FreePark freePark = new FreePark(channel, new BankAccount());
     SquareNode node = new SquareNode(seqNumber++, name, freePark);
     addToLink(node);
@@ -91,6 +101,7 @@ public class BordBuilder {
 
   public BordBuilder addGo(String name) {
     checkIfCanAddSquare();
+    logger.debug("Make Go: " + seqNumber + ": " + name);
     Go go = new Go();
     SquareNode node = new SquareNode(seqNumber++, name, go);
     addToLink(node);
@@ -101,6 +112,7 @@ public class BordBuilder {
 
   public BordBuilder addDeck(String squareName) {
     checkIfCanAddSquare();
+    logger.debug("Make Deck: " + seqNumber + ": " + squareName);
     decks.computeIfAbsent(squareName, Deck::new);
     board.addDeck(decks.get(squareName));
     SquareNode node = new SquareNode(seqNumber++, squareName, decks.get(squareName));
@@ -110,6 +122,7 @@ public class BordBuilder {
 
   public BordBuilder addSquare(String name) {
     checkIfCanAddSquare();
+    logger.debug("Make Square: " + seqNumber + ": " + name);
     addToLink(new ActionSquare(seqNumber++, name));
     return this;
   }
