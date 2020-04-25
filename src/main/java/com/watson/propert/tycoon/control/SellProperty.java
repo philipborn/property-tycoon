@@ -13,11 +13,21 @@ public class SellProperty {
   private GuiProperty property;
   private boolean sellingSquare;
   private int housesToRemove;
+  private boolean mortgageProperty;
 
   public SellProperty(GuiProperty property) {
     this.property = property;
     housesToRemove = 0;
     sellingSquare = false;
+    mortgageProperty = false;
+  }
+
+  public boolean isMortgaged() {
+    return mortgageProperty;
+  }
+
+  public void setMortgageProperty(boolean mortgageProperty) {
+    this.mortgageProperty = mortgageProperty;
   }
 
   public boolean sellingSquare() {

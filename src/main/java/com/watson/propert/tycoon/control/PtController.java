@@ -395,6 +395,65 @@ public class PtController {
   }
 
   @FXML
+  void raiseFundsTest(ActionEvent event) throws IOException {
+    GuiPlayer player = gameBoard.getPlayers()[0];
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptRaiseFundsPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    ptRaiseFundsPopupCtrl controller = loader.getController();
+
+    Stage raiseFundsWindow = new Stage();
+    GuiProperty gprop =
+        new GuiProperty(gameBoard.getSquares()[18], game.propertInfo(18).get().rentsPerHouse());
+    player.addProperty(gprop);
+    upgrade_property_test(gprop);
+    controller.setData(player, raiseFundsWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    raiseFundsWindow.setScene(scene);
+    raiseFundsWindow.show();
+
+    // remove properties from portfolio
+    raiseFundsWindow.setOnCloseRequest(
+        (WindowEvent windowEvent) -> {
+          List<SellProperty> properties = controller.getPropertiesToSell();
+
+          for (SellProperty sellProperty : properties) {
+            // if property is mortgaged, mortgage it
+            if (sellProperty.isMortgaged()) {
+
+              // board mortgage display
+              game.send(
+                  new PlayerAction.Mortgaged(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+
+            } else {
+              // remove houses & post player action
+              for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+                sellProperty.getProperty().getSquare().removeHouse();
+                game.send(
+                    new PlayerAction.SellHouse(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+              // if selling the whole square
+              if (sellProperty.sellingSquare()) {
+                // remove property from portfolio & post player action
+                player.getPortfolio().remove(sellProperty.getProperty());
+                game.send(
+                    new PlayerAction.SellProperty(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+            }
+          }
+        });
+  }
+
+  @FXML
   void playerInDebtTest(ActionEvent event) throws IOException {
     GuiPlayer player = gameBoard.getPlayers()[0];
     // find fxml file
@@ -731,7 +790,7 @@ public class PtController {
 
   @Subscribe
   void movePlayer(PlayerMovedEvent event) {
-    move(event.newPost - event.oldPost, gameBoard.getCurrentPlayer());
+    move(((event.newPost - event.oldPost) % 40), gameBoard.getCurrentPlayer(), event.typ);
   }
 
   @FXML
@@ -811,10 +870,14 @@ public class PtController {
     int position = player.getToken().getPosition();
 
     // move to jail square (square 10)
-    move(10 - position, player);
+    if ((10 - position) > 0) {
+      move(10 - position, player, Movement.FORWARD);
+    } else {
+      move(10 - position, player, Movement.BACKWARD);
+    }
   }
 
-  void move(int spaces, GuiPlayer player) {
+  void move(int spaces, GuiPlayer player, Movement direction) {
     GuiToken tok = player.getToken();
     PathTransition pt = new PathTransition();
     Path p =
@@ -824,7 +887,7 @@ public class PtController {
     p.getElements().add(new LineTo(newPos.getX(), newPos.getY()));
 
     for (int i = 0; i < abs(spaces); i++) {
-      if (spaces < 0) {
+      if ((direction == Movement.BACKWARD)) {
         tok.moveBackwards();
       } else tok.moveForwards();
       newPos = gameBoard.getSquare(tok.getPosition()).getCentre();
