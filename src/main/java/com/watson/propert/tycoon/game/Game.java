@@ -47,21 +47,21 @@ public class Game implements PropertTycoon {
   @Override
   public boolean canBuyHouse(int squareNumber) {
     Square square = board.forward(squareNumber - 1);
-    RuleHouse rule = new RuleHouse(player,square,channel);
+    RuleHouse rule = new RuleHouse(player, square, channel);
     return rule.canBuyHouse();
   }
 
   @Override
   public boolean canSellHouse(int squareNumber) {
     Square square = board.forward(squareNumber - 1);
-    RuleHouse rule = new RuleHouse(player,square,channel);
+    RuleHouse rule = new RuleHouse(player, square, channel);
     return rule.canSellHouse();
   }
 
   @Override
   public boolean canSellProperty(int squareNumber) {
     Square square = board.forward(squareNumber - 1);
-    RuleSellProperty rule = new RuleSellProperty(player,square,channel);
+    RuleSellProperty rule = new RuleSellProperty(player, square, channel);
     return rule.canSellProperty();
   }
 
@@ -215,10 +215,8 @@ public class Game implements PropertTycoon {
 
   private void removeMortgage(PlayerAction.RemoveMortgage playerAction) {
     Square square = board.forward(playerAction.squareNum);
-    RemoveMortgageRule rule = new RemoveMortgageRule(player);
-    square.visitBy(rule);
-    rule.lastStatus()
-        .ifPresent((status) -> channel.post(new MortgageChangedEvent(square.getNumber(), status)));
+    RuleMortgage rule = new RuleMortgage(player, square, channel);
+    rule.tryRemoveMortgage();
   }
 
   private class NoOwner implements State {
@@ -386,13 +384,14 @@ public class Game implements PropertTycoon {
   }
 
   private void mortgaged(PlayerAction.Mortgaged msg) {
-    ToMorgade rule = new ToMorgade(player);
-    rule.morgade(board.forward(msg.squareNum));
+    Square square = board.forward(msg.squareNum);
+    RuleMortgage rule = new RuleMortgage(player, square, channel);
+    rule.tryMortgage();
   }
 
   private void buildHouse(PlayerAction.BuildHouse playerAction) {
     Square square = board.forward(playerAction.squareNum);
-    RuleHouse rule = new RuleHouse(player,square,channel);
+    RuleHouse rule = new RuleHouse(player, square, channel);
     if (rule.canBuyHouse()) {
       rule.buildHouse();
     }
@@ -400,7 +399,7 @@ public class Game implements PropertTycoon {
 
   private void sellHouse(PlayerAction.SellHouse msg) {
     Square street = board.forward(msg.squareNum);
-    RuleHouse rule = new RuleHouse(player, street ,channel);
+    RuleHouse rule = new RuleHouse(player, street, channel);
     rule.sellHouse();
   }
 

@@ -91,7 +91,6 @@ public class Street extends Property {
     return super.totalValue() + houseLevel * group.getHousePrice();
   }
 
-
   @Override
   public void visitBy(SquareVisitor visitor) {
     visitor.areAt(this);

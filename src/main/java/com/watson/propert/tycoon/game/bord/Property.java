@@ -52,12 +52,16 @@ public abstract class Property implements SquareTyp {
   }
 
   public int mortgage() {
+    int pay = price() / 2;
+    Bank.instance().payTo(owner, pay);
     mortgaged = true;
-    return price() / 2;
+    return pay;
   }
 
-  public void RemoveMortgage() {
-    owner.payTo(Bank.instance(), price() / 2);
+  public int RemoveMortgage() {
+    int received = price() / 2;
+    owner.payTo(Bank.instance(), received);
     mortgaged = false;
+    return received;
   }
 }

@@ -7,7 +7,6 @@ import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.bord.Street;
-import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.HouseChangeEvent;
 
 public class RuleHouse implements SquareVisitor {
@@ -17,10 +16,10 @@ public class RuleHouse implements SquareVisitor {
   private EventBus channel;
   private Optional<Street> street = Optional.empty();
 
-  public RuleHouse(Owner player, Square square , EventBus channel) {
+  public RuleHouse(Owner player, Square square, EventBus channel) {
     this.player = player;
     this.channel = channel;
-    this.square  = square;
+    this.square = square;
   }
 
   public boolean canBuyHouse() {
@@ -35,7 +34,8 @@ public class RuleHouse implements SquareVisitor {
       square.visitBy(this);
     }
     street.ifPresent((this::buildHouse));
-    street.ifPresent((street1 -> channel.post(new HouseChangeEvent(square.getNumber(),street1.getNumHouse()))));
+    street.ifPresent(
+        (street1 -> channel.post(new HouseChangeEvent(square.getNumber(), street1.getNumHouse()))));
   }
 
   private void buildHouse(Street theStreet) {
@@ -44,7 +44,7 @@ public class RuleHouse implements SquareVisitor {
           .owner()
           .filter((owner -> owner.equals(player)))
           .ifPresent((owner) -> theStreet.buyHouses());
-      channel.post(new HouseChangeEvent(square.getNumber(),theStreet.getNumHouse()));
+      channel.post(new HouseChangeEvent(square.getNumber(), theStreet.getNumHouse()));
     }
   }
 
@@ -65,10 +65,10 @@ public class RuleHouse implements SquareVisitor {
   private void sellHouse(Street theStreet) {
     if (theStreet.canBuildHouse()) {
       theStreet
-              .owner()
-              .filter((owner -> owner.equals(player)))
-              .ifPresent((owner) -> theStreet.buyHouses());
-      channel.post(new HouseChangeEvent(square.getNumber(),theStreet.getNumHouse()));
+          .owner()
+          .filter((owner -> owner.equals(player)))
+          .ifPresent((owner) -> theStreet.buyHouses());
+      channel.post(new HouseChangeEvent(square.getNumber(), theStreet.getNumHouse()));
     }
   }
 

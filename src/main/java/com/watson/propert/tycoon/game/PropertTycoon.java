@@ -13,7 +13,8 @@ public interface PropertTycoon {
   void send(PlayerAction playerAction);
 
   /**
-   *  Check if current player can build house at street
+   * Check if current player can build house at street
+   *
    * @param squareNumber The number of square to check
    * @return True if can build a house, else false
    */
@@ -21,6 +22,7 @@ public interface PropertTycoon {
 
   /**
    * Check if current player can sell a house at a street
+   *
    * @param squareNumber The number of square to check
    * @return True if can sell a house, else false
    */
@@ -28,6 +30,7 @@ public interface PropertTycoon {
 
   /**
    * Check if current player can sell a property
+   *
    * @param squareNumber The number of square to check
    * @return True if property can be sold else false
    */
