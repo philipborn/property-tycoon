@@ -797,7 +797,19 @@ public class PtController {
 
   @Subscribe
   void movePlayer(PlayerMovedEvent event) {
-    move(((event.newPost - event.oldPost) % 40), gameBoard.getCurrentPlayer(), event.typ);
+    int numSquares = 40;
+    int steps = 0;
+    switch (event.typ) {
+      case FORWARD:
+        steps = event.newPost - event.oldPost;
+        steps = event.newPost < event.oldPost ? steps + numSquares : steps;
+        break;
+      case BACKWARD:
+        steps = event.oldPost - event.newPost;
+        steps = event.oldPost < event.newPost ? steps + numSquares : steps;
+        break;
+    }
+    move(steps, gameBoard.getCurrentPlayer(), event.typ);
   }
 
   @FXML
