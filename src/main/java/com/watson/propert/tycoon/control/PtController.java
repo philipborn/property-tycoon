@@ -1158,13 +1158,13 @@ public class PtController {
         .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
     // Scale game board based on screen DPI
     rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
-
+    /*
     // TEST HOUSES
     gameBoard.getSquare(3).addHouse();
     gameBoard.getSquare(3).addHouse();
     gameBoard.getSquare(3).addHouse();
     gameBoard.getSquare(3).addHouse();
-
+    */
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
     boardReader.readFile("src/main/resources/boardDataJSON.json");
