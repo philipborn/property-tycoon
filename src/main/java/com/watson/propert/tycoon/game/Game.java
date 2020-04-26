@@ -53,19 +53,15 @@ public class Game implements PropertTycoon {
     master.newGame(players);
     player = master.currentPlayer();
     if (settings.getSecondsToEnd() > 0) {
-      endTimer = new Timer("EndTimer");
+      if (endTimer != null) {
+        endTimer.cancel();
+      }
+      endTimer = new Timer("EndTimer", true);
       int SECOND_IN_MILISEC = 1000;
       endTimer.scheduleAtFixedRate(
           new TimeLeftTask(channel, settings.getSecondsToEnd()), 2000, SECOND_IN_MILISEC);
     }
     switchTo(new NewTurn());
-  }
-
-  @Override
-  public void endGame() {
-    if (endTimer != null) {
-      endTimer.cancel();
-    }
   }
 
   @Override

@@ -358,7 +358,6 @@ public class PtController {
     Optional<ButtonType> result = alert.showAndWait();
     if (result.get() == ButtonType.OK) {
       // Exit game
-      game.endGame();
       Platform.exit();
     }
   }
@@ -689,7 +688,6 @@ public class PtController {
       }
 
       // Start the game
-      game.endGame();
       game.startGame(setting);
       game.registerListener(this);
     }
