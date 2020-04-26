@@ -2,6 +2,7 @@ package com.watson.propert.tycoon.game.rules;
 
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.*;
+import com.watson.propert.tycoon.game.entitys.Player;
 import com.watson.propert.tycoon.game.events.PropertyEvent;
 
 import java.util.Optional;
@@ -43,7 +44,7 @@ public class RuleSellProperty implements SquareVisitor {
   public void sellProperty() {
     if (canSellProperty()) {
       property.ifPresent(Property::sell);
-      channel.post(new PropertyEvent(square.getNumber(),null));
+      channel.post(new PropertyEvent(square.getNumber(), Player.Id.NULL));
     }
   }
 

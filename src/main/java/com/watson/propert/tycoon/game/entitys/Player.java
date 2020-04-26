@@ -24,7 +24,8 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
     THREE,
     FOUR,
     FIVE,
-    SIX;
+    SIX,
+    NULL;
 
     public static Id fromInt(int x) {
       switch (x) {
@@ -41,7 +42,7 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
         case 6:
           return Id.SIX;
         default:
-          return null;
+          return Id.NULL;
       }
     }
   }
