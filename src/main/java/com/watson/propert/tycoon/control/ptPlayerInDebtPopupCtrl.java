@@ -119,7 +119,7 @@ public class ptPlayerInDebtPopupCtrl {
 
   @FXML
   void setDone_button(ActionEvent event) {
-    removeRedundantInfo();
+    //removeRedundantInfo();
     if (Integer.parseInt(debt_label.getText()) <= 0 && isLegalState()) {
       cashBack = Integer.parseInt(debt_label.getText());
       thisWindow.fireEvent(new WindowEvent(thisWindow, WindowEvent.WINDOW_CLOSE_REQUEST));

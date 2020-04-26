@@ -269,18 +269,14 @@ public class PtController {
 
   private String message;
   private boolean upgrade_state;
+  private boolean buy_state;
+  private boolean move_state;
 
   // Audio clips
   private AudioClip throwDiceAudio;
   private AudioClip dropTokenAudio;
   private AudioClip takeCardAudio;
   private AudioClip tingAudio;
-
-  @FXML
-  void clickedNo(ActionEvent event) {}
-
-  @FXML
-  void clickedYes(ActionEvent event) {}
 
   // Show Extended Player Details
   @FXML
@@ -395,8 +391,7 @@ public class PtController {
   }
 
   @FXML
-  void raiseFundsTest(ActionEvent event) throws IOException {
-    GuiPlayer player = gameBoard.getPlayers()[0];
+  void raiseFunds(GuiPlayer player) throws IOException {
     // find fxml file
     URL fxmlUrl = ClassLoader.getSystemResource("ptRaiseFundsPopup.fxml");
     FXMLLoader loader = new FXMLLoader(fxmlUrl);
@@ -406,10 +401,6 @@ public class PtController {
     ptRaiseFundsPopupCtrl controller = loader.getController();
 
     Stage raiseFundsWindow = new Stage();
-    GuiProperty gprop =
-        new GuiProperty(gameBoard.getSquares()[18], game.propertyInfo(18).get().rentsPerHouse());
-    player.addProperty(gprop);
-    upgrade_property_test(gprop);
     controller.setData(player, raiseFundsWindow);
 
     // Create & show scene
@@ -711,12 +702,26 @@ public class PtController {
 
   @FXML
   public void yes(ActionEvent event) {
-    buyProperty(gameBoard.getSquare(gameBoard.getCurrentPlayer().getToken().getPosition()));
+    if (buy_state) {
+      buyProperty(gameBoard.getSquare(gameBoard.getCurrentPlayer().getToken().getPosition()));
+    } else if (upgrade_state) {
+      // done upgrading
+      upgrade_state = false;
+      game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+    }
+  }
+
+  @FXML
+  public void no(ActionEvent event) throws IOException {
+    if (buy_state) {
+
+    } else if (upgrade_state) {
+      raiseFunds(gameBoard.getCurrentPlayer());
+    }
   }
 
   private void buyProperty(GuiSquare square) {
     game.send(PlayerAction.BuyProperty.INSTANCE);
-    game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
 
     int squareNumber = gameBoard.getIndexOf(square);
 
@@ -764,11 +769,16 @@ public class PtController {
 
   @Subscribe
   void upgradePropertyState(CanFixPropertyEvent event) {
-    // change buttons to 'done' (yes) & 'raise funds' (no)
+    buy_state = false;
     upgrade_state = true;
+    BUTTON_YES.setText("Done");
+    BUTTON_NO.setText("Raise Funds");
+    //END_GAME.setText("Done");
+    //NEW_GAME.setText("Raise Funds");
     message =
-        gameBoard.getPlayers()[event.player.ordinal()]
-            + ", you can now upgrade properties you own by clicking on them.";
+        gameBoard.getPlayers()[event.player.ordinal()].getName()
+            + ", you can now upgrade properties you own by clicking on them, or sell/mortgage them to raise funds. Click done when you've finished.";
+    displayMessage();
   }
 
   @FXML
@@ -831,7 +841,7 @@ public class PtController {
 
       // load data to controller
       controller.setData(
-          game.propertyInfo(squareNumber + 1).get(), gameBoard.getSquare(squareNumber));
+          game.propertyInfo(squareNumber + 1).get(), gameBoard.getSquare(squareNumber), gameBoard);
 
       // Create & show scene
       Scene scene = new Scene(root);
@@ -865,7 +875,11 @@ public class PtController {
 
   @Subscribe
   void changeTurn(ChangePlayerEvent event) {
-    upgrade_state = false;
+
+    BUTTON_YES.setText("Yes");
+    BUTTON_NO.setText("No");
+    //END_GAME.setText("Yes");
+    //NEW_GAME.setText("No");
 
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
@@ -875,6 +889,7 @@ public class PtController {
 
     message = gameBoard.getCurrentPlayer().getName() + ", roll dice!";
     displayMessage();
+    move_state = true;
   }
 
   @Subscribe
@@ -923,8 +938,10 @@ public class PtController {
 
   @Subscribe
   void propertyFunctionality(BuyOrNotMsg msg) {
+    move_state = false;
     message = "Would you like to buy " + msg.propName + " for " + msg.price + "?";
     displayMessage();
+    buy_state = true;
   }
 
   // Calculate the centre point of each square relative to game board Pane
@@ -1195,6 +1212,8 @@ public class PtController {
     message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
     displayMessage();
     upgrade_state = false;
+    buy_state = false;
+    move_state = true;
 
     // GAME OVER TEST
     // Create and show a New Game Dialog

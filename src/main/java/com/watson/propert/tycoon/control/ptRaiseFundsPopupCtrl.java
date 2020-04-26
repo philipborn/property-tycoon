@@ -145,7 +145,7 @@ public class ptRaiseFundsPopupCtrl {
 
   @FXML
   void setDone_button(ActionEvent event) {
-    removeRedundantInfo();
+    //removeRedundantInfo();
     if (isLegalState()) {
       cashBack = Integer.parseInt(funds_label.getText());
       thisWindow.fireEvent(new WindowEvent(thisWindow, WindowEvent.WINDOW_CLOSE_REQUEST));

@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import com.watson.propert.tycoon.game.PropertyInfo;
+import com.watson.propert.tycoon.gui.GuiGameBoard;
 import com.watson.propert.tycoon.gui.GuiSquare;
 
 /**
@@ -48,14 +49,16 @@ public class ptPropertyPopupCtrl {
 
   @FXML private Label RENT_4H;
 
-  void setData(PropertyInfo info, GuiSquare guiSquare) {
+  void setData(PropertyInfo info, GuiSquare guiSquare, GuiGameBoard gameBoard) {
     // fill in relevant data
     PROPERTY_POPUP_GROUP.getStyleClass().add(guiSquare.getGroup().getCssClass());
     PROPERTY_NAME.setText(info.getName());
     RENT_BASIC.setText(String.valueOf(info.getRent()));
     PROPERTY_PRICE.setText(String.valueOf(info.price()));
-    if (info.isMorged()) {
-      PROPERTY_OWNER.setText(info.getOwner().name());
+    if (info.getOwner() != null) {
+      PROPERTY_OWNER.setText(gameBoard.getPlayers()[info.getOwner().ordinal()].getName());
+    } else if (info.isMorged()) {
+      PROPERTY_OWNER.setText("Mortgaged");
     } else {
       PROPERTY_OWNER.setText("For sale");
     }
