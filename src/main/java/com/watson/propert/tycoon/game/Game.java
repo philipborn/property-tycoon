@@ -45,6 +45,27 @@ public class Game implements PropertTycoon {
   }
 
   @Override
+  public boolean canBuyHouse(int squareNumber) {
+    Square square = board.forward(squareNumber - 1);
+    RuleHouse rule = new RuleHouse(player,square,channel);
+    return rule.canBuyHouse();
+  }
+
+  @Override
+  public boolean canSellHouse(int squareNumber) {
+    Square square = board.forward(squareNumber - 1);
+    RuleHouse rule = new RuleHouse(player,square,channel);
+    return rule.canSellHouse();
+  }
+
+  @Override
+  public boolean canSellProperty(int squareNumber) {
+    Square square = board.forward(squareNumber - 1);
+    RuleSellProperty rule = new RuleSellProperty(player,square,channel);
+    return rule.canSellProperty();
+  }
+
+  @Override
   public void startGame(GameSetting settings) {
     List<Player> players = new ArrayList<>();
     settings
@@ -370,9 +391,8 @@ public class Game implements PropertTycoon {
   }
 
   private void buildHouse(PlayerAction.BuildHouse playerAction) {
-    BuyHouseRule rule = new BuyHouseRule(player);
     Square square = board.forward(playerAction.squareNum);
-    square.visitBy(rule);
+    RuleHouse rule = new RuleHouse(player,square,channel);
     if (rule.canBuyHouse()) {
       rule.buildHouse();
     }
@@ -380,12 +400,13 @@ public class Game implements PropertTycoon {
 
   private void sellHouse(PlayerAction.SellHouse msg) {
     Square street = board.forward(msg.squareNum);
-    new ToSellHouses(player, channel).sellHouses(street);
+    RuleHouse rule = new RuleHouse(player, street ,channel);
+    rule.sellHouse();
   }
 
   private void sellProperty(PlayerAction.SellProperty msg) {
     Square property = board.forward(msg.squareNum);
-    RuleSellProperty rule = new RuleSellProperty(player);
-    property.visitBy(rule);
+    RuleSellProperty rule = new RuleSellProperty(player, property, channel);
+    rule.sellProperty();
   }
 }

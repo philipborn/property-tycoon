@@ -13,6 +13,27 @@ public interface PropertTycoon {
   void send(PlayerAction playerAction);
 
   /**
+   *  Check if current player can build house at street
+   * @param squareNumber The number of square to check
+   * @return True if can build a house, else false
+   */
+  boolean canBuyHouse(int squareNumber);
+
+  /**
+   * Check if current player can sell a house at a street
+   * @param squareNumber The number of square to check
+   * @return True if can sell a house, else false
+   */
+  boolean canSellHouse(int squareNumber);
+
+  /**
+   * Check if current player can sell a property
+   * @param squareNumber The number of square to check
+   * @return True if property can be sold else false
+   */
+  boolean canSellProperty(int squareNumber);
+
+  /**
    * @param squareNum) The number of the square, first square as number 1
    * @return Datastructer with all information of a Property, empty if not a property
    */
