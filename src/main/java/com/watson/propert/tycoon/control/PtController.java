@@ -408,7 +408,7 @@ public class PtController {
 
     Stage raiseFundsWindow = new Stage();
     GuiProperty gprop =
-        new GuiProperty(gameBoard.getSquares()[18], game.propertInfo(18).get().rentsPerHouse());
+        new GuiProperty(gameBoard.getSquares()[18], game.propertyInfo(18).get().rentsPerHouse());
     player.addProperty(gprop);
     upgrade_property_test(gprop);
     controller.setData(player, raiseFundsWindow);
@@ -855,12 +855,11 @@ public class PtController {
 
   @Subscribe
   void changeTurn(ChangePlayerEvent event) {
-
     upgrade_state = false;
 
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
-    gameBoard.getNextPlayer();
+    gameBoard.setNextPlayer(event.activePlayer.ordinal());
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 

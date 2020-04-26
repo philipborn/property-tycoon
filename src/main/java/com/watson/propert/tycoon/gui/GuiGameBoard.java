@@ -78,8 +78,12 @@ public class GuiGameBoard {
     return this.properties_per_street;
   }
 
-  public GuiPlayer getNextPlayer() {
-    currentPlayer = (currentPlayer + 1) % numberPlayers();
+  public GuiPlayer setNextPlayer(int idNumber) {
+    if (idNumber >= numberPlayers() || idNumber < 0) {
+      throw new IllegalArgumentException(
+          "IdNumber need be positive and smaller then number of player");
+    }
+    currentPlayer = (idNumber);
     return players[currentPlayer];
   }
 
