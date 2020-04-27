@@ -791,10 +791,23 @@ public class PtController {
         squareNumber++;
         square = gameBoard.getSquares()[squareNumber];
       }
-      // if player owns square & it is improvable
-      if (gameBoard.getCurrentPlayer().owns(square) && square.getGroup().getHousePrice() > 0) {
+      // if player owns square, it is improvable & a house can be bought
+      if (gameBoard.getCurrentPlayer().owns(square)
+          && square.getGroup().getHousePrice() > 0
+          && game.canBuyHouse(squareNumber)) {
+        // add house image & send player action
         square.addHouse();
         game.send(new PlayerAction.BuildHouse(squareNumber));
+
+        // otherwise, if the player doesn't own all the properties
+      } else if (gameBoard.getCurrentPlayer().owns(square)
+          && square.getGroup().getHousePrice() > 0) {
+        // display warning window
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Property Upgrade Warning");
+        alert.setHeaderText("Can't Build House");
+        alert.setContentText("Have to own all the properties in a set to build houses!");
+        alert.show();
       }
     }
   }

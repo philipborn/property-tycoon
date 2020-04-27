@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -51,11 +52,11 @@ public class ptRaiseFundsPopupCtrl {
               if (newValue) {
                 // checkbox is ticked
                 record.setSellingSquare(true);
-                addToDebtLabel(Integer.parseInt(property.getPrice()));
+                addToFundLabel(Integer.parseInt(property.getPrice()));
               } else if (oldValue) {
                 // checkbox unticked
                 record.setSellingSquare(false);
-                subtractDebtLabel(Integer.parseInt(property.getPrice()));
+                subtractFundLabel(Integer.parseInt(property.getPrice()));
               }
             });
     VBox propertyPane = (VBox) property.getPane(140);
@@ -76,11 +77,11 @@ public class ptRaiseFundsPopupCtrl {
                 if (newValue) {
                   // checkbox is ticked
                   record.setHousesToRemove(record.getHousesToRemove() + 1);
-                  addToDebtLabel(property.getGroup().getHousePrice());
+                  addToFundLabel(property.getGroup().getHousePrice());
                 } else if (oldValue) {
                   // checkbox unticked
                   record.setHousesToRemove(record.getHousesToRemove() - 1);
-                  subtractDebtLabel(property.getGroup().getHousePrice());
+                  subtractFundLabel(property.getGroup().getHousePrice());
                 }
               });
       ((StackPane) houses.getChildren().get(i)).getChildren().add(sellHouse);
@@ -89,7 +90,6 @@ public class ptRaiseFundsPopupCtrl {
     // mortgage property check box
     CheckBox mortgageProperty = new CheckBox("Mortgage");
     mortgageProperty.allowIndeterminateProperty();
-    ;
     mortgageProperty
         .selectedProperty()
         .addListener(
@@ -97,7 +97,8 @@ public class ptRaiseFundsPopupCtrl {
               if (newValue) {
                 // checkbox is ticked
                 record.setMortgageProperty(true);
-                addToDebtLabel(Integer.parseInt(property.getPrice()) / 2);
+                property.mortgage();
+                addToFundLabel(Integer.parseInt(property.getPrice()) / 2);
                 for (CheckBox cb : boxes) {
                   cb.setSelected(false);
                   cb.setDisable(true);
@@ -105,24 +106,30 @@ public class ptRaiseFundsPopupCtrl {
               } else if (oldValue) {
                 // checkbox unticked
                 record.setMortgageProperty(false);
-                subtractDebtLabel(Integer.parseInt(property.getPrice()) / 2);
+                property.unmortgage();
+                subtractFundLabel(Integer.parseInt(property.getPrice()) / 2);
                 for (CheckBox cb : boxes) {
                   cb.setDisable(false);
                 }
               }
             });
-
+    // account for properties that are already mortgaged
+    if (property.isMortgaged()) {
+      // select mortgaged checkbox & subtract amount added to debt label
+      mortgageProperty.setSelected(true);
+      subtractFundLabel(Integer.parseInt(property.getPrice()) / 2);
+    }
     propertyPane.getChildren().addAll(sellProperty, mortgageProperty);
     propertyPane.setAlignment(Pos.CENTER);
     SCROLLER.getChildren().add(propertyPane);
   }
 
-  private void addToDebtLabel(int amount) {
+  private void addToFundLabel(int amount) {
     int sum = Integer.parseInt(funds_label.getText());
     funds_label.setText(String.valueOf(sum += amount));
   }
 
-  private void subtractDebtLabel(int amount) {
+  private void subtractFundLabel(int amount) {
     int sum = Integer.parseInt(funds_label.getText());
     funds_label.setText(String.valueOf(sum -= amount));
   }
@@ -151,7 +158,12 @@ public class ptRaiseFundsPopupCtrl {
       thisWindow.fireEvent(new WindowEvent(thisWindow, WindowEvent.WINDOW_CLOSE_REQUEST));
       thisWindow.close();
     } else {
-      // do not close window (add dialogues?)
+      // do not close window & display warning window
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("Sell Property Warning");
+      alert.setHeaderText("Can't Sell Property");
+      alert.setContentText("Have to sell every house/hotel on a property to sell the property!");
+      alert.show();
     }
   }
 
