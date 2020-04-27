@@ -1,11 +1,17 @@
 package com.watson.propert.tycoon.game.bord;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.watson.propert.tycoon.game.actions.ActionFactory;
 import com.watson.propert.tycoon.game.actions.ActionTyp;
 
 public class CardMaker {
+
+  private static final Logger logger = LoggerFactory.getLogger(CardMaker.class);
 
   private Map<String, CardFactory> factors = new HashMap<>();
   private ActionFactory actionFactory;
@@ -57,11 +63,16 @@ public class CardMaker {
 
   public static void combine(Collection<Card> cards, Collection<Deck> decks) {
     Map<String, Deck> deckMap = new HashMap<>();
-    decks.forEach((deck) -> deckMap.put(deck.deckName, deck));
+    decks.forEach((deck) -> deckMap.put(deck.getDeckName(), deck));
     cards
         .stream()
         .filter((card) -> deckMap.keySet().contains(card.getDeckName()))
         .forEach((card) -> deckMap.get(card.getDeckName()).put(card));
     decks.forEach(Deck::shuffle);
+    decks
+        .stream()
+        .filter((deck -> deck.isEmpty()))
+        .collect(Collectors.toList())
+        .forEach((deck -> logger.warn(deck.getDeckName() + "has no cards!")));
   }
 }
