@@ -704,25 +704,26 @@ public class PtController {
   public void yes(ActionEvent event) {
     if (buy_state) {
       buyProperty(gameBoard.getSquare(gameBoard.getCurrentPlayer().getToken().getPosition()));
+      game.send(PlayerAction.Yes.INSTANCE);
     } else if (upgrade_state) {
       // done upgrading
       upgrade_state = false;
       game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+    } else {
+      game.send(PlayerAction.Yes.INSTANCE);
     }
   }
 
   @FXML
   public void no(ActionEvent event) throws IOException {
-    if (buy_state) {
-
-    } else if (upgrade_state) {
+    if (upgrade_state) {
       raiseFunds(gameBoard.getCurrentPlayer());
+    } else {
+      game.send(PlayerAction.No.INSTANCE);
     }
   }
 
   private void buyProperty(GuiSquare square) {
-    game.send(PlayerAction.BuyProperty.INSTANCE);
-
     int squareNumber = gameBoard.getIndexOf(square);
 
     game.propertyInfo(squareNumber)

@@ -233,10 +233,10 @@ public class Game implements PropertTycoon {
 
     @Override
     public void handle(PlayerAction playerAction) {
-      if (playerAction instanceof PlayerAction.BuyProperty) {
+      if (playerAction instanceof PlayerAction.Yes) {
         buyProperty();
         nextState();
-      } else if (playerAction instanceof PlayerAction.Auction) {
+      } else if (playerAction instanceof PlayerAction.No) {
         nextState();
       }
     }
