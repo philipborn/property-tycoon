@@ -63,7 +63,7 @@ public class RuleAfterMove implements SquareVisitor {
     Card card = deck.draw();
     logger.debug("Player " + player.getId() + " landed on a card: " + card.getDeckName());
     channel.post(new CardDrawEvent(card.getDeckName(), card.getDescription()));
-    card.run(player);
     deck.put(card);
+    card.run(player);
   }
 }
