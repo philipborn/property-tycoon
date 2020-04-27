@@ -74,7 +74,7 @@ public class GuiPlayer {
   }
 
   public int calculateNetWorth() {
-    int total = 0;
+    int total = Integer.parseInt(info.getMoney().getText());
     for (GuiProperty gp : portfolio) {
       total += gp.getCurrentRent();
     }

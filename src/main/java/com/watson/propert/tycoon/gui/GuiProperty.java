@@ -25,11 +25,25 @@ public class GuiProperty {
   GuiSquare square;
   int boardPosition;
   Optional<ImmutableList<Integer>> rentPrices;
+  boolean mortgaged;
 
   public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> rentPrices) {
     this.square = square;
     this.boardPosition = 0;
     this.rentPrices = rentPrices;
+    mortgaged = false;
+  }
+
+  public void mortgage() {
+    mortgaged = true;
+  }
+
+  public void unmortgage() {
+    mortgaged = false;
+  }
+
+  public boolean isMortgaged() {
+    return mortgaged;
   }
 
   public GuiProperty(GuiSquare square) {

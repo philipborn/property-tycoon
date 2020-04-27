@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -125,7 +126,12 @@ public class ptPlayerInDebtPopupCtrl {
       thisWindow.fireEvent(new WindowEvent(thisWindow, WindowEvent.WINDOW_CLOSE_REQUEST));
       thisWindow.close();
     } else {
-      // do not close window (add dialogues?)
+      // do not close window & display warning window
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("Sell Property Warning");
+      alert.setHeaderText("Can't Sell Property");
+      alert.setContentText("Have to sell every house/hotel on a property to sell the property!");
+      alert.show();
     }
   }
 
