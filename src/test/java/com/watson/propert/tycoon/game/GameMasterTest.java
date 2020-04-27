@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.bord.ActionSquare;
 import com.watson.propert.tycoon.game.bord.Square;
+import com.watson.propert.tycoon.game.bord.SquareNode;
 import com.watson.propert.tycoon.game.entitys.BankAccount;
 import com.watson.propert.tycoon.game.entitys.GameMaster;
 import com.watson.propert.tycoon.game.entitys.Player;
@@ -25,7 +25,7 @@ public class GameMasterTest {
 
   @BeforeEach
   void setup() {
-    square = new ActionSquare(1, "Test");
+    square = new SquareNode(1, "Test");
     channel = new EventBus();
 
     int cash = 10000;

@@ -129,7 +129,7 @@ public class Game implements PropertTycoon {
     br.readFile("src/main/resources/boardDataJSON.json");
     EventBus channel = new EventBus();
     Board board = BordBuilder.with(channel).addFrom(BoardSource.using(br)).getBoard();
-    CardMaker maker = new CardMaker(new ActionFactory(board.getFreePark()));
+    CardMaker maker = new CardMaker(new ActionFactory(board.getFreePark(), channel));
     CardReader cr = new CardReaderJson("src/main/resources/cards.json");
     CardMaker.combine(maker.make(cr), board.getDecks());
     PropertTycoon game = new Game(board, channel);
@@ -168,7 +168,7 @@ public class Game implements PropertTycoon {
       int sum = dicePair.throwDices().stream().mapToInt((a) -> a).sum();
       Square newLocation = player.move(sum);
       try {
-        newLocation.visitBy(new AfterMove(player));
+        newLocation.visitBy(new RuleAfterMove(player, channel));
         if (PropertyCanBought.by(player)) {
           switchTo(new NoOwner());
         } else if (CanFixProperty.forPlayer(player)) {
@@ -209,6 +209,8 @@ public class Game implements PropertTycoon {
         sellProperty((PlayerAction.SellProperty) playerAction);
       } else if (playerAction instanceof PlayerAction.RemoveMortgage) {
         removeMortgage((PlayerAction.RemoveMortgage) playerAction);
+      } else if (playerAction instanceof PlayerAction.Mortgaged) {
+        mortgaged((PlayerAction.Mortgaged) playerAction);
       }
     }
   }

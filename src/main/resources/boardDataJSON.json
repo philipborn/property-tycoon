@@ -43,6 +43,7 @@
     "Name": "Income Tax",
     "Group": "Action",
     "Typ": "player-pay-bank",
+    "Pay": 200,
     "Description": "Pay 200",
     "Action": "Pay £200"
   },
@@ -211,7 +212,7 @@
     "Position": 21,
     "Name": "Free Parking",
     "Group": "freeparking",
-    "Action": "Collect fines",
+    "Action": "Collect fines"
   },
   {
     "Position": 22,
@@ -393,6 +394,7 @@
     "Name": "Super Tax",
     "Group": "Action",
     "Typ": "player-pay-bank",
+    "pay": 100,
     "Description": "Pay 100"
   },
   {

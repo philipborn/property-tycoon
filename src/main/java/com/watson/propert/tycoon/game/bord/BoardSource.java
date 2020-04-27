@@ -55,8 +55,7 @@ public class BoardSource implements BordBuilder.Source {
     JAIL(BoardSource::buildJail),
     FREEPARKING(BoardSource::buildFreePark),
     TAKE_CARD(BoardSource::buildDeck),
-    GO_TO_JAIL(BoardSource::buildSquare),
-    ACTION(BoardSource::buildSquare);
+    ACTION(BoardSource::buildAction);
 
     private final BiConsumer<BordBuilder, Map<String, String>> handler;
 
@@ -169,6 +168,13 @@ public class BoardSource implements BordBuilder.Source {
     logger.debug("Make card: " + prop.get("position") + " : " + prop.get("name"));
     String squareName = prop.getOrDefault("name", "Unknown Card");
     builder.addDeck(squareName);
+  }
+
+  private static void buildAction(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make ActionTrigger: " + prop.get("position") + " : " + prop.get("name"));
+    String squareName = prop.getOrDefault("name", "Unknown Action");
+    Action action = new ActionPlaceHolder(prop);
+    builder.addActionSquare(squareName, action);
   }
 
   public static BoardSource using(BordReader reader) {

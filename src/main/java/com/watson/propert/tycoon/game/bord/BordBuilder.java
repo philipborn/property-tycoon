@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.EventBus;
+import com.watson.propert.tycoon.game.actions.ActionFactory;
 import com.watson.propert.tycoon.game.entitys.BankAccount;
 
 public class BordBuilder {
@@ -25,7 +26,6 @@ public class BordBuilder {
 
   private SquareNode first;
   private SquareNode last;
-  private Map<String, String> prop;
   private Boolean doneLastLink = false;
 
   private int seqNumber = 1;
@@ -37,6 +37,7 @@ public class BordBuilder {
   public Board getBoard() {
     if (doneLastLink == false) {
       linkLastAndFirst();
+      insertAction();
     }
     return board;
   }
@@ -44,8 +45,14 @@ public class BordBuilder {
   public Square getFirstSquare() {
     if (doneLastLink == false) {
       linkLastAndFirst();
+      insertAction();
     }
     return first;
+  }
+
+  private void insertAction() {
+    ActionFactory actions = new ActionFactory(board.getFreePark(), channel);
+    ActionPlaceHolder.replaces(actions, first.iterator());
   }
 
   public BordBuilder addStreet(String name, int value, Street.Colour color, List<Integer> rents) {
@@ -123,13 +130,16 @@ public class BordBuilder {
   public BordBuilder addSquare(String name) {
     checkIfCanAddSquare();
     logger.debug("Make Square: " + seqNumber + ": " + name);
-    addToLink(new ActionSquare(seqNumber++, name));
+    addToLink(new SquareNode(seqNumber++, name));
     return this;
   }
 
   public BordBuilder addActionSquare(String name, Action action) {
     checkIfCanAddSquare();
-    addToLink(new ActionSquare(seqNumber++, name, action));
+    logger.debug("Make Action: " + seqNumber + ": " + name);
+    ActionTrigger typ = new ActionTrigger(action);
+    SquareNode node = new SquareNode(seqNumber++, name, typ);
+    addToLink(node);
     return this;
   }
 

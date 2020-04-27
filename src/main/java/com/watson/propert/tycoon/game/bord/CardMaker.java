@@ -3,6 +3,7 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.*;
 
 import com.watson.propert.tycoon.game.actions.ActionFactory;
+import com.watson.propert.tycoon.game.actions.ActionTyp;
 
 public class CardMaker {
 
@@ -30,24 +31,24 @@ public class CardMaker {
   }
 
   private Card makeCard(CardOrder order, CardFactory factory) {
-    String typ = order.getTyp();
+    ActionTyp typ = ActionTyp.valueOf(order.getTyp().replace('-', '_').toUpperCase());
     String description = order.getDescription();
     switch (typ) {
-      case "player-step-forward":
+      case PLAYER_STEP_FORWARD:
         return factory.playerStepsForward(description, order.getSteps());
-      case "player-step-backward":
+      case PLAYER_STEP_BACKWARD:
         return factory.playerStepsBackwards(description, order.getSteps());
-      case "player-forward-to":
+      case PLAYER_FORWARD_TO:
         return factory.forwardTo(description, order.getPosition());
-      case "player-backward-to":
+      case PLAYER_BACKWARD_TO:
         return factory.BackwardTo(description, order.getPosition());
-      case "player-to-jail":
+      case PLAYER_TO_JAIL:
         return factory.playerToJail(description);
-      case "player-pay-bank":
+      case PLAYER_PAY_BANK:
         return factory.playerPayBank(description, order.getPay());
-      case "player-pay-freepark":
+      case PLAYER_PAY_FREEPARK:
         return factory.playerPayFreePark(description, order.getPay());
-      case "bank-pay-player":
+      case BANK_PAY_PLAYER:
         return factory.bankPayPlayer(description, order.getPay());
       default:
         throw new RuntimeException(String.format("Unknown card type: %s", typ));
