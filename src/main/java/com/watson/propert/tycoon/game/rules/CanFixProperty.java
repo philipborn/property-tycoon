@@ -16,7 +16,7 @@ public class CanFixProperty implements SquareVisitor {
     CanFixProperty rule = new CanFixProperty(player);
     Square bord = player.postion();
     for (Square square : bord) {
-      bord.visitBy(rule);
+      square.visitBy(rule);
       if (rule.hasFoundProperty()) {
         return true;
       }
