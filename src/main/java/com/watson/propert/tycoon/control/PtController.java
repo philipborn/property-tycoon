@@ -361,13 +361,48 @@ public class PtController {
   }
 
   @Subscribe
-  void payOrJail(PayOrJailEvent event) {
-    message =
-        gameBoard.getCurrentPlayer().getName()
-            + ", pay "
-            + event.price
-            + " to the bank or you will go to jail!";
-    displayMessage();
+  void payOrJail(PayOrJailEvent event) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPayOrJailPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    Stage payOrJailWindow = new Stage();
+    // get controller for popup
+    ptPayOrJailPopupCtrl controller = loader.getController();
+    controller.setData(gameBoard.getCurrentPlayer(), event.price, payOrJailWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    payOrJailWindow.setScene(scene);
+    payOrJailWindow.showAndWait();
+
+    // get result
+    boolean playerIsPaying = controller.isPaying();
+    if (playerIsPaying) {
+      System.out.println("paying");
+    } else {
+      System.out.println("jailing");
+    }
+  }
+
+  @Subscribe
+  void drawCard(CardDrawEvent cardDrawEvent) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptCardPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    Card card = Card.getCardByName(cardDrawEvent.deckName);
+
+    // get controller for popup & set data
+    PtCardPopupCtrl controller = loader.getController();
+    controller.setData(cardDrawEvent.description, card);
+
+    // Create & show scene
+    Stage cardWindow = new Stage();
+    cardWindow.setTitle(cardDrawEvent.deckName);
+    Scene scene = new Scene(root);
+    cardWindow.setScene(scene);
+    cardWindow.show();
   }
 
   @Subscribe
