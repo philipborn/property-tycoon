@@ -262,6 +262,8 @@ public class PtController {
 
   @FXML private Label TIMER;
 
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
   private GuiGameBoard gameBoard;
   private Stage playerPopUp;
   private Stage currentPopup;
@@ -831,7 +833,9 @@ public class PtController {
         steps = event.oldPost < event.newPost ? steps + numSquares : steps;
         break;
     }
+    logger.debug("Start movePlayer: from " + event.oldPost + " to " + event.newPost);
     move(steps, gameBoard.getCurrentPlayer(), event.typ);
+    logger.debug("End movePlayer: from " + event.oldPost + " to " + event.newPost);
   }
 
   @FXML
@@ -960,7 +964,6 @@ public class PtController {
 
   // Calculate the centre point of each square relative to game board Pane
   void calculateSquareCentres() {
-    Logger logger = LoggerFactory.getLogger(App.class);
     Direction dir = Direction.DOWN;
     Double tileHeight = SQUARE_1.getPrefHeight();
     Double tileWidth = SQUARE_1.getPrefWidth();

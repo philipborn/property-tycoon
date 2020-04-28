@@ -2,12 +2,17 @@ package com.watson.propert.tycoon.game.rules;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.*;
 import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.events.MortgageChangedEvent;
 
 public class RuleMortgage implements SquareVisitor {
+
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   private Owner currentPlayer;
   private Square square;
@@ -21,14 +26,15 @@ public class RuleMortgage implements SquareVisitor {
   }
 
   public boolean canMortgage() {
-    Boolean notMortgage = Optional.ofNullable(property).map(Property::isMortgage).orElse(false);
-
-    return notMortgage && isOwner();
+    Boolean isMortgage = Optional.ofNullable(property).map(Property::isMortgage).orElse(true);
+    return !isMortgage && isOwner();
   }
 
   public void tryMortgage() {
     if (canMortgage()) {
       property.mortgage();
+      logger.debug(
+          "MortgageChangedEvent: " + square.getNumber() + "isMortgage: " + property.isMortgage());
       channel.post(new MortgageChangedEvent(square.getNumber(), property.isMortgage()));
     }
   }
@@ -56,6 +62,8 @@ public class RuleMortgage implements SquareVisitor {
   public void tryRemoveMortgage() {
     if (canRemoveMortgage()) {
       property.RemoveMortgage();
+      logger.debug(
+          "MortgageChangedEvent: " + square.getNumber() + "isMortgage: " + property.isMortgage());
       channel.post(new MortgageChangedEvent(square.getNumber(), property.isMortgage()));
     }
   }

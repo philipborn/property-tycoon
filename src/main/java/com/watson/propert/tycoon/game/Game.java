@@ -3,6 +3,9 @@ package com.watson.propert.tycoon.game;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.actions.ActionFactory;
 import com.watson.propert.tycoon.game.bord.*;
@@ -16,6 +19,8 @@ import com.watson.propert.tycoon.io.CardReaderJson;
 public class Game implements PropertTycoon {
 
   protected static final int START_CASH = 1500;
+
+  private static final Logger logger = LoggerFactory.getLogger(Game.class);
 
   private GameMaster master;
   private GameEnd gameEnd = new GameEnd() {};
@@ -41,6 +46,7 @@ public class Game implements PropertTycoon {
 
   @Override
   public void send(PlayerAction playerAction) {
+    logger.debug("received: " + playerAction.getClass().getSimpleName());
     state.handle(playerAction);
   }
 
@@ -122,6 +128,7 @@ public class Game implements PropertTycoon {
     this.state.exit();
     nextState.entry();
     this.state = nextState;
+    logger.debug("Game state is: " + nextState.getClass().getSimpleName());
   }
 
   public static PropertTycoon newGame() {
@@ -154,6 +161,7 @@ public class Game implements PropertTycoon {
         jailer.decrementJailTime(player);
         player = master.newTurn();
       }
+      logger.debug("ChangePlayerEvent: " + player.getId());
       channel.post(new ChangePlayerEvent(player.getId()));
     }
 
@@ -194,6 +202,7 @@ public class Game implements PropertTycoon {
 
     @Override
     public void entry() {
+      logger.debug("PropertyFixEvent for player" + player.getId());
       channel.post(new CanFixPropertyEvent(player.getId()));
     }
 
@@ -216,7 +225,7 @@ public class Game implements PropertTycoon {
   }
 
   private void removeMortgage(PlayerAction.RemoveMortgage playerAction) {
-    Square square = board.forward(playerAction.squareNum);
+    Square square = board.forward(playerAction.squareNum - 1);
     RuleMortgage rule = new RuleMortgage(player, square, channel);
     rule.tryRemoveMortgage();
   }
@@ -228,6 +237,7 @@ public class Game implements PropertTycoon {
       PropertyInfo info = PropertyInfo.getInfo(player.postion()).get();
       String propertyName = info.getName();
       int price = info.price();
+      logger.debug("BuyOrNotEvent: " + propertyName + " " + price);
       channel.post(new BuyOrNotMsg(propertyName, price));
     }
 
@@ -259,9 +269,11 @@ public class Game implements PropertTycoon {
       rule = new GoToJail(player, jailer);
       rule.movePlayer();
       if (rule.canPayJail()) {
+        logger.debug("PayOrJailEvent: pay " + rule.getFine());
         channel.post(new PayOrJailEvent(rule.getFine()));
       } else {
         rule.toJail();
+        logger.debug("PlayerToJailEvent Player: " + player.getId());
         channel.post(new PlayerToJailEvent(player.getId()));
         state = new NewTurn();
         state.entry();
@@ -275,6 +287,7 @@ public class Game implements PropertTycoon {
         switchTo(new NewTurn());
       } else if (playerAction instanceof PlayerAction.No) {
         rule.toJail();
+        logger.debug("PlayerToJailEvent Player: " + player.getId());
         channel.post(new PlayerToJailEvent(player.getId()));
         switchTo(new NewTurn());
       }
@@ -324,7 +337,9 @@ public class Game implements PropertTycoon {
       player = (Player) e.needToPay();
       payTo = e.payTo();
       needToFree = e.amount();
+      logger.debug("Change Player to: " + player.getId());
       channel.post(new ChangePlayerEvent(player.getId()));
+      logger.debug("PlayerInDebtEvent Player: " + player.getId() + " debt: " + needToFree);
       channel.post(new PlayerInDebtEvent(player.getId(), needToFree));
     }
   }
@@ -344,6 +359,7 @@ public class Game implements PropertTycoon {
                   .stream()
                   .map((player) -> player.getId())
                   .collect(Collectors.toList())));
+      logger.debug("Game is over end");
     }
 
     @Override
@@ -381,12 +397,12 @@ public class Game implements PropertTycoon {
   private void buyProperty() {
     Square property = player.postion();
     property.visitBy(new BuyProperty(player));
+    logger.debug("Player: " + player.getId() + " buy property " + property.getNumber());
     channel.post(new PropertyEvent(property.getNumber(), player.getId()));
-    switchTo(new FixProperty());
   }
 
   private void mortgaged(PlayerAction.Mortgaged msg) {
-    Square square = board.forward(msg.squareNum);
+    Square square = board.forward(msg.squareNum - 1);
     RuleMortgage rule = new RuleMortgage(player, square, channel);
     rule.tryMortgage();
   }

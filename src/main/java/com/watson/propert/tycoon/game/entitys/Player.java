@@ -12,11 +12,10 @@ import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.events.PlayerMovedEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
 import com.watson.propert.tycoon.game.rules.TotalValue;
-import com.watson.propert.tycoon.gui.App;
 
 public class Player implements Owner, Prisonable, Comparable<Player> {
 
-  private static final Logger logger = LoggerFactory.getLogger(App.class);
+  private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
   public enum Id {
     ONE,
@@ -73,8 +72,8 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
     int newPosition = location.getNumber();
     if (newPosition != oldPosition) {
       Movement typ = steps > 0 ? Movement.FORWARD : Movement.BACKWARD;
-      channel.post(new PlayerMovedEvent(newPosition, oldPosition, typ));
       logMove(newPosition, oldPosition);
+      channel.post(new PlayerMovedEvent(newPosition, oldPosition, typ));
     }
     return location;
   }
@@ -82,8 +81,8 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
   public void moveTo(Square newPosition) {
     int oldPost = location.getNumber();
     location = newPosition;
-    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost, Movement.FORWARD));
     logMove(location.getNumber(), oldPost);
+    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost, Movement.FORWARD));
   }
 
   private void logMove(int newPosition, int oldPosition) {
@@ -120,6 +119,7 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
     account.receiveCash(amount);
     int cash = account.cash();
     if (cash != oldCash) {
+      logger.debug("CashEvent: " + id + " old:" + oldCash + " new:" + cash);
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
@@ -130,6 +130,7 @@ public class Player implements Owner, Prisonable, Comparable<Player> {
     account.payTo(cashUser, amount);
     int cash = account.cash();
     if (cash != oldCash) {
+      logger.debug("CashEvent: " + id + " old:" + oldCash + " new:" + cash);
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
