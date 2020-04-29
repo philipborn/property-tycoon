@@ -1208,8 +1208,12 @@ public class PtController {
         .getInfo()
         .getInfo()
         .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
+
+    logger.debug("Screen height: " + Screen.getPrimary().getBounds().getHeight());
+    logger.debug("Screen scaling: "+ Screen.getPrimary().getOutputScaleX());
     // Scale game board based on screen DPI
-    rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
+    //rescaleGameBoard((Screen.getPrimary().getBounds().getHeight() / 720) * 1 / Screen.getPrimary().getOutputScaleX());
+    rescaleGameBoard(1/ (1080.0 / Screen.getPrimary().getBounds().getHeight()));
     /*
     // TEST HOUSES
     gameBoard.getSquare(3).addHouse();
