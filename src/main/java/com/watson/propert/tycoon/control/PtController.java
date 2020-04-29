@@ -1077,6 +1077,9 @@ public class PtController {
     IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
 
+    FREE_PARKING.setPrefWidth(default_corner_inner_size);
+    FREE_PARKING.setPrefHeight(default_corner_inner_size);
+
     // Resize Tile images
     ImageView[] tileImages =
         new ImageView[] {
@@ -1202,25 +1205,13 @@ public class PtController {
     gameBoard.setPlayers(players);
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 
-    /*
-    gameBoard
-        .getCurrentPlayer()
-        .getInfo()
-        .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
 
     logger.debug("Screen height: " + Screen.getPrimary().getBounds().getHeight());
     logger.debug("Screen scaling: "+ Screen.getPrimary().getOutputScaleX());
     // Scale game board based on screen DPI
     //rescaleGameBoard((Screen.getPrimary().getBounds().getHeight() / 720) * 1 / Screen.getPrimary().getOutputScaleX());
     rescaleGameBoard(1/ (1080.0 / Screen.getPrimary().getBounds().getHeight()));
-    /*
-    // TEST HOUSES
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
-    */
+
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
     boardReader.readFile("src/main/resources/boardDataJSON.json");
