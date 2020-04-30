@@ -402,7 +402,7 @@ public class PtController {
     cardWindow.setTitle(cardDrawEvent.deckName);
     Scene scene = new Scene(root);
     cardWindow.setScene(scene);
-    cardWindow.show();
+    cardWindow.showAndWait();
   }
 
   @Subscribe
@@ -451,15 +451,31 @@ public class PtController {
         (WindowEvent windowEvent) -> {
           List<SellProperty> properties = controller.getPropertiesToSell();
 
+          // for every property the player owns
           for (SellProperty sellProperty : properties) {
-            // if property is mortgaged, mortgage it
-            if (sellProperty.isMortgaged()) {
+            // if property was not mortgaged & is now mortgaged
+            if (sellProperty.changeInMortgageProperty()
+                && !(sellProperty.getProperty().isMortgaged())) {
 
               // board mortgage display
+              // update GuiProperty object & send player action
+              sellProperty.getProperty().mortgage();
               game.send(
                   new PlayerAction.Mortgaged(
                       gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
 
+              // if property was mortgaged & is now not mortgaged
+            } else if (sellProperty.changeInMortgageProperty()
+                && sellProperty.getProperty().isMortgaged()) {
+
+              // undo board mortgage display
+              // update GuiProperty object & send player action
+              sellProperty.getProperty().unmortgage();
+              game.send(
+                  new PlayerAction.RemoveMortgage(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+
+              // otherwise, player is selling/removing houses
             } else {
               // remove houses & post player action
               for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
@@ -1205,12 +1221,11 @@ public class PtController {
     gameBoard.setPlayers(players);
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 
-
     logger.debug("Screen height: " + Screen.getPrimary().getBounds().getHeight());
-    logger.debug("Screen scaling: "+ Screen.getPrimary().getOutputScaleX());
+    logger.debug("Screen scaling: " + Screen.getPrimary().getOutputScaleX());
     // Scale game board based on screen DPI
     //rescaleGameBoard((Screen.getPrimary().getBounds().getHeight() / 720) * 1 / Screen.getPrimary().getOutputScaleX());
-    rescaleGameBoard(1/ (1080.0 / Screen.getPrimary().getBounds().getHeight()));
+    rescaleGameBoard(1 / (1080.0 / Screen.getPrimary().getBounds().getHeight()));
 
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();

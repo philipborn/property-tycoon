@@ -22,7 +22,7 @@ public class SellProperty {
     mortgageProperty = false;
   }
 
-  public boolean isMortgaged() {
+  public boolean changeInMortgageProperty() {
     return mortgageProperty;
   }
 
