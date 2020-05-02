@@ -1,18 +1,21 @@
 package com.watson.propert.tycoon.game.entitys;
 
-import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Streams;
 import com.google.common.eventbus.EventBus;
-import com.watson.propert.tycoon.game.bord.Property;
+import com.watson.propert.tycoon.game.Movement;
+import com.watson.propert.tycoon.game.bord.Owner;
 import com.watson.propert.tycoon.game.bord.Square;
 import com.watson.propert.tycoon.game.bord.SquareVisitor;
 import com.watson.propert.tycoon.game.events.CashEvent;
 import com.watson.propert.tycoon.game.events.PlayerMovedEvent;
 import com.watson.propert.tycoon.game.rules.Passing;
+import com.watson.propert.tycoon.game.rules.TotalValue;
 
-public class Player
-    implements com.watson.propert.tycoon.game.bord.Owner, Prisonable, Comparable<Player> {
+public class Player implements Owner, Prisonable, Comparable<Player> {
+
+  private static final Logger logger = LoggerFactory.getLogger(Player.class);
 
   public enum Id {
     ONE,
@@ -20,7 +23,27 @@ public class Player
     THREE,
     FOUR,
     FIVE,
-    SIX
+    SIX,
+    NULL;
+
+    public static Id fromInt(int x) {
+      switch (x) {
+        case 1:
+          return Id.ONE;
+        case 2:
+          return Id.TWO;
+        case 3:
+          return Id.THREE;
+        case 4:
+          return Id.FOUR;
+        case 5:
+          return Id.FIVE;
+        case 6:
+          return Id.SIX;
+        default:
+          return Id.NULL;
+      }
+    }
   }
 
   public final Id id;
@@ -48,7 +71,9 @@ public class Player
     }
     int newPosition = location.getNumber();
     if (newPosition != oldPosition) {
-      channel.post(new PlayerMovedEvent(newPosition, oldPosition));
+      Movement typ = steps > 0 ? Movement.FORWARD : Movement.BACKWARD;
+      logMove(newPosition, oldPosition);
+      channel.post(new PlayerMovedEvent(newPosition, oldPosition, typ));
     }
     return location;
   }
@@ -56,7 +81,19 @@ public class Player
   public void moveTo(Square newPosition) {
     int oldPost = location.getNumber();
     location = newPosition;
-    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost));
+    logMove(location.getNumber(), oldPost);
+    channel.post(new PlayerMovedEvent(location.getNumber(), oldPost, Movement.FORWARD));
+  }
+
+  private void logMove(int newPosition, int oldPosition) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Player ");
+    builder.append(id);
+    builder.append(" move from ");
+    builder.append(oldPosition);
+    builder.append(" to ");
+    builder.append(newPosition);
+    logger.info(builder.toString());
   }
 
   public Square postion() {
@@ -64,13 +101,7 @@ public class Player
   }
 
   public int totalValue() {
-    return account.cash()
-        + Streams.stream(location.iterator())
-            .filter(Property.class::isInstance)
-            .map(Property.class::cast)
-            .filter((prop) -> prop.owner().equals(Optional.of(this)))
-            .mapToInt(Property::totalValue)
-            .sum();
+    return TotalValue.calculateFor(this);
   }
 
   public Id getId() {
@@ -88,6 +119,7 @@ public class Player
     account.receiveCash(amount);
     int cash = account.cash();
     if (cash != oldCash) {
+      logger.debug("CashEvent: " + id + " old:" + oldCash + " new:" + cash);
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }
@@ -98,6 +130,7 @@ public class Player
     account.payTo(cashUser, amount);
     int cash = account.cash();
     if (cash != oldCash) {
+      logger.debug("CashEvent: " + id + " old:" + oldCash + " new:" + cash);
       channel.post(CashEvent.write(id, oldCash, cash));
     }
   }

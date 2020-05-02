@@ -2,22 +2,24 @@ package com.watson.propert.tycoon.game.bord;
 
 import com.watson.propert.tycoon.game.actions.DoNothingAction;
 
-public class ActionSquare extends SquareNode {
+public class ActionTrigger implements SquareTyp {
 
-  private final Action action;
+  private Action action;
 
-  public ActionSquare(int seqNumber, String name, Action action) {
-    super(seqNumber, name);
+  public ActionTrigger(Action action) {
     this.action = action;
   }
 
-  public ActionSquare(int seqNumber, String name) {
-    super(seqNumber, name);
+  public ActionTrigger() {
     this.action = new DoNothingAction();
   }
 
   public Action getAction() {
     return action;
+  }
+
+  protected void setAction(Action action) {
+    this.action = action;
   }
 
   @Override

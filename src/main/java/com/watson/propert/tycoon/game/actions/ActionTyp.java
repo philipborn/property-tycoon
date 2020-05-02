@@ -1,0 +1,12 @@
+package com.watson.propert.tycoon.game.actions;
+
+public enum ActionTyp {
+  PLAYER_STEP_FORWARD,
+  PLAYER_STEP_BACKWARD,
+  PLAYER_FORWARD_TO,
+  PLAYER_BACKWARD_TO,
+  PLAYER_TO_JAIL,
+  PLAYER_PAY_BANK,
+  PLAYER_PAY_FREEPARK,
+  BANK_PAY_PLAYER
+}

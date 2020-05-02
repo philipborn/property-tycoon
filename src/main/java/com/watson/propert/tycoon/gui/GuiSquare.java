@@ -132,6 +132,31 @@ public class GuiSquare {
     }
   }
 
+  /** Removes a house or hotel from the Property Group */
+  public void removeHouse() {
+    Node group = pane.lookup("#PROPERTY_GROUP");
+    if (group != null) {
+      if (numHouses > 4) {
+        // remove hotel
+        ((Pane) group).getChildren().clear();
+
+        // add in 4 houses
+        for (int i = 0; i < numHouses; i++) {
+          ImageView iv = new ImageView();
+          iv.setFitWidth(((HBox) group).getPrefWidth() / 4.0);
+          iv.setFitHeight(((HBox) group).getPrefHeight());
+          iv.setImage(
+              new Image(ClassLoader.getSystemResource("board/houseLarge.png").toExternalForm()));
+          ((Pane) group).getChildren().add(iv);
+        }
+      } else {
+        // remove last image pane
+        ((Pane) group).getChildren().remove(((Pane) group).getChildren().size() - 1);
+      }
+      numHouses--;
+    }
+  }
+
   /**
    * Get the number of houses on a Property Square 5 represents a hotel
    *

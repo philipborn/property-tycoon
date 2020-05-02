@@ -12,4 +12,12 @@ public enum Card {
   public String getCssClass() {
     return this.cssClass;
   }
+
+  public static Card getCardByName(String deckName) {
+    if (deckName.equalsIgnoreCase("pot luck")) {
+      return POT_LUCK;
+    } else {
+      return OP_KNOCKS;
+    }
+  }
 }

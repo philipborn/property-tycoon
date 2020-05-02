@@ -73,8 +73,26 @@ public class GuiPlayer {
     return null;
   }
 
+  public int calculateNetWorth() {
+    int total = Integer.parseInt(info.getMoney().getText());
+    for (GuiProperty gp : portfolio) {
+      total += gp.getCurrentRent();
+    }
+    return total;
+  }
+
   // Return Player's Portfolio
   public ArrayList<GuiProperty> getPortfolio() {
     return portfolio;
+  }
+
+  public boolean owns(GuiSquare square) {
+    boolean found = false;
+    for (GuiProperty gp : portfolio) {
+      if (gp.getSquare() == square) {
+        found = true;
+      }
+    }
+    return found;
   }
 }

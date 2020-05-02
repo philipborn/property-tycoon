@@ -56,22 +56,43 @@ public class NewGame {
     newGameStage.setScene(scene);
   }
 
+  /** Show New Game set up dialog */
   public void showDialog() {
     newGameStage.showAndWait();
   }
 
+  /**
+   * Get New Players details
+   *
+   * @return new players
+   */
   public ArrayList<GuiPlayer> getNewPlayers() {
     return players;
   }
 
+  /**
+   * is a new game requested, otherwise quit
+   *
+   * @return
+   */
   public boolean isNewGame() {
     return controller.isNewGame();
   }
 
+  /**
+   * Is the new game to have a timer?
+   *
+   * @return
+   */
   public boolean isTimedGame() {
     return controller.getTimedGame() > 0;
   }
 
+  /**
+   * Duration of new game in hours
+   *
+   * @return number of hours
+   */
   public int getGameTime() {
     return controller.getTimedGame();
   }

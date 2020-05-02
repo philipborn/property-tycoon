@@ -5,6 +5,8 @@ package com.watson.propert.tycoon.gui;
  * @author Lee Richards
  * @version Sprint4
  */
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -12,17 +14,61 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
+import com.google.common.collect.ImmutableList;
+
 public class GuiProperty {
   GuiSquare square;
   int boardPosition;
+  Optional<ImmutableList<Integer>> rentPrices;
+  boolean mortgaged;
+
+  public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> rentPrices) {
+    this.square = square;
+    this.boardPosition = 0;
+    this.rentPrices = rentPrices;
+    mortgaged = false;
+  }
+
+  public void mortgage() {
+    mortgaged = true;
+  }
+
+  public void unmortgage() {
+    mortgaged = false;
+  }
+
+  public boolean isMortgaged() {
+    return mortgaged;
+  }
 
   public GuiProperty(GuiSquare square) {
     this.square = square;
     this.boardPosition = 0;
+    this.rentPrices = Optional.empty();
+  }
+
+  public int getCurrentRent() {
+    AtomicInteger i = new AtomicInteger();
+    rentPrices.ifPresentOrElse(
+        (prices) -> {
+          // use number of houses to index prices
+          i.set(prices.get(square.numHouses).intValue());
+        },
+        () -> {
+          // otherwise use price
+          i.set(Integer.parseInt(square.getPrice()));
+        });
+    final int i1 = i.get();
+    return i1;
+  }
+
+  public Optional<ImmutableList<Integer>> getRentPrices() {
+    return rentPrices;
   }
 
   public PropertyGroup getGroup() {
@@ -35,6 +81,10 @@ public class GuiProperty {
 
   public String getName() {
     return square.getName();
+  }
+
+  public GuiSquare getSquare() {
+    return square;
   }
 
   /*
@@ -121,12 +171,14 @@ public class GuiProperty {
     // Add Houses
     if (numHouses > 0 && numHouses <= 4) {
       for (int i = 0; i < numHouses; i++) {
+        StackPane house = new StackPane();
         ImageView iv = new ImageView();
         iv.setFitHeight(pg.getPrefHeight() - 8);
         iv.setPreserveRatio(true);
         iv.setImage(
             new Image(ClassLoader.getSystemResource("board/houseLarge.png").toExternalForm()));
-        pg.getChildren().add(iv);
+        house.getChildren().add(iv);
+        pg.getChildren().add(house);
       }
     }
 

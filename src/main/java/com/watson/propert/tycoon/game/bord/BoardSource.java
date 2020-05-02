@@ -26,6 +26,9 @@ package com.watson.propert.tycoon.game.bord;
 import java.util.*;
 import java.util.function.BiConsumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
  *
@@ -34,6 +37,8 @@ import java.util.function.BiConsumer;
  * @since 13/02/2020
  */
 public class BoardSource implements BordBuilder.Source {
+
+  private static final Logger logger = LoggerFactory.getLogger(BoardSource.class);
 
   enum Group {
     GO(BoardSource::buildGo),
@@ -50,8 +55,7 @@ public class BoardSource implements BordBuilder.Source {
     JAIL(BoardSource::buildJail),
     FREEPARKING(BoardSource::buildFreePark),
     TAKE_CARD(BoardSource::buildDeck),
-    GO_TO_JAIL(BoardSource::buildSquare),
-    ACTION(BoardSource::buildSquare);
+    ACTION(BoardSource::buildAction);
 
     private final BiConsumer<BordBuilder, Map<String, String>> handler;
 
@@ -96,11 +100,13 @@ public class BoardSource implements BordBuilder.Source {
   }
 
   private static void buildSquare(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make square: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     builder.addSquare(name);
   }
 
   private static void buildStreet(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make street: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     Street.Colour color = extractColor(prop.get("group"));
@@ -127,35 +133,48 @@ public class BoardSource implements BordBuilder.Source {
   }
 
   private static void buildStation(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make station: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addStation(name, value);
   }
 
   private static void buildUtility(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make utility: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.get("name");
     int value = Integer.parseInt(prop.get("cost"));
     builder.addUtility(name, value);
   }
 
   private static void buildGo(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make Go: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "Go");
     builder.addGo(name);
   }
 
   private static void buildJail(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make jail: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "Jail");
     builder.addJail(name);
   }
 
   private static void buildFreePark(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make freePark: " + prop.get("position") + " : " + prop.get("name"));
     String name = prop.getOrDefault("name", "FreePark");
     builder.addFreePark(name);
   }
 
   private static void buildDeck(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make card: " + prop.get("position") + " : " + prop.get("name"));
     String squareName = prop.getOrDefault("name", "Unknown Card");
     builder.addDeck(squareName);
+  }
+
+  private static void buildAction(BordBuilder builder, Map<String, String> prop) {
+    logger.debug("Make ActionTrigger: " + prop.get("position") + " : " + prop.get("name"));
+    String squareName = prop.getOrDefault("name", "Unknown Action");
+    Action action = new ActionPlaceHolder(prop);
+    builder.addActionSquare(squareName, action);
   }
 
   public static BoardSource using(BordReader reader) {

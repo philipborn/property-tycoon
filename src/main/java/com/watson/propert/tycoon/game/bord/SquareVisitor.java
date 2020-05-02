@@ -8,7 +8,7 @@ public interface SquareVisitor {
 
   default void areAt(Utilities utilities) {}
 
-  default void areAt(ActionSquare actionSquare) {}
+  default void areAt(ActionTrigger actionTrigger) {}
 
   default void areAt(Deck deck) {}
 

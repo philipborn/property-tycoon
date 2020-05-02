@@ -15,18 +15,11 @@ public interface PlayerAction {
   }
 
   /** No to a question from game */
-  enum No implements PlayerAction {}
-
-  /** Player buy property the player is standing on */
-  enum BuyProperty implements PlayerAction {
+  enum No implements PlayerAction {
     INSTANCE
   }
 
-  /** Player not buying and auction wil start */
-  enum Auction implements PlayerAction {
-    INSTANCE
-  }
-
+  /** Signal player is done fixing with properties */
   enum DonePropertyUpgrade implements PlayerAction {
     INSTANCE
   }

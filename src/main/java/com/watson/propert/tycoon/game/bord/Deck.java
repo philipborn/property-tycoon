@@ -2,6 +2,9 @@ package com.watson.propert.tycoon.game.bord;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.watson.propert.tycoon.game.actions.DoNothingAction;
 
 public class Deck implements SquareTyp {
@@ -9,8 +12,10 @@ public class Deck implements SquareTyp {
   private static final Card NULL_CARD =
       new Card("Null", "This card do not exist", new DoNothingAction());
 
-  String deckName;
-  Deque<Card> cards = new ArrayDeque<>();
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  private String deckName;
+  private Deque<Card> cards = new ArrayDeque<>();
 
   public Deck(String deckName) {
     this.deckName = deckName;
@@ -22,6 +27,7 @@ public class Deck implements SquareTyp {
 
   public Card draw() {
     if (cards.isEmpty()) {
+      logger.warn(deckName + " has no cards!");
       return NULL_CARD;
     }
     return cards.removeFirst();
@@ -35,6 +41,10 @@ public class Deck implements SquareTyp {
     List<Card> tmp = new ArrayList<>(cards);
     Collections.shuffle(tmp);
     cards = new ArrayDeque<>(tmp);
+  }
+
+  public boolean isEmpty() {
+    return cards.isEmpty();
   }
 
   @Override

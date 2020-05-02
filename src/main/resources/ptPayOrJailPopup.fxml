@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="486.0" stylesheets="@pt_player_popup.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.ptPayOrJailPopupCtrl">
+   <children>
+      <VBox layoutX="250.0" layoutY="77.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="186.0" prefWidth="448.0" spacing="20.0" styleClass="player_details">
+               <children>
+                  <ImageView fx:id="IMG_PLAYER_TOKEN" cache="true" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="player_token">
+                     <image>
+                        <Image url="@tokens/tokenSmartPhone.png" />
+                     </image>
+                  </ImageView>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="153.0" prefWidth="313.0" spacing="20.0">
+                     <children>
+                        <HBox prefWidth="100.0">
+                           <children>
+                              <Label text="Pay Or Jail" textFill="#f7f9e0" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="System Bold" size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <FlowPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="313.0">
+                           <children>
+                              <Label fx:id="PLAYER_NAME" styleClass="player" text="Player Name" textFill="#f7f9e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label styleClass="player" text=", you must pay " textFill="#f7f9e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="AMOUNT" styleClass="player" text="500" textFill="#f7f9e0">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="AMOUNT1" styleClass="player" text=" or go to jail." textFill="#f7f9e0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+               <children>
+                  <Button fx:id="pay_button" mnemonicParsing="false" onAction="#pay" prefHeight="55.0" prefWidth="104.0" text="Pay" />
+                  <Button fx:id="jail_button" mnemonicParsing="false" onAction="#jail" prefHeight="55.0" prefWidth="105.0" text="Jail" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

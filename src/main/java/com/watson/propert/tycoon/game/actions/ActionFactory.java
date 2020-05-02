@@ -1,5 +1,6 @@
 package com.watson.propert.tycoon.game.actions;
 
+import com.google.common.eventbus.EventBus;
 import com.watson.propert.tycoon.game.bord.Action;
 import com.watson.propert.tycoon.game.entitys.Bank;
 import com.watson.propert.tycoon.game.entitys.CashUser;
@@ -7,17 +8,19 @@ import com.watson.propert.tycoon.game.entitys.CashUser;
 public class ActionFactory {
 
   private CashUser freePark;
+  private EventBus channel;
 
-  public ActionFactory(CashUser freePark) {
+  public ActionFactory(CashUser freePark, EventBus channel) {
     this.freePark = freePark;
+    this.channel = channel;
   }
 
   public Action backwardTo(int destination) {
-    return new BackwardTo(destination);
+    return new BackwardTo(destination, channel);
   }
 
   public Action forwardTo(int destination) {
-    return new ForwardTo(destination);
+    return new ForwardTo(destination, channel);
   }
 
   public Action playerToJail() {

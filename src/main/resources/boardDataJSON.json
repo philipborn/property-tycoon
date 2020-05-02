@@ -41,16 +41,11 @@
   {
     "Position": 5,
     "Name": "Income Tax",
-    "Group": "",
-    "Action": "Pay Â£200",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Action",
+    "Typ": "player-pay-bank",
+    "Pay": 200,
+    "Description": "Pay 200",
+    "Action": "Pay £200"
   },
   {
     "Position": 6,
@@ -59,12 +54,6 @@
     "Action": "",
     "canBeBought": "Yes",
     "Cost": 200,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
   },
   {
     "Position": 7,
@@ -84,15 +73,7 @@
     "Position": 8,
     "Name": "Opportunity Knocks",
     "Group": "Take card",
-    "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Action": "Take card"
   },
   {
     "Position": 9,
@@ -125,16 +106,7 @@
   {
     "Position": 11,
     "Name": "Jail/Just visiting",
-    "Group": "jail",
-    "Action": "",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "jail"
   },
   {
     "Position": 12,
@@ -154,15 +126,7 @@
     "Position": 13,
     "Name": "Tesla Power Co",
     "Group": "Utilities",
-    "Action": "",
-    "canBeBought": "Yes",
-    "Cost": 150,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Cost": 150
   },
   {
     "Position": 14,
@@ -196,15 +160,7 @@
     "Position": 16,
     "Name": "Hove Station",
     "Group": "Station",
-    "Action": "",
-    "canBeBought": "Yes",
-    "Cost": 200,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Cost": 200
   },
   {
     "Position": 17,
@@ -223,23 +179,14 @@
   {
     "Position": 18,
     "Name": "Pot Luck",
-    "Group": "",
+    "Group": "Take card",
     "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "canBeBought": "No"
   },
   {
     "Position": 19,
     "Name": "Wolowitz Street",
     "Group": "Orange",
-    "Action": "",
-    "canBeBought": "Yes",
     "Cost": 180,
     "Rent": 14,
     "1house": 70,
@@ -252,7 +199,6 @@
     "Position": 20,
     "Name": "Penny Lane",
     "Group": "Orange",
-    "Action": "",
     "canBeBought": "Yes",
     "Cost": 200,
     "Rent": 16,
@@ -266,22 +212,12 @@
     "Position": 21,
     "Name": "Free Parking",
     "Group": "freeparking",
-    "Action": "Collect fines",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Action": "Collect fines"
   },
   {
     "Position": 22,
     "Name": "Yue Fei Square",
     "Group": "Red",
-    "Action": "",
-    "canBeBought": "Yes",
     "Cost": 220,
     "Rent": 18,
     "1house": 90,
@@ -293,23 +229,12 @@
   {
     "Position": 23,
     "Name": "Opportunity Knocks",
-    "Group": "Take card",
-    "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Take card"
   },
   {
     "Position": 24,
     "Name": "Mulan Rouge",
     "Group": "Red",
-    "Action": "",
-    "canBeBought": "Yes",
     "Cost": 220,
     "Rent": 18,
     "1house": 90,
@@ -322,8 +247,6 @@
     "Position": 25,
     "Name": "Han Xin Gardens",
     "Group": "Red",
-    "Action": "",
-    "canBeBought": "Yes",
     "Cost": 240,
     "Rent": 20,
     "1house": 100,
@@ -336,15 +259,7 @@
     "Position": 26,
     "Name": "Falmer Station",
     "Group": "Station",
-    "Action": "",
-    "canBeBought": "Yes",
-    "Cost": 200,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Cost": 200
   },
   {
     "Position": 27,
@@ -378,15 +293,7 @@
     "Position": 29,
     "Name": "Edison Water",
     "Group": "Utilities",
-    "Action": "",
-    "canBeBought": "Yes",
-    "Cost": 150,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Cost": 150
   },
   {
     "Position": 30,
@@ -405,16 +312,8 @@
   {
     "Position": 31,
     "Name": "Go to Jail",
-    "Group": "Go to jail",
-    "Action": "",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Action",
+    "Typ": "player-to-jail"
   },
   {
     "Position": 32,
@@ -447,16 +346,7 @@
   {
     "Position": 34,
     "Name": "Pot Luck",
-    "Group": "Take card",
-    "Action": "Take card",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Take card"
   },
   {
     "Position": 35,
@@ -478,27 +368,12 @@
     "Group": "Station",
     "Action": "",
     "canBeBought": "Yes",
-    "Cost": 200,
-    "Rent": "See notes",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Cost": 200
   },
   {
     "Position": 37,
     "Name": "Opportunity Knocks",
-    "Group": "Take card",
-    "Action": "",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Take card"
   },
   {
     "Position": 38,
@@ -517,16 +392,10 @@
   {
     "Position": 39,
     "Name": "Super Tax",
-    "Group": "",
-    "Action": "Pay Â£100",
-    "canBeBought": "No",
-    "Cost": "",
-    "Rent": "",
-    "1house": "",
-    "2houses": "",
-    "3houses": "",
-    "4houses": "",
-    "hotel": ""
+    "Group": "Action",
+    "Typ": "player-pay-bank",
+    "pay": 100,
+    "Description": "Pay 100"
   },
   {
     "Position": 40,

@@ -27,6 +27,7 @@ import static java.lang.StrictMath.abs;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
@@ -49,6 +50,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import org.slf4j.Logger;
@@ -56,13 +58,17 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.eventbus.Subscribe;
 import com.watson.propert.tycoon.game.*;
-import com.watson.propert.tycoon.game.events.BuyOrNotMsg;
-import com.watson.propert.tycoon.game.events.CashEvent;
-import com.watson.propert.tycoon.game.events.ChangePlayerEvent;
-import com.watson.propert.tycoon.game.events.DiceEvent;
+import com.watson.propert.tycoon.game.entitys.Player;
+import com.watson.propert.tycoon.game.events.*;
 import com.watson.propert.tycoon.gui.*;
+import com.watson.propert.tycoon.gui.PlayerInfo;
 import com.watson.propert.tycoon.io.BoardReaderJson;
 
+/**
+ * Controller class for the main GUI.
+ *
+ * @author Tom Doran
+ */
 public class PtController {
 
   @FXML private ResourceBundle resources;
@@ -224,6 +230,8 @@ public class PtController {
 
   @FXML private Button END_GAME;
 
+  @FXML private Label FREE_PARKING;
+
   @FXML private HBox PLAYER_1;
   @FXML private HBox PLAYER_2;
   @FXML private HBox PLAYER_3;
@@ -254,24 +262,23 @@ public class PtController {
 
   @FXML private Label TIMER;
 
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
   private GuiGameBoard gameBoard;
   private Stage playerPopUp;
   private Stage currentPopup;
   private PropertTycoon game;
+
+  private String message;
+  private boolean upgrade_state;
+  private boolean buy_state;
+  private boolean move_state;
 
   // Audio clips
   private AudioClip throwDiceAudio;
   private AudioClip dropTokenAudio;
   private AudioClip takeCardAudio;
   private AudioClip tingAudio;
-
-  @FXML
-  void clickedNo(ActionEvent event) {}
-
-  @FXML
-  void clickedYes(ActionEvent event) {
-    yes();
-  }
 
   // Show Extended Player Details
   @FXML
@@ -303,20 +310,28 @@ public class PtController {
         }
       }
     }
+    controller.setData(player);
+    /*
+     if (player != null) {
+       // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
+       player.getPortfolio().clear();
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(1), game.propertInfo(1).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(3), game.propertInfo(3).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(6), game.propertInfo(6).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(7), game.propertInfo(7).get().rentsPerHouse()));
+       player.addProperty(
+           new GuiProperty(gameBoard.getSquare(8), game.propertInfo(8).get().rentsPerHouse()));
+       // END TEST DATA
 
-    if (player != null) {
-      // TEST DATA - DELETE WHEN BUY PROPERTY IS IMPLEMENTED
-      player.getPortfolio().clear();
-      player.addProperty(new GuiProperty(gameBoard.getSquare(1)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(3)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(6)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(7)));
-      player.addProperty(new GuiProperty(gameBoard.getSquare(8)));
-      // END TEST DATA
+       // load data to controller
+       controller.setData(player);
+     }
+    */
 
-      // load data to controller
-      controller.setData(player);
-    }
     // Create & show scene
     Scene scene = new Scene(root);
     playerPopUp.setScene(scene);
@@ -343,6 +358,291 @@ public class PtController {
       // Exit game
       Platform.exit();
     }
+  }
+
+  @Subscribe
+  void payOrJail(PayOrJailEvent event) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPayOrJailPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    Stage payOrJailWindow = new Stage();
+    // get controller for popup
+    ptPayOrJailPopupCtrl controller = loader.getController();
+    controller.setData(gameBoard.getCurrentPlayer(), event.price, payOrJailWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    payOrJailWindow.setScene(scene);
+    payOrJailWindow.showAndWait();
+
+    // get result
+    boolean playerIsPaying = controller.isPaying();
+    if (playerIsPaying) {
+      System.out.println("paying");
+    } else {
+      System.out.println("jailing");
+    }
+  }
+
+  @Subscribe
+  void drawCard(CardDrawEvent cardDrawEvent) throws IOException {
+    // getting URL of fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptCardPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+    Card card = Card.getCardByName(cardDrawEvent.deckName);
+
+    // get controller for popup & set data
+    PtCardPopupCtrl controller = loader.getController();
+    controller.setData(cardDrawEvent.description, card);
+
+    // Create & show scene
+    Stage cardWindow = new Stage();
+    cardWindow.setTitle(cardDrawEvent.deckName);
+    Scene scene = new Scene(root);
+    cardWindow.setScene(scene);
+    cardWindow.showAndWait();
+  }
+
+  @Subscribe
+  void mortgageChange(MortgageChangedEvent event) {
+    String name = gameBoard.getSquares()[event.squareNumber].getName();
+    if (event.mortgageStatus) {
+      message = name + ", is now mortgaged";
+    } else {
+      message = name + ", is now unmortgaged";
+    }
+  }
+
+  @Subscribe
+  void houseChange(HouseChangeEvent event) {
+    // find property in current players portfolio
+    int i = 0;
+    while (gameBoard.getCurrentPlayer().getPortfolio().get(i).getBoardPosition()
+        != event.seqNumber) {
+      i++;
+    }
+    GuiProperty property = gameBoard.getCurrentPlayer().getPortfolio().get(i);
+    property.setNumHouses(event.numHouses);
+  }
+
+  @FXML
+  void raiseFunds(GuiPlayer player) throws IOException {
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptRaiseFundsPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    ptRaiseFundsPopupCtrl controller = loader.getController();
+
+    Stage raiseFundsWindow = new Stage();
+    controller.setData(player, raiseFundsWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    raiseFundsWindow.setScene(scene);
+    raiseFundsWindow.show();
+
+    // remove properties from portfolio
+    raiseFundsWindow.setOnCloseRequest(
+        (WindowEvent windowEvent) -> {
+          List<SellProperty> properties = controller.getPropertiesToSell();
+
+          // for every property the player owns
+          for (SellProperty sellProperty : properties) {
+            // if property was not mortgaged & is now mortgaged
+            if (sellProperty.changeInMortgageProperty()
+                && !(sellProperty.getProperty().isMortgaged())) {
+
+              // board mortgage display
+              // update GuiProperty object & send player action
+              sellProperty.getProperty().mortgage();
+              game.send(
+                  new PlayerAction.Mortgaged(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+
+              // if property was mortgaged & is now not mortgaged
+            } else if (sellProperty.changeInMortgageProperty()
+                && sellProperty.getProperty().isMortgaged()) {
+
+              // undo board mortgage display
+              // update GuiProperty object & send player action
+              sellProperty.getProperty().unmortgage();
+              game.send(
+                  new PlayerAction.RemoveMortgage(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+
+              // otherwise, player is selling/removing houses
+            } else {
+              // remove houses & post player action
+              for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+                sellProperty.getProperty().getSquare().removeHouse();
+                game.send(
+                    new PlayerAction.SellHouse(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+              // if selling the whole square
+              if (sellProperty.sellingSquare()) {
+                // remove property from portfolio & post player action
+                player.getPortfolio().remove(sellProperty.getProperty());
+                game.send(
+                    new PlayerAction.SellProperty(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+            }
+          }
+        });
+  }
+
+  @FXML
+  void playerInDebtTest(ActionEvent event) throws IOException {
+    GuiPlayer player = gameBoard.getPlayers()[0];
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerInDebtPopup.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    ptPlayerInDebtPopupCtrl controller = loader.getController();
+
+    Stage playerInDebtWindow = new Stage();
+    GuiProperty gprop =
+        new GuiProperty(gameBoard.getSquares()[18], game.propertyInfo(18).get().rentsPerHouse());
+    player.addProperty(gprop);
+    upgrade_property_test(gprop);
+    controller.setData(player, 60, playerInDebtWindow);
+
+    // Create & show scene
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    playerInDebtWindow.setScene(scene);
+    playerInDebtWindow.show();
+
+    // remove properties from portfolio
+    playerInDebtWindow.setOnCloseRequest(
+        (WindowEvent windowEvent) -> {
+          List<SellProperty> properties = controller.getPropertiesToSell();
+          for (SellProperty sellProperty : properties) {
+            // remove houses & post player action
+            for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+              sellProperty.getProperty().getSquare().removeHouse();
+              game.send(
+                  new PlayerAction.SellHouse(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+            }
+            // if selling the whole square
+            if (sellProperty.sellingSquare()) {
+              // remove property from portfolio & post player action
+              player.getPortfolio().remove(sellProperty.getProperty());
+              game.send(
+                  new PlayerAction.SellProperty(
+                      gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+            }
+          }
+        });
+  }
+
+  @Subscribe
+  void playerInDebt(PlayerInDebtEvent event) throws IOException {
+
+    GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
+
+    if (event.amount > player.calculateNetWorth()) {
+      // player is out of game
+    } else {
+      // find fxml file
+      URL fxmlUrl = ClassLoader.getSystemResource("ptPlayerInDebtPopup.fxml");
+      FXMLLoader loader = new FXMLLoader(fxmlUrl);
+      Parent root = loader.load();
+
+      // get controller
+      ptPlayerInDebtPopupCtrl controller = loader.getController();
+
+      Stage playerInDebtWindow = new Stage();
+      controller.setData(player, event.amount, playerInDebtWindow);
+
+      // Create & show scene
+      Scene scene = new Scene(root);
+      scene.setFill(Color.TRANSPARENT);
+      playerInDebtWindow.setScene(scene);
+      playerInDebtWindow.show();
+
+      // remove properties from portfolio
+      playerInDebtWindow.setOnCloseRequest(
+          (WindowEvent windowEvent) -> {
+            List<SellProperty> properties = controller.getPropertiesToSell();
+            for (SellProperty sellProperty : properties) {
+              // remove houses & post player action
+              for (int i = 0; i < sellProperty.getHousesToRemove(); i++) {
+                sellProperty.getProperty().getSquare().removeHouse();
+                game.send(
+                    new PlayerAction.SellHouse(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+              // if selling the whole square
+              if (sellProperty.sellingSquare()) {
+                // remove property from portfolio & post player action
+                player.getPortfolio().remove(sellProperty.getProperty());
+                game.send(
+                    new PlayerAction.SellProperty(
+                        gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
+              }
+            }
+          });
+    }
+  }
+
+  /*
+   FOR TESTING GAME OVER FUNCTIONALITY (REMOVE FROM NEW GAME BUTTON)
+  */
+  @FXML
+  void gameOverTest(ActionEvent event) throws IOException {
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    PtWinnerCtrl controller = loader.getController();
+
+    // get winner
+    GuiPlayer winningPlayer = gameBoard.getPlayers()[0];
+
+    controller.setWinner(winningPlayer);
+
+    // Create & show scene
+    Stage gameOverWindow = new Stage();
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    gameOverWindow.setScene(scene);
+    gameOverWindow.show();
+  }
+
+  @Subscribe
+  void gameOver(GameOverEvent event) throws IOException {
+    // find fxml file
+    URL fxmlUrl = ClassLoader.getSystemResource("ptWinnerScreen.fxml");
+    FXMLLoader loader = new FXMLLoader(fxmlUrl);
+    Parent root = loader.load();
+
+    // get controller
+    PtWinnerCtrl controller = loader.getController();
+
+    // get winner
+    Player.Id winnerId = event.ranking.get(0);
+    GuiPlayer winningPlayer = gameBoard.getPlayers()[winnerId.ordinal()];
+
+    controller.setWinner(winningPlayer);
+
+    // Create & show scene
+    Stage gameOverWindow = new Stage();
+    Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
+    gameOverWindow.setScene(scene);
+    gameOverWindow.show();
   }
 
   /**
@@ -405,14 +705,22 @@ public class PtController {
         t[i].getToken().setVisible(true);
       }
 
+      GameSetting setting = new GameSetting();
+
       // Set new players
       gameBoard.setPlayers(players);
+      for (int i = 1; i <= players.length; i++) {
+        setting.set(Player.Id.fromInt(i));
+      }
 
       // If a timed game, show and set timer, otherwise hide
       if (newGame.isTimedGame()) {
-        setTimer(newGame.getGameTime() * 3600);
+        int timeLimitInSeconds = newGame.getGameTime() * 3600;
+        setTimer(timeLimitInSeconds);
+        setting.setSecondsToEnd(timeLimitInSeconds);
         TIMER.setVisible(true);
         gameBoard.setTimedGame(true);
+
       } else {
         TIMER.setVisible(false);
         gameBoard.setTimedGame(false);
@@ -423,7 +731,8 @@ public class PtController {
         gameBoard.reset();
       }
 
-      game = Game.newGame();
+      // Start the game
+      game.startGame(setting);
       game.registerListener(this);
     }
   }
@@ -444,10 +753,52 @@ public class PtController {
             + String.format("%02d", secs));
   }
 
-  private void yes() {
-    // implement window
-    game.send(PlayerAction.BuyProperty.INSTANCE);
-    game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+  @FXML
+  public void yes(ActionEvent event) {
+    if (buy_state) {
+      buyProperty(gameBoard.getSquare(gameBoard.getCurrentPlayer().getToken().getPosition()));
+      game.send(PlayerAction.Yes.INSTANCE);
+    } else if (upgrade_state) {
+      // done upgrading
+      upgrade_state = false;
+      game.send(PlayerAction.DonePropertyUpgrade.INSTANCE);
+    } else {
+      game.send(PlayerAction.Yes.INSTANCE);
+    }
+  }
+
+  @FXML
+  public void no(ActionEvent event) throws IOException {
+    if (upgrade_state) {
+      raiseFunds(gameBoard.getCurrentPlayer());
+    } else {
+      game.send(PlayerAction.No.INSTANCE);
+    }
+  }
+
+  private void buyProperty(GuiSquare square) {
+    int squareNumber = gameBoard.getIndexOf(square);
+
+    game.propertyInfo(squareNumber)
+        .ifPresentOrElse(
+            (rents) -> {
+              System.out.println(
+                  gameBoard.getCurrentPlayer().getName()
+                      + " bought "
+                      + gameBoard.getSquare(squareNumber).getName());
+
+              gameBoard
+                  .getCurrentPlayer()
+                  .addProperty(new GuiProperty(square, rents.rentsPerHouse()));
+            },
+            () -> {
+              System.out.println(
+                  gameBoard.getCurrentPlayer().getName()
+                      + " bought "
+                      + gameBoard.getSquare(squareNumber).getName());
+
+              gameBoard.getCurrentPlayer().addProperty(new GuiProperty(square));
+            });
   }
 
   @FXML
@@ -458,7 +809,7 @@ public class PtController {
   @Subscribe
   void diceHandler(DiceEvent event) {
     throwDiceAudio.play();
-    PauseTransition pause = new PauseTransition(Duration.seconds(3));
+    PauseTransition pause = new PauseTransition(Duration.seconds(0));
     pause.setOnFinished(
         ev -> {
           // move functionality
@@ -466,14 +817,76 @@ public class PtController {
           //displayMessage(gameBoard.getCurrentPlayer().getName() + " move: " + i + " spaces");
           DICE_IMG_1.setImage(gameBoard.diceFace(event.firstDice()));
           DICE_IMG_2.setImage(gameBoard.diceFace(event.secondDice()));
-          move(i);
         });
     pause.play();
   }
 
-  void moveBackThreeSpaces() {
-    move(-3);
-    changeTurn();
+  @Subscribe
+  void upgradePropertyState(CanFixPropertyEvent event) {
+    buy_state = false;
+    upgrade_state = true;
+    BUTTON_YES.setText("Done");
+    BUTTON_NO.setText("Raise Funds");
+    //END_GAME.setText("Done");
+    //NEW_GAME.setText("Raise Funds");
+    message =
+        gameBoard.getPlayers()[event.player.ordinal()].getName()
+            + ", you can now upgrade properties you own by clicking on them, or sell/mortgage them to raise funds. Click done when you've finished.";
+    displayMessage();
+  }
+
+  @FXML
+  void upgrade_property(MouseEvent event) {
+    if (upgrade_state) {
+      // find square
+      int squareNumber = 0;
+      GuiSquare square = gameBoard.getSquares()[squareNumber];
+      while (square.getPane() != event.getSource()) {
+        squareNumber++;
+        square = gameBoard.getSquares()[squareNumber];
+      }
+      // if player owns square, it is improvable & a house can be bought
+      if (gameBoard.getCurrentPlayer().owns(square)
+          && square.getGroup().getHousePrice() > 0
+          && game.canBuyHouse(squareNumber)) {
+        // add house image & send player action
+        square.addHouse();
+        game.send(new PlayerAction.BuildHouse(squareNumber));
+
+        // otherwise, if the player doesn't own all the properties
+      } else if (gameBoard.getCurrentPlayer().owns(square)
+          && square.getGroup().getHousePrice() > 0) {
+        // display warning window
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Property Upgrade Warning");
+        alert.setHeaderText("Can't Build House");
+        alert.setContentText("Have to own all the properties in a set to build houses!");
+        alert.show();
+      }
+    }
+  }
+
+  private void upgrade_property_test(GuiProperty guiProperty) {
+    guiProperty.getSquare().addHouse();
+  }
+
+  @Subscribe
+  void movePlayer(PlayerMovedEvent event) {
+    int numSquares = 40;
+    int steps = 0;
+    switch (event.typ) {
+      case FORWARD:
+        steps = event.newPost - event.oldPost;
+        steps = event.newPost < event.oldPost ? steps + numSquares : steps;
+        break;
+      case BACKWARD:
+        steps = event.oldPost - event.newPost;
+        steps = event.oldPost < event.newPost ? steps + numSquares : steps;
+        break;
+    }
+    logger.debug("Start movePlayer: from " + event.oldPost + " to " + event.newPost);
+    move(steps, gameBoard.getCurrentPlayer(), event.typ);
+    logger.debug("End movePlayer: from " + event.oldPost + " to " + event.newPost);
   }
 
   @FXML
@@ -493,10 +906,11 @@ public class PtController {
     }
 
     // if there is property info for square (ie. if square is a property square)
-    if (game.propertInfo(squareNumber - 1).isPresent()) {
+    if (game.propertyInfo(squareNumber + 1).isPresent()) {
 
       // load data to controller
-      controller.setData(game.propertInfo(squareNumber - 1).get());
+      controller.setData(
+          game.propertyInfo(squareNumber + 1).get(), gameBoard.getSquare(squareNumber), gameBoard);
 
       // Create & show scene
       Scene scene = new Scene(root);
@@ -513,42 +927,63 @@ public class PtController {
     }
   }
 
-  private void displayMessage(String message) {
+  private void displayMessage() {
     MESSAGE_AREA.setText(message);
+    System.out.println(message);
   }
 
   @Subscribe
-  void newTurn(ChangePlayerEvent event) {
-    changeTurn();
+  void timeUpdate(TimeTicEvent event) {
+    Platform.runLater(() -> setTimer(event.secondsLeft));
   }
 
-  void changeTurn() {
-    // can utilise style sheets, white & transparent is just to show the functionality
-    //gameBoard.getCurrentPlayer().getInfo().getInfo().setStyle("-fx-background-color:TRANSPARENT");
+  @Subscribe
+  void freeParking(FreeParkChangeEvent event) {
+    FREE_PARKING.setText("" + event.newCash);
+  }
+
+  @Subscribe
+  void changeTurn(ChangePlayerEvent event) {
+
+    BUTTON_YES.setText("Yes");
+    BUTTON_NO.setText("No");
+    //END_GAME.setText("Yes");
+    //NEW_GAME.setText("No");
+
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerName");
-    gameBoard.getNextPlayer();
+    gameBoard.setNextPlayer(event.activePlayer.ordinal());
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().clear();
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
-    /*
 
-    gameBoard
-    .getCurrentPlayer()
-    .getInfo()
-    .getInfo()
-    .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
+    message = gameBoard.getCurrentPlayer().getName() + ", roll dice!";
+    displayMessage();
+    move_state = true;
   }
 
   @Subscribe
   void updateMoney(CashEvent event) {
-    Label l = (Label) gameBoard.getCurrentPlayer().getInfo().getMoney();
+    Label l = (Label) gameBoard.getPlayers()[event.id.ordinal()].getInfo().getMoney();
     l.setText("" + event.getNewCash());
+    tingAudio.play();
   }
 
-  void goToJail() {}
+  @Subscribe
+  void goToJail(PlayerToJailEvent event) {
+    // get player position
+    GuiPlayer player = gameBoard.getPlayers()[event.playerId.ordinal()];
+    int position = player.getToken().getPosition();
 
-  void move(int spaces) {
-    GuiToken tok = gameBoard.getCurrentPlayer().getToken();
+    // move to jail square (square 10)
+    if ((10 - position) > 0) {
+      move(10 - position, player, Movement.FORWARD);
+    } else {
+      move(10 - position, player, Movement.BACKWARD);
+    }
+  }
+
+  void move(int spaces, GuiPlayer player, Movement direction) {
+    GuiToken tok = player.getToken();
     PathTransition pt = new PathTransition();
     Path p =
         new Path(
@@ -557,7 +992,7 @@ public class PtController {
     p.getElements().add(new LineTo(newPos.getX(), newPos.getY()));
 
     for (int i = 0; i < abs(spaces); i++) {
-      if (spaces < 0) {
+      if ((direction == Movement.BACKWARD)) {
         tok.moveBackwards();
       } else tok.moveForwards();
       newPos = gameBoard.getSquare(tok.getPosition()).getCentre();
@@ -567,16 +1002,19 @@ public class PtController {
     pt.setDuration(Duration.millis(abs(spaces) * 300));
     pt.setPath(p);
     pt.play();
+    //displayMessage();
   }
 
   @Subscribe
   void propertyFunctionality(BuyOrNotMsg msg) {
-    displayMessage("Would you like to buy " + msg.propName + " for " + msg.price + "?");
+    move_state = false;
+    message = "Would you like to buy " + msg.propName + " for " + msg.price + "?";
+    displayMessage();
+    buy_state = true;
   }
 
   // Calculate the centre point of each square relative to game board Pane
   void calculateSquareCentres() {
-    Logger logger = LoggerFactory.getLogger(App.class);
     Direction dir = Direction.DOWN;
     Double tileHeight = SQUARE_1.getPrefHeight();
     Double tileWidth = SQUARE_1.getPrefWidth();
@@ -654,6 +1092,9 @@ public class PtController {
     IMG_FREE_PARKING.setFitWidth(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitHeight(default_corner_inner_size);
     IMG_GOTO_JAIL.setFitWidth(default_corner_inner_size);
+
+    FREE_PARKING.setPrefWidth(default_corner_inner_size);
+    FREE_PARKING.setPrefHeight(default_corner_inner_size);
 
     // Resize Tile images
     ImageView[] tileImages =
@@ -756,7 +1197,7 @@ public class PtController {
         new AudioClip(ClassLoader.getSystemResource("audio/dropToken.mp3").toExternalForm());
     takeCardAudio =
         new AudioClip(ClassLoader.getSystemResource("audio/takeCard.mp3").toExternalForm());
-    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/rollDice.mp3").toExternalForm());
+    tingAudio = new AudioClip(ClassLoader.getSystemResource("audio/ting.mp3").toExternalForm());
 
     // Initialise players - FOR TESTING
     // To be set up by New Game Dialog box
@@ -780,20 +1221,11 @@ public class PtController {
     gameBoard.setPlayers(players);
     gameBoard.getCurrentPlayer().getInfo().getName().getStyleClass().add("playerNameHighlighted");
 
-    /*
-    gameBoard
-        .getCurrentPlayer()
-        .getInfo()
-        .getInfo()
-        .setStyle("-fx-background-color:BLACK; -fx-opacity:0.4;"); */
+    logger.debug("Screen height: " + Screen.getPrimary().getBounds().getHeight());
+    logger.debug("Screen scaling: " + Screen.getPrimary().getOutputScaleX());
     // Scale game board based on screen DPI
-    rescaleGameBoard(1 / Screen.getPrimary().getOutputScaleX());
-
-    // TEST HOUSES
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
-    gameBoard.getSquare(3).addHouse();
+    //rescaleGameBoard((Screen.getPrimary().getBounds().getHeight() / 720) * 1 / Screen.getPrimary().getOutputScaleX());
+    rescaleGameBoard(1 / (1080.0 / Screen.getPrimary().getBounds().getHeight()));
 
     // read JSON file
     BoardReaderJson boardReader = new BoardReaderJson();
@@ -805,7 +1237,9 @@ public class PtController {
     playerPopUp = new Stage();
     playerPopUp.initStyle(StageStyle.UTILITY);
     playerPopUp.setTitle("Extended Player Data");
+
     game = Game.newGame();
+
     game.registerListener(this);
 
     // for every square on the board
@@ -837,8 +1271,22 @@ public class PtController {
 
     }
 
+    message = gameBoard.getCurrentPlayer().getName() + " , roll the dice!";
+    displayMessage();
+    upgrade_state = false;
+    buy_state = false;
+    move_state = true;
+
+    // GAME OVER TEST
     // Create and show a New Game Dialog
-    newGame(null);
+    GameOver gameOver = new GameOver();
+    gameOver.setWinner(new GuiPlayer("Duane Dibbley", null));
+    gameOver.showDialog();
+    if (gameOver.doNewGame()) {
+      newGame(null);
+    } else {
+      endGame(null);
+    }
     // Results pushed to GameBoard class
     //NewGame newGameDialog = new NewGame();
     //newGameDialog.showDialog();
