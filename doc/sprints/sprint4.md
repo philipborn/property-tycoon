@@ -28,7 +28,7 @@ Before game the Player select the number of player for the game. There there sel
 player for game, token, if Ai, time to end the game and write theres name. When game show the what player have selceted.
 
 Player land on card sqaure will see the card and the action from the card will be cared out.
-If a players token land on freepark it will all cash that cumlated in freeparking. 
+If a players token land on freepark it will all cash that cumlated in freeparking.
 
 After moving and made the action, the player will get the option to buy or sell house ,and sell and mortige property.
 
@@ -73,7 +73,7 @@ The pliolcy for forbidden acion is nothing appens. No extions or error message.
 This is to make the controller simplare as only need tranlate player action to method calls.
 This take application logic out of the controlers. Reason for no error maesses is player should not need more information,
 the inforamtion should aready be there
-  
+
 To solve be have a interpaterter pattern and using command pattern. Interpeter whould give a fleixble interafce for the cousterms to used.
 The pattern is there is a class for every gramma rule of the domain languish.  Witch is same structer for top-down parser.
 The out put of inpterter is a action objcet. The object Card have objcet Action. A action hold all it needs.
@@ -99,4 +99,4 @@ For makeing parsing the card easer, every type of action has a name.
 Every card have action name that defiend the action. Then have key and valus paire to parameterise the action.
 As every typ of action is defiand as key-value parie, aprsing is verty easy.
 
-When making changes to partermeter to the sqaures constuter, then large amount o files need change as the 
+When making changes to partermeter to the sqaures constuter, then large amount o files need change as the
