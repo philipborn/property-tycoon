@@ -65,7 +65,7 @@ Non-functionle
 
 ## Design
 
-Se figure for the class
+![Class digram](../figs/Sprint3.1.png)
 
 There should be a particular class for each type of property: street, Station Utilisation.
 They will inherit from an abstract class property, with implement standard methods
@@ -75,6 +75,8 @@ Problem with circular link list is easily making an infinite loop if tries to fi
 The square will implement the Iterable interface to make more accessible to traverse the board,
 There will need to get all station, all Utilation or get all street of the same colour.
 To solve that, we apply special Iterator that returns square we want.
+Another problem is the squares need to linkt, witch leads to a builder that builde the bouard. >The sourse for the board builder
+is a board reader.
 
 The game model needs in the future to enforce that only some player action is able at some state.
 The solution is to have everything need to carry out a player action is stored in command object, action.
@@ -91,19 +93,17 @@ Specify the state machine was not test.
 
 ## Summary of sprint
 
-Six tokens were implanted and working correctly.
-Player was apple to buy property, and the rent was taken from the squares.
-
-PopWindow as implented on gui side, but was not intergted with modle.
-
-Not implemented:
-
+Six tokens change turns were implanted and working correctly.
+Player was apple to buy property, as we the cash change. There is a bug when a player land on owned property.
+The problem is the game force player to try to buy a property even it is owend. As game state macheine yeat handle rent a expation will be throw.
 The action was never implanted to save time. Instead, there were only methods for the game witch GUI
-could call, which leads to the state machine. Each state is a class.
+could call. Each state is a class. No handling for rent was implented.
+
+PopWindow have a basic implented on gui side, but is nevere calde. There now whay
+for player to see that the cought.
 
 Double dice roll was not implemented as then go jail need to be implemented.
-Cards were never implemented, both in GUI and Game model. 
+Cards were never implemented, both in GUI and Game model.
 
-Refactor:
-
-The task to move square is moved from Player to SquareImp as the player class shouldn't know how the board is structured.
+Some large refactor was to was to move move logic to SquareImp.
+As the player class shouldn't know how the board is structured, the move logick should be in player.
