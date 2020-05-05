@@ -14,89 +14,93 @@
 
 Individual key contributions
 
-| Person   | Area                                                 |
-| :------- | ---------------------------------------------------- |
-| Lee      | GUI: start game, player interface , other improments |
-| Philip   | Model: Card, gameState                               |
-| Roksanna | House figers                                         |
-| Tom      | property pop window                                  |
+| Person   | Area                                                  |
+| :------- | ----------------------------------------------------- |
+| Lee      | GUI: start game, player interface, other improvements |
+| Philip   | Model: Card, game state                               |
+| Roksanna | House figures                                         |
+| Tom      | property pop window                                   |
 
 ## User stories
 
 
-Before game the Player select the number of player for the game. There there select number of
-player for game, token, if Ai, time to end the game and write theres name. When game show the what player have selceted.
+Before the game, the player selects the number of player for the game. Their select number of
+player for game, token, if Ai, time to end the game and write their name. When the game show what player have selected.
 
-Player land on card sqaure will see the card and the action from the card will be cared out.
-If a players token land on freepark it will all cash that cumlated in freeparking.
+Player land on card square, a card is drawn, and the Action from the card will be cared out.
+If a player's token land on the free park it will all cash that accumulated in free parking.
 
-After moving and made the action, the player will get the option to buy or sell house ,and sell and mortige property.
+After moving and made the Action, the player will get the option to buy or sell a house, and sell and mortgage property.
 
 After this sprint, we should have the game's GUI show a the bord, dices and a token.
 The squares in the bord will show their names,
 which can be modified by changing inside a JSON file.
 The change will affect when restarted the app.
-Player can throw dices and token will move around the bord.
+A player can throw dices and token will move around the board.
 
 ## Requirements analysis
 
-Function requriment
+Function requirements
 
-1. Player land on Free parking : player shall get all cash collet in free parking
-2. Player land on cards: draw card from a deck and show the card. Thr card action will be carrid out.
-3. If player go to jail, player may get option to pay 50 pound or lose 2 turns. player turn end after desiade.
-4. Player skale don't pay rent if owner of property is in jail.
-5. At start of game: shale apple to select number of player.
-6. At start of game: shale apple to select tokens to player.
-7. At start of game: shale apple to select ai of a player.
-8. At start of game: shale apple to write player names.
-9. After player have moved and done action, player shall have option to buy and sell houses, and sell and mortige on property.
-10. Action on property can only done by player that owend the propterty.
-11. If player make forbidden actinon, nothing happens
+1. Player land on Free parking: player shall get all cash collect in the free parking
+2. Player land on cards: draw a card from a deck and show the card. The card action will be carried out.
+3. If a player goes to jail, the player may get the option to pay 50 pounds or lose two turns. The player turn end after decide.
+4. Player shale doesn't pay rent if the owner of the property is in jail.
+5. At the start of the game: shale apple to select the number of players.
+6. At the beginning of the game: shale apple to select tokens to a player.
+7. At the start of the game: shale apple to select ai of a player.
+8. At the start of the game: shale apple to write player names.
+9. After the player has moved and done Action, the player shall have the option to buy and sell houses, and sell and mortgage on a property.
+10. Action on a property can only be done by the player that owned the property.
+11. If the player makes forbidden actinon, nothing happens
 
 Non-functionle
 
-1. Card file are using JSON format.
-2. Extra inforamtion that not showed on main board view, are shoiwnd by popups windows. Like cards.
+1. The card file is using JSON format.
+2. Popups windows show extra information that not showed on mainboard view. Like cards.
 
 ## Design
 
-Start of the game, a window come up. When the number of players are sleckted, a row for each player will abear.
-In the row there figure showing the token, field for the players name and pick ai for this player.
+Start of the game, a window comes up. When the number of players is selected, a row for each player will appear.
+In the row there figure showing the token, a field for the player's name and pick ai for this player.
 On this window, the option for a time limit can be selected.
 
-A stathec machine that that player action should not allways be apple only can be made at witch state, still use the state machine is add beagined the game interface.
+A state machine that that player action should not always be apple only can be made at witch state, still use the state machine is added after the game interface.
 
-Make command to lowert maouny methods the game need to pass to the states.
-In short state machines handle all player requsets.
-The pliolcy for forbidden acion is nothing appens. No extions or error message.
-This is to make the controller simplare as only need tranlate player action to method calls.
-This take application logic out of the controlers. Reason for no error maesses is player should not need more information,
-the inforamtion should aready be there
+Make command to lower the number of methods needed that the game need to pass to the states.
+In short, state machines handle all player requests.
+The policy for forbidden Action is nothing happens. There will be no exceptions or error message.
+This is to make the controller simpler as only need translate player action to method calls.
+This takes application logic out of the controllers. Reason for no error messages is player should not need more information,
+the information should already be there.
 
-To solve be have a interpaterter pattern and using command pattern. Interpeter whould give a fleixble interafce for the cousterms to used.
-The pattern is there is a class for every gramma rule of the domain languish.  Witch is same structer for top-down parser.
-The out put of inpterter is a action objcet. The object Card have objcet Action. A action hold all it needs.
-All card will be stored in decks. A Sqauare can hold a deck refens. When player land on the sqaure, the top card will be picket. Meassgae will be sent to gui with the card discriptoy and the action that card hold on will be actived.
+To solve the problem of having card action read from a file, we will be using the interpreter pattern and using the command pattern.
+The interpreter would give a flexible interface for the customs to use.
+The pattern is there is a class for every gramma rule of the domain languish.  Witch is the same structure for a top-down parser.
+The output of interpreter is an action object. The object Card has object Action. An action holds all it needs.
+All card will be stored in decks. A Square can hold a deck reference. When a player land on the square, the top card will be picket. A message will be sent to GUI with the card description and the Action that card hold on will be activated.
 
 ## Test plan and evidence of testing
 
-GUI and Game state maxchine will be tested manule. There will be a need for test protedcol testing all action and information should be apple for the player.
+GUI and Game state machine will be tested manually. There will be a need for test protocol testing all Action and information should be an apple for the player.
 
-Rest of the game will be test by unit test.
+Unit tests will test the rest of the game.
 
 ## Summary of sprint
 
-GUI have a start window, as dsigen.
-yes and no at bottens of the borad.
-
- Have added tookens figures toekn figures
-
+GUI has a start window, as design.
+Yes and no at bottoms of the board.
+Have added the tokens figures
 Have adding sound for dices hand player get cash.
 
-Hade short the devople time so need to simplfie the card design.
-For makeing parsing the card easer, every type of action has a name.
-Every card have action name that defiend the action. Then have key and valus paire to parameterise the action.
-As every typ of action is defiand as key-value parie, aprsing is verty easy.
+Hade short the development time so need to simplify the card design.
+For making parsing the card easer, every type of Action has a name.
+Every card has an action name that defined the Action. Then have key and value pairs to parameterise the Action.
+As every type of Action is defined as key-value parsing is easy.
 
-When making changes to partermeter to the sqaures constuter, then large amount o files need change as the
+When making changes to the parameter to the squares constructor,
+then a large number of files need changing. This show that many tests was dependent on the square constructed.
+To lose the coupling, inheritance was removed and made square hold a Square type object. The square type is reached by the visitor pattern.
+The change leads to the test of different types of square don't need to see the linking part of the squares.
+
+There was not to do the test of the new functionalty. So bugs are expected for next sprint.
