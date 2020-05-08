@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,30 +27,62 @@ public class GuiProperty {
   int boardPosition;
   Optional<ImmutableList<Integer>> rentPrices;
   boolean mortgaged;
+  String price;
 
   public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> rentPrices) {
     this.square = square;
     this.boardPosition = 0;
     this.rentPrices = rentPrices;
     mortgaged = false;
-  }
-
-  public void mortgage() {
-    mortgaged = true;
-  }
-
-  public void unmortgage() {
-    mortgaged = false;
-  }
-
-  public boolean isMortgaged() {
-    return mortgaged;
+    // save price of property & set label to sold
+    price = square.getPrice();
+    setPriceLabel("Sold");
   }
 
   public GuiProperty(GuiSquare square) {
     this.square = square;
     this.boardPosition = 0;
     this.rentPrices = Optional.empty();
+    mortgaged = false;
+    // save price of property & set label to sold
+    price = square.getPrice();
+    setPriceLabel("Sold");
+  }
+
+  public String getPrice() {
+    return price;
+  }
+
+  private void setPriceLabel(String s) {
+    Node priceLabel = square.getPane().lookup("#PROPERTY_PRICE");
+    if (priceLabel instanceof Label) {
+      ((Label) priceLabel).setText(s);
+    }
+  }
+
+  /** Method to mortgage a property object. */
+  public void mortgage() {
+    mortgaged = true;
+    setPriceLabel("M");
+  }
+
+  /** Method to un-mortgage a property object. */
+  public void unmortgage() {
+    mortgaged = false;
+    setPriceLabel("Sold");
+  }
+
+  public void sell() {
+    setPriceLabel(price);
+  }
+
+  /**
+   * Method to indicate if a property object is mortgaged or not.
+   *
+   * @return true if mortgaged, false otherwise
+   */
+  public boolean isMortgaged() {
+    return mortgaged;
   }
 
   public int getCurrentRent() {
@@ -93,10 +126,6 @@ public class GuiProperty {
   }
 
    */
-
-  public String getPrice() {
-    return square.getPrice();
-  }
 
   /*
   public void setPrice(int price) {

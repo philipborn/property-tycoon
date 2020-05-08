@@ -379,9 +379,9 @@ public class PtController {
     // get result
     boolean playerIsPaying = controller.isPaying();
     if (playerIsPaying) {
-      System.out.println("paying");
+      yes(new ActionEvent());
     } else {
-      System.out.println("jailing");
+      no(new ActionEvent());
     }
   }
 
@@ -395,10 +395,10 @@ public class PtController {
 
     // get controller for popup & set data
     PtCardPopupCtrl controller = loader.getController();
-    controller.setData(cardDrawEvent.description, card);
+    Stage cardWindow = new Stage(StageStyle.TRANSPARENT);
+    controller.setData(cardDrawEvent.description, card, cardWindow);
 
     // Create & show scene
-    Stage cardWindow = new Stage();
     cardWindow.setTitle(cardDrawEvent.deckName);
     Scene scene = new Scene(root);
     cardWindow.setScene(scene);
@@ -454,10 +454,8 @@ public class PtController {
           // for every property the player owns
           for (SellProperty sellProperty : properties) {
             // if property was not mortgaged & is now mortgaged
-            if (sellProperty.changeInMortgageProperty()
-                && !(sellProperty.getProperty().isMortgaged())) {
+            if (!(sellProperty.getProperty().isMortgaged()) && sellProperty.isNowMortgaged()) {
 
-              // board mortgage display
               // update GuiProperty object & send player action
               sellProperty.getProperty().mortgage();
               game.send(
@@ -465,10 +463,9 @@ public class PtController {
                       gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
 
               // if property was mortgaged & is now not mortgaged
-            } else if (sellProperty.changeInMortgageProperty()
-                && sellProperty.getProperty().isMortgaged()) {
+            } else if (sellProperty.getProperty().isMortgaged()
+                && !(sellProperty.isNowMortgaged())) {
 
-              // undo board mortgage display
               // update GuiProperty object & send player action
               sellProperty.getProperty().unmortgage();
               game.send(
@@ -484,10 +481,12 @@ public class PtController {
                     new PlayerAction.SellHouse(
                         gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
               }
+
               // if selling the whole square
               if (sellProperty.sellingSquare()) {
                 // remove property from portfolio & post player action
                 player.getPortfolio().remove(sellProperty.getProperty());
+                sellProperty.getProperty().sell();
                 game.send(
                     new PlayerAction.SellProperty(
                         gameBoard.getIndexOf(sellProperty.getProperty().getSquare())));
@@ -700,7 +699,7 @@ public class PtController {
                 newGame.getNewPlayers().get(i).isAi(),
                 pi[i]);
         pi[i].getName().setText(newGame.getNewPlayers().get(i).getName());
-        pi[i].getMoney().setText("500");
+        pi[i].getMoney().setText("1500");
         pi[i].getContainer().setVisible(true);
         t[i].getToken().setVisible(true);
       }
