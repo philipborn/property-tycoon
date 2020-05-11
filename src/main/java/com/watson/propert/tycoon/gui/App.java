@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 package com.watson.propert.tycoon.gui;
-
+/** Main JavaFX Launch App */
 import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

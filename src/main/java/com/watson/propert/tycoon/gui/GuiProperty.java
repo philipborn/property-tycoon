@@ -24,6 +24,11 @@ public class GuiProperty {
   boolean mortgaged;
   String price;
 
+  /**
+   * Construct a GuiProperty
+   *
+   * @param square
+   */
   public GuiProperty(GuiSquare square) {
     this.square = square;
     this.boardPosition = 0;
@@ -33,10 +38,20 @@ public class GuiProperty {
     setPriceLabel("Sold");
   }
 
+  /**
+   * Get price of the property
+   *
+   * @return
+   */
   public String getPrice() {
     return price;
   }
 
+  /**
+   * Set price of the property
+   *
+   * @param s price of property
+   */
   private void setPriceLabel(String s) {
     Node priceLabel = square.getPane().lookup("#PROPERTY_PRICE");
     if (priceLabel instanceof Label) {

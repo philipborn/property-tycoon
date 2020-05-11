@@ -9,13 +9,13 @@
 }
 
 .backgroundPotLuck {
-    -fx-opacity: 0.8;
+    -fx-opacity: 1.0;
     -fx-background-color: #d8dd4c;
     -fx-background-radius: 20;
 }
 
 .backgroundOpKnock {
-    -fx-opacity: 0.8;
+    -fx-opacity: 1.0;
     -fx-background-color: #ea5bcd;
     -fx-background-radius: 20;
 }

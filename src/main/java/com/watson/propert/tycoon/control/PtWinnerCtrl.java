@@ -9,6 +9,12 @@ import javafx.stage.Stage;
 
 import com.watson.propert.tycoon.gui.*;
 
+/**
+ * Controller for pop-up dialog congratulating winning player
+ *
+ * @author Lee Richards
+ * @version Sprint 5
+ */
 public class PtWinnerCtrl {
 
   @FXML private Label WINNING_PLAYER;

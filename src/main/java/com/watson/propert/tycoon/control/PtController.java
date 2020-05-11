@@ -393,6 +393,7 @@ public class PtController {
     // Create & show scene
     cardWindow.setTitle(cardDrawEvent.deckName);
     Scene scene = new Scene(root);
+    scene.setFill(Color.TRANSPARENT);
     cardWindow.setScene(scene);
     cardWindow.showAndWait();
   }
