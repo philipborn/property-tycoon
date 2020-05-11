@@ -1,11 +1,11 @@
 @font-face {
     font-family: "BankGothic Lt BT";
-    src: url('bgothl.ttf');
+    src: url('fonts/bgothl.ttf');
 }
 
 @font-face {
     font-family: "OCR A Std";
-    src: url('OCRAStd.otf');
+    src: url('fonts/OCRAStd.otf');
 }
 
 /*
@@ -13,6 +13,13 @@
  */
 #root {
     -fx-background-image: url("background02.jpg");
+    -fx-background-repeat: stretch stretch;   
+    -fx-background-position: center center;
+    -fx-background-size: 100%  100%;
+}
+
+#Winner_background {
+    -fx-background-image: url("congratulations.jpg");
     -fx-background-repeat: stretch stretch;   
     -fx-background-position: center center;
     -fx-background-size: 100%  100%;
@@ -43,6 +50,14 @@
     -fx-border-color: #000;
 }
 
+.PotLuck {
+    -fx-background-color: #d8dd4c;
+}
+
+.OpKnock {
+    -fx-background-color: #86ad75;
+}
+
 #PANEL {
 
 }
@@ -61,59 +76,58 @@
     -fx-text-fill: #000;
 }
 
-#PROPERTY_GROUP_BROWN {
+.PROPERTY_GROUP_BROWN {
     -fx-background-color: #9c552d;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_GREEN {
+.PROPERTY_GROUP_GREEN {
     -fx-background-color: #00aa86;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_YELLOW {
+.PROPERTY_GROUP_YELLOW {
      -fx-background-color: #ffd600;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_STATION {
+.PROPERTY_GROUP_STATION {
      -fx-background-color: #000000;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_UTILITIES {
+.PROPERTY_GROUP_UTILITIES {
     -fx-background-color: #aaaaaa;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_ORANGE {
+.PROPERTY_GROUP_ORANGE {
     -fx-background-color: #ff5a00;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_PURPLE {
+.PROPERTY_GROUP_PURPLE {
      -fx-background-color: #bc34ba;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_BLUE {
+.PROPERTY_GROUP_BLUE {
      -fx-background-color: #0085cf;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_RED {
+.PROPERTY_GROUP_RED {
     -fx-background-color: #f32837;
     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_DEEP_BLUE {
+.PROPERTY_GROUP_DEEP_BLUE {
      -fx-background-color: #001ca8;
      -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
 }
 
-#PROPERTY_GROUP_TAKE_CARD {
-     -fx-background-color: #ffffff;
-     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+.PROPERTY_GROUP_TAKE_CARD {
+     -fx-background-color: transparent;
 }
 
 .token {
@@ -191,14 +205,14 @@
  * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
  */
 .button {
-    -fx-padding: 15 22 15 22;   
+    -fx-padding: 10 18 10 18;   
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: #2e241a;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
     -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
-    -fx-font-size: 26px;
+    -fx-font-size: 24px;
     -fx-text-fill: #d8d8d8;
     -fx-border-insets: 2px;
 }

@@ -1,0 +1,170 @@
+[
+  {
+    "DeckName": "Pot Luck",
+    "Description": "You inherit 100 pound",
+    "Typ": "bank-pay-player",
+    "Pay": 100
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "You have won 2nd prize in a beauty contest, collect 20 pound",
+    "Typ": "bank-pay-player",
+    "Pay": 20
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Go back to Crapper Street",
+    "Typ": "player-backward-to",
+    "position": 2
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Student loan refund. Collect 20 pound",
+    "Typ": "bank-pay-player",
+    "pay": 20
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Bank error in you favour Collect 200 pound",
+    "Typ": "bank-pay-player",
+    "pay": 200
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Pay bill for text books of 100 pound",
+    "Typ": "player-pay-bank",
+    "pay": 100
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Mega late night taxi bill pay 50 pound",
+    "Typ": "player-pay-bank",
+    "pay": 50
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Advance to go",
+    "Typ": "player-forward-to",
+    "position": 1
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "From sale of Bitcoin you get 50 pound",
+    "Typ": "bank-pay-player",
+    "pay": 50
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Pay a £10 fine or take Opportunity Knocks",
+    "Typ": "player-pay-bank",
+    "Pay": 10,
+    "Card": "Opportunity Knocks"
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Pay insurance fee of 50 pound",
+    "Typ": "player-pay-freepark",
+    "Pay": 50
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Savings bond matures, collect £100",
+    "Typ": "bank-pay-player",
+    "Pay": 100
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Go to jail. Do not pass GO, do not collect £200",
+    "Typ": "player-to-jail"
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "Received interest on shares of £25",
+    "Typ": "bank-pay-player",
+    "pay": 25
+  },
+  {
+    "DeckName": "Pot Luck",
+    "Description": "It's your birthday. Collect £10 from each player",
+    "Typ": "bank-pay-player",
+    "Pay": 10
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Bank pays you divided of £50",
+    "Typ": "bank-pay-player",
+    "pay": 50
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "You have won a lip sync battle. Collect £100",
+    "Typ": "bank-pay-player",
+    "pay": 100
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Advance to Turing Heights",
+    "Typ": "player-forward-to",
+    "position": 40
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Advance to Han Xin Gardens. If you pass GO, collect £200",
+    "Typ": "player-forward-to",
+    "position": 25
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Fined £15 for speeding",
+    "Typ": "player-pay-freepark",
+    "pay": 15
+  },
+  {
+  "DeckName": "Opportunity Knocks",
+  "Description": "Pay university fees of £150",
+  "Typ": "player-pay-bank",
+  "Pay": 150
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Take a trip to Hove station. If you pass GO collect £200",
+    "Typ": "player-forward-to",
+    "Position": 16
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Loan matures, collect £150",
+    "Typ": "bank-pay-player",
+    "Pay": 150
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Advance to GO",
+    "Typ": "player-forward-to",
+    "Position": 1
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Go back 3 spaces",
+    "Typ": "player-step-backward",
+    "steps": 3
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Advance to Skywalker Drive. If you pass GO collect £200",
+    "Typ": "player-forward-to",
+    "Position": 12
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Go to jail. Do not pass GO, do not collect £200",
+    "Typ": "player-to-jail"
+  },
+  {
+    "DeckName": "Opportunity Knocks",
+    "Description": "Drunk in charge of a skateboard. Fine £20",
+    "Typ": "player-pay-freepark",
+    "Pay": 20
+  }
+]
+

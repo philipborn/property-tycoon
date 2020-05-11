@@ -3,10 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -39,7 +35,7 @@
                <children>
                   <HBox id="street" fx:id="STREET_1" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -61,7 +57,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_8" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -83,7 +79,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_7" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -105,7 +128,61 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_6" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 1" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TAX" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_INCOME_TAX" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/tax.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -127,7 +204,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_5" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0" styleClass="potLuck">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -135,87 +212,26 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_1" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_4" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_3" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_2" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_1" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -239,7 +255,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" snapToPixel="false" styleClass="corner" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -251,7 +267,7 @@
                            </children></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.rowIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_10" layoutX="710.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner" GridPane.rowIndex="2">
                      <children>
                         <HBox fx:id="JAIL_CORNER" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
                            <children>
@@ -263,19 +279,49 @@
                            </children></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" GridPane.columnIndex="2">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_30" layoutX="10.0" layoutY="710.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner" GridPane.columnIndex="2">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0">
+                           <children>
+                              <ImageView id="GO_TO_JAIL" fx:id="IMG_GOTO_JAIL" fitHeight="86.0" fitWidth="86.0" opacity="0.85" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                 <image>
+                                    <Image url="@board/goToJail.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></HBox>
                      </children>
                   </StackPane>
-                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0">
+                  <StackPane id="SQUARE_BG" fx:id="SQUARE_20" layoutX="710.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="103.0" styleClass="corner">
                      <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" />
+                        <HBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="99.0" StackPane.alignment="CENTER">
+                           <children>
+                              <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="99.0" prefWidth="80.0">
+                                 <children>
+                                    <ImageView id="FREE_PARKING" fx:id="IMG_FREE_PARKING" fitHeight="80.0" fitWidth="90.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                                       <image>
+                                          <Image url="@board/freeParking.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="FREE_PARKING" text="£0.00">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
                   </StackPane>
                   <HBox id="street" fx:id="STREET_2" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="90.0" snapToPixel="false" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_19" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -297,7 +343,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_18" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_18" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -319,7 +365,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_17" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -341,7 +414,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_16" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 2" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -363,7 +463,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_15" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -385,7 +485,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_14" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -393,7 +493,7 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POWER" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
@@ -405,55 +505,16 @@
                                     </Label>
                                  </children>
                               </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_13" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_12" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
+                              <ImageView fx:id="IMG_POWER_STAT" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/teslaPowerCo.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
                         <FlowPane>
                            <children>
-                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                              <StackPane id="SQUARE_BG" fx:id="SQUARE_11" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                                  <padding>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </padding>
@@ -481,7 +542,7 @@
                   </HBox>
                   <HBox id="street" fx:id="STREET_3" alignment="CENTER" fillHeight="false" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="180.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_29" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -503,7 +564,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_28" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="WATER CO" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_WATER_CO" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/edisonWaterCo.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -525,7 +613,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_27" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -547,7 +635,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_26" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 3" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -569,7 +684,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_25" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -591,7 +706,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_24" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -599,65 +714,26 @@
                               <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
                                  <children>
                                     <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font size="10.0" />
                                        </font>
                                     </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_2" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_23" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_22" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_21" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -683,7 +759,7 @@
                   </HBox>
                   <HBox id="street" fx:id="STREET_4" alignment="CENTER" layoutX="112.0" layoutY="707.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="594.0" rotate="-90.0" snapToPixel="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <children>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_39" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -705,7 +781,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_38" layoutX="274.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TAX" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_SUPER_TAX" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/tax.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -727,7 +830,61 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_37" layoutX="308.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0" styleClass="opKnock">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="OP KNOCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_OP_KNOCK_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/opKnocks.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="TRAIN 4" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_TRAIN_STAT_4" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/train.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -749,7 +906,34 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_36" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0" styleClass="potLuck">
+                           <padding>
+                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                           </padding>
+                           <children>
+                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
+                                 <children>
+                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
+                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="POT LUCK" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <ImageView fx:id="IMG_POT_LUCK_3" fitHeight="103.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@board/potLuck.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -771,95 +955,7 @@
                               </VBox>
                            </children>
                         </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_35" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_34" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_33" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_32" layoutX="340.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
-                           <padding>
-                              <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
-                           </padding>
-                           <children>
-                              <VBox id="PANEL" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="99.0" prefWidth="64.0" spacing="3.0">
-                                 <children>
-                                    <HBox id="PROPERTY_GROUP" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" />
-                                    <Label id="PROPERTY_NAME" alignment="TOP_CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="64.0" text="Gangsters Paradise" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font size="10.0" />
-                                       </font>
-                                    </Label>
-                                    <Label id="PROPERTY_PRICE" alignment="TOP_CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="64.0" text="£800" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </StackPane>
-                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="66.0">
+                        <StackPane id="SQUARE_BG" fx:id="SQUARE_31" layoutX="374.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#upgrade_property" onMouseEntered="#openHoverWindow" onMouseExited="#closeHoverWindow" prefHeight="103.0" prefWidth="66.0">
                            <padding>
                               <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                            </padding>
@@ -885,58 +981,56 @@
                   </HBox>
                </children>
             </GridPane>
-            <HBox id="TOKEN1" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #000;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN1" fx:id="TOKEN_PLAYER_1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="1" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenCat.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <HBox id="TOKEN2" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F00;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN2" fx:id="TOKEN_PLAYER_2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="2" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenGoblet.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <HBox id="TOKEN3" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0F0;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN3" fx:id="TOKEN_PLAYER_3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="3" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenBoot.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <HBox id="TOKEN4" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #00F;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN4" fx:id="TOKEN_PLAYER_4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="4" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenSmartPhone.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <HBox id="TOKEN5" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #FF0;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN5" fx:id="TOKEN_PLAYER_5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="5" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenHatStand.png" />
+                     </image></ImageView>
                </children>
             </HBox>
-            <HBox id="TOKEN6" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #0FF;" styleClass="token" translateX="725.0" translateY="725.0">
+            <HBox id="TOKEN6" fx:id="TOKEN_PLAYER_6" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="token" translateX="725.0" translateY="725.0">
                <children>
-                  <Label text="6" textAlignment="CENTER" textFill="#f5f0f0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenSpoon.png" />
+                     </image></ImageView>
                </children>
             </HBox>
          </children>
@@ -958,56 +1052,101 @@
                      </image>
                   </ImageView>
                </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
-            <VBox id="PLAYER_NAME_CONTAINER_1" fx:id="PLAYER_1" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+            <HBox fx:id="PLAYER_1" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" spacing="15.0">
                <children>
-                  <Label id="PLAYER_NAME_1" styleClass="playerName" text="Player 1">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_1" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_1" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenCat.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" fx:id="PLAYER_NAME" styleClass="playerName" text="Player 1" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" fx:id="PLAYER_BALANCE" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets left="10.0" right="10.0" top="25.0" />
                </VBox.margin>
-            </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_3" fx:id="PLAYER_3" alignment="CENTER" layoutX="10.0" layoutY="150.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="PLAYER_3" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <Label id="PLAYER_NAME_3" styleClass="playerName" text="Player 3">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_3" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_3" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenBoot.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" styleClass="playerName" text="Player 3" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_5" fx:id="PLAYER_5" alignment="CENTER" layoutX="10.0" layoutY="250.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <HBox fx:id="PLAYER_5" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <Label id="PLAYER_NAME_5" styleClass="playerName" text="Player 5">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_5" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_5" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenHatStand.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" styleClass="playerName" text="Player 5" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
             <VBox fx:id="BUTTON_CONTAINER" alignment="BOTTOM_CENTER" prefHeight="175.0" spacing="25.0">
                <children>
                   <Button fx:id="NEW_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newGame" text="NEW GAME" />
-                  <Button fx:id="END_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#endGame" text="END GAME" />
+                  <Button fx:id="END_GAME" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#endGame" text="QUIT GAME" />
                </children>
                <VBox.margin>
                   <Insets bottom="25.0" top="25.0" />
@@ -1021,68 +1160,119 @@
          <children>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                <children>
-                  <Label id="Timer" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" text="00:00:00" textAlignment="CENTER">
+                  <Label id="Timer" fx:id="TIMER" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" text="00:00:00" textAlignment="CENTER">
                      <font>
                         <Font size="64.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <VBox id="PLAYER_NAME_CONTAINER_2" fx:id="PLAYER_2" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+            <HBox fx:id="PLAYER_2" alignment="CENTER_LEFT" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="25.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                <children>
-                  <Label id="PLAYER_NAME_2" styleClass="playerName" text="Player 2">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_2" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_2" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenGoblet.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" styleClass="playerName" text="Player 2" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="PLAYER_4" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <children>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_4" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenSmartPhone.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" styleClass="playerName" text="Player 4" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
-                  <Insets top="40.0" />
+                  <Insets left="10.0" right="10.0" />
                </VBox.margin>
-            </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_4" fx:id="PLAYER_4" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+            </HBox>
+            <HBox fx:id="PLAYER_6" alignment="CENTER_LEFT" layoutX="20.0" layoutY="905.0" onMouseClicked="#playerPopUp" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                <children>
-                  <Label id="PLAYER_NAME_4" styleClass="playerName" text="Player 4">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_4" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
+                  <ImageView id="Token" fx:id="IMG_PLAYER_6" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tokens/tokenSpoon.png" />
+                     </image>
+                  </ImageView>
+                  <VBox id="PlayerDetail" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
+                     <children>
+                        <Label id="PlayerName" styleClass="playerName" text="Player 6" textOverrun="CLIP">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label id="PlayerBalance" styleClass="playerAccount" text="£888.88">
+                           <font>
+                              <Font name="System Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox id="PLAYER_NAME_CONTAINER_6" fx:id="PLAYER_6" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" styleClass="playerDisplay">
-               <children>
-                  <Label id="PLAYER_NAME_6" styleClass="playerName" text="Player 6">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Label id="ACCOUNT_BALANCE_PLAYER_6" styleClass="playerAccount" text="£888.88">
-                     <font>
-                        <Font name="System Italic" size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </HBox>
             <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" spacing="25.0">
                <children>
-                  <TextArea id="MESSAGE_BOX" fx:id="MESSAGE_AREA" editable="false" prefWidth="270.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="SOMETIMES">
+                  <TextArea id="MESSAGE_BOX" fx:id="MESSAGE_AREA" editable="false" prefWidth="280.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="SOMETIMES">
                      <font>
                         <Font size="24.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="25.0" top="25.0" />
+                        <Insets bottom="5.0" top="15.0" />
                      </VBox.margin>
                   </TextArea>
+                  <HBox alignment="CENTER" prefHeight="50.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="BUTTON_YES" mnemonicParsing="false" onAction="#yes" text="Yes" />
+                        <Button fx:id="BUTTON_NO" mnemonicParsing="false" onAction="#no" text="No" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" />
+                     </padding>
+                  </HBox>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
@@ -1091,45 +1281,4 @@
          </children>
       </VBox>
    </right>
-   <top>
-    <MenuBar BorderPane.alignment="CENTER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-   </top>
 </BorderPane>

@@ -1,7 +1,9 @@
 package com.watson.propert.tycoon.gui;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +12,7 @@ import org.slf4j.LoggerFactory;
  * CLass to represent the GUI game board
  *
  * @author Lee Richards
- * @version Sprint3
+ * @version Sprint4
  */
 public class GuiGameBoard {
   public static int length = 40;
@@ -24,11 +26,19 @@ public class GuiGameBoard {
   GuiDice dice;
   int currentPlayer = 0;
   Boolean timedGame = false;
-  String timeRemaining = "01:59:59";
+  int timeRemaining = 0;
 
   public GuiGameBoard(Pane gameBoard) {
     this.gameBoard = gameBoard;
     this.dice = new GuiDice();
+  }
+
+  public int getIndexOf(GuiSquare guiSquare) {
+    int i = 0;
+    while (squares[i] != guiSquare) {
+      i++;
+    }
+    return i;
   }
 
   public GuiSquare[] getSquares() {
@@ -68,8 +78,12 @@ public class GuiGameBoard {
     return this.properties_per_street;
   }
 
-  public GuiPlayer getNextPlayer() {
-    currentPlayer = (currentPlayer + 1) % numberPlayers();
+  public GuiPlayer setNextPlayer(int idNumber) {
+    if (idNumber >= numberPlayers() || idNumber < 0) {
+      throw new IllegalArgumentException(
+          "IdNumber need be positive and smaller then number of player");
+    }
+    currentPlayer = (idNumber);
     return players[currentPlayer];
   }
 
@@ -82,5 +96,47 @@ public class GuiGameBoard {
 
   public Image diceFace(int i) {
     return dice.getDiceFace(i);
+  }
+
+  public Boolean getTimedGame() {
+    return timedGame;
+  }
+
+  public void setTimedGame(Boolean timedGame) {
+    this.timedGame = timedGame;
+  }
+
+  // Clear all houses and hotels from gameboard
+  public void clearAllHouses() {
+    for (GuiSquare sq : squares) {
+      clearHousesFromProperty(sq);
+    }
+  }
+
+  // Clear all houses or hotel from a Square
+  public void clearHousesFromProperty(GuiSquare property) {
+    VBox panel = (VBox) property.getPane().lookup("#PANEL");
+    if (panel != null) {
+      HBox group = (HBox) panel.lookup("#PROPERTY_GROUP");
+      group.getChildren().clear();
+    }
+  }
+
+  // Reset Tokens to GO
+  public void tokensReset() {
+    for (GuiPlayer player : players) {
+      GuiCoords centre = getSquare(0).getCentre();
+      player.getToken().setPosition(0);
+      player.getToken().getToken().setTranslateX(centre.getX() - 25);
+      player.getToken().getToken().setTranslateY(centre.getY() - 25);
+    }
+  }
+
+  // Reset gameboard
+  public void reset() {
+    currentPlayer = 0;
+    tokensReset();
+    // Clear all houses and hotels from board
+    clearAllHouses();
   }
 }

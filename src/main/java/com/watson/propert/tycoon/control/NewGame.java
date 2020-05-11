@@ -16,11 +16,18 @@ import org.slf4j.LoggerFactory;
 import com.watson.propert.tycoon.gui.App;
 import com.watson.propert.tycoon.gui.GuiPlayer;
 
+/**
+ * New Game Dialog Box Wrapper
+ *
+ * @author Lee Richards
+ * @version Sprint3
+ */
 public class NewGame {
   ArrayList<GuiPlayer> players;
   Stage newGameStage;
   FXMLLoader loader;
   Logger logger = LoggerFactory.getLogger(App.class);
+  PtNewGameDialogCtrl controller;
 
   public NewGame() throws IOException {
     players = new ArrayList<GuiPlayer>();
@@ -40,19 +47,53 @@ public class NewGame {
     scene.getStylesheets().clear();
     scene.getStylesheets().add(cssUrl.toExternalForm());
 
-    PtNewGameDialogCtrl controller = loader.getController();
+    controller = loader.getController();
     controller.setNewPlayers(players);
+
     logger.debug("Controller: " + (controller != null));
     // Set up stage to fill primary screen
     newGameStage.setTitle("Property Tycoon New Game");
     newGameStage.setScene(scene);
   }
 
+  /** Show New Game set up dialog */
   public void showDialog() {
     newGameStage.showAndWait();
   }
 
+  /**
+   * Get New Players details
+   *
+   * @return new players
+   */
   public ArrayList<GuiPlayer> getNewPlayers() {
     return players;
+  }
+
+  /**
+   * is a new game requested, otherwise quit
+   *
+   * @return
+   */
+  public boolean isNewGame() {
+    return controller.isNewGame();
+  }
+
+  /**
+   * Is the new game to have a timer?
+   *
+   * @return
+   */
+  public boolean isTimedGame() {
+    return controller.getTimedGame() > 0;
+  }
+
+  /**
+   * Duration of new game in hours
+   *
+   * @return number of hours
+   */
+  public int getGameTime() {
+    return controller.getTimedGame();
   }
 }

@@ -2,28 +2,53 @@ package com.watson.propert.tycoon.game;
 
 import java.util.Optional;
 
+import com.watson.propert.tycoon.game.entitys.Player;
+
 /** The interface for GUI to take action for the players */
 public interface PropertTycoon {
 
-  /**
-   * Thrown the dices and moves the current player. The value of Dices will received by a DiceEvent
-   */
-  void throwDicesAndMove();
+  void startGame(GameSetting settings);
 
-  /** Call when player wants to buy a Property. Only works on ownless properys. */
-  void buyProperty();
-
-  /** Call when player don't whant to buy, and to began a auction */
-  void notBuyingProperty();
-
-  /** Call when done fixing propertys. Like buingy houses */
-  void donePropertyManagement();
+  /** Sen player Actions to the game */
+  void send(PlayerAction playerAction);
 
   /**
-   * @param squareNum) The number of the square
-   * @return Datastructer with all information of a Property
+   * Check if current player can build house at street
+   *
+   * @param squareNumber The number of square to check
+   * @return True if can build a house, else false
    */
-  Optional<PropertyInfo> propertInfo(int squareNum);
+  boolean canBuyHouse(int squareNumber);
+
+  /**
+   * Check if current player can sell a house at a street
+   *
+   * @param squareNumber The number of square to check
+   * @return True if can sell a house, else false
+   */
+  boolean canSellHouse(int squareNumber);
+
+  /**
+   * Check if current player can sell a property
+   *
+   * @param squareNumber The number of square to check
+   * @return True if property can be sold else false
+   */
+  boolean canSellProperty(int squareNumber);
+
+  /**
+   * @param squareNum) The number of the square, first square as number 1
+   * @return Datastructer with all information of a Property, empty if not a property
+   */
+  Optional<PropertyInfo> propertyInfo(int squareNum);
+
+  /**
+   * PlayerInfo as cash, totalValue, properties owned by the player.
+   *
+   * @param id Id of the player want info from
+   * @return Immutable container player stats if player is still playing, else empty
+   */
+  Optional<PlayerInfo> playerInfo(Player.Id id);
 
   /**
    * Used to get start cash for player

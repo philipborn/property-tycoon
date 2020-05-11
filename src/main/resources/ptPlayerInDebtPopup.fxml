@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@pt_player_popup.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.watson.propert.tycoon.control.ptPlayerInDebtPopupCtrl">
+   <children>
+      <VBox layoutX="250.0" layoutY="77.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="100.0" spacing="20.0" styleClass="player_details">
+               <children>
+                  <ImageView fx:id="IMG_PLAYER_TOKEN" cache="true" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="player_token">
+                     <image>
+                        <Image url="@tokens/tokenSmartPhone.png" />
+                     </image>
+                  </ImageView>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0">
+                     <children>
+                        <HBox prefWidth="100.0">
+                           <children>
+                              <Label fx:id="PLAYER_NAME" styleClass="player" text="Player 1" textOverrun="CLIP">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label styleClass="player" text=", you are " textOverrun="CLIP">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PLAYER_NAME111" styleClass="player" text="in debt." textOverrun="CLIP">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <FlowPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="530.0">
+                           <children>
+                              <Label prefHeight="50.0" prefWidth="500.0" styleClass="player" text="Select properties &amp; houses below to sell in order to pay back" textOverrun="CLIP">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="50.0" prefWidth="500.0" styleClass="player" text="the amount shown below (until number &lt;= 0)." textOverrun="CLIP">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </HBox>
+            <ScrollPane fx:id="SCROLL_PANE" fitToHeight="true" minHeight="225.0" prefHeight="250.0" prefWidth="600.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="SCROLLER" alignment="CENTER_LEFT" minWidth="578.0" prefHeight="243.0" spacing="10.0" styleClass="popup_background">
+                     <children>
+                        <VBox fx:id="PROPERTY_CARD_1" alignment="CENTER" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+                           <children>
+                              <HBox fx:id="PROPERTY_POPUP_GROUP" alignment="CENTER" prefHeight="36.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="PROPERTY_GROUP_YELLOW" />
+                                    <String fx:value="card_group" />
+                                 </styleClass>
+                              </HBox>
+                              <Label fx:id="PROPERTY_NAME" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="70.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PROPERTY_PRICE" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="sell_check_1" alignment="CENTER" mnemonicParsing="false" text="Sell" />
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="PROPERTY_CARD_11" alignment="CENTER" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+                           <children>
+                              <HBox fx:id="PROPERTY_POPUP_GROUP1" alignment="CENTER" prefHeight="36.0" prefWidth="132.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="PROPERTY_GROUP_RED" />
+                                    <String fx:value="card_group" />
+                                 </styleClass>
+                              </HBox>
+                              <Label fx:id="PROPERTY_NAME1" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="132.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PROPERTY_PRICE1" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="sell_check_11" alignment="CENTER" mnemonicParsing="false" text="Sell" />
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="PROPERTY_CARD_12" alignment="CENTER" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+                           <children>
+                              <HBox fx:id="PROPERTY_POPUP_GROUP2" alignment="CENTER" prefHeight="36.0" prefWidth="132.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="PROPERTY_GROUP_GREEN" />
+                                    <String fx:value="card_group" />
+                                 </styleClass>
+                              </HBox>
+                              <Label fx:id="PROPERTY_NAME2" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="132.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PROPERTY_PRICE2" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="sell_check_111" alignment="CENTER" mnemonicParsing="false" text="Sell" />
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="PROPERTY_CARD_13" alignment="CENTER" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+                           <children>
+                              <HBox fx:id="PROPERTY_POPUP_GROUP3" alignment="CENTER" prefHeight="36.0" prefWidth="132.0" spacing="3.0">
+                                 <padding>
+                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                 </padding>
+                                 <styleClass>
+                                    <String fx:value="card_group" />
+                                    <String fx:value="PROPERTY_GROUP_BLUE" />
+                                 </styleClass>
+                              </HBox>
+                              <Label fx:id="PROPERTY_NAME3" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="132.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PROPERTY_PRICE3" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="sell_check_1111" alignment="CENTER" mnemonicParsing="false" text="Sell" />
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="PROPERTY_CARD_14" alignment="CENTER" prefHeight="250.0" prefWidth="140.0" spacing="18.0" styleClass="card_bg">
+                           <children>
+                              <HBox fx:id="PROPERTY_POPUP_GROUP4" alignment="CENTER" prefHeight="36.0" prefWidth="132.0" spacing="3.0" styleClass="card_group">
+                                 <padding>
+                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                 </padding>
+                              </HBox>
+                              <Label fx:id="PROPERTY_NAME4" alignment="TOP_CENTER" prefHeight="70.0" prefWidth="132.0" styleClass="card_name" text="Brighton Road" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="PROPERTY_PRICE4" alignment="TOP_CENTER" prefWidth="132.0" styleClass="card_sales_price" text="£800" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="sell_check_11111" alignment="CENTER" mnemonicParsing="false" text="Sell" />
+                           </children>
+                           <padding>
+                              <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+               </content>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </ScrollPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Label styleClass="player" text="Debt remaining:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Label styleClass="player" text="£">
+                                 <font>
+                                    <Font size="41.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="debt_label" styleClass="player" text="3000">
+                                 <font>
+                                    <Font size="41.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <Button fx:id="done_button" mnemonicParsing="false" onAction="#setDone_button" prefHeight="55.0" prefWidth="119.0" text="Done" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

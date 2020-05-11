@@ -8,8 +8,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import com.watson.propert.tycoon.game.PropertyInfo;
+import com.watson.propert.tycoon.gui.GuiGameBoard;
 import com.watson.propert.tycoon.gui.GuiSquare;
 
+/**
+ * Class for controlling a single property popup window.
+ *
+ * @author Tom Doran
+ */
 public class ptPropertyPopupCtrl {
 
   @FXML private ResourceBundle resources;
@@ -42,10 +49,35 @@ public class ptPropertyPopupCtrl {
 
   @FXML private Label RENT_4H;
 
-  void setData(GuiSquare square) {
+  void setData(PropertyInfo info, GuiSquare guiSquare, GuiGameBoard gameBoard) {
     // fill in relevant data
-    PROPERTY_PRICE.setText(
-        square.getCentre().getX() + " " + square.getCentre().getY()); // just to show functionality
+    PROPERTY_POPUP_GROUP.getStyleClass().add(guiSquare.getGroup().getCssClass());
+    PROPERTY_NAME.setText(info.getName());
+    RENT_BASIC.setText(String.valueOf(info.getRent()));
+    PROPERTY_PRICE.setText(String.valueOf(info.price()));
+    if (info.getOwner() != null) {
+      PROPERTY_OWNER.setText(gameBoard.getPlayers()[info.getOwner().ordinal()].getName());
+    } else if (info.isMorged()) {
+      PROPERTY_OWNER.setText("Mortgaged");
+    } else {
+      PROPERTY_OWNER.setText("For sale");
+    }
+    info.rentsPerHouse()
+        .ifPresentOrElse(
+            (rents) -> {
+              RENT_1H.setText(String.valueOf(rents.get(1)));
+              RENT_2H.setText(String.valueOf(rents.get(2)));
+              RENT_3H.setText(String.valueOf(rents.get(3)));
+              RENT_4H.setText(String.valueOf(rents.get(4)));
+              RENT_HOTEL.setText(String.valueOf(rents.get(5)));
+            },
+            () -> { // for utility/station
+              RENT_1H.setText("N/A");
+              RENT_2H.setText("N/A");
+              RENT_3H.setText("N/A");
+              RENT_4H.setText("N/A");
+              RENT_HOTEL.setText("N/A");
+            });
   }
 
   @FXML

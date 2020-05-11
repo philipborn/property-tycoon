@@ -1,0 +1,169 @@
+@font-face {
+    font-family: "BankGothic Lt BT";
+    src: url('fonts/bgothl.ttf');
+}
+
+@font-face {
+    font-family: "OCR A Std";
+    src: url('fonts/OCRAStd.otf');
+}
+
+/*
+ * Photographs and graphic design by Lee Richards
+ */
+
+ #root {
+     -fx-background-image: url("background02.jpg");
+     -fx-background-repeat: stretch stretch;
+     -fx-background-position: center center;
+     -fx-background-size: 100%  100%;
+     -fx-background-color: rgba(0, 0, 0, 0.3);
+     -fx-border-radius: 20;
+ }
+
+.popup_background {
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+}
+
+.card_bg {
+    -fx-background-color: white;
+    -fx-background-radius:6;
+}
+
+.card_group {
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0, 0, 0);
+    -fx-background-radius:8;
+ }
+
+
+.PROPERTY_GROUP_BROWN {
+    -fx-background-color: #9c552d;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_GREEN {
+    -fx-background-color: #00aa86;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_YELLOW {
+     -fx-background-color: #ffd600;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_STATION {
+     -fx-background-color: #000000;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_UTILITIES {
+    -fx-background-color: #aaaaaa;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_ORANGE {
+    -fx-background-color: #ff5a00;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_PURPLE {
+     -fx-background-color: #bc34ba;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_BLUE {
+     -fx-background-color: #0085cf;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_RED {
+    -fx-background-color: #f32837;
+    -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_DEEP_BLUE {
+     -fx-background-color: #001ca8;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.PROPERTY_GROUP_TAKE_CARD {
+     -fx-background-color: #ffffff;
+     -fx-effect: dropshadow(three-pass-box, black, 3, 0, 0, 0);
+}
+
+.card_name {
+    -fx-font-size: 18;
+}
+.card_sales_price {
+    -fx-font-size: 14;
+}
+
+.player_details {
+    -fx-text-fill: #F7F9E0;
+    -fx-border-color: #F7F9E0;
+    -fx-border-width: 0 0 3 0;
+}
+
+.player {
+    -fx-text-fill: #F7F9E0;
+}
+
+.option {
+    -fx-text-fill: #F7F9E0;
+}
+
+.option_value {
+    -fx-text-fill: #F7F9E0;
+}
+
+/*
+ * Button skinning adapted from:
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 10 18 10 18;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #2e241a;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-font-family: "BankGothic Lt BT", Helvetica, Arial, sans-serif;
+    -fx-font-size: 24px;
+    -fx-text-fill: #d8d8d8;
+    -fx-border-insets: 2px;
+}
+
+.button:hover {
+    -fx-background-color: #574531;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: white;
+    -fx-text-fill: #1d1d1d;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+}
+
+.button:default:hover {
+    -fx-background-color: derive(-fx-focus-color,30%);
+}
