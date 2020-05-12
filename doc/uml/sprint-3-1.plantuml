@@ -1,0 +1,129 @@
+@startuml Sprint3
+
+abstract ActionHandler {
+    next: ActionHandler
+    handel(Action): Boolean
+}
+
+class newTurn{
+    ..Task..
+    Handler for:
+    ThrowDice action
+    and MovePlayer action
+}
+
+abstract Action {
+    next: Action
+    afterDo(Action):
+    nextAction(): Action
+    execute():
+}
+
+'Game Object'
+interface Square {
+   next(): Square
+   back(): Square
+   Iterator(): BordIterator
+}
+
+class SquareImp {
+    channel: Eventbus
+    setNext()
+    setBack()
+}
+
+class Player {
+    channel: Eventbus
+    cash: int
+    moveSteps(int): Square
+    moveTo(Square): Square
+    jumpTo(Sqaure): Square
+    payTo(Player, int):
+}
+
+class DicePair {
+    channel: Eventbus
+    throwDices():
+    lastThrow(): List<int>
+}
+
+class GameMaster {
+    currentPlayer(): Player
+    allActivePlayers(): List<Player>
+}
+
+abstract Property {
+    owner: Player
+    rent(): int
+    owner(): Optionla<Player>
+    value(): int
+    mortgage():
+    isMortgage(): boolean
+    sell():
+    buy(Player):
+}
+
+class Station {
+    stationIter(): Iterator
+}
+class Street {
+    houseLevel:
+    color: Enum.Color
+    SameColorIter(): Iterator
+}
+class Utilities {
+    utilitIter(): Iterator
+}
+
+
+class CardPlace {
+    draw(): Draw
+}
+class freePark
+class State {
+    getAction(): Action
+}
+
+class BordFactory {
+    build(BordReader): Square
+}
+
+interface BordReader {
+    getPropertys(): Map<String,String>
+    haveNextObjeckt(): Boolean
+    nextObjeckt():
+}
+
+
+'IO-level'
+
+class BordReaderJson
+
+'Relations'
+
+ActionHandler <|-- newTurn
+
+Action <|-- MovePlayer
+Action <|-- ThrowDice
+ThrowDice o-- DicePair
+MovePlayer o-- DicePair
+MovePlayer o-- GameMaster
+
+GameMaster o-- "2-6" Player
+
+Player o-- "1" Square : postion
+
+Square <|.. SquareImp
+SquareImp <|-- Property
+Property <|-- Street
+Property <|-- Station
+Property <|-- Utilities
+
+SquareImp <|-- State
+SquareImp <|-- CardPlace
+
+SquareImp <- BordFactory : builds
+BordFactory --> BordReader : used
+BordReader <|.. BordReaderJson
+
+@enduml
