@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Class for reading a JSON file & outputting the object data as a HashMap for later classes to use
+ * Class for reading a JSON file and outputting the object data as a HashMap for later classes to use
  *
  * @author Tom Doran
  * @version 1.1
