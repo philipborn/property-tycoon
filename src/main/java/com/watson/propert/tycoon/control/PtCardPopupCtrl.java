@@ -7,12 +7,14 @@ package com.watson.propert.tycoon.control;
  */
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import com.watson.propert.tycoon.gui.Card;
 
@@ -32,15 +34,9 @@ public class PtCardPopupCtrl {
 
   @FXML private StackPane CARD_BG;
 
-  public void setData(String title, String instructions, Image image, Card card) {
-    CARD_TITLE.setText(title);
-    CARD_TEXT.setText(instructions);
-    CARD_IMG.setImage(image);
-    CARD_BG.getStyleClass().clear();
-    CARD_BG.getStyleClass().add(card.getCssClass());
-  }
+  private Stage thisWindow;
 
-  public void setData(String instructions, Card card) {
+  public void setData(String instructions, Card card, Stage thisWindow) {
     CARD_TEXT.setText(instructions);
     if (card.equals(Card.POT_LUCK)) {
       CARD_TITLE.setText("POT LUCK");
@@ -51,6 +47,14 @@ public class PtCardPopupCtrl {
       CARD_IMG.setImage(
           new Image(ClassLoader.getSystemResource("board/opKnocksCard.png").toExternalForm()));
     }
+    CARD_BG.getStyleClass().clear();
+    CARD_BG.getStyleClass().add(card.getCssClass());
+    this.thisWindow = thisWindow;
+  }
+
+  @FXML
+  void setOkButton(ActionEvent event) {
+    thisWindow.close();
   }
 
   @FXML

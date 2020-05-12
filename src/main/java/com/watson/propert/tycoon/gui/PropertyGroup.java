@@ -31,10 +31,20 @@ public enum PropertyGroup {
     this.housePrice = housePrice;
   }
 
+  /**
+   * Get the CSS class of the property group
+   *
+   * @return
+   */
   public String getCssClass() {
     return this.cssClass;
   }
 
+  /**
+   * Get the house price ???
+   *
+   * @return
+   */
   public int getHousePrice() {
     return housePrice;
   }

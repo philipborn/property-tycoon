@@ -5,10 +5,9 @@ package com.watson.propert.tycoon.gui;
  * @author Lee Richards
  * @version Sprint4
  */
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,56 +18,87 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
-import com.google.common.collect.ImmutableList;
-
 public class GuiProperty {
   GuiSquare square;
   int boardPosition;
-  Optional<ImmutableList<Integer>> rentPrices;
   boolean mortgaged;
+  String price;
 
-  public GuiProperty(GuiSquare square, Optional<ImmutableList<Integer>> rentPrices) {
+  /**
+   * Construct a GuiProperty
+   *
+   * @param square
+   */
+  public GuiProperty(GuiSquare square) {
     this.square = square;
     this.boardPosition = 0;
-    this.rentPrices = rentPrices;
     mortgaged = false;
+    // save price of property & set label to sold
+    price = square.getPrice();
+    setPriceLabel("Sold");
   }
 
+  /**
+   * Get price of the property
+   *
+   * @return
+   */
+  public String getPrice() {
+    return price;
+  }
+
+  /**
+   * Set price of the property
+   *
+   * @param s price of property
+   */
+  private void setPriceLabel(String s) {
+    Node priceLabel = square.getPane().lookup("#PROPERTY_PRICE");
+    if (priceLabel instanceof Label) {
+      ((Label) priceLabel).setText(s);
+    }
+  }
+
+  /** Method to mortgage a property object. */
   public void mortgage() {
     mortgaged = true;
+    setPriceLabel("M");
   }
 
+  /** Method to un-mortgage a property object. */
   public void unmortgage() {
     mortgaged = false;
+    setPriceLabel("Sold");
   }
 
+  /** Method to sell a property object. */
+  public void sell() {
+    setPriceLabel(price);
+  }
+
+  /**
+   * Method to indicate if a property object is mortgaged or not.
+   *
+   * @return true if mortgaged, false otherwise
+   */
   public boolean isMortgaged() {
     return mortgaged;
   }
 
-  public GuiProperty(GuiSquare square) {
-    this.square = square;
-    this.boardPosition = 0;
-    this.rentPrices = Optional.empty();
-  }
+  /**
+   * Method to get the current value of the property including houses.
+   *
+   * @return value
+   */
+  public int getCurrentValue() {
+    // for stations/utilities value of house = 0
+    int valueOfHouses = 0;
 
-  public int getCurrentRent() {
-    AtomicInteger i = new AtomicInteger();
-    rentPrices.ifPresentOrElse(
-        (prices) -> {
-          // use number of houses to index prices
-          i.set(prices.get(square.numHouses).intValue());
-        },
-        () -> {
-          // otherwise use price
-          i.set(Integer.parseInt(square.getPrice()));
-        });
-    final int i1 = i.get();
-    return i1;
-  }
-
-  public Optional<ImmutableList<Integer>> getRentPrices() {
-    return rentPrices;
+    // if houses are present, calculate their total value
+    if (getSquare().getGroup().getHousePrice() > 0) {
+      valueOfHouses = getNumHouses() * getSquare().getGroup().getHousePrice();
+    }
+    return valueOfHouses + Integer.parseInt(getPrice());
   }
 
   public PropertyGroup getGroup() {
@@ -86,23 +116,6 @@ public class GuiProperty {
   public GuiSquare getSquare() {
     return square;
   }
-
-  /*
-  public void setName(String name) {
-    this.name = name;
-  }
-
-   */
-
-  public String getPrice() {
-    return square.getPrice();
-  }
-
-  /*
-  public void setPrice(int price) {
-    this.price = price;
-  }
-   */
 
   public int getNumHouses() {
     return square.numberOfHouses();

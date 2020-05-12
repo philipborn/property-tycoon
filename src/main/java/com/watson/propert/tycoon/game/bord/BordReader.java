@@ -24,7 +24,7 @@ public interface BordReader {
   /**
    * To read a file
    *
-   * @param filePath path to the file with the Board data
+   * @param fileName path to the file with the Board data
    */
   void readFile(String fileName);
 }

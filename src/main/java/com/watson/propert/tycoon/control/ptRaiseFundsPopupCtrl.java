@@ -97,7 +97,7 @@ public class ptRaiseFundsPopupCtrl {
               if (newValue) {
                 // checkbox is ticked
                 record.setMortgageProperty(true);
-                property.mortgage();
+                //property.mortgage();
                 addToFundLabel(Integer.parseInt(property.getPrice()) / 2);
                 for (CheckBox cb : boxes) {
                   cb.setSelected(false);
@@ -106,7 +106,7 @@ public class ptRaiseFundsPopupCtrl {
               } else if (oldValue) {
                 // checkbox unticked
                 record.setMortgageProperty(false);
-                property.unmortgage();
+                //property.unmortgage();
                 subtractFundLabel(Integer.parseInt(property.getPrice()) / 2);
                 for (CheckBox cb : boxes) {
                   cb.setDisable(false);
