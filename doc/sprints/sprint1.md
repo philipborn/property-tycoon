@@ -9,7 +9,6 @@
 | Sprint start date     | 11-02-2020 |
 | Sprint end date       | 18-02-2020 |
 
-
 ## key contributions
 
 Individual key contributions
@@ -64,7 +63,7 @@ As we don't know how much about JavaFX, the class diagram of controllers is ligh
 The class structure expected after the sprint is shown in figure below.
 Where all classes in game level shoud be direct from game domain.
 
-![Class digram](sprint1_goal_UML.pdf)
+![Class digram](figs/../../figs/sprint1_goal_UML.pdf)
 
 ## Test plan and evidence of testing
 
