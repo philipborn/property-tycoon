@@ -34,7 +34,7 @@ After moving and made the Action, the player will get the option to buy or sell 
 
 After this sprint, we should have the game's GUI show a the bord, dices and a token.
 The squares in the bord will show their names,
-which can be modified by changing inside a JSON file.
+with is stored inside a JSON file.
 The change will affect when restarted the app.
 A player can throw dices and token will move around the board.
 
@@ -63,22 +63,20 @@ Non-functionle
 
 Start of the game, a window comes up. When the number of players is selected, a row for each player will appear.
 In the row there figure showing the token, a field for the player's name and pick ai for this player.
-On this window, the option for a time limit can be selected.
+Last, the option for a time limit can be selected.
 
-A state machine that that player action should not always be apple only can be made at witch state, still use the state machine is added after the game interface.
-
-Make command to lower the number of methods needed that the game need to pass to the states.
-In short, state machines handle all player requests.
-The policy for forbidden Action is nothing happens. There will be no exceptions or error message.
-This is to make the controller simpler as only need translate player action to method calls.
-This takes application logic out of the controllers. Reason for no error messages is player should not need more information,
-the information should already be there.
+A state machine will be used to control with Action can be carried out. The state machine will begin the model interface
+where take a player action and call the right method. Action that should not be trigger will not give exceptions or error message.
+The controller is more straightforward as it only needs to translate player action to method calls and leaves the controller with no application logic.
+Player action will be messages sent to the game model to lower the number of methods call needed to pass from the game to the states.
+The second reason for no error messages is player should not need more information, the information should already be there.
 
 To solve the problem of having card action read from a file, we will be using the interpreter pattern and using the command pattern.
 The interpreter would give a flexible interface for the customs to use.
 The pattern is there is a class for every gramma rule of the domain languish.  Witch is the same structure for a top-down parser.
 The output of interpreter is an action object. The object Card has object Action. An action holds all it needs.
-All card will be stored in decks. A Square can hold a deck reference. When a player land on the square, the top card will be picket. A message will be sent to GUI with the card description and the Action that card hold on will be activated.
+All card will be stored in decks. A Square can hold a deck reference. When a player land on the square, the top card will be picket.
+A message will be sent to GUI with the card description and the Action that card hold on will be activated.
 
 ## Test plan and evidence of testing
 
@@ -100,7 +98,7 @@ As every type of Action is defined as key-value parsing is easy.
 
 When making changes to the parameter to the squares constructor,
 then a large number of files need changing. This show that many tests was dependent on the square constructed.
-To lose the coupling, inheritance was removed and made square hold a Square type object. The square type is reached by the visitor pattern.
+To lose the coupling between square and property inheritance was removed and made square hold a Square type object. The square type is reached by the visitor pattern.
 The change leads to the test of different types of square don't need to see the linking part of the squares.
 
-There was not to do the test of the new functionalty. So bugs are expected for next sprint.
+There was not to do the test of the new functionality. So bugs are expected for next sprint.
