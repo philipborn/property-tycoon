@@ -56,7 +56,8 @@ Design in dividade in tre main parts:
 - Game model : Has all game logic
 - IO : Hide file format for rest of the app
 
-Figure below will be the template for the GUI. This case the template, so the developer can change for there liking. As we don't know how much about JavaFX, the class diagram of controllers is light on details compare to main modele in class diagram.
+Figure below will be the template for the GUI. This case the template, so the developer can change for there liking.
+As we don't know how much about JavaFX, the class diagram of controllers is light on details compare to main modele in class diagram.
 
 ![Figure of gui layout](figs/../../figs/screenLayout_0_1.png)
 
