@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 public class GuiDice {
   Image[] diceFace = new Image[6];
 
+  /** Construct a new GuiDice */
   public GuiDice() {
     this.initDiceFaces();
   }
@@ -27,6 +28,12 @@ public class GuiDice {
     }
   }
 
+  /**
+   * Returns a JavaFX Image representing a dice face
+   *
+   * @param i The number of the dice side required
+   * @return Dice Image
+   */
   public Image getDiceFace(int i) {
     i = abs(i - 1) % 6;
     return diceFace[i];

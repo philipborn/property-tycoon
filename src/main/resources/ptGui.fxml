@@ -1254,7 +1254,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </HBox>
-            <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" spacing="25.0">
+            <VBox fx:id="BUTTON_CONTAINER1" alignment="BOTTOM_CENTER" spacing="20.0">
                <children>
                   <TextArea id="MESSAGE_BOX" fx:id="MESSAGE_AREA" editable="false" prefWidth="280.0" promptText="PLAYER 1 ROLL DICE!" wrapText="true" VBox.vgrow="SOMETIMES">
                      <font>
@@ -1264,15 +1264,12 @@
                         <Insets bottom="5.0" top="15.0" />
                      </VBox.margin>
                   </TextArea>
-                  <HBox alignment="CENTER" prefHeight="50.0" spacing="15.0">
+                  <VBox alignment="CENTER" spacing="5.0">
                      <children>
                         <Button fx:id="BUTTON_YES" mnemonicParsing="false" onAction="#yes" text="Yes" />
                         <Button fx:id="BUTTON_NO" mnemonicParsing="false" onAction="#no" text="No" />
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" />
-                     </padding>
-                  </HBox>
+                  </VBox>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />

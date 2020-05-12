@@ -20,6 +20,11 @@ public class GuiSquare {
   int numHouses;
   PropertyGroup group;
 
+  /**
+   * Construct a GuiSquare
+   *
+   * @param p Pane on game board
+   */
   public GuiSquare(Pane p) {
     this.pane = p;
     this.centre = new GuiCoords(0.0, 0.0);
@@ -27,18 +32,35 @@ public class GuiSquare {
     this.group = PropertyGroup.UTILITIES;
   }
 
+  /**
+   * Get the GuiSquare from a Pane on the game board
+   *
+   * @param p
+   * @param xy
+   */
   public GuiSquare(Pane p, GuiCoords xy) {
     this.pane = p;
     this.centre = xy;
   }
 
+  /**
+   * Get the property group of the square
+   *
+   * @return
+   */
   public PropertyGroup getGroup() {
     return group;
   }
 
+  /**
+   * Set the property group for this square
+   *
+   * @param group
+   */
   public void setGroup(PropertyGroup group) {
     this.group = group;
   }
+
   /**
    * Get square's Pane on GUI
    *
