@@ -63,7 +63,8 @@ As we don't know how much about JavaFX, the class diagram of controllers is ligh
 The class structure expected after the sprint is shown in figure below.
 Where all classes in game level shoud be direct from game domain.
 
-![Class digram](figs/../../figs/sprint1_goal_UML.pdf)
+![Class digram](figs/../../figs/sprint1_goal_UML-1.png)
+![Class digram](figs/../../figs/sprint1_goal_UML-2.png)
 
 ## Test plan and evidence of testing
 
